@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบสอบท้องถิ่นออนไลน์ (Super Admin & Exam Platform)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Kanit', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-12">
+
+  <!-- แถบบบน: ข้อมูลเลเวลผู้เล่นและปุ่มแอดมิน -->
+  <div class="bg-slate-900 text-white px-6 py-3 flex flex-wrap justify-between items-center shadow-md gap-2">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl" id="userBadge">🥉</span>
+      <div>
+        <p class="text-xs text-slate-400" id="userTitleName">Level 1: ผู้เริ่มต้นสอบ</p>
+        <p class="font-bold text-sm" id="userLevelText">ผู้ใช้งานทั่วไป</p>
+      </div>
+      <div class="ml-2 bg-slate-800 px-3 py-1 rounded-full text-xs text-indigo-300 font-medium">
+        ⭐ XP: <span id="userXp">0</span>
+      </div>
+    </div>
+    <div class="flex gap-2 flex-wrap">
+      <button onclick="openLeaderboard()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">
+        🏆 จัดอันดับ (Leaderboard)
+      </button>
+      <button onclick="toggleMembership()" id="memberStatusBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">
+        👤 ทั่วไป (5 ข้อ)
+      </button>
+      <button onclick="toggleAdminMode()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-xs font-medium transition shadow-sm">
+        ⚙️ หลังบ้าน (Admin)
+      </button>
+    </div>
+  </div>
+
+  <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+    
+    <!-- 📄 หน้าจอหลัก -->
+    <div id="mainScreen" class="space-y-8">
+      <header class="text-center">
+        <h1 class="text-3xl font-bold text-slate-900 mb-2">ระบบทดสอบความรู้ท้องถิ่น & Mini Quest</h1>
+        <p class="text-slate-600 text-sm">จำลองสถานการณ์สอบจริง คลังข้อสอบอัจฉริยะ และระบบฝึกซ้อมจุดอ่อนรายบุคคล</p>
+      </header>
+
+      <!-- เมนูลัดพิเศษ: ฝึกข้อที่ทำผิดบ่อย & โหมดจำลองสอบรวม -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div onclick="startIncorrectReview()" class="bg-gradient-to-r from-rose-600 to-pink-700 text-white p-5 rounded-3xl shadow-lg cursor-pointer hover:scale-[1.01] transition flex items-center justify-between">
+          <div>
+            <div class="text-2xl mb-1">🔁</div>
+            <h2 class="font-bold text-base">คลังทบทวนข้อที่ทำผิด</h2>
+            <p class="text-xs text-rose-100">ฝึกซ้อมเฉพาะข้อที่คุณเคยตอบผิดซ้ำ ๆ (<span id="incorrectCountBadge">0</span> ข้อ)</p>
+          </div>
+          <span class="bg-white/25 px-4 py-2 rounded-2xl text-xs font-bold">ฝึกเลย →</span>
+        </div>
+
+        <div onclick="startFullExamMode()" class="bg-gradient-to-r from-indigo-600 to-blue-700 text-white p-5 rounded-3xl shadow-lg cursor-pointer hover:scale-[1.01] transition flex items-center justify-between">
+          <div>
+            <div class="text-2xl mb-1">⏱️</div>
+            <h2 class="font-bold text-base">โหมดจำลองสอบจริง (Full Exam)</h2>
+            <p class="text-xs text-indigo-100">สุ่ม 50 ข้อ จับเวลา 2 ชั่วโมงเต็ม เหมือนห้องสอบจริง</p>
+          </div>
+          <span class="bg-white/25 px-4 py-2 rounded-2xl text-xs font-bold">ลุยเลย →</span>
+        </div>
+      </div>
+
+      <!-- ส่วนที่ 1: Mini Quest -->
+      <section class="bg-gradient-to-r from-indigo-900 via-blue-900 to-slate-900 text-white p-6 rounded-3xl shadow-xl border border-indigo-500/20">
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h2 class="text-lg font-bold">🎯 Mini Quest ฝึกซ้อมรายหมวด (ภาค ก)</h2>
+            <p class="text-xs text-indigo-200">ฝึกเจาะลึกทีละหมวด สั้นกระชับ เหมาะกับเวลาว่าง</p>
+          </div>
+          <span class="bg-indigo-500/30 text-indigo-200 text-xs px-3 py-1 rounded-full border border-indigo-400/30 font-medium">หมวดฮิต</span>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <button onclick="startMiniQuest('minithai')" class="bg-white/10 hover:bg-white/20 p-3.5 rounded-2xl text-left transition border border-white/15 shadow-inner">
+            <div class="text-xl mb-1">📖</div>
+            <div class="font-bold text-sm">ภาษาไทย</div>
+            <div class="text-xs text-indigo-200">กระชับ ฉับไว</div>
+          </button>
+          <button onclick="startMiniQuest('minimath')" class="bg-white/10 hover:bg-white/20 p-3.5 rounded-2xl text-left transition border border-white/15 shadow-inner">
+            <div class="text-xl mb-1">📊</div>
+            <div class="font-bold text-sm">คิดวิเคราะห์ / คณิต</div>
+            <div class="text-xs text-indigo-200">ฝึกตรรกะตัวเลข</div>
+          </button>
+          <button onclick="startMiniQuest('minieng')" class="bg-white/10 hover:bg-white/20 p-3.5 rounded-2xl text-left transition border border-white/15 shadow-inner">
+            <div class="text-xl mb-1">🔤</div>
+            <div class="font-bold text-sm">ภาษาอังกฤษ</div>
+            <div class="text-xs text-indigo-200">คำศัพท์ & แกรมม่า</div>
+          </button>
+          <button onclick="startMiniQuest('minilaw')" class="bg-white/10 hover:bg-white/20 p-3.5 rounded-2xl text-left transition border border-white/15 shadow-inner">
+            <div class="text-xl mb-1">⚖️</div>
+            <div class="font-bold text-sm">กฎหมาย 13 ฉบับ</div>
+            <div class="text-xs text-indigo-200">แม่นข้อสอบราชการ</div>
+          </button>
+        </div>
+      </section>
+
+      <!-- ส่วนที่ 2: ตำแหน่งสอบหลักทั้งหมด -->
+      <div>
+        <h2 class="text-xl font-bold text-slate-800 mb-4">📚 ชุดข้อสอบตำแหน่งหลัก (จำลองสอบจริง)</h2>
+        <div id="packList" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
+      </div>
+    </div>
+
+    <!-- 📝 หน้าจอทำข้อสอบ -->
+    <div id="examScreen" class="hidden bg-white p-6 rounded-3xl shadow-md border border-slate-100">
+      <div class="flex justify-between items-center mb-6 pb-4 border-b">
+        <div>
+          <h2 id="examTitle" class="text-lg font-bold text-slate-800">ชื่อชุดข้อสอบ</h2>
+          <p class="text-xs text-slate-500" id="examProgress">ข้อที่ 1 จาก 5</p>
+        </div>
+        <div class="bg-amber-100 text-amber-800 px-4 py-2 rounded-2xl font-bold text-sm flex items-center gap-2 shadow-inner">
+          ⏳ <span id="timerDisplay">00:00</span>
+        </div>
+      </div>
+
+      <!-- แผงกระดาษคำตอบข้ามข้อ (Question Navigator) -->
+      <div class="mb-6 bg-slate-50 p-3 rounded-2xl border flex gap-1.5 overflow-x-auto" id="qNavigator"></div>
+
+      <div class="mb-6">
+        <p id="questionText" class="text-base font-medium text-slate-900 mb-4">คำถาม...</p>
+        <div id="optionsList" class="space-y-3"></div>
+      </div>
+
+      <div class="flex justify-between">
+        <button onclick="prevQuestion()" id="prevBtn" class="bg-slate-200 text-slate-700 px-5 py-2.5 rounded-2xl text-sm font-medium hover:bg-slate-300 transition">ก่อนหน้า</button>
+        <button onclick="nextQuestion()" id="nextBtn" class="bg-slate-900 text-white px-6 py-2.5 rounded-2xl text-sm font-medium hover:bg-slate-800 transition shadow-md">ถัดไป</button>
+      </div>
+    </div>
+
+    <!-- 🏆 หน้าจอสรุปผล -->
+    <div id="resultScreen" class="hidden bg-white p-6 rounded-3xl shadow-md border border-slate-100 text-center space-y-6">
+      <div class="text-5xl" id="resultIcon">🎉</div>
+      <h2 class="text-2xl font-bold text-slate-900">สรุปผลการทดสอบ</h2>
+      
+      <div class="grid grid-cols-3 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+        <div>
+          <p class="text-xs text-slate-500">คะแนนที่ได้</p>
+          <p class="text-xl font-bold text-indigo-600" id="scoreText">0/0</p>
+        </div>
+        <div>
+          <p class="text-xs text-slate-500">เวลาที่ใช้</p>
+          <p class="text-xl font-bold text-slate-700" id="timeUsedText">0 นาที</p>
+        </div>
+        <div>
+          <p class="text-xs text-slate-500">XP ที่ได้รับ</p>
+          <p class="text-xl font-bold text-amber-500" id="earnedXpText">+0 XP</p>
+        </div>
+      </div>
+
+      <div id="achievementBox" class="hidden bg-amber-50 border border-amber-200 p-3 rounded-2xl text-xs text-amber-800 font-medium">
+        🏆 ปลดล็อกรางวัลพิเศษ: <span id="rewardName">เซียนข้อสอบหน้าใหม่!</span>
+      </div>
+
+      <div class="text-left space-y-4">
+        <h3 class="font-bold text-slate-800 border-b pb-2">💡 เฉลยและคำอธิบาย</h3>
+        <div id="reviewList" class="space-y-3 max-h-60 overflow-y-auto pr-2"></div>
+      </div>
+
+      <button onclick="backToHome()" class="w-full bg-slate-900 text-white py-3.5 rounded-2xl text-sm font-medium hover:bg-slate-800 transition shadow-md">กลับสู่หน้าหลัก</button>
+    </div>
+
+  </div>
+
+  <!-- 🏆 โมดัลกระดานจัดอันดับ (Leaderboard Modal) -->
+  <div id="leaderboardModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-6 space-y-4">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="font-bold text-lg text-slate-900">🏆 กระดานจัดอันดับ (Leaderboard)</h3>
+        <button onclick="closeLeaderboard()" class="text-slate-400 hover:text-slate-700 font-bold text-lg">✕</button>
+      </div>
+      <div id="leaderboardList" class="space-y-2 max-h-60 overflow-y-auto"></div>
+      <button onclick="closeLeaderboard()" class="w-full bg-slate-900 text-white py-2.5 rounded-xl text-sm font-medium">ปิดหน้าต่าง</button>
+    </div>
+  </div>
+
+  <!-- 🛠️ หลังบ้านระบบแท็บ (Admin Panel) -->
+  <div id="adminPanel" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+        <h2 class="text-lg font-bold">🛠️ หลังบ้าน: จัดการระบบข้อสอบ</h2>
+        <button onclick="toggleAdminMode()" class="text-slate-400 hover:text-white text-lg font-bold px-2">✕</button>
+      </div>
+
+      <!-- แท็บเมนู -->
+      <div class="flex border-b bg-slate-100 px-4 pt-3 gap-2 overflow-x-auto">
+        <button onclick="switchAdminTab('tabPos')" id="btnTabPos" class="px-4 py-2 text-sm font-semibold rounded-t-2xl bg-white text-indigo-600 border-t border-x shadow-sm transition whitespace-nowrap">➕ เพิ่มตำแหน่ง</button>
+        <button onclick="switchAdminTab('tabEditPos')" id="btnTabEditPos" class="px-4 py-2 text-sm font-semibold rounded-t-2xl bg-slate-200 text-slate-600 transition whitespace-nowrap">✏️ แก้ไขตำแหน่ง/สี</button>
+        <button onclick="switchAdminTab('tabQ')" id="btnTabQ" class="px-4 py-2 text-sm font-semibold rounded-t-2xl bg-slate-200 text-slate-600 transition whitespace-nowrap">📝 เพิ่มข้อสอบ</button>
+        <button onclick="switchAdminTab('tabData')" id="btnTabData" class="px-4 py-2 text-sm font-semibold rounded-t-2xl bg-slate-200 text-slate-600 transition whitespace-nowrap">💾 สำรอง/นำเข้าข้อมูล</button>
+      </div>
+
+      <!-- เนื้อหาแท็บ -->
+      <div class="p-6 overflow-y-auto flex-1 bg-white space-y-4">
+        
+        <!-- แท็บ 1: เพิ่มตำแหน่ง -->
+        <div id="tabPos" class="space-y-4">
+          <div class="bg-indigo-50/50 border border-indigo-100 p-5 rounded-2xl space-y-3">
+            <h3 class="font-bold text-indigo-900 text-sm">สร้างตำแหน่งสอบใหม่</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-medium text-slate-600 block mb-1">รหัสตำแหน่ง (ภาษาอังกฤษ)</label>
+                <input type="text" id="newPosKey" placeholder="เช่น hr" class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-600 block mb-1">ชื่อตำแหน่ง (ภาษาไทย)</label>
+                <input type="text" id="newPosName" placeholder="เช่น นักทรัพยากรบุคคล" class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-600 block mb-1">ไอคอน Emoji</label>
+                <input type="text" id="newPosIcon" placeholder="เช่น 👥" class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-600 block mb-1">คำอธิบายสั้น ๆ</label>
+                <input type="text" id="newPosDesc" placeholder="กฎหมาย ก.พ.น." class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+            </div>
+            <button onclick="addNewPosition()" class="w-full bg-indigo-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-indigo-700 transition shadow-md">บันทึกสร้างตำแหน่งใหม่</button>
+          </div>
+        </div>
+
+        <!-- แท็บ 2: แก้ไข/สีการ์ด (50 เฉดสี) -->
+        <div id="tabEditPos" class="hidden space-y-4">
+          <div class="bg-amber-50/50 border border-amber-100 p-5 rounded-2xl space-y-3">
+            <h3 class="font-bold text-amber-900 text-sm">เลือกตำแหน่งเพื่อแก้ไขและเปลี่ยนสีการ์ด</h3>
+            <div>
+              <label class="text-xs font-medium text-slate-600 block mb-1">เลือกตำแหน่ง</label>
+              <select id="selectEditPack" onchange="loadPackDataToEdit()" class="border p-2.5 rounded-xl w-full text-sm bg-white shadow-sm"></select>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-medium text-slate-600 block mb-1">ชื่อตำแหน่ง</label>
+                <input type="text" id="editPosName" class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-600 block mb-1">หมวดย่อย</label>
+                <input type="text" id="editPosSub" class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-600 block mb-1">ไอคอน</label>
+                <input type="text" id="editPosIcon" class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-600 block mb-1">เวลาทำข้อสอบ (นาที)</label>
+                <input type="number" id="editPosMins" class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+              <div class="md:col-span-2">
+                <label class="text-xs font-medium text-slate-600 block mb-1">คำอธิบาย</label>
+                <input type="text" id="editPosDesc" class="border p-2.5 rounded-xl text-sm w-full bg-white shadow-sm">
+              </div>
+              <div class="md:col-span-2">
+                <label class="text-xs font-medium text-slate-600 block mb-1">🎨 ธีมสีการ์ด (รองรับ 50 เฉดสี)</label>
+                <select id="editPosTheme" class="border p-2.5 rounded-xl text-sm w-full bg-white font-medium shadow-sm">
+                  <option value="classic">⚪ 1. ธีมคลาสสิก</option>
+                  <option value="slate">🪨 2. สเลทเทาเข้ม</option>
+                  <option value="zinc">⚙️ 3. ซิงค์เงิน</option>
+                  <option value="stone">🏛️ 4. สโตนอบอุ่น</option>
+                  <option value="neutral">📄 5. นิวทรัลกระดาษ</option>
+                  <option value="ocean">🌊 6. มหาสมุทร</option>
+                  <option value="sky">🌤️ 7. ฟ้าพาสเทล</option>
+                  <option value="indigo">🌌 8. เนบิวลา</option>
+                  <option value="blue">📘 9. น้ำเงินแท้</option>
+                  <option value="cyan">🧊 10. ไซแอนใส</option>
+                  <option value="royal">👑 11. รอยัลบลู</option>
+                  <option value="navy">⚓ 12. เนวี่กรมท่า</option>
+                  <option value="lightblue">🔹 13. ฟ้าสว่าง</option>
+                  <option value="midnight">🌙 14. มิดไนท์</option>
+                  <option value="ice">❄️ 15. ไอซ์บลู</option>
+                  <option value="emerald">🌿 16. มรกต</option>
+                  <option value="mint">🍃 17. มินต์</option>
+                  <option value="green">🌳 18. เขียวใบไม้</option>
+                  <option value="teal">🦚 19. เทล</option>
+                  <option value="forest">🌲 20. ฟอเรสต์</option>
+                  <option value="lime">🍏 21. ไลม์</option>
+                  <option value="sage">🌿 22. เซจ</option>
+                  <option value="olive">🫒 23. โอลีฟ</option>
+                  <option value="pistachio">🥜 24. พิสตาชิโอ</option>
+                  <option value="seafoam">🌊 25. ซีโฟม</option>
+                  <option value="amber">🔥 26. แอมอำพัน</option>
+                  <option value="orange">🍊 27. ส้มแท้</option>
+                  <option value="yellow">⭐ 28. เหลืองทอง</option>
+                  <option value="gold">🪙 29. ทองประกาย</option>
+                  <option value="sunset">🌅 30. ซันเซ็ต</option>
+                  <option value="warmorange">🎃 31. ส้มฟักทอง</option>
+                  <option value="lemon">🍋 32. เลมอน</option>
+                  <option value="tangerine">🍊 33. แทงเจอรีน</option>
+                  <option value="honey">🍯 34. น้ำผึ้ง</option>
+                  <option value="autumn">🍁 35. ออทัมน์</option>
+                  <option value="rose">🌹 36. กุหลาบ</option>
+                  <option value="pink">🌸 37. ซากุระ</option>
+                  <option value="red">❤️ 38. แดงเพลิง</option>
+                  <option value="magenta">🌺 39. มาเจนต้า</option>
+                  <option value="blush">🩰 40. บลัชพิงค์</option>
+                  <option value="crimson">🍷 41. คริมสัน</option>
+                  <option value="coral">🪸 42. ปะการัง</option>
+                  <option value="ruby">💎 43. ทับทิม</option>
+                  <option value="purple">🟣 44. ม่วงอิมพีเรียล</option>
+                  <option value="violet">🔮 45. ไวโอเล็ต</option>
+                  <option value="lavender">🪻 46. ลาเวนเดอร์</option>
+                  <option value="plum">🍇 47. พลัม</option>
+                  <option value="orchid">🪷 48. กล้วยไม้</option>
+                  <option value="fuchsia">💜 49. ฟุกเซีย</option>
+                  <option value="amethyst">💎 50. อเมทิสต์</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex gap-2 pt-2">
+              <button onclick="saveEditedPosition()" class="flex-1 bg-amber-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-amber-700 transition shadow-md">บันทึกการแก้ไข</button>
+              <button onclick="deletePosition()" class="bg-rose-600 text-white px-4 py-3 rounded-xl text-sm font-medium hover:bg-rose-700 transition shadow-md">ลบตำแหน่ง</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- แท็บ 3: เพิ่มข้อสอบ -->
+        <div id="tabQ" class="hidden space-y-4">
+          <div class="bg-emerald-50/50 border border-emerald-100 p-5 rounded-2xl space-y-3">
+            <h3 class="font-bold text-emerald-900 text-sm">เพิ่มคำถามและเฉลย</h3>
+            <div>
+              <label class="text-xs font-medium text-slate-600 block mb-1">เลือกตำแหน่งเป้าหมาย</label>
+              <select id="selectTargetPack" class="border p-2.5 rounded-xl w-full text-sm bg-white shadow-sm"></select>
+            </div>
+            <div>
+              <label class="text-xs font-medium text-slate-600 block mb-1">โจทย์คำถาม</label>
+              <textarea id="newQText" placeholder="พิมพ์โจทย์คำถาม..." class="border p-2.5 rounded-xl w-full text-sm h-20 bg-white shadow-sm"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <input type="text" id="opt0" placeholder="ตัวเลือก ก" class="border p-2.5 rounded-xl text-sm bg-white shadow-sm">
+              <input type="text" id="opt1" placeholder="ตัวเลือก ข" class="border p-2.5 rounded-xl text-sm bg-white shadow-sm">
+              <input type="text" id="opt2" placeholder="ตัวเลือก ค" class="border p-2.5 rounded-xl text-sm bg-white shadow-sm">
+              <input type="text" id="opt3" placeholder="ตัวเลือก ง" class="border p-2.5 rounded-xl text-sm bg-white shadow-sm">
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl border shadow-sm">
+              <span class="text-sm font-medium text-slate-700">ข้อที่ถูก (0=ก, 1=ข, 2=ค, 3=ง):</span>
+              <input type="number" id="ansCorrect" min="0" max="3" value="0" class="border p-2 rounded-lg w-20 text-sm text-center font-bold">
+            </div>
+            <div>
+              <label class="text-xs font-medium text-slate-600 block mb-1">คำอธิบายเฉลย</label>
+              <textarea id="newQExp" placeholder="อธิบายเหตุผล..." class="border p-2.5 rounded-xl w-full text-sm h-16 bg-white shadow-sm"></textarea>
+            </div>
+            <button onclick="addNewQuestion()" class="w-full bg-emerald-600 text-white py-3 rounded-xl text-sm font-medium hover:bg-emerald-700 transition shadow-md">บันทึกเพิ่มข้อสอบ</button>
+          </div>
+        </div>
+
+        <!-- แท็บ 4: สำรอง/นำเข้าข้อมูล (Export/Import) -->
+        <div id="tabData" class="hidden space-y-4">
+          <div class="bg-slate-100 border p-5 rounded-2xl space-y-4">
+            <h3 class="font-bold text-slate-900 text-sm">💾 ระบบสำรองและนำเข้าข้อมูลระบบ (JSON)</h3>
+            <p class="text-xs text-slate-600">คุณสามารถส่งออกข้อมูลทั้งหมดเพื่อเก็บไว้สำรอง หรือนำเข้าไฟล์ JSON เพื่ออัปเดตฐานข้อมูลชุดข้อสอบจำนวนมากได้ทันที</p>
+            <div class="flex gap-2">
+              <button onclick="exportDataJson()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-sm font-medium transition shadow-sm">📥 ดาวน์โหลดข้อมูลสำรอง (Export)</button>
+            </div>
+            <hr class="border-slate-300">
+            <div>
+              <label class="text-xs font-medium text-slate-700 block mb-1">📤 นำเข้าข้อมูล (Import JSON)</label>
+              <input type="file" id="importFile" accept=".json" class="border p-2 rounded-xl text-xs w-full bg-white mb-2">
+              <button onclick="importDataJson()" class="w-full bg-slate-800 hover:bg-slate-900 text-white py-2.5 rounded-xl text-sm font-medium transition">อัปโหลดและแทนที่ข้อมูล</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let userProfile = {
+      name: localStorage.getItem('USER_NAME') || 'ผู้ใช้งานทั่วไป',
+      xp: parseInt(localStorage.getItem('USER_XP')) || 0,
+      level: 1,
+      isMember: false
+    };
+
+    let incorrectQuestions = JSON.parse(localStorage.getItem('LOCAL_INCORRECT')) || [];
+
+    let defaultPackData = {
+      kor: { name:'ภาค ก ท้องถิ่น (รวมทุกหมวด)', sub:'ความรู้ความสามารถทั่วไป', icon:'🎓', mins:10, desc:'คิดวิเคราะห์ · ภาษาไทย · กฎหมาย', theme:'ocean' },
+      comp: { name:'นักวิชาการคอมพิวเตอร์', sub:'ภาค ข ความรู้เฉพาะตำแหน่ง', icon:'💻', mins:5, desc:'เครือข่าย · ฐานข้อมูล · ออกแบบระบบ', theme:'indigo' },
+      pr: { name:'นักประชาสัมพันธ์', sub:'ภาค ข ความรู้เฉพาะตำแหน่ง', icon:'📣', mins:5, desc:'หลักการประชาสัมพันธ์ · สื่อสารมวลชน', theme:'emerald' },
+      minithai: { name:'Mini Quest: ภาษาไทย', sub:'ฝึกซ้อมย่อย ภาค ก', icon:'📖', mins:3, desc:'ฝึกจับใจความและภาษาไทยเน้นๆ', theme:'pink' },
+      minimath: { name:'Mini Quest: คิดวิเคราะห์/คณิต', sub:'ฝึกซ้อมย่อย ภาค ก', icon:'📊', mins:3, desc:'ฝึกตรรกะและตัวเลข', theme:'amber' },
+      minieng: { name:'Mini Quest: ภาษาอังกฤษ', sub:'ฝึกซ้อมย่อย ภาค ก', icon:'🔤', mins:3, desc:'คำศัพท์และโครงสร้างประโยค', theme:'sky' },
+      minilaw: { name:'Mini Quest: กฎหมาย 13 ฉบับ', sub:'ฝึกซ้อมย่อย ภาค ก', icon:'⚖️', mins:3, desc:'เจาะลึกกฎหมายท้องถิ่นสำคัญ', theme:'purple' }
+    };
+
+    let defaultExamData = {
+      kor: [
+        { t:'ตาม พรบ. การศึกษาแห่งชาติ การศึกษาภาคบังคับมีกี่ปี', o:['6 ปี','8 ปี','9 ปี','12 ปี'], a:2, e:'กำหนดไว้ 9 ปีตามมาตรา 17' },
+        { t:'ปีงบประมาณของไทยเริ่มต้นวันที่เท่าใด', o:['1 มกราคม','1 เมษายน','1 กรกฎาคม','1 ตุลาคม'], a:3, e:'เริ่มต้น 1 ตุลาคม ถึง 30 กันยายน' }
+      ],
+      comp: [
+        { t:'ข้อใดคือโปรโตคอลหลักในระบบอินเทอร์เน็ต', o:['FTP','TCP/IP','SMTP','HTTP'], a:1, e:'TCP/IP เป็นรากฐานการสื่อสาร' }
+      ],
+      pr: [
+        { t:'จุดมุ่งหมายแท้จริงของการประชาสัมพันธ์คืออะไร', o:['ขายสินค้า','สร้างความเข้าใจอันดีร่วมกัน','โฆษณาผู้บริหาร','ตอบโต้ข่าวลือ'], a:1, e:'มุ่งสร้างความสัมพันธ์อันดี' }
+      ],
+      minithai: [{ t:'ข้อใดสะกดถูกต้อง', o:['อนุญาต - กะเพรา','นะค่ะ - ผัดเผือก','กงสุล - โควต้า','เท่ห์ - ปรากฎ'], a:0, e:'อนุญาตและกะเพราถูกต้อง' }],
+      minimath: [{ t:'อนุกรม 2, 4, 8, 16, ?', o:['24','30','32','36'], a:2, e:'คูณ 2 ได้ 32' }],
+      minieng: [{ t:'Synonym of Begin?', o:['Finish','Start','Stop','End'], a:1, e:'Start คือเริ่มต้น' }],
+      minilaw: [{ t:'อบต. มีฐานะเป็นราชการบริหารส่วนใด', o:['ส่วนกลาง','ส่วนภูมิภาค','ส่วนท้องถิ่น','ส่วนภูมิภาคพิเศษ'], a:2, e:'เป็นส่วนท้องถิ่น' }]
+    };
+
+    let PACKS = JSON.parse(localStorage.getItem('LOCAL_PACKS')) || defaultPackData;
+    let EXAM_DATA = JSON.parse(localStorage.getItem('LOCAL_EXAM_DATA')) || defaultExamData;
+
+    let currentPackKey = '';
+    let activeQuestions = [];
+    let currentIndex = 0;
+    let userAnswers = {};
+    let timerInterval = null;
+    let timeLeft = 0;
+    let isReviewMode = false;
+
+ function getThemeClasses(theme) {
+      switch(theme) {
+        // กลุ่มโทนฟ้า/น้ำเงิน
+        case 'ocean': return { card: 'bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-cyan-400/30 hover:scale-[1.02]', subText: 'text-cyan-100', descText: 'text-cyan-50/80', btn: 'bg-white text-blue-700 hover:bg-cyan-50 font-bold shadow-md' };
+        case 'sky': return { card: 'bg-gradient-to-br from-sky-50 to-blue-100 text-slate-800 shadow-md shadow-sky-100 border border-sky-200 hover:scale-[1.02]', subText: 'text-sky-700 font-semibold', descText: 'text-slate-600', btn: 'bg-sky-600 hover:bg-sky-700 text-white shadow-md' };
+        case 'indigo': return { card: 'bg-gradient-to-br from-indigo-600 to-slate-800 text-white shadow-lg shadow-indigo-500/25 border border-indigo-500/30 hover:scale-[1.02]', subText: 'text-indigo-200', descText: 'text-indigo-100/80', btn: 'bg-indigo-400 text-slate-900 hover:bg-indigo-300 font-bold shadow-md' };
+        case 'blue': return { card: 'bg-gradient-to-br from-blue-600 to-blue-800 text-white shadow-lg shadow-blue-600/25 border border-blue-400/30 hover:scale-[1.02]', subText: 'text-blue-200', descText: 'text-blue-100/80', btn: 'bg-white text-blue-800 hover:bg-blue-50 font-bold shadow-md' };
+        case 'cyan': return { card: 'bg-gradient-to-br from-cyan-400 to-teal-500 text-white shadow-lg shadow-cyan-400/25 border border-cyan-300/30 hover:scale-[1.02]', subText: 'text-cyan-100', descText: 'text-cyan-50/80', btn: 'bg-white text-teal-800 hover:bg-cyan-50 font-bold shadow-md' };
+        case 'royal': return { card: 'bg-gradient-to-br from-blue-800 to-indigo-900 text-white shadow-lg shadow-blue-900/25 border border-blue-500/30 hover:scale-[1.02]', subText: 'text-blue-200', descText: 'text-blue-100/80', btn: 'bg-amber-400 text-slate-900 hover:bg-amber-300 font-bold shadow-md' };
+        case 'navy': return { card: 'bg-gradient-to-br from-slate-800 to-blue-950 text-white shadow-lg shadow-slate-900/25 border border-slate-700 hover:scale-[1.02]', subText: 'text-blue-300', descText: 'text-slate-400', btn: 'bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-md' };
+        case 'lightblue': return { card: 'bg-gradient-to-br from-sky-400 to-blue-500 text-white shadow-lg shadow-sky-400/25 border border-sky-300 hover:scale-[1.02]', subText: 'text-sky-100', descText: 'text-sky-50/80', btn: 'bg-white text-sky-800 hover:bg-sky-50 font-bold shadow-md' };
+        case 'midnight': return { card: 'bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white shadow-lg shadow-indigo-950/25 border border-indigo-900 hover:scale-[1.02]', subText: 'text-indigo-300', descText: 'text-indigo-200/70', btn: 'bg-indigo-600 hover:bg-indigo-500 text-white font-bold shadow-md' };
+        case 'ice': return { card: 'bg-gradient-to-br from-blue-50 to-cyan-100 text-slate-800 shadow-md border border-cyan-200 hover:scale-[1.02]', subText: 'text-cyan-800 font-semibold', descText: 'text-slate-600', btn: 'bg-cyan-600 hover:bg-cyan-700 text-white shadow-md' };
+
+        // กลุ่มโทนเขียว/ธรรมชาติ
+        case 'emerald': return { card: 'bg-gradient-to-br from-emerald-600 to-teal-700 text-white shadow-lg shadow-emerald-500/25 border border-emerald-400/30 hover:scale-[1.02]', subText: 'text-emerald-100', descText: 'text-emerald-50/80', btn: 'bg-white text-emerald-800 hover:bg-emerald-50 font-bold shadow-md' };
+        case 'mint': return { card: 'bg-gradient-to-br from-emerald-50 to-teal-100 text-slate-800 shadow-md shadow-emerald-100 border border-emerald-200 hover:scale-[1.02]', subText: 'text-emerald-700 font-semibold', descText: 'text-slate-600', btn: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md' };
+        case 'green': return { card: 'bg-gradient-to-br from-green-600 to-emerald-800 text-white shadow-lg shadow-green-600/25 border border-green-400/30 hover:scale-[1.02]', subText: 'text-green-100', descText: 'text-green-50/80', btn: 'bg-white text-green-900 hover:bg-green-50 font-bold shadow-md' };
+        case 'teal': return { card: 'bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-lg shadow-teal-500/25 border border-teal-300/30 hover:scale-[1.02]', subText: 'text-teal-100', descText: 'text-teal-50/80', btn: 'bg-white text-teal-900 hover:bg-teal-50 font-bold shadow-md' };
+        case 'forest': return { card: 'bg-gradient-to-br from-emerald-800 to-green-950 text-white shadow-lg shadow-green-950/25 border border-emerald-700 hover:scale-[1.02]', subText: 'text-emerald-300', descText: 'text-emerald-200/80', btn: 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold shadow-md' };
+        case 'lime': return { card: 'bg-gradient-to-br from-lime-500 to-green-600 text-white shadow-lg shadow-lime-500/25 border border-lime-300 hover:scale-[1.02]', subText: 'text-lime-100', descText: 'text-lime-50/80', btn: 'bg-white text-lime-900 hover:bg-lime-50 font-bold shadow-md' };
+        case 'sage': return { card: 'bg-gradient-to-br from-emerald-100 to-teal-200 text-slate-800 shadow-md border border-emerald-300 hover:scale-[1.02]', subText: 'text-emerald-800 font-semibold', descText: 'text-slate-700', btn: 'bg-teal-700 hover:bg-teal-800 text-white shadow-md' };
+        case 'olive': return { card: 'bg-gradient-to-br from-yellow-700 to-emerald-900 text-white shadow-lg border border-yellow-600/30 hover:scale-[1.02]', subText: 'text-yellow-200', descText: 'text-yellow-100/80', btn: 'bg-white text-yellow-900 hover:bg-yellow-50 font-bold shadow-md' };
+        case 'pistachio': return { card: 'bg-gradient-to-br from-lime-50 to-emerald-100 text-slate-800 shadow-md border border-lime-200 hover:scale-[1.02]', subText: 'text-emerald-800 font-semibold', descText: 'text-slate-600', btn: 'bg-emerald-700 hover:bg-emerald-800 text-white shadow-md' };
+        case 'seafoam': return { card: 'bg-gradient-to-br from-teal-50 to-cyan-100 text-slate-800 shadow-md border border-teal-200 hover:scale-[1.02]', subText: 'text-teal-800 font-semibold', descText: 'text-slate-600', btn: 'bg-teal-600 hover:bg-teal-700 text-white shadow-md' };
+
+        // กลุ่มโทนส้ม/เหลือง/แอมเบอร์
+        case 'amber': return { card: 'bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-lg shadow-amber-500/25 border border-amber-400/30 hover:scale-[1.02]', subText: 'text-amber-100', descText: 'text-amber-50/80', btn: 'bg-white text-amber-800 hover:bg-amber-50 font-bold shadow-md' };
+        case 'orange': return { card: 'bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-lg shadow-orange-500/25 border border-orange-400/30 hover:scale-[1.02]', subText: 'text-orange-100', descText: 'text-orange-50/80', btn: 'bg-white text-orange-900 hover:bg-orange-50 font-bold shadow-md' };
+        case 'yellow': return { card: 'bg-gradient-to-br from-amber-300 to-yellow-500 text-slate-900 shadow-lg shadow-yellow-400/25 border border-amber-300 hover:scale-[1.02]', subText: 'text-amber-950 font-semibold', descText: 'text-amber-900/80', btn: 'bg-slate-900 hover:bg-slate-800 text-white shadow-md' };
+        case 'gold': return { card: 'bg-gradient-to-br from-yellow-500 to-amber-700 text-white shadow-lg shadow-yellow-600/25 border border-yellow-400 hover:scale-[1.02]', subText: 'text-yellow-100', descText: 'text-yellow-50/80', btn: 'bg-white text-amber-950 hover:bg-yellow-50 font-bold shadow-md' };
+        case 'sunset': return { card: 'bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 text-white shadow-lg shadow-orange-500/25 border border-pink-400/30 hover:scale-[1.02]', subText: 'text-pink-100', descText: 'text-orange-50/80', btn: 'bg-white text-orange-800 hover:bg-orange-50 font-bold shadow-md' };
+        case 'warmorange': return { card: 'bg-gradient-to-br from-amber-600 to-orange-700 text-white shadow-lg border border-amber-500/30 hover:scale-[1.02]', subText: 'text-amber-100', descText: 'text-amber-50/80', btn: 'bg-white text-amber-900 hover:bg-amber-50 font-bold shadow-md' };
+        case 'lemon': return { card: 'bg-gradient-to-br from-yellow-50 to-amber-100 text-slate-800 shadow-md border border-yellow-200 hover:scale-[1.02]', subText: 'text-amber-800 font-semibold', descText: 'text-slate-600', btn: 'bg-amber-600 hover:bg-amber-700 text-white shadow-md' };
+        case 'tangerine': return { card: 'bg-gradient-to-br from-orange-400 to-amber-500 text-white shadow-lg border border-orange-300 hover:scale-[1.02]', subText: 'text-orange-100', descText: 'text-orange-50/80', btn: 'bg-white text-orange-900 hover:bg-orange-50 font-bold shadow-md' };
+        case 'honey': return { card: 'bg-gradient-to-br from-amber-400 to-yellow-600 text-white shadow-lg border border-amber-300 hover:scale-[1.02]', subText: 'text-amber-100', descText: 'text-amber-50/80', btn: 'bg-slate-900 hover:bg-slate-800 text-white shadow-md' };
+        case 'autumn': return { card: 'bg-gradient-to-br from-orange-700 via-amber-700 to-yellow-800 text-white shadow-lg border border-orange-600 hover:scale-[1.02]', subText: 'text-amber-200', descText: 'text-amber-100/80', btn: 'bg-white text-orange-950 hover:bg-amber-50 font-bold shadow-md' };
+
+        // กลุ่มโทนชมพู/แดง
+        case 'rose': return { card: 'bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-lg shadow-rose-500/25 border border-rose-400/30 hover:scale-[1.02]', subText: 'text-rose-100', descText: 'text-rose-50/80', btn: 'bg-white text-rose-800 hover:bg-rose-50 font-bold shadow-md' };
+        case 'pink': return { card: 'bg-gradient-to-br from-pink-500 to-rose-600 text-white shadow-lg shadow-pink-500/25 border border-pink-400/30 hover:scale-[1.02]', subText: 'text-pink-100', descText: 'text-pink-50/80', btn: 'bg-white text-rose-700 hover:bg-pink-50 font-bold shadow-md' };
+        case 'red': return { card: 'bg-gradient-to-br from-red-600 to-rose-800 text-white shadow-lg shadow-red-600/25 border border-red-400/30 hover:scale-[1.02]', subText: 'text-red-100', descText: 'text-red-50/80', btn: 'bg-white text-red-900 hover:bg-red-50 font-bold shadow-md' };
+        case 'magenta': return { card: 'bg-gradient-to-br from-fuchsia-600 to-pink-700 text-white shadow-lg shadow-fuchsia-600/25 border border-fuchsia-400/30 hover:scale-[1.02]', subText: 'text-fuchsia-100', descText: 'text-fuchsia-50/80', btn: 'bg-white text-fuchsia-900 hover:bg-fuchsia-50 font-bold shadow-md' };
+        case 'blush': return { card: 'bg-gradient-to-br from-pink-50 to-rose-100 text-slate-800 shadow-md border border-pink-200 hover:scale-[1.02]', subText: 'text-rose-700 font-semibold', descText: 'text-slate-600', btn: 'bg-rose-600 hover:bg-rose-700 text-white shadow-md' };
+        case 'crimson': return { card: 'bg-gradient-to-br from-rose-800 to-red-950 text-white shadow-lg border border-rose-700 hover:scale-[1.02]', subText: 'text-rose-200', descText: 'text-rose-100/80', btn: 'bg-white text-rose-950 hover:bg-rose-50 font-bold shadow-md' };
+        case 'coral': return { card: 'bg-gradient-to-br from-rose-400 to-orange-500 text-white shadow-lg border border-rose-300 hover:scale-[1.02]', subText: 'text-rose-100', descText: 'text-rose-50/80', btn: 'bg-white text-rose-900 hover:bg-rose-50 font-bold shadow-md' };
+        case 'ruby': return { card: 'bg-gradient-to-br from-red-700 to-rose-900 text-white shadow-lg border border-red-600 hover:scale-[1.02]', subText: 'text-red-200', descText: 'text-red-100/80', btn: 'bg-amber-300 text-slate-950 hover:bg-amber-200 font-bold shadow-md' };
+
+        // กลุ่มโทนม่วง/ลาเวนเดอร์
+        case 'purple': return { card: 'bg-gradient-to-br from-purple-600 to-indigo-700 text-white shadow-lg shadow-purple-500/25 border border-purple-400/30 hover:scale-[1.02]', subText: 'text-purple-200', descText: 'text-purple-100/80', btn: 'bg-white text-purple-700 hover:bg-purple-50 font-bold shadow-md' };
+        case 'violet': return { card: 'bg-gradient-to-br from-violet-600 to-purple-800 text-white shadow-lg shadow-violet-600/25 border border-violet-400/30 hover:scale-[1.02]', subText: 'text-violet-100', descText: 'text-violet-50/80', btn: 'bg-white text-violet-900 hover:bg-violet-50 font-bold shadow-md' };
+        case 'lavender': return { card: 'bg-gradient-to-br from-purple-50 to-indigo-100 text-slate-800 shadow-md border border-purple-200 hover:scale-[1.02]', subText: 'text-purple-700 font-semibold', descText: 'text-slate-600', btn: 'bg-purple-600 hover:bg-purple-700 text-white shadow-md' };
+        case 'plum': return { card: 'bg-gradient-to-br from-purple-800 to-slate-900 text-white shadow-lg border border-purple-700 hover:scale-[1.02]', subText: 'text-purple-300', descText: 'text-purple-200/80', btn: 'bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold shadow-md' };
+        case 'orchid': return { card: 'bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white shadow-lg border border-fuchsia-400 hover:scale-[1.02]', subText: 'text-fuchsia-100', descText: 'text-fuchsia-50/80', btn: 'bg-white text-purple-900 hover:bg-fuchsia-50 font-bold shadow-md' };
+        case 'fuchsia': return { card: 'bg-gradient-to-br from-purple-600 to-pink-600 text-white shadow-lg border border-purple-400 hover:scale-[1.02]', subText: 'text-pink-100', descText: 'text-purple-50/80', btn: 'bg-white text-purple-900 hover:bg-pink-50 font-bold shadow-md' };
+        case 'amethyst': return { card: 'bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white shadow-lg border border-purple-300 hover:scale-[1.02]', subText: 'text-purple-100', descText: 'text-indigo-50/80', btn: 'bg-white text-indigo-900 hover:bg-purple-50 font-bold shadow-md' };
+
+        // โทนพื้นฐานอื่นๆ (สเลท, ซิงค์, สโตน, นิวทรัล)
+        case 'slate': return { card: 'bg-gradient-to-br from-slate-700 to-slate-900 text-white shadow-lg shadow-slate-500/25 border border-slate-600 hover:scale-[1.02]', subText: 'text-slate-300', descText: 'text-slate-400', btn: 'bg-indigo-500 hover:bg-indigo-400 text-white font-bold shadow-md' };
+        case 'zinc': return { card: 'bg-gradient-to-br from-zinc-600 to-zinc-800 text-white shadow-lg border border-zinc-500 hover:scale-[1.02]', subText: 'text-zinc-300', descText: 'text-zinc-400', btn: 'bg-sky-500 hover:bg-sky-400 text-white font-bold shadow-md' };
+        case 'stone': return { card: 'bg-gradient-to-br from-stone-600 to-stone-800 text-white shadow-lg border border-stone-500 hover:scale-[1.02]', subText: 'text-stone-300', descText: 'text-stone-400', btn: 'bg-amber-500 hover:bg-amber-400 text-white font-bold shadow-md' };
+        case 'neutral': return { card: 'bg-gradient-to-br from-slate-100 to-gray-200 text-slate-800 shadow-md border border-slate-300 hover:scale-[1.02]', subText: 'text-slate-600 font-semibold', descText: 'text-slate-500', btn: 'bg-slate-800 hover:bg-slate-700 text-white shadow-md' };
+
+        default:
+          return { card: 'bg-white text-slate-800 shadow-md border border-slate-200 hover:scale-[1.02]', subText: 'text-indigo-600 font-semibold', descText: 'text-slate-500', btn: 'bg-slate-900 hover:bg-slate-800 text-white shadow-md' };
+      }
+    }
+
+    function renderMainUI() {
+      const listEl = document.getElementById('packList');
+      listEl.innerHTML = '';
+      for (let key in PACKS) {
+        if(key.startsWith('mini')) continue;
+        let p = PACKS[key];
+        let theme = getThemeClasses(p.theme || 'classic');
+        listEl.innerHTML += `
+          <div class="${theme.card} p-6 rounded-3xl transition duration-300 flex flex-col justify-between">
+            <div>
+              <div class="text-3xl mb-3">${p.icon}</div>
+              <h3 class="text-xl font-bold tracking-tight">${p.name}</h3>
+              <p class="text-xs ${theme.subText} mb-1">${p.sub}</p>
+              <p class="text-xs ${theme.descText} mb-6">${p.desc}</p>
+            </div>
+            <button onclick="startExam('${key}')" class="w-full ${theme.btn} py-3 rounded-2xl text-sm transition">เริ่มทำข้อสอบ</button>
+          </div>
+        `;
+      }
+      updateUserProfileUI();
+      updateAdminSelects();
+    }
+
+    function updateUserProfileUI() {
+      document.getElementById('userXp').innerText = userProfile.xp;
+      userProfile.level = Math.floor(userProfile.xp / 100) + 1;
+      
+      let badge = '🥉';
+      let title = 'ผู้เริ่มต้นสอบ';
+      if(userProfile.level >= 5) { badge = '🥇'; title = 'ว่าที่ข้าราชการระดับปฏิบัติการ'; }
+      else if(userProfile.level >= 3) { badge = '🥈'; title = 'นักเรียนรู้มือฉมัง'; }
+
+      document.getElementById('userBadge').innerText = badge;
+      document.getElementById('userTitleName').innerText = `Level ${userProfile.level}: ${title}`;
+      document.getElementById('userLevelText').innerText = userProfile.name;
+      document.getElementById('incorrectCountBadge').innerText = incorrectQuestions.length;
+
+      let btn = document.getElementById('memberStatusBtn');
+      btn.innerText = userProfile.isMember ? "⭐ สมาชิก (เต็ม 100%)" : "👤 ทั่วไป (5 ข้อ)";
+    }
+
+    function toggleMembership() {
+      userProfile.isMember = !userProfile.isMember;
+      alert(userProfile.isMember ? '🎉 เปิดสิทธิ์สมาชิกเต็มจำนวนแล้ว!' : '👤 กลับสู่สถานะบุคคลทั่วไป');
+      updateUserProfileUI();
+    }
+
+    // ⏱️ โหมดจำลองสอบจริง Full Exam (สุ่ม 50 ข้อ เวลา 2 ชม.)
+    function startFullExamMode() {
+      let allQ = [];
+      for(let k in EXAM_DATA) { allQ = allQ.concat(EXAM_DATA[k]); }
+      if(allQ.length === 0) { alert('ยังไม่มีข้อสอบในระบบ'); return; }
+
+      // สุ่มสลับข้อสอบ
+      allQ.sort(() => Math.random() - 0.5);
+      activeQuestions = allQ.slice(0, 50); // สูงสุด 50 ข้อ
+      currentPackKey = 'fullexam';
+      currentIndex = 0;
+      userAnswers = {};
+      timeLeft = 120 * 60; // 2 ชั่วโมง
+      isReviewMode = false;
+
+      setupExamScreen('จำลองสอบจริง (Full Exam Mode - 50 ข้อ)');
+    }
+
+    function startExam(key) {
+      currentPackKey = key;
+      let rawQ = EXAM_DATA[key] || [];
+      if (rawQ.length === 0) { alert('ยังไม่มีข้อสอบในหมวดนี้'); return; }
+
+      activeQuestions = [...rawQ];
+      // สุ่มข้อสอบทุกครั้งที่กดเริ่มสอบ
+      activeQuestions.sort(() => Math.random() - 0.5);
+
+      if (!userProfile.isMember && activeQuestions.length > 5) {
+        activeQuestions = activeQuestions.slice(0, 5);
+      }
+
+      currentIndex = 0;
+      userAnswers = {};
+      timeLeft = (PACKS[key]?.mins || 5) * 60;
+      isReviewMode = false;
+
+      setupExamScreen(PACKS[key]?.name || 'ฝึกซ้อมย่อย');
+    }
+
+    function startMiniQuest(key) { startExam(key); }
+
+    // 🔁 โหมดฝึกข้อที่ทำผิดบ่อย
+    function startIncorrectReview() {
+      if(incorrectQuestions.length === 0) { alert('ยอดเยี่ยม! ยังไม่มีประวัติข้อสอบที่ทำผิด'); return; }
+      activeQuestions = [...incorrectQuestions];
+      currentPackKey = 'incorrect';
+      currentIndex = 0;
+      userAnswers = {};
+      timeLeft = incorrectQuestions.length * 60;
+      isReviewMode = true;
+
+      setupExamScreen('ทบทวนข้อสอบที่ทำผิด (Weakness Review)');
+    }
+
+    function setupExamScreen(title) {
+      document.getElementById('mainScreen').classList.add('hidden');
+      document.getElementById('examScreen').classList.remove('hidden');
+      document.getElementById('examTitle').innerText = title;
+      startTimer();
+      renderNavigator();
+      loadQuestion();
+    }
+
+    function renderNavigator() {
+      let nav = document.getElementById('qNavigator');
+      nav.innerHTML = '';
+      activeQuestions.forEach((q, idx) => {
+        let isDone = userAnswers[idx] !== undefined;
+        let isCurrent = idx === currentIndex;
+        let bg = isCurrent ? 'bg-indigo-600 text-white' : isDone ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-white text-slate-700 border';
+        nav.innerHTML += `<button onclick="jumpQuestion(${idx})" class="w-8 h-8 rounded-lg text-xs font-bold ${bg} shadow-sm transition">${idx+1}</button>`;
+      });
+    }
+
+    function jumpQuestion(idx) {
+      currentIndex = idx;
+      loadQuestion();
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          alert('หมดเวลาการสอบ!');
+          submitExam();
+          return;
+        }
+        timeLeft--;
+        let m = Math.floor(timeLeft / 60);
+        let s = timeLeft % 60;
+        document.getElementById('timerDisplay').innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      }, 1000);
+    }
+
+    function loadQuestion() {
+      let q = activeQuestions[currentIndex];
+      document.getElementById('examProgress').innerText = `ข้อที่ ${currentIndex + 1} จาก ${activeQuestions.length}`;
+      document.getElementById('questionText').innerText = q.t;
+
+      let optEl = document.getElementById('optionsList');
+      optEl.innerHTML = '';
+      q.o.forEach((opt, idx) => {
+        let isSelected = userAnswers[currentIndex] === idx ? 'border-indigo-600 bg-indigo-50 text-indigo-900 shadow-sm' : 'border-slate-200 hover:bg-slate-50';
+        optEl.innerHTML += `
+          <button onclick="selectAnswer(${idx})" class="w-full text-left p-4 rounded-2xl border transition text-sm font-medium ${isSelected}">
+            <span class="font-bold mr-2">${['ก','ข','ค','ง'][idx]}.</span> ${opt}
+          </button>
+        `;
+      });
+
+      document.getElementById('prevBtn').style.display = currentIndex === 0 ? 'none' : 'block';
+      document.getElementById('nextBtn').innerText = currentIndex === activeQuestions.length - 1 ? 'ส่งคำตอบ' : 'ถัดไป';
+      renderNavigator();
+    }
+
+    function selectAnswer(idx) {
+      userAnswers[currentIndex] = idx;
+      loadQuestion();
+    }
+
+    function nextQuestion() {
+      if (currentIndex < activeQuestions.length - 1) {
+        currentIndex++;
+        loadQuestion();
+      } else {
+        submitExam();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        loadQuestion();
+      }
+    }
+
+    function submitExam() {
+      clearInterval(timerInterval);
+      let score = 0;
+      activeQuestions.forEach((q, idx) => {
+        let userAns = userAnswers[idx];
+        if (userAns === q.a) {
+          score++;
+          // ถ้าเคยทำผิดแล้วตอบถูก ให้ลบออกจากคลังข้อสอบผิด
+          incorrectQuestions = incorrectQuestions.filter(item => item.t !== q.t);
+        } else {
+          // ถ้าตอบผิด บันทึกลงคลังข้อสอบผิด (ไม่ให้ซ้ำกัน)
+          if(!incorrectQuestions.some(item => item.t === q.t)) {
+            incorrectQuestions.push(q);
+          }
+        }
+      });
+      localStorage.setItem('LOCAL_INCORRECT', JSON.stringify(incorrectQuestions));
+
+      let earnedXp = score * 10;
+      userProfile.xp += earnedXp;
+      localStorage.setItem('USER_XP', userProfile.xp);
+
+      document.getElementById('examScreen').classList.add('hidden');
+      document.getElementById('resultScreen').classList.remove('hidden');
+
+      document.getElementById('scoreText').innerText = `${score} / ${activeQuestions.length}`;
+      document.getElementById('timeUsedText').innerText = `${Math.floor(((5*60) - timeLeft)/60)} นาที`;
+      document.getElementById('earnedXpText').innerText = `+${earnedXp} XP`;
+
+      let revList = document.getElementById('reviewList');
+      revList.innerHTML = '';
+      activeQuestions.forEach((q, idx) => {
+        let userAns = userAnswers[idx];
+        let isCorrect = userAns === q.a;
+        revList.innerHTML += `
+          <div class="p-3.5 rounded-xl border text-xs ${isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'}">
+            <p class="font-bold text-slate-800">ข้อ ${idx+1}: ${q.t}</p>
+            <p class="text-slate-600 mt-1">ตอบ: <span class="${isCorrect ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}">${userAns !== undefined ? q.o[userAns] : 'ไม่ได้ตอบ'}</span></p>
+            ${!isCorrect ? `<p class="text-emerald-700 mt-0.5">เฉลย: ${q.o[q.a]}</p>` : ''}
+            <p class="text-slate-500 mt-1 italic">💡 ${q.e}</p>
+          </div>
+        `;
+      });
+
+      updateUserProfileUI();
+    }
+
+    function backToHome() {
+      document.getElementById('resultScreen').classList.add('hidden');
+      document.getElementById('mainScreen').classList.remove('hidden');
+      renderMainUI();
+    }
+
+    // 🏆 Leaderboard Modal
+    function openLeaderboard() {
+      let modal = document.getElementById('leaderboardModal');
+      modal.classList.remove('hidden');
+      let list = document.getElementById('leaderboardList');
+      list.innerHTML = `
+        <div class="flex justify-between items-center p-3 bg-indigo-50 rounded-xl font-bold text-sm"><span>🥇 คุณ (${userProfile.name})</span><span class="text-indigo-600">${userProfile.xp} XP</span></div>
+        <div class="flex justify-between items-center p-3 bg-slate-50 rounded-xl text-sm"><span>🥈 สมชาย สายลุย</span><span class="text-slate-600">850 XP</span></div>
+        <div class="flex justify-between items-center p-3 bg-slate-50 rounded-xl text-sm"><span>🥉 กนกวรรณ สอบผ่าน</span><span class="text-slate-600">720 XP</span></div>
+      `;
+    }
+    function closeLeaderboard() { document.getElementById('leaderboardModal').classList.add('hidden'); }
+
+    // 💾 Export / Import JSON
+    function exportDataJson() {
+      let data = { packs: PACKS, examData: EXAM_DATA };
+      let blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      let url = URL.createObjectURL(blob);
+      let a = document.createElement('a');
+      a.href = url;
+      a.download = 'exam_backup_data.json';
+      a.click();
+    }
+
+    function importDataJson() {
+      let fileInput = document.getElementById('importFile');
+      if(fileInput.files.length === 0) { alert('กรุณาเลือกไฟล์ JSON'); return; }
+      let file = fileInput.files[0];
+      let reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          let data = JSON.parse(e.target.result);
+          if(data.packs && data.examData) {
+            PACKS = data.packs;
+            EXAM_DATA = data.examData;
+            localStorage.setItem('LOCAL_PACKS', JSON.stringify(PACKS));
+            localStorage.setItem('LOCAL_EXAM_DATA', JSON.stringify(EXAM_DATA));
+            alert('นำเข้าข้อมูลสำเร็จ!');
+            renderMainUI();
+          } else { alert('รูปแบบไฟล์ไม่ถูกต้อง'); }
+        } catch(err) { alert('เกิดข้อผิดพลาดในการอ่านไฟล์'); }
+      };
+      reader.readAsText(file);
+    }
+
+    // อปก. แอดมินทั่วไป
+    function toggleAdminMode() { document.getElementById('adminPanel').classList.toggle('hidden'); updateAdminSelects(); }
+    function switchAdminTab(tabId) {
+      ['tabPos', 'tabEditPos', 'tabQ', 'tabData'].forEach(id => document.getElementById(id).classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+    }
+    function updateAdminSelects() {
+      let selTarget = document.getElementById('selectTargetPack');
+      let selEdit = document.getElementById('selectEditPack');
+      if (selTarget) selTarget.innerHTML = '';
+      if (selEdit) selEdit.innerHTML = '';
+      for(let key in PACKS) {
+        let label = `${PACKS[key].name} (${key})`;
+        if (selTarget) selTarget.innerHTML += `<option value="${key}">${label}</option>`;
+        if (selEdit) selEdit.innerHTML += `<option value="${key}">${label}</option>`;
+      }
+      loadPackDataToEdit();
+    }
+    function loadPackDataToEdit() {
+      let key = document.getElementById('selectEditPack').value;
+      if (!key || !PACKS[key]) return;
+      let p = PACKS[key];
+      document.getElementById('editPosName').value = p.name || '';
+      document.getElementById('editPosSub').value = p.sub || '';
+      document.getElementById('editPosIcon').value = p.icon || '';
+      document.getElementById('editPosMins').value = p.mins || 5;
+      document.getElementById('editPosDesc').value = p.desc || '';
+      document.getElementById('editPosTheme').value = p.theme || 'classic';
+    }
+    function addNewPosition() {
+      let key = document.getElementById('newPosKey').value.trim();
+      let name = document.getElementById('newPosName').value.trim();
+      if(!key || !name) { alert('กรุณากรอกข้อมูลให้ครบถ้วน'); return; }
+      PACKS[key] = { name: name, sub: 'ภาค ข ความรู้เฉพาะตำแหน่ง', icon: document.getElementById('newPosIcon').value.trim() || '📝', mins: 10, desc: document.getElementById('newPosDesc').value.trim(), theme: 'ocean' };
+      if(!EXAM_DATA[key]) EXAM_DATA[key] = [];
+      localStorage.setItem('LOCAL_PACKS', JSON.stringify(PACKS));
+      localStorage.setItem('LOCAL_EXAM_DATA', JSON.stringify(EXAM_DATA));
+      alert('เพิ่มตำแหน่งสำเร็จ!');
+      renderMainUI();
+    }
+    function saveEditedPosition() {
+      let key = document.getElementById('selectEditPack').value;
+      if (!key || !PACKS[key]) return;
+      PACKS[key].name = document.getElementById('editPosName').value.trim();
+      PACKS[key].sub = document.getElementById('editPosSub').value.trim();
+      PACKS[key].icon = document.getElementById('editPosIcon').value.trim() || '📝';
+      PACKS[key].mins = parseInt(document.getElementById('editPosMins').value) || 5;
+      PACKS[key].desc = document.getElementById('editPosDesc').value.trim();
+      PACKS[key].theme = document.getElementById('editPosTheme').value;
+      localStorage.setItem('LOCAL_PACKS', JSON.stringify(PACKS));
+      alert('บันทึกสำเร็จ!');
+      renderMainUI();
+    }
+    function deletePosition() {
+      let key = document.getElementById('selectEditPack').value;
+      if (confirm('ต้องการลบตำแหน่งนี้ใช่หรือไม่?')) {
+        delete PACKS[key]; delete EXAM_DATA[key];
+        localStorage.setItem('LOCAL_PACKS', JSON.stringify(PACKS));
+        localStorage.setItem('LOCAL_EXAM_DATA', JSON.stringify(EXAM_DATA));
+        renderMainUI();
+      }
+    }
+    function addNewQuestion() {
+      let key = document.getElementById('selectTargetPack').value;
+      let t = document.getElementById('newQText').value.trim();
+      let o = [document.getElementById('opt0').value.trim(), document.getElementById('opt1').value.trim(), document.getElementById('opt2').value.trim(), document.getElementById('opt3').value.trim()];
+      let a = parseInt(document.getElementById('ansCorrect').value);
+      let e = document.getElementById('newQExp').value.trim();
+      if(!t || o.some(x => !x)) { alert('กรุณากรอกข้อมูลให้ครบ'); return; }
+      if(!EXAM_DATA[key]) EXAM_DATA[key] = [];
+      EXAM_DATA[key].push({ t, o, a, e });
+      localStorage.setItem('LOCAL_EXAM_DATA', JSON.stringify(EXAM_DATA));
+      alert('เพิ่มข้อสอบสำเร็จ!');
+    }
+
+    renderMainUI();
+  </script>
+</body>
+</html>
