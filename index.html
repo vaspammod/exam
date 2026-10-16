@@ -843,48 +843,5 @@
 
     renderMainUI();
   </script>
-  <script>
-/* ===== GOOGLE SHEETS LIVE DATA SYNC ===== */
-(function(){
-  var SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwOFTl47xjBxVySr19G1ACh1J0nzjpMaVn1p-QDAY58h5mXOWhttc4sUl_WVyso8dcRrw/exec"; // ⬅️ วาง Web App URL ที่นี่
-
-  if (!SHEET_API_URL || SHEET_API_URL.indexOf("http") !== 0) return;
-
-  var statusBox = document.createElement("div");
-  statusBox.style.cssText = "position:fixed;top:12px;right:12px;z-index:9999;background:rgba(255,255,255,0.92);border:1px solid #C7E8F7;padding:6px 12px;border-radius:20px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);font-family:inherit;pointer-events:none;";
-  statusBox.innerText = "🔄 กำลังซิงค์ข้อสอบ...";
-  document.body.appendChild(statusBox);
-
-  fetch(SHEET_API_URL)
-    .then(function(res){ return res.json(); })
-    .then(function(remoteBank){
-      if (!remoteBank || Object.keys(remoteBank).length === 0) {
-        statusBox.innerText = "⚠️ ชีตว่างเปล่า";
-        setTimeout(function(){ statusBox.remove(); }, 3000);
-        return;
-      }
-
-      var targetName = ['BANK','EXAMS','QUIZ','DATA','QUESTIONS'].find(function(k){
-        return window[k] && typeof window[k] === 'object';
-      }) || 'BANK';
-
-      if (!window[targetName]) window[targetName] = {};
-
-      Object.keys(remoteBank).forEach(function(key){
-        window[targetName][key] = remoteBank[key];
-      });
-
-      statusBox.innerText = "✅ ซิงค์ข้อสอบสำเร็จ (" + Object.keys(remoteBank).length + " ตำแหน่ง)";
-      setTimeout(function(){ statusBox.remove(); }, 2500);
-
-      if (typeof renderCards === "function") renderCards();
-    })
-    .catch(function(err){
-      console.warn("Sheet sync error:", err);
-      statusBox.innerText = "❌ ซิงค์ไม่สำเร็จ (ใช้ข้อมูลเดิม)";
-      setTimeout(function(){ statusBox.remove(); }, 3000);
-    });
-})();
-</script>
 </body>
 </html>
