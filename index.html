@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LocalGov Quest - คลังข้อสอบท้องถิ่น</title>
+  <title>LocalGov Quest - คลังข้อสอบท้องถิ่น กสถ.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -22,38 +22,68 @@
       --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Sarabun', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 60px; }
-    header { background: #fff; border-bottom: 1px solid var(--border); padding: 16px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-    .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 70px; }
+    
+    header { background: #fff; border-bottom: 1px solid var(--border); padding: 14px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700; color: var(--primary-dark); }
+    .header-controls { display: flex; align-items: center; gap: 10px; }
     .mode-pill { display: flex; align-items: center; background: #eff6ff; padding: 4px 10px; border-radius: 999px; border: 1px solid #bfdbfe; font-size: 13px; font-weight: 500; gap: 6px; }
     .mode-select { border: none; background: transparent; font-size: 13px; font-weight: 600; color: var(--primary); cursor: pointer; outline: none; }
+    
     .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-    .card { background: var(--card-bg); border-radius: 14px; border: 1px solid var(--border); padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
+    
+    /* แท็บสลับหมวด */
+    .tab-bar { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; }
+    .tab-btn { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border); background: #fff; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: 0.15s; }
+    .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    
+    /* สไตล์การ์ดข้อสอบและธีม */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+    .card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
     .card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #cbd5e1; }
     .card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
-    .card-icon { font-size: 32px; background: #f1f5f9; width: 54px; height: 54px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .card-icon { font-size: 32px; width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .card-title { font-size: 16px; font-weight: 700; color: #0f172a; line-height: 1.3; }
-    .card-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px; background: #e0f2fe; color: #0369a1; margin-top: 4px; }
+    .card-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px; margin-top: 4px; }
     .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; flex-grow: 1; }
-    .card-btn { width: 100%; padding: 10px; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; font-weight: 600; font-size: 14px; color: var(--primary); transition: 0.15s; }
+    .card-btn { width: 100%; padding: 10px; background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; font-weight: 600; font-size: 14px; color: var(--primary); transition: 0.15s; }
     .card:hover .card-btn { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* ธีมสีการ์ด */
+    .theme-blue .card-icon { background: #eff6ff; }
+    .theme-blue .card-badge { background: #dbeafe; color: #1e40af; }
+    .theme-emerald .card-icon { background: #ecfdf5; }
+    .theme-emerald .card-badge { background: #d1fae5; color: #065f46; }
+    .theme-purple .card-icon { background: #faf5ff; }
+    .theme-purple .card-badge { background: #f3e8ff; color: #6b21a8; }
+    .theme-amber .card-icon { background: #fffbeb; }
+    .theme-amber .card-badge { background: #fef3c7; color: #92400e; }
+    .theme-rose .card-icon { background: #fff1f2; }
+    .theme-rose .card-badge { background: #ffe4e6; color: #9f1239; }
+    .theme-cyan .card-icon { background: #ecfeff; }
+    .theme-cyan .card-badge { background: #cffafe; color: #155e75; }
+
+    /* หน้าต่างป๊อปอัป Modal */
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .modal-box { background: #fff; width: 100%; max-width: 520px; border-radius: 20px; padding: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); animation: pop 0.2s ease-out; }
+    .modal-box { background: #fff; width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; border-radius: 20px; padding: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); animation: pop 0.2s ease-out; }
     @keyframes pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
     .modal-title { font-size: 19px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
     .modal-detail { background: #f8fafc; border-radius: 12px; padding: 14px; margin-bottom: 20px; font-size: 14px; line-height: 1.6; }
     .modal-actions { display: flex; gap: 10px; }
+    
     .btn { flex: 1; min-height: 48px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.15s; }
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-primary:hover { background: var(--primary-dark); }
     .btn-secondary { background: #e2e8f0; color: #475569; }
-    .exam-wrapper { max-width: 760px; margin: 16px auto; }
+    .btn-danger { background: #fee2e2; color: var(--danger); }
+
+    /* หน้าข้อสอบ */
+    .exam-wrapper { max-width: 780px; margin: 16px auto; }
     .exam-header { background: #fff; padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
     .timer { font-size: 17px; font-weight: 700; color: var(--danger); display: flex; align-items: center; gap: 6px; }
     .question-card { background: #fff; border-radius: 16px; border: 1px solid var(--border); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow); }
-    .q-number { font-size: 13px; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 6px; }
+    .q-number { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
     .q-text { font-size: 16px; font-weight: 600; line-height: 1.6; margin-bottom: 18px; }
     .choice-list { display: flex; flex-direction: column; gap: 10px; }
     .choice-item { border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 16px; cursor: pointer; transition: 0.15s; font-size: 15px; display: flex; align-items: center; gap: 12px; line-height: 1.4; }
@@ -67,6 +97,14 @@
     .pal-btn { height: 36px; border-radius: 8px; border: 1px solid var(--border); background: #f8fafc; font-weight: 600; font-size: 13px; cursor: pointer; }
     .pal-btn.answered { background: var(--primary); color: #fff; border-color: var(--primary); }
     .pal-btn.current { outline: 2px solid #0f172a; outline-offset: 1px; }
+
+    /* ปุ่มเปิดหลังบ้านลอยตัว */
+    .admin-float-btn { position: fixed; right: 16px; bottom: 16px; width: 48px; height: 48px; border-radius: 50%; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; z-index: 900; border: none; }
+    .admin-form-group { margin-bottom: 12px; }
+    .admin-form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .admin-input, .admin-select, .admin-textarea { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
+    .admin-textarea { resize: vertical; min-height: 60px; }
+
     .hidden { display: none !important; }
     @media (max-width: 640px) {
       .header-inner { flex-direction: column; align-items: flex-start; }
@@ -83,35 +121,48 @@
       <span>🏛️</span>
       <span>LocalGov Quest</span>
     </div>
-    <div class="mode-pill">
-      <span>⚙️ โหมด:</span>
-      <select id="modeSelect" class="mode-select" onchange="changeMode(this.value)">
-        <option value="practice">⚡ ฝึกฝนด่วน (เฉลยทันที)</option>
-        <option value="exam">🎯 สนามจริง (สอบจับเวลา)</option>
-      </select>
+    <div class="header-controls">
+      <div class="mode-pill">
+        <span>⚙️ โหมด:</span>
+        <select id="modeSelect" class="mode-select" onchange="changeMode(this.value)">
+          <option value="practice">⚡ ฝึกฝนด่วน (เฉลยทันที)</option>
+          <option value="exam">🎯 สนามจริง (จับเวลา 60%)</option>
+        </select>
+      </div>
     </div>
   </div>
 </header>
 
+<!-- หน้ารายการชุดข้อสอบ -->
 <div id="homeView" class="container">
-  <div style="margin-bottom: 20px;">
-    <h2 style="font-size: 22px; font-weight: 700; color:#0f172a;">เลือกตำแหน่งสอบแข่งขัน (ภาค ข)</h2>
-    <p style="font-size: 14px; color: var(--text-muted);">ระบบจำลองข้อสอบเสมือนจริง พร้อมเฉลยและคำอธิบายตามหลักกฎหมาย</p>
+  <div style="margin-bottom: 16px;">
+    <h2 style="font-size: 22px; font-weight: 700; color:#0f172a;">ระบบจำลองการสอบภาค ก และ ภาค ข ท้องถิ่น</h2>
+    <p style="font-size: 14px; color: var(--text-muted);">เลือกหมวดหมู่ที่ต้องการฝึกฝน อ้างอิงระเบียบและกฎหมายฉบับมาตรฐาน กสถ.</p>
   </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="filterTab('all', this)">📌 ทั้งหมด</button>
+    <button class="tab-btn" onclick="filterTab('partA_all', this)">🏆 ภาค ก รวมทุกหมวด</button>
+    <button class="tab-btn" onclick="filterTab('partA_sub', this)">📖 ภาค ก ฝึกซ้อมรายหมวด</button>
+    <button class="tab-btn" onclick="filterTab('partB', this)">💼 ภาค ข ความรู้เฉพาะตำแหน่ง</button>
+  </div>
+
   <div id="cardGrid" class="grid"></div>
 </div>
 
+<!-- Modal สรุปกติกาข้อสอบ -->
 <div id="briefModal" class="modal-overlay hidden">
   <div class="modal-box">
     <div id="briefTitle" class="modal-title"></div>
     <div id="briefDetail" class="modal-detail"></div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeModal()">ยกเลิก</button>
-      <button class="btn btn-primary" onclick="confirmStart()">เริ่มทำข้อสอบ</button>
+      <button class="btn btn-primary" onclick="confirmStart()">เริ่มทำข้อสอบ ➔</button>
     </div>
   </div>
 </div>
 
+<!-- หน้าทำข้อสอบ -->
 <div id="examView" class="container exam-wrapper hidden">
   <div class="exam-header">
     <div>
@@ -137,267 +188,363 @@
   <div id="palette" class="palette-grid"></div>
 </div>
 
+<!-- หน้าสรุปผลการสอบ -->
 <div id="resultView" class="container exam-wrapper hidden">
   <div class="question-card" style="text-align: center; padding: 36px 20px;">
     <div id="scoreIcon" style="font-size: 54px; margin-bottom: 10px;">🏆</div>
     <h2 id="scoreTitle" style="font-size: 24px; font-weight: 700; margin-bottom: 6px;"></h2>
     <p id="scoreSub" style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;"></p>
     <div style="display:inline-block; background:#f8fafc; border:1px solid var(--border); border-radius:14px; padding:16px 28px; margin-bottom: 24px;">
-      <span style="font-size: 38px; font-weight: 800; color: var(--primary);" id="totalScore">0</span>
-      <span style="font-size: 16px; color: var(--text-muted);"> / 10 ข้อ</span>
+      <span style="font-size: 40px; font-weight: 800; color: var(--primary);" id="totalScore">0</span>
+      <span style="font-size: 16px; color: var(--text-muted);" id="fullScoreText"> / 10 ข้อ</span>
     </div>
-    <div style="display:flex; gap:12px; justify-content:center;">
-      <button class="btn btn-primary" onclick="backToHome()">กลับหน้าแรก</button>
-      <button class="btn btn-secondary" onclick="reviewExam()">🔍 ดูเฉลยทั้งหมด</button>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="backToHome()">กลับหน้าหลัก</button>
+      <button class="btn btn-secondary" onclick="reviewExam()">🔍 ดูเฉลยละเอียดทุกข้อ</button>
+    </div>
+  </div>
+</div>
+
+<!-- ปุ่มเปิดระบบหลังบ้าน Admin Studio -->
+<button class="admin-float-btn" onclick="openAdminModal()" title="เปิดระบบหลังบ้าน">⚙️</button>
+
+<!-- Modal หลังบ้าน Admin Studio -->
+<div id="adminModal" class="modal-overlay hidden">
+  <div class="modal-box" style="max-width: 680px;">
+    <div class="modal-title" style="justify-content: space-between;">
+      <span>🛠️ ระบบหลังบ้านจัดการข้อสอบ</span>
+      <button onclick="closeAdminModal()" style="border:none; background:transparent; font-size:20px; cursor:pointer;">✖</button>
+    </div>
+
+    <!-- ส่วนที่ 1: เลือกจัดการชุดข้อสอบ -->
+    <div style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
+      <div class="admin-form-group">
+        <label>เลือกตำแหน่ง / หมวดวิชาที่จะแก้ไข:</label>
+        <select id="admPosSelect" class="admin-select" onchange="onAdminSelectPack(this.value)"></select>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-secondary" style="min-height:36px; font-size:13px;" onclick="toggleAddPackForm()">➕ เพิ่มตำแหน่งใหม่</button>
+        <button class="btn btn-danger" style="min-height:36px; font-size:13px;" onclick="deleteCurrentPack()">🗑️ ลบตำแหน่งนี้</button>
+      </div>
+    </div>
+
+    <!-- ฟอร์มสร้างตำแหน่งใหม่ (ซ่อนไว้เปิดเมื่อกดปุ่ม) -->
+    <div id="addPackBox" class="hidden" style="background:#f1f5f9; padding:14px; border-radius:12px; margin-bottom:16px;">
+      <h4 style="font-size:14px; margin-bottom:8px;">เพิ่มตำแหน่ง / ชุดข้อสอบใหม่:</h4>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+        <input id="npId" class="admin-input" placeholder="ID (อังกฤษ เช่น it, driver)">
+        <input id="npName" class="admin-input" placeholder="ชื่อตำแหน่ง">
+        <input id="npIcon" class="admin-input" placeholder="อีโมจิ (เช่น 💻)">
+        <select id="npCategory" class="admin-select">
+          <option value="partB">ภาค ข เฉพาะตำแหน่ง</option>
+          <option value="partA_sub">ภาค ก รายหมวด</option>
+          <option value="partA_all">ภาค ก รวมทุกหมวด</option>
+        </select>
+        <select id="npTheme" class="admin-select">
+          <option value="theme-blue">ธีม: น้ำเงิน (Blue)</option>
+          <option value="theme-emerald">ธีม: มรกต (Emerald)</option>
+          <option value="theme-purple">ธีม: ม่วง (Purple)</option>
+          <option value="theme-amber">ธีม: อำพัน (Amber)</option>
+          <option value="theme-rose">ธีม: กุหลาบ (Rose)</option>
+          <option value="theme-cyan">ธีม: ฟ้า (Cyan)</option>
+        </select>
+        <input id="npDesc" class="admin-input" placeholder="คำอธิบายสั้นๆ">
+      </div>
+      <button class="btn btn-primary" style="min-height:36px; font-size:13px; margin-top:8px; width:100%;" onclick="saveNewPack()">บันทึกชุดใหม่</button>
+    </div>
+
+    <!-- ส่วนที่ 2: เปลี่ยนธีมและคำอธิบายชุดปัจจุบัน -->
+    <div style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div class="admin-form-group">
+          <label>เปลี่ยนธีมสีการ์ด:</label>
+          <select id="admCurrentTheme" class="admin-select" onchange="updateCurrentTheme(this.value)">
+            <option value="theme-blue">น้ำเงิน (Blue)</option>
+            <option value="theme-emerald">มรกต (Emerald)</option>
+            <option value="theme-purple">ม่วง (Purple)</option>
+            <option value="theme-amber">อำพัน (Amber)</option>
+            <option value="theme-rose">กุหลาบ (Rose)</option>
+            <option value="theme-cyan">ฟ้า (Cyan)</option>
+          </select>
+        </div>
+        <div class="admin-form-group">
+          <label>แท็กสังกัดหมวดหมู่:</label>
+          <select id="admCurrentCategory" class="admin-select" onchange="updateCurrentCategory(this.value)">
+            <option value="partA_all">ภาค ก รวมทุกหมวด</option>
+            <option value="partA_sub">ภาค ก รายหมวด</option>
+            <option value="partB">ภาค ข เฉพาะตำแหน่ง</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ส่วนที่ 3: เพิ่มข้อสอบใหม่ลงในชุดนี้ -->
+    <div style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
+      <h4 style="font-size:15px; margin-bottom:8px;">➕ เพิ่มข้อสอบในตำแหน่งนี้ (<span id="admQCount">0</span> ข้อปัจจุบัน)</h4>
+      <div class="admin-form-group">
+        <label>โจทย์คำถาม:</label>
+        <textarea id="admQText" class="admin-textarea" placeholder="พิมพ์คำถามที่นี่..."></textarea>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+        <input id="admChoice0" class="admin-input" placeholder="ก. ตัวเลือกที่ 1">
+        <input id="admChoice1" class="admin-input" placeholder="ข. ตัวเลือกที่ 2">
+        <input id="admChoice2" class="admin-input" placeholder="ค. ตัวเลือกที่ 3">
+        <input id="admChoice3" class="admin-input" placeholder="ง. ตัวเลือกที่ 4">
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 2fr; gap:8px; margin-top:8px;">
+        <div>
+          <label style="font-size:12px; font-weight:600;">เฉลยข้อที่ถูก:</label>
+          <select id="admAns" class="admin-select">
+            <option value="0">ข้อ ก.</option>
+            <option value="1">ข้อ ข.</option>
+            <option value="2">ข้อ ค.</option>
+            <option value="3">ข้อ ง.</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:600;">คำอธิบาย / มาตรากฎหมาย:</label>
+          <input id="admExp" class="admin-input" placeholder="ระบุเหตุผลหรือมาตราอ้างอิง">
+        </div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:10px; width:100%; min-height:40px;" onclick="addQuestionToCurrentPack()">เพิ่มข้อสอบข้อนี้ ➔</button>
+    </div>
+
+    <!-- ส่วนที่ 4: การสำรองข้อมูล นำเข้า / ส่งออก (Backup & Restore) -->
+    <div>
+      <h4 style="font-size:15px; margin-bottom:8px;">💾 ระบบสำรองข้อมูล (Backup / Import)</h4>
+      <div style="display:flex; gap:8px; margin-bottom:10px;">
+        <button class="btn btn-secondary" style="min-height:36px; font-size:13px;" onclick="exportDataJSON()">📤 ส่งออกไฟล์สำรอง (.JSON)</button>
+        <button class="btn btn-secondary" style="min-height:36px; font-size:13px;" onclick="triggerImportJSON()">📥 นำเข้าไฟล์สำรอง (.JSON)</button>
+        <button class="btn btn-danger" style="min-height:36px; font-size:13px;" onclick="resetToFactoryDefault()">🔄 คืนค่าเริ่มต้นโรงงาน</button>
+        <input type="file" id="importFileInput" accept=".json" class="hidden" onchange="handleFileImport(event)">
+      </div>
+      <textarea id="jsonClipboardBox" class="admin-textarea" style="font-size:11px;" placeholder="กล่องแสดงผล JSON / วางโค้ด JSON เพื่อกดนำเข้า..."></textarea>
+      <button class="btn btn-secondary" style="width:100%; min-height:34px; font-size:12px; margin-top:4px;" onclick="importFromClipboard()">📥 กู้คืนข้อมูลจากกล่องข้อความด้านบน</button>
     </div>
   </div>
 </div>
 
 <script>
-/* ================= ฐานข้อมูลข้อสอบ 14 ตำแหน่ง ================= */
-window.BANK = {
-  edu: {
-    id: 'edu', icon: '🎓', name: 'นักวิชาการศึกษาปฏิบัติการ', desc: 'พ.ร.บ.การศึกษาแห่งชาติ · การศึกษาภาคบังคับ · หลักสูตรและการจัดการเรียนรู้',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'edulaw', name: 'กฎหมายการศึกษา' }, { k: 'eduacad', name: 'หลักวิชาการศึกษา' }],
+/* ================= ฐานข้อมูลเริ่มต้นมาตรฐาน 19 ชุด ================= */
+const DEFAULT_BANK = {
+  /* ------------------- ภาค ก รวมทุกหมวด ------------------- */
+  partA_full: {
+    id: 'partA_full', icon: '🏆', name: 'ภาค ก ท้องถิ่น (รวมทุกหมวด)',
+    tag: 'ภาค ก ความรู้ความสามารถทั่วไป', category: 'partA_all', theme: 'theme-blue',
+    desc: 'ชุดจำลองสนามจริง: คิดวิเคราะห์เชิงคณิต · ภาษาไทย · กฎหมายท้องถิ่น 11 ฉบับ · ภาษาอังกฤษ',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การศึกษาภาคบังคับมีกำหนดระยะเวลากี่ปี', c:['หกปี','แปดปี','เก้าปี','สิบสองปี'], a:2, e:'มาตรา 17 กำหนดการศึกษาภาคบังคับจำนวนเก้าปี โดยให้เด็กอายุย่างเข้าปีที่เจ็ดเข้าเรียนจนอายุย่างเข้าปีที่สิบหก ส่วน 12 ปีคือการศึกษาขั้นพื้นฐานที่รัฐต้องจัดให้' },
+      { s:'math', q:'อนุกรมตัวเลข: 3, 7, 15, 31, 63, ... ตัวเลขถัดไปคือจำนวนใด', c:['95','115','127','135'], a:2, e:'ระยะห่างเพิ่มขึ้นเป็นสองเท่า: +4, +8, +16, +32, ดังนั้นตัวถัดไปคือ +64 ได้ 63 + 64 = 127' },
+      { s:'math', q:'สินค้าชิ้นหนึ่งติดราคาขายไว้ 1,200 บาท หากลดราคาให้ผู้ซื้อ 20% ร้านค้ายังคงได้กำไร 20% จงหาราคาทุนของสินค้านี้', c:['750 บาท','800 บาท','850 บาท','900 บาท'], a:1, e:'ราคาขายจริงหลังลด 20% คือ 1,200 × 0.80 = 960 บาท โดยราคา 960 บาทคิดเป็น 120% ของราคาทุน ดังนั้นทุน = (960 × 100) ÷ 120 = 800 บาท' },
+      { s:'thai', q:'ข้อใดใช้คำราชาศัพท์ได้ถูกต้องตามหลักไวยากรณ์ไทย', c:['ทรงเสด็จพระราชดำเนินไปทรงเปิดงาน','เสด็จพระราชดำเนินไปเปิดงาน','เสด็จไปทรงพระดำเนิน','ทรงเสด็จไปเยือน'], a:1, e:'คำว่า "เสด็จพระราชดำเนิน" เป็นกริยาราชาศัพท์ในตัวเองอยู่แล้ว ไม่ต้องเติม "ทรง" ซ้อนข้างหน้า' },
+      { s:'thai', q:'สำนวนในข้อใดมีความหมายตรงกับคำว่า "ยอมจำนนเพราะจำนนด้วยพยานหลักฐาน"', c:['จนแต้ม','จับไม่ได้ไล่ไม่ทัน','มัดมือชก','จำนนต่อหลักฐาน'], a:0, e:'"จนแต้ม" มาจากการเล่นหมากรุก หมายถึงหมดทางเดิน หมดปัญญาโต้แย้ง หรือยอมจำนนต่อสถานการณ์' },
+      { s:'law', q:'ตามพระราชบัญญัติระเบียบบริหารราชการแผ่นดิน พ.ศ. 2534 การจัดระเบียบบริหารราชการของไทยแบ่งเป็นกี่ส่วน', c:['2 ส่วน (ส่วนกลาง, ส่วนภูมิภาค)','3 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น)','4 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น, องค์การมหาชน)','3 ส่วน (ส่วนกลาง, ส่วนท้องถิ่น, ส่วนเอกชน)'], a:1, e:'มาตรา 4 แบ่งเป็น 1. ราชการส่วนกลาง 2. ราชการส่วนภูมิภาค 3. ราชการส่วนท้องถิ่น' },
+      { s:'law', q:'องค์กรปกครองส่วนท้องถิ่นรูปแบบพิเศษในประเทศไทยปัจจุบัน ได้แก่ข้อใด', c:['พัทยา และ เทศบาลนครนครราชสีมา','กรุงเทพมหานคร และ เมืองพัทยา','กรุงเทพมหานคร และ องค์การบริหารส่วนจังหวัดนนทบุรี','เทศบาลนครเชียงใหม่ และ เมืองพัทยา'], a:1, e:'องค์กรปกครองส่วนท้องถิ่นรูปแบบพิเศษมี 2 แห่งคือ กรุงเทพมหานคร และ เมืองพัทยา' },
+      { s:'eng', q:'Select the most suitable word: "The municipality _____ a new park project next Monday."', c:['launches','launched','will launch','has launched'], a:2, e:'มีตัวบอกเวลาในอนาคต "next Monday" จึงต้องใช้ Future Simple Tense (will + V.1)' },
+      { s:'eng', q:'Choose the synonym of the word "EFFICIENT":', c:['Effective and productive','Slow and complicated','Careless and weak','Expensive and luxury'], a:0, e:'Efficient หมายถึง มีประสิทธิภาพ ประหยัดเวลาและพลังงาน ตรงกับ Effective and productive' },
+      { s:'math', q:'หากรถยนต์คันหนึ่งแล่นด้วยความเร็วคงที่ 90 กิโลเมตรต่อชั่วโมง ในเวลา 40 นาที จะแล่นได้ระยะทางเท่าใด', c:['50 กิโลเมตร','60 กิโลเมตร','65 กิโลเมตร','70 กิโลเมตร'], a:1, e:'40 นาทีคิดเป็น 40/60 = 2/3 ชั่วโมง นำความเร็ว 90 × (2/3) = 60 กิโลเมตร' },
+      { s:'law', q:'พระราชกฤษฎีกาว่าด้วยหลักเกณฑ์และวิธีการบริหารกิจการบ้านเมืองที่ดี พ.ศ. 2546 มีเป้าหมายสูงสุดเพื่อสิ่งใด', c:['เพื่อลดงบประมาณรายจ่ายประจำปี','เพื่อเกิดประโยชน์สุขของประชาชน','เพื่อเพิ่มข้าราชการส่วนภูมิภาค','เพื่อยกเลิกกฎหมายที่ล้าสมัย'], a:1, e:'มาตรา 6 กำหนดเป้าหมายอันดับแรกและสำคัญที่สุดคือ "เกิดประโยชน์สุขของประชาชน"' }
+    ]
+  },
+
+  /* ------------------- ภาค ก รายหมวด 4 วิชา ------------------- */
+  partA_math: {
+    id: 'partA_math', icon: '🧮', name: 'ภาค ก: คิดวิเคราะห์และคณิตศาสตร์',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-emerald',
+    desc: 'เจาะลึกอนุกรม ตรรกศาสตร์ เงื่อนไขสัญลักษณ์ คณิตศาสตร์ทั่วไป ร้อยละ และโจทย์ปัญหา',
+    sec: 3600, mins: 60, pass: 60,
+    q: [
+      { s:'m', q:'อนุกรม: 2, 6, 12, 20, 30, ... พจน์ถัดไปคือเลขใด', c:['40','42','44','46'], a:1, e:'ระยะห่างคือ +4, +6, +8, +10 ดังนั้นตัวถัดไปคือ +12 ได้ 30 + 12 = 42' },
+      { s:'m', q:'เสาไฟปักเรียงกันเป็นแถวตรง แต่ละต้นห่างกัน 5 เมตร ถ้ามีเสาไฟทั้งหมด 21 ต้น เสาต้นแรกกับต้นสุดท้ายห่างกันกี่เมตร', c:['100 เมตร','105 เมตร','110 เมตร','115 เมตร'], a:0, e:'เสา 21 ต้น มีช่วงว่าง 20 ช่วง นำ 20 × 5 = 100 เมตร' },
+      { s:'m', q:'ผลบวกของเลขคู่ 5 จำนวนเรียงกันมีค่าเท่ากับ 120 จงหาเลขคู่ที่มีค่าน้อยที่สุด', c:['18','20','22','24'], a:1, e:'ค่าเฉลี่ยคือตัวกลาง = 120 ÷ 5 = 24 ดังนั้นเลขทั้ง 5 ตัวคือ 20, 22, 24, 26, 28 ตัวน้อยสุดคือ 20' },
+      { s:'m', q:'ถ้า A ทำงานเสร็จใน 6 วัน และ B ทำงานชนิดเดียวกันเสร็จใน 3 วัน หากทั้งสองช่วยกันทำงานจะเสร็จในกี่วัน', c:['1.5 วัน','2 วัน','2.5 วัน','4.5 วัน'], a:1, e:'ใน 1 วัน ทั้งสองทำได้ (1/6) + (1/3) = 3/6 = 1/2 ของงาน ดังนั้นใช้เวลารวม 2 วัน' },
+      { s:'m', q:'ซื้อส้มมาราคากิโลกรัมละ 40 บาท ขายไป 50 บาท คิดเป็นกำไรกี่เปอร์เซ็นต์', c:['20%','25%','30%','35%'], a:1, e:'กำไร 10 บาท เทียบทุน 40 บาท คิดเป็น (10 ÷ 40) × 100 = 25%' }
+    ]
+  },
+  partA_thai: {
+    id: 'partA_thai', icon: '📖', name: 'ภาค ก: ภาษาไทยและการสื่อสาร',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-amber',
+    desc: 'ความเข้าใจภาษา การเรียงรูปประโยค การจับใจความสำคัญ คำราชาศัพท์ และสำนวนไทย',
+    sec: 3600, mins: 60, pass: 60,
+    q: [
+      { s:'t', q:'คำในข้อใดสะกดถูกต้องตามพจนานุกรมฉบับราชบัณฑิตยสถานทุกคำ', c:['กะเพรา อนุญาต สัมมนา','กระเพรา อนุญาต สัมมนา','กะเพรา อนุณาต สัมนา','กระเพรา อนุญาติ สัมมนา'], a:0, e:'กะเพรา (ไม่มี ร), อนุญาต (ไม่มีสระอิ), สัมมนา (ม ม้าสองตัว)' },
+      { s:'t', q:'ประโยคใดเป็นประโยคที่ไม่มีการกำกวมในด้านความหมาย', c:['เขาเห็นตำรวจจับขโมยบนรถเมล์','แม่บอกลูกสาวว่าเพื่อนของเธอมาหา','แพทย์ตรวจรักษาคนไข้ด้วยความตั้งใจในห้องตรวจ','ครูตีนักเรียนที่มาสายด้วยไม้เรียว'], a:2, e:'ข้อ 3 สื่อสารประธาน กริยา กรรม และสถานที่ได้อย่างชัดเจน ไม่มีคำขยายกำกวม' },
+      { s:'t', q:'"คมในฝัก" มีความหมายตรงกับบุคคลที่มีลักษณะตามข้อใด', c:['คนที่มีอาวุธติดตัวอยู่เสมอ','คนที่มีความรู้ความสามารถแต่ไม่แสดงโอ้อวด','คนที่มีวาจาเชือดเฉือนผู้อื่น','คนที่มีปฏิภาณไหวพริบสู้คน'], a:1, e:'คมในฝัก หมายถึง ผู้มีความรู้ความสามารถซ่อนอยู่แต่สงบเสงี่ยม ไม่โอ้อวด' }
+    ]
+  },
+  partA_law: {
+    id: 'partA_law', icon: '⚖️', name: 'ภาค ก: กฎหมายการปฏิบัติราชการท้องถิ่น',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-purple',
+    desc: 'พ.ร.บ.อบจ., เทศบาล, อบต., พัทยา, กำหนดแผนกระจายอำนาจ, และการบริหารกิจการบ้านเมืองที่ดี',
+    sec: 3600, mins: 60, pass: 60,
+    q: [
+      { s:'l', q:'ผู้ว่าราชการจังหวัดใช้อำนาจกำกับดูแลองค์การบริหารส่วนจังหวัดในลักษณะใด', c:['บังคับบัญชาโดยตรง','กำกับดูแลตามที่กฎหมายกำหนด','ตรวจสอบภายในทุกสัปดาห์','ไม่มีอำนาจกำกับดูแล'], a:1, e:'ราชการส่วนภูมิภาคมีอำนาจ "กำกับดูแล" (Supervision) องค์กรปกครองส่วนท้องถิ่นตามขอบเขตที่กฎหมายบัญญัติ มิใช่การบังคับบัญชา' },
+      { s:'l', q:'ข้อบัญญัติท้องถิ่นจะมีผลบังคับใช้ได้เมื่อใด', c:['เมื่อสภาท้องถิ่นมีมติเห็นชอบในวาระสาม','เมื่อผู้ว่าราชการจังหวัดลงนาม','เมื่อได้ประกาศไว้โดยเปิดเผย ณ สำนักงานท้องถิ่นตามกำหนด','เมื่อประชาชนลงประชามติ'], a:2, e:'ข้อบัญญัติท้องถิ่นต้องผ่านกระบวนการประกาศไว้โดยเปิดเผย ณ ที่ทำการ อปท. ตามเวลาที่กฎหมายระบุจึงจะมีผลใช้บังคับ' }
+    ]
+  },
+  partA_eng: {
+    id: 'partA_eng', icon: '🌐', name: 'ภาค ก: ภาษาอังกฤษสำหรับการปฏิบัติงาน',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-cyan',
+    desc: 'Structure & Grammar, Vocabulary, Conversation ในสำนักงาน และ Reading Comprehension',
+    sec: 3600, mins: 60, pass: 60,
+    q: [
+      { s:'e', q:'"Could you please submit the financial report by Friday?" ประโยคนี้มีเจตนาตามข้อใด', c:['Giving an order','Making a polite request','Refusing an offer','Apologizing'], a:1, e:'ขึ้นต้นด้วย "Could you please..." เป็นสำนวนการขอร้องอย่างสุภาพ (Polite request)' },
+      { s:'e', q:'Neither the officer nor the staff _____ available right now.', c:['is','are','be','were'], a:0, e:'โครงสร้าง Neither... nor... กริยาจะผันตามประธานตัวหลังสุด ซึ่ง "the staff" เป็นนามเอกพจน์/กลุ่มก้อน จึงใช้ is' }
+    ]
+  },
+
+  /* ------------------- ภาค ข เฉพาะตำแหน่ง 14 ตำแหน่ง ------------------- */
+  edu: {
+    id: 'edu', icon: '🎓', name: 'นักวิชาการศึกษาปฏิบัติการ', category: 'partB', theme: 'theme-blue',
+    desc: 'พ.ร.บ.การศึกษาแห่งชาติ · การศึกษาภาคบังคับ · หลักสูตรและการจัดการเรียนรู้',
+    sec: 7200, mins: 120, pass: 60,
+    q: [
+      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การศึกษาภาคบังคับมีกำหนดระยะเวลากี่ปี', c:['หกปี','แปดปี','เก้าปี','สิบสองปี'], a:2, e:'มาตรา 17 กำหนดการศึกษาภาคบังคับเก้าปี (อายุย่างเข้าปีที่ 7 ถึง 16)' },
       { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การจัดการศึกษามีกี่รูปแบบ', c:['สองรูปแบบ','สามรูปแบบ','สี่รูปแบบ','ห้ารูปแบบ'], a:1, e:'มาตรา 15 กำหนดสามรูปแบบ คือ ในระบบ นอกระบบ และตามอัธยาศัย' },
       { s:'edulaw', q:'ผู้ปกครองที่ไม่ส่งเด็กซึ่งอยู่ในเกณฑ์การศึกษาภาคบังคับเข้าเรียน ต้องระวางโทษตามข้อใด', c:['ปรับไม่เกินหนึ่งพันบาท','ปรับไม่เกินหนึ่งหมื่นบาท','จำคุกไม่เกินหนึ่งเดือน','จำคุกไม่เกินสามเดือน'], a:0, e:'พ.ร.บ.การศึกษาภาคบังคับ พ.ศ. 2545 มาตรา 13 กำหนดโทษปรับไม่เกินหนึ่งพันบาท' },
       { s:'edulaw', q:'ตามพระราชบัญญัติการพัฒนาเด็กปฐมวัย พ.ศ. 2562 เด็กปฐมวัยหมายถึงเด็กช่วงอายุใด', c:['สามปีถึงห้าปีบริบูรณ์','สองปีถึงหกปีบริบูรณ์','ต่ำกว่าหกปีบริบูรณ์','ต่ำกว่าเจ็ดปีบริบูรณ์'], a:2, e:'มาตรา 3 นิยามเด็กปฐมวัยว่าหมายถึงเด็กซึ่งมีอายุต่ำกว่าหกปีบริบูรณ์' },
-      { s:'edulaw', q:'การประกันคุณภาพภายในของสถานศึกษาเป็นหน้าที่ของผู้ใด', c:['สำนักงานรับรองมาตรฐานฯ (สมศ.)','สถานศึกษาและหน่วยงานต้นสังกัด','สพฐ.','ผู้ตรวจราชการ'], a:1, e:'เป็นหน้าที่ของสถานศึกษาและหน่วยงานต้นสังกัด โดยถือเป็นส่วนหนึ่งของกระบวนการบริหารปกติ' },
-      { s:'eduacad', q:'หลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พ.ศ. 2551 กำหนดกลุ่มสาระการเรียนรู้ไว้กี่กลุ่ม', c:['ห้ากลุ่ม','หกกลุ่ม','เจ็ดกลุ่ม','แปดกลุ่ม'], a:3, e:'กำหนดไว้แปดกลุ่มสาระการเรียนรู้ และมีกิจกรรมพัฒนาผู้เรียนเสริมอีกหนึ่งส่วน' },
-      { s:'eduacad', q:'การประเมินผลการเรียนรู้ที่เน้นตรวจสอบจากการปฏิบัติในสถานการณ์จริง เรียกว่าอะไร', c:['การประเมินแบบอิงกลุ่ม','การประเมินตามสภาพจริง','การประเมินแบบย่อย','การประเมินแบบอิงเกณฑ์'], a:1, e:'การประเมินตามสภาพจริง (Authentic Assessment) มุ่งวัดความสามารถจากการลงมือปฏิบัติจริง' },
-      { s:'eduacad', q:'จุดมุ่งหมายทางการศึกษาตามแนวคิดของบลูม ข้อใดมิใช่หนึ่งในสามด้าน', c:['ด้านพุทธิพิสัย','ด้านจิตพิสัย','ด้านสังคมพิสัย','ด้านทักษะพิสัย'], a:2, e:'บลูมแบ่งพฤติกรรมการเรียนรู้เป็นสามด้าน คือ พุทธิพิสัย จิตพิสัย และทักษะพิสัย' },
-      { s:'eduacad', q:'การจัดการเรียนรู้ที่ให้ผู้เรียนสืบค้น ตั้งสมมติฐาน และสรุปความรู้ด้วยตนเอง ตรงกับข้อใด', c:['การจัดการเรียนรู้แบบสืบเสาะหาความรู้','การจัดการเรียนรู้แบบบรรยาย','การจัดการเรียนรู้แบบสาธิต','การจัดการเรียนรู้แบบท่องจำ'], a:0, e:'Inquiry-based learning เน้นให้ผู้เรียนสร้างองค์ความรู้ด้วยตนเองผ่านการสำรวจและตั้งสมมติฐาน' },
-      { s:'eduacad', q:'ศูนย์พัฒนาเด็กเล็กขององค์กรปกครองส่วนท้องถิ่น มีภารกิจหลักตรงกับข้อใด', c:['จัดการเรียนการสอนตามหลักสูตรประถม','จัดประสบการณ์เรียนรู้และส่งเสริมพัฒนาการทุกด้าน','เตรียมสอบเข้าประถม','รับฝากเลี้ยงเด็กระหว่างวัน'], a:1, e:'ภารกิจหลักคือการจัดประสบการณ์ส่งเสริมพัฒนาการทั้งสี่ด้านอย่างสมดุลตามมาตรฐานสถานพัฒนาเด็กปฐมวัย' }
+      { s:'eduacad', q:'หลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พ.ศ. 2551 กำหนดกลุ่มสาระการเรียนรู้ไว้กี่กลุ่ม', c:['ห้ากลุ่ม','หกกลุ่ม','เจ็ดกลุ่ม','แปดกลุ่ม'], a:3, e:'กำหนดไว้แปดกลุ่มสาระการเรียนรู้' }
     ]
   },
   hr: {
-    id: 'hr', icon: '👥', name: 'นักทรัพยากรบุคคลปฏิบัติการ', desc: 'การบริหารงานบุคคลส่วนท้องถิ่น · วินัยและการรักษาวินัย · แผนอัตรากำลัง',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'hrlaw', name: 'วินัยและการบริหารบุคคล' }, { k: 'hrmgt', name: 'การพัฒนาทรัพยากรบุคคล' }],
+    id: 'hr', icon: '👥', name: 'นักทรัพยากรบุคคลปฏิบัติการ', category: 'partB', theme: 'theme-emerald',
+    desc: 'การบริหารงานบุคคลส่วนท้องถิ่น · วินัยและการรักษาวินัย · แผนอัตรากำลัง 3 ปี',
+    sec: 7200, mins: 120, pass: 60,
     q: [
       { s:'hrlaw', q:'โทษทางวินัยสำหรับพนักงานส่วนท้องถิ่น มีกี่สถาน', c:['สามสถาน','สี่สถาน','ห้าสถาน','หกสถาน'], a:2, e:'มีห้าสถาน ได้แก่ ภาคทัณฑ์ ตัดเงินเดือน ลดเงินเดือน ปลดออก และไล่ออก' },
-      { s:'hrlaw', q:'พนักงานส่วนท้องถิ่นที่ถูกลงโทษปลดออก มีสิทธิได้รับบำเหน็จบำนาญหรือไม่', c:['ไม่มีสิทธิใดๆ','มีสิทธิเสมือนว่าผู้นั้นลาออกจากราชการ','มีสิทธิได้รับกึ่งหนึ่ง','ขึ้นอยู่กับดุลพินิจ'], a:1, e:'ผู้ถูกลงโทษปลดออกยังมีสิทธิได้รับบำเหน็จบำนาญเสมือนลาออกจากราชการ ต่างจากการไล่ออก' },
-      { s:'hrlaw', q:'คณะกรรมการมาตรฐานการบริหารงานบุคคลส่วนท้องถิ่น มีชื่อย่อตรงกับข้อใด', c:['ก.จ.','ก.ท.','ก.อบต.','ก.ถ.'], a:3, e:'ก.ถ. ทำหน้าที่กำหนดมาตรฐานกลางและนโยบายด้านการบริหารงานบุคคลส่วนท้องถิ่น' },
-      { s:'hrlaw', q:'คณะกรรมการพนักงานเทศบาลระดับจังหวัด (ก.ท.จ.) มีผู้ใดเป็นประธานกรรมการ', c:['ผู้ว่าราชการจังหวัดหรือรองที่ได้รับมอบหมาย','นายกเทศมนตรีที่เลือกกันเอง','ท้องถิ่นจังหวัด','ปลัดจังหวัด'], a:0, e:'พ.ร.บ.ระเบียบบริหารงานบุคคลส่วนท้องถิ่น กำหนดให้ผู้ว่าราชการจังหวัดหรือรองผู้ว่าฯ เป็นประธาน' },
-      { s:'hrlaw', q:'ข้าราชการหรือพนักงานส่วนท้องถิ่นมีสิทธิลาคลอดบุตรได้กี่วัน', c:['สี่สิบห้าวัน','หกสิบวัน','เก้าสิบวัน','หนึ่งร้อยยี่สิบวัน'], a:2, e:'ระเบียบว่าด้วยการลากำหนดให้มีสิทธิลาคลอดบุตรได้เก้าสิบวันโดยได้รับเงินเดือน' },
-      { s:'hrlaw', q:'สิทธิการลาพักผ่อนประจำปีของพนักงานส่วนท้องถิ่น กำหนดไว้ปีละกี่วันทำการ', c:['ห้าวันทำการ','สิบวันทำการ','สิบห้าวันทำการ','ยี่สิบวันทำการ'], a:1, e:'กำหนดปีละสิบวันทำการ และสามารถสะสมวันลาที่เหลือรวมกับปีถัดไปได้ตามเกณฑ์' },
-      { s:'hrmgt', q:'ระบบจำแนกตำแหน่งของข้าราชการส่วนท้องถิ่นในปัจจุบัน แบ่งออกเป็นกี่ประเภท', c:['ประเภทเดียว','สองประเภท','สามประเภท','สี่ประเภท'], a:3, e:'แบ่งเป็นสี่ประเภท คือ บริหารท้องถิ่น อำนวยการท้องถิ่น วิชาการ และทั่วไป' },
-      { s:'hrmgt', q:'แผนอัตรากำลังขององค์กรปกครองส่วนท้องถิ่น จัดทำครอบคลุมระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:0, e:'จัดทำเป็นกรอบแผนอัตรากำลังสามปี เพื่อวิเคราะห์ภารกิจและควบคุมค่าใช้จ่ายด้านบุคคล' },
-      { s:'hrmgt', q:'แนวคิดเรื่องสมรรถนะ (Competency) หมายถึงข้อใดมากที่สุด', c:['อัตราเงินเดือนที่เหมาะสม','จำนวนชั่วโมงอบรม','คุณลักษณะเชิงพฤติกรรมที่ทำให้ปฏิบัติงานได้โดดเด่น','วุฒิการศึกษาตามมาตรฐาน'], a:2, e:'สมรรถนะคือความรู้ ทักษะ และคุณลักษณะส่วนบุคคลที่สะท้อนผ่านพฤติกรรมการทำงานที่โดดเด่น' },
-      { s:'hrmgt', q:'การประเมินผลการปฏิบัติงานของพนักงานส่วนท้องถิ่น ดำเนินการปีละกี่ครั้ง', c:['ปีละหนึ่งครั้ง','ปีละสองครั้ง','ปีละสามครั้ง','ปีละสี่ครั้ง'], a:1, e:'ดำเนินการปีละสองครั้งตามรอบหกเดือน เพื่อใช้ประกอบการพิจารณาเลื่อนขั้น' }
+      { s:'hrlaw', q:'พนักงานส่วนท้องถิ่นที่ถูกลงโทษปลดออก มีสิทธิได้รับบำเหน็จบำนาญหรือไม่', c:['ไม่มีสิทธิใดๆ','มีสิทธิเสมือนว่าผู้นั้นลาออกจากราชการ','มีสิทธิได้รับกึ่งหนึ่ง','ขึ้นอยู่กับดุลพินิจ'], a:1, e:'ผู้ถูกลงโทษปลดออกยังมีสิทธิได้รับบำเหน็จบำนาญเสมือนลาออกจากราชการ' },
+      { s:'hrlaw', q:'คณะกรรมการมาตรฐานการบริหารงานบุคคลส่วนท้องถิ่น มีชื่อย่อตรงกับข้อใด', c:['ก.จ.','ก.ท.','ก.อบต.','ก.ถ.'], a:3, e:'ก.ถ. ทำหน้าที่กำหนดมาตรฐานกลางด้านการบริหารงานบุคคลส่วนท้องถิ่น' }
     ]
   },
   fin: {
-    id: 'fin', icon: '💰', name: 'นักวิชาการเงินและบัญชีปฏิบัติการ', desc: 'ระเบียบการเงินการคลังท้องถิ่น · พ.ร.บ.จัดซื้อจัดจ้างฯ · หลักการบัญชีคู่',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'finlaw', name: 'การเงินและการพัสดุ' }, { k: 'finacc', name: 'หลักการบัญชี' }],
+    id: 'fin', icon: '💰', name: 'นักวิชาการเงินและบัญชีปฏิบัติการ', category: 'partB', theme: 'theme-amber',
+    desc: 'ระเบียบการเงินการคลังท้องถิ่น · พ.ร.บ.จัดซื้อจัดจ้างฯ · หลักการบัญชีคู่',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'finlaw', q:'ปีงบประมาณของส่วนราชการและองค์กรปกครองส่วนท้องถิ่น เริ่มต้นและสิ้นสุดเมื่อใด', c:['1 ม.ค. ถึง 31 ธ.ค.','1 ต.ค. ถึง 30 ก.ย. ของปีถัดไป','1 เม.ย. ถึง 31 มี.ค. ของปีถัดไป','1 ก.ค. ถึง 30 มิ.ย. ของปีถัดไป'], a:1, e:'ปีงบประมาณเริ่มตั้งแต่วันที่ 1 ตุลาคมของปีหนึ่ง ถึง 30 กันยายนของปีถัดไป' },
-      { s:'finlaw', q:'ตาม พ.ร.บ.การจัดซื้อจัดจ้างฯ พ.ศ. 2560 การจัดซื้อจัดจ้างมีกี่วิธี', c:['สองวิธี','สามวิธี','สี่วิธี','ห้าวิธี'], a:1, e:'มาตรา 55 กำหนดไว้สามวิธี ได้แก่ ประกาศเชิญชวนทั่วไป คัดเลือก และเฉพาะเจาะจง' },
-      { s:'finlaw', q:'การจัดซื้อจัดจ้างโดยวิธีเฉพาะเจาะจงเนื่องจากวงเงินเล็กน้อย กำหนดไว้ไม่เกินเท่าใด', c:['ไม่เกินหนึ่งแสนบาท','ไม่เกินห้าแสนบาท','ไม่เกินหนึ่งล้านบาท','ไม่เกินสองล้านบาท'], a:1, e:'กฎกระทรวงกำหนดวงเงินจัดซื้อจัดจ้างโดยวิธีเฉพาะเจาะจงไว้ไม่เกินห้าแสนบาท' },
-      { s:'finlaw', q:'เมื่อสิ้นปีงบประมาณและปิดบัญชีแล้ว ต้องกันยอดเงินสะสมไว้เป็นทุนสำรองสะสมเท่าใด', c:['ร้อยละสิบ','ร้อยละสิบห้า','ร้อยละยี่สิบห้า','ร้อยละห้าสิบ'], a:2, e:'ระเบียบกำหนดให้กันยอดเงินสะสมประจำปีไว้ร้อยละยี่สิบห้าเป็นเงินทุนสำรองเงินสะสม' },
-      { s:'finlaw', q:'เมื่อองค์กรปกครองส่วนท้องถิ่นได้รับเงินไม่ว่ากรณีใด ต้องดำเนินการตามข้อใด', c:['ออกใบเสร็จรับเงินให้แก่ผู้ชำระเงินทุกครั้ง','บันทึกเฉพาะสมุดเงินสด','เก็บเงินสดไว้จนสิ้นเดือน','นำส่งคลังจังหวัดทันที'], a:0, e:'ต้องออกใบเสร็จรับเงินให้แก่ผู้ชำระเงินทุกครั้ง และนำฝากธนาคารตามกำหนดเวลา' },
-      { s:'finlaw', q:'ข้อใดมิใช่เป้าหมายตาม พ.ร.บ.วินัยการเงินการคลังของรัฐ พ.ศ. 2561', c:['รักษาวินัยการใช้จ่ายเงินแผ่นดิน','รักษาเสถียรภาพทางการคลัง','ความโปร่งใสตรวจสอบได้','กำหนดให้หน่วยงานรัฐต้องมีกำไรทุกปี'], a:3, e:'กฎหมายเน้นวินัย ความคุ้มค่า และเสถียรภาพ หน่วยงานรัฐมิได้จัดตั้งเพื่อแสวงหากำไร' },
-      { s:'finacc', q:'สมการบัญชีที่เป็นพื้นฐานของระบบบัญชีคู่ ตรงกับข้อใด', c:['สินทรัพย์ = หนี้สิน + ส่วนของเจ้าของ','สินทรัพย์ = หนี้สิน - ส่วนของเจ้าของ','หนี้สิน = สินทรัพย์ + ส่วนของเจ้าของ','ส่วนของเจ้าของ = สินทรัพย์ + หนี้สิน'], a:0, e:'สมการบัญชีคือ สินทรัพย์เท่ากับหนี้สินบวกส่วนของเจ้าของ (Assets = Liabilities + Equity)' },
-      { s:'finacc', q:'การซื้อครุภัณฑ์เป็นเงินสด จะบันทึกบัญชีตามหลักบัญชีคู่อย่างไร', c:['เดบิต เงินสด, เครดิต ครุภัณฑ์','เดบิต ครุภัณฑ์, เครดิต เงินสด','เดบิต ครุภัณฑ์, เครดิต ทุน','เดบิต ค่าใช้จ่าย, เครดิต ครุภัณฑ์'], a:1, e:'สินทรัพย์ครุภัณฑ์เพิ่มขึ้นลงเดบิต สินทรัพย์เงินสดลดลงลงเครดิต' },
-      { s:'finacc', q:'งบการเงินใดที่แสดงฐานะทางการเงิน ณ วันใดวันหนึ่ง', c:['งบกระแสเงินสด','งบแสดงผลการดำเนินงาน','งบแสดงฐานะการเงิน','งบทดลอง'], a:2, e:'งบแสดงฐานะการเงินแสดงรายการสินทรัพย์ หนี้สิน และส่วนของเจ้าของ ณ วันสิ้นงวด' },
-      { s:'finacc', q:'ค่าเสื่อมราคาของสินทรัพย์ถาวร มีความหมายตรงกับข้อใด', c:['เงินสดที่กันไว้ซื้อของใหม่','ผลขาดทุนจากการจำหน่าย','มูลค่าตลาดที่ลดลง','การปันส่วนราคาทุนเป็นค่าใช้จ่ายตามอายุใช้งาน'], a:3, e:'ค่าเสื่อมราคาคือการเฉลี่ยราคาทุนของสินทรัพย์เป็นค่าใช้จ่ายในแต่ละงวดอย่างเป็นระบบ' }
+      { s:'finlaw', q:'ปีงบประมาณของส่วนราชการและองค์กรปกครองส่วนท้องถิ่น เริ่มต้นและสิ้นสุดเมื่อใด', c:['1 ม.ค. ถึง 31 ธ.ค.','1 ต.ค. ถึง 30 ก.ย. ของปีถัดไป','1 เม.ย. ถึง 31 มี.ค. ของปีถัดไป','1 ก.ค. ถึง 30 มิ.ย. ของปีถัดไป'], a:1, e:'เริ่มตั้งแต่วันที่ 1 ตุลาคมของปีหนึ่ง ถึง 30 กันยายนของปีถัดไป' },
+      { s:'finlaw', q:'การจัดซื้อจัดจ้างโดยวิธีเฉพาะเจาะจงเนื่องจากวงเงินเล็กน้อย กำหนดไว้ไม่เกินเท่าใด', c:['ไม่เกินหนึ่งแสนบาท','ไม่เกินห้าแสนบาท','ไม่เกินหนึ่งล้านบาท','ไม่เกินสองล้านบาท'], a:1, e:'กฎกระทรวงกำหนดวงเงินวิธีเฉพาะเจาะจงไว้ไม่เกินห้าแสนบาท' }
     ]
   },
   reg: {
-    id: 'reg', icon: '🪪', name: 'นักจัดการงานทะเบียนและบัตรปฏิบัติการ', desc: 'กฎหมายทะเบียนราษฎร · บัตรประจำตัวประชาชน · สัญชาติ',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'regciv', name: 'ทะเบียนราษฎร' }, { k: 'regid', name: 'บัตรประชาชน' }],
+    id: 'reg', icon: '🪪', name: 'นักจัดการงานทะเบียนและบัตรปฏิบัติการ', category: 'partB', theme: 'theme-cyan',
+    desc: 'กฎหมายทะเบียนราษฎร · บัตรประจำตัวประชาชน · การแจ้งเกิด/ตาย/ย้ายที่อยู่',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'regciv', q:'เมื่อมีคนเกิดในบ้าน เจ้าบ้านต้องแจ้งการเกิดต่อนายทะเบียนภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน'], a:2, e:'พ.ร.บ.การทะเบียนราษฎร พ.ศ. 2534 มาตรา 18 กำหนดให้แจ้งภายในสิบห้าวันนับแต่วันเกิด' },
-      { s:'regciv', q:'เมื่อมีคนตายในบ้าน เจ้าบ้านต้องแจ้งการตายต่อนายทะเบียนภายในระยะเวลาเท่าใด', c:['ภายในยี่สิบสี่ชั่วโมง','ภายในสามวัน','ภายในเจ็ดวัน','ภายในสิบห้าวัน'], a:0, e:'มาตรา 21 กำหนดให้แจ้งการตายภายในยี่สิบสี่ชั่วโมงนับแต่เวลาตาย' },
-      { s:'regciv', q:'เมื่อผู้อยู่ในบ้านย้ายที่อยู่ออกจากบ้าน เจ้าบ้านต้องแจ้งการย้ายออกภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน','ภายในหกสิบวัน'], a:1, e:'มาตรา 30 กำหนดให้แจ้งการย้ายออกและย้ายเข้าภายในสิบห้าวันนับแต่วันที่ย้าย' },
-      { s:'regciv', q:'เมื่อปลูกสร้างบ้านใหม่เสร็จ เจ้าบ้านต้องแจ้งขอเลขหมายประจำบ้านภายในกี่วัน', c:['ภายในสามวัน','ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน'], a:3, e:'มาตรา 34 กำหนดให้ขอเลขหมายประจำบ้านภายในสิบห้าวันนับแต่วันสร้างบ้านเสร็จ' },
-      { s:'regciv', q:'ทะเบียนบ้านแบบใดใช้สำหรับคนสัญชาติไทยและคนต่างด้าวที่มีใบสำคัญถิ่นที่อยู่', c:['ทะเบียนบ้านแบบ ท.ร. 14','ทะเบียนบ้านแบบ ท.ร. 13','ทะเบียนบ้านกลาง','ทะเบียนประวัติราษฎร'], a:0, e:'ท.ร. 14 ใช้สำหรับคนไทยและคนต่างด้าวที่มีถิ่นที่อยู่ถาวร ส่วน ท.ร. 13 ใช้กับคนต่างด้าวชั่วคราว' },
-      { s:'regciv', q:'ทะเบียนบ้านกลาง มีไว้เพื่อวัตถุประสงค์ใด', c:['บันทึกบ้านกำลังก่อสร้าง','บันทึกบ้านในที่สาธารณะ','ลงรายการบุคคลที่ไม่อาจมีชื่อในทะเบียนบ้านได้','บันทึกบ้านที่มีคนเกินยี่สิบคน'], a:2, e:'ทะเบียนบ้านกลางจัดทำขึ้นเพื่อลงรายการบุคคลที่ไม่มีชื่อในทะเบียนบ้านปกติ' },
-      { s:'regid', q:'ผู้มีสัญชาติไทยต้องมีบัตรประจำตัวประชาชนเมื่อมีอายุเท่าใด', c:['ตั้งแต่ห้าปีบริบูรณ์','ตั้งแต่เจ็ดปีบริบูรณ์','ตั้งแต่สิบห้าปีบริบูรณ์','ตั้งแต่ยี่สิบปีบริบูรณ์'], a:1, e:'พ.ร.บ.บัตรประจำตัวประชาชน กำหนดให้ผู้มีสัญชาติไทยอายุตั้งแต่เจ็ดปีบริบูรณ์ต้องมีบัตร' },
-      { s:'regid', q:'บัตรประจำตัวประชาชนมีอายุการใช้งานกี่ปีนับแต่วันออกบัตร', c:['ห้าปี','หกปี','แปดปี','สิบปี'], a:2, e:'บัตรประจำตัวประชาชนมีอายุแปดปีนับแต่วันออกบัตร' },
-      { s:'regid', q:'เมื่อบัตรประจำตัวประชาชนหมดอายุหรือสูญหาย ต้องขอมีบัตรใหม่ภายในกี่วัน', c:['ภายในสามสิบวัน','ภายในหกสิบวัน','ภายในเก้าสิบวัน','ภายในหนึ่งร้อยยี่สิบวัน'], a:1, e:'ต้องยื่นคำขอมีบัตรใหม่ภายในหกสิบวันนับแต่วันที่บัตรหมดอายุ ชำรุด หรือสูญหาย' },
-      { s:'regid', q:'เลขประจำตัวประชาชนของบุคคลผู้มีสัญชาติไทย ประกอบด้วยตัวเลขกี่หลัก', c:['เก้าหลัก','สิบหลัก','สิบเอ็ดหลัก','สิบสามหลัก'], a:3, e:'ประกอบด้วยตัวเลขสิบสามหลัก มีโครงสร้างแสดงประเภทบุคคล สำนักทะเบียน และเลขตรวจสอบ' }
+      { s:'regciv', q:'เมื่อมีคนเกิดในบ้าน เจ้าบ้านต้องแจ้งการเกิดต่อนายทะเบียนภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน'], a:2, e:'พ.ร.บ.การทะเบียนราษฎร มาตรา 18 กำหนดให้แจ้งภายในสิบห้าวันนับแต่วันเกิด' },
+      { s:'regciv', q:'เมื่อมีคนตายในบ้าน เจ้าบ้านต้องแจ้งการตายต่อนายทะเบียนภายในระยะเวลาเท่าใด', c:['ภายในยี่สิบสี่ชั่วโมง','ภายในสามวัน','ภายในเจ็ดวัน','ภายในสิบห้าวัน'], a:0, e:'มาตรา 21 กำหนดให้แจ้งการตายภายในยี่สิบสี่ชั่วโมงนับแต่เวลาตาย' }
     ]
   },
   urban: {
-    id: 'urban', icon: '🗺️', name: 'นักผังเมืองปฏิบัติการ', desc: 'กฎหมายผังเมือง · ผังเมืองรวม · การควบคุมอาคารและการใช้ประโยชน์ที่ดิน',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'uplaw', name: 'กฎหมายผังเมือง' }, { k: 'uptech', name: 'การวางผังเมือง' }],
+    id: 'urban', icon: '🗺️', name: 'นักผังเมืองปฏิบัติการ', category: 'partB', theme: 'theme-purple',
+    desc: 'กฎหมายผังเมือง พ.ศ. 2562 · การใช้ประโยชน์ที่ดิน · การควบคุมอาคารสูง',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'uplaw', q:'พระราชบัญญัติการผังเมืองฉบับที่ใช้บังคับอยู่ในปัจจุบัน คือฉบับปี พ.ศ. ใด', c:['พ.ศ. 2518','พ.ศ. 2562','พ.ศ. 2535','พ.ศ. 2558'], a:1, e:'พ.ร.บ.การผังเมือง พ.ศ. 2562 มีผลยกเลิกฉบับปี 2518 และปรับปรุงโครงสร้างผังเมืองทั้งระบบ' },
-      { s:'uplaw', q:'ในแผนผังกำหนดการใช้ประโยชน์ที่ดินตามผังเมืองรวม พื้นที่สีเหลืองหมายถึงที่ดินประเภทใด', c:['ที่อยู่อาศัยหนาแน่นน้อย','ที่อยู่อาศัยหนาแน่นปานกลาง','พาณิชยกรรม','ชนบทและเกษตรกรรม'], a:0, e:'สีเหลืองคือที่อยู่อาศัยหนาแน่นน้อย สีส้มคือหนาแน่นปานกลาง สีน้ำตาลคือหนาแน่นมาก' },
-      { s:'uplaw', q:'พื้นที่สีม่วงในแผนผังผังเมืองรวม หมายถึงที่ดินประเภทใด', c:['สถาบันราชการ','สถาบันการศึกษา','อุตสาหกรรมและคลังสินค้า','อนุรักษ์ชนบท'], a:2, e:'สีม่วงแสดงประเภทอุตสาหกรรมและคลังสินค้า สีน้ำเงินคือสถาบันราชการ' },
-      { s:'uplaw', q:'ตามกฎกระทรวงควบคุมอาคาร อาคารสูงหมายถึงอาคารที่มีความสูงตั้งแต่เท่าใด', c:['ตั้งแต่สิบห้าเมตรขึ้นไป','ตั้งแต่สิบแปดเมตรขึ้นไป','ตั้งแต่ยี่สิบเมตรขึ้นไป','ตั้งแต่ยี่สิบสามเมตรขึ้นไป'], a:3, e:'อาคารสูงคืออาคารที่มีความสูงตั้งแต่ยี่สิบสามเมตรขึ้นไป วัดถึงพื้นดาดฟ้า' },
-      { s:'uplaw', q:'อาคารขนาดใหญ่พิเศษ หมายถึงอาคารที่มีพื้นที่รวมกันทุกชั้นในหลังเดียวกันเท่าใด', c:['เกินสองพันตารางเมตร','ตั้งแต่หนึ่งหมื่นตารางเมตรขึ้นไป','ตั้งแต่ห้าพันตารางเมตรขึ้นไป','เกินสองหมื่นตารางเมตร'], a:1, e:'อาคารขนาดใหญ่พิเศษมีพื้นที่รวมกันตั้งแต่หนึ่งหมื่นตารางเมตรขึ้นไป' },
-      { s:'uptech', q:'อัตราส่วนพื้นที่อาคารรวมต่อพื้นที่ดิน (FAR) เป็นมาตรการควบคุมสิ่งใด', c:['ควบคุมความสูงของอาคาร','ควบคุมระยะถอยร่น','ควบคุมความหนาแน่นของการพัฒนาที่ดิน','ควบคุมพื้นที่สีเขียว'], a:2, e:'FAR ใช้ควบคุมความหนาแน่นของอาคารรวมเทียบกับขนาดแปลงที่ดิน' },
-      { s:'uptech', q:'ผังเมืองรวมกับผังเมืองเฉพาะ แตกต่างกันในสาระสำคัญตามข้อใด', c:['ผังเมืองรวมเป็นกรอบนโยบาย ผังเมืองเฉพาะเป็นแผนปฏิบัติการระดับแปลงที่ดิน','ผังเมืองรวมใช้เฉพาะในเทศบาล','ผังเมืองรวมมีอายุห้าปี','ผังเมืองรวมจัดทำโดยเอกชน'], a:0, e:'ผังเมืองรวมชี้นำภาพรวม ผังเมืองเฉพาะกำหนดรายละเอียดระดับโครงการและแปลงที่ดิน' },
-      { s:'uptech', q:'กระบวนการวางและจัดทำผังเมืองรวม ประชาชนมีส่วนร่วมในขั้นตอนใด', c:['เฉพาะหลังประกาศใช้','ทุกขั้นตอนตั้งแต่เริ่มวางผัง รับฟังความคิดเห็น และยื่นคำร้อง','เฉพาะขั้นตอนฟ้องศาล','ไม่มีส่วนร่วม'], a:1, e:'กฎหมายผังเมืองกำหนดให้ประชาชนมีส่วนร่วมตลอดกระบวนการวางและปรับปรุงผัง' },
-      { s:'uptech', q:'แนวคิดการพัฒนาพื้นที่โดยรอบสถานีขนส่งมวลชน (TOD) มีหลักการสำคัญตรงกับข้อใด', c:['ขยายถนนให้กว้างขึ้น','แยกพื้นที่พักอาศัยออกจากสถานี','จำกัดความหนาแน่นรอบสถานี','พัฒนาพื้นที่หนาแน่นสูง ผสมผสานการใช้งาน เดินถึงสถานีได้ง่าย'], a:3, e:'TOD เน้นความหนาแน่นสูง ผสมผสานกิจกรรม และลดการใช้รถยนต์ส่วนบุคคล' },
-      { s:'uptech', q:'ข้อมูลพื้นฐานที่สำคัญที่สุดในการคาดการณ์ความต้องการใช้ที่ดินในอนาคต คือข้อใด', c:['การคาดประมาณจำนวนและโครงสร้างประชากร','ราคาประเมินที่ดิน','จำนวนใบอนุญาตก่อสร้างย้อนหลัง','ผลการเลือกตั้งท้องถิ่น'], a:0, e:'ประชากรเป็นตัวแปรหลักที่กำหนดความต้องการที่อยู่อาศัย พาณิชยกรรม และสาธารณูปโภคทั้งหมด' }
+      { s:'uplaw', q:'ในแผนผังกำหนดการใช้ประโยชน์ที่ดินตามผังเมืองรวม พื้นที่สีเหลืองหมายถึงที่ดินประเภทใด', c:['ที่อยู่อาศัยหนาแน่นน้อย','ที่อยู่อาศัยหนาแน่นปานกลาง','พาณิชยกรรม','ชนบทและเกษตรกรรม'], a:0, e:'สีเหลืองคือที่อยู่อาศัยหนาแน่นน้อย สีส้มคือหนาแน่นปานกลาง' },
+      { s:'uplaw', q:'ตามกฎกระทรวงควบคุมอาคาร อาคารสูงหมายถึงอาคารที่มีความสูงตั้งแต่เท่าใด', c:['ตั้งแต่สิบห้าเมตรขึ้นไป','ตั้งแต่สิบแปดเมตรขึ้นไป','ตั้งแต่ยี่สิบเมตรขึ้นไป','ตั้งแต่ยี่สิบสามเมตรขึ้นไป'], a:3, e:'อาคารสูงคืออาคารที่มีความสูงตั้งแต่ 23 เมตรขึ้นไป วัดถึงพื้นดาดฟ้า' }
     ]
   },
   legal: {
-    id: 'legal', icon: '⚖️', name: 'นิติกรปฏิบัติการ', desc: 'กฎหมายแพ่งและพาณิชย์ · กฎหมายอาญา · กฎหมายวิธีปฏิบัติราชการทางปกครอง',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'lgciv', name: 'แพ่งและอาญา' }, { k: 'lgadm', name: 'กฎหมายปกครอง' }],
+    id: 'legal', icon: '⚖️', name: 'นิติกรปฏิบัติการ', category: 'partB', theme: 'theme-rose',
+    desc: 'กฎหมายแพ่งและพาณิชย์ · กฎหมายอาญา · กฎหมายวิธีปฏิบัติราชการทางปกครอง',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'lgciv', q:'ตามประมวลกฎหมายแพ่งและพาณิชย์ บุคคลย่อมบรรลุนิติภาวะเมื่อใด', c:['อายุสิบแปดปีบริบูรณ์','อายุยี่สิบปีบริบูรณ์ หรือเมื่อสมรสโดยชอบด้วยกฎหมาย','อายุยี่สิบปีบริบูรณ์เท่านั้น','อายุยี่สิบเอ็ดปีบริบูรณ์'], a:1, e:'บรรลุนิติภาวะเมื่ออายุครบยี่สิบปีบริบูรณ์ หรือเมื่อทำการสมรสตามเงื่อนไขกฎหมาย' },
-      { s:'lgciv', q:'นิติกรรมที่ผู้เยาว์ทำลงโดยปราศจากความยินยอมของผู้แทนโดยชอบธรรม มีผลอย่างไร', c:['สมบูรณ์ทุกประการ','ตกเป็นโมฆะ','ตกเป็นโมฆียะ','ไม่มีผลผูกพัน'], a:2, e:'มาตรา 21 กำหนดให้นิติกรรมที่ผู้เยาว์ทำโดยมิได้รับความยินยอมตกเป็นโมฆียะ' },
-      { s:'lgciv', q:'สิทธิเรียกร้องค่าเสียหายอันเกิดแต่มูลละเมิด มีอายุความเท่าใด', c:['หนึ่งปีนับแต่รู้ถึงการละเมิดและรู้ตัวผู้ต้องชดใช้ หรือสิบปีนับแต่วันทำละเมิด','สองปีนับแต่วันทำละเมิด','ห้าปีนับแต่รู้เหตุ','สิบปีนับแต่วันรู้เหตุ'], a:0, e:'มาตรา 448 กำหนดอายุความหนึ่งปีนับแต่วันรู้ หรือสิบปีนับแต่วันทำละเมิด' },
-      { s:'lgciv', q:'โทษตามประมวลกฎหมายอาญา มีกี่สถาน', c:['สามสถาน','สี่สถาน','ห้าสถาน','หกสถาน'], a:2, e:'มาตรา 18 กำหนดโทษไว้ห้าสถาน คือ ประหารชีวิต จำคุก กักขัง ปรับ และริบทรัพย์สิน' },
-      { s:'lgciv', q:'ความแตกต่างสำคัญระหว่างโมฆะกรรมกับโมฆียะกรรม คือข้อใด', c:['โมฆะสมบูรณ์จนกว่าจะบอกล้าง','โมฆะเสียเปล่ามาแต่ต้น โมฆียะสมบูรณ์จนกว่าจะถูกบอกล้าง','ผลเหมือนกันทุกประการ','โมฆะใช้เฉพาะสัญญา'], a:1, e:'โมฆะเสียเปล่าแต่ต้นและให้สัตยาบันไม่ได้ ส่วนโมฆียะมีผลสมบูรณ์จนกว่าจะมีการบอกล้าง' },
-      { s:'lgadm', q:'การฟ้องคดีต่อศาลปกครองกรณีเดือดร้อนเสียหายจากคำสั่งทางปกครอง ต้องยื่นฟ้องภายในกี่วัน', c:['ภายในสามสิบวัน','ภายในหกสิบวัน','ภายในเก้าสิบวัน','ภายในหนึ่งปี'], a:2, e:'มาตรา 49 กำหนดให้ยื่นฟ้องภายในเก้าสิบวันนับแต่วันที่รู้หรือควรรู้ถึงเหตุแห่งการฟ้องคดี' },
-      { s:'lgadm', q:'ตาม พ.ร.บ.ความรับผิดทางละเมิดของเจ้าหน้าที่ เจ้าหน้าที่ต้องรับผิดชดใช้เงินเมื่อใด', c:['เฉพาะกรณีจงใจหรือประมาทเลินเล่ออย่างร้ายแรง','ทุกกรณีที่เกิดความเสียหาย','เฉพาะคดีอาญา','เฉพาะยอดเงินเกินหนึ่งล้าน'], a:0, e:'เจ้าหน้าที่ต้องรับผิดชดใช้ค่าสินไหมทดแทนเฉพาะเมื่อกระทำโดยจงใจหรือประมาทเลินเล่ออย่างร้ายแรง' },
-      { s:'lgadm', q:'คำสั่งทางปกครองที่เป็นหนังสือและปฏิเสธคำขอ ต้องระบุสิ่งใดไว้ด้วย', c:['ระบุเฉพาะผลคำสั่ง','ระบุเหตุผล ข้อเท็จจริง ข้อกฎหมาย และข้อพิจารณาในการใช้ดุลพินิจ','ระบุเฉพาะชื่อเจ้าหน้าที่','ระบุเฉพาะวันที่ออกคำสั่ง'], a:1, e:'มาตรา 37 กำหนดให้คำสั่งทางปกครองที่เป็นหนังสือต้องจัดให้มีเหตุผลประกอบด้วยเสมอ' },
-      { s:'lgadm', q:'ข้อใดมิใช่คำสั่งทางปกครองตามกฎหมายวิธีปฏิบัติราชการทางปกครอง', c:['คำสั่งอนุญาตก่อสร้าง','คำสั่งไม่อนุญาตประกอบกิจการ','การออกกฎกระทรวงที่มีผลบังคับเป็นการทั่วไป','คำวินิจฉัยอุทธรณ์'], a:2, e:'การออกกฎกระทรวงมีผลบังคับทั่วไปจัดเป็น กฎ มิใช่คำสั่งทางปกครองซึ่งบังคับเฉพาะราย' },
-      { s:'lgadm', q:'ข้อใดเป็นสิทธิของคู่กรณีในกระบวนพิจารณาทางปกครอง', c:['สิทธิได้รับทราบข้อเท็จจริงและโต้แย้งพยานหลักฐาน','สิทธิขอตรวจดูเอกสารที่จำเป็น','สิทธิแต่งตั้งทนายความหรือที่ปรึกษา','ถูกทุกข้อที่กล่าวมา'], a:3, e:'พ.ร.บ.วิธีปฏิบัติราชการทางปกครองรับรองสิทธิเหล่านี้เพื่อคุ้มครองความเป็นธรรมแก่คู่กรณี' }
+      { s:'lgciv', q:'ตามประมวลกฎหมายแพ่งและพาณิชย์ บุคคลย่อมบรรลุนิติภาวะเมื่อใด', c:['อายุสิบแปดปีบริบูรณ์','อายุยี่สิบปีบริบูรณ์ หรือเมื่อสมรสโดยชอบด้วยกฎหมาย','อายุยี่สิบปีบริบูรณ์เท่านั้น','อายุยี่สิบเอ็ดปีบริบูรณ์'], a:1, e:'บรรลุนิติภาวะเมื่ออายุ 20 ปีบริบูรณ์ หรือเมื่อทำการสมรสชอบด้วยกฎหมาย' },
+      { s:'lgadm', q:'การฟ้องคดีต่อศาลปกครองกรณีเดือดร้อนเสียหายจากคำสั่งทางปกครอง ต้องยื่นฟ้องภายในกี่วัน', c:['ภายในสามสิบวัน','ภายในหกสิบวัน','ภายในเก้าสิบวัน','ภายในหนึ่งปี'], a:2, e:'มาตรา 49 กำหนดให้ยื่นฟ้องภายในเก้าสิบวันนับแต่วันที่รู้เหตุแห่งการฟ้องคดี' }
     ]
   },
   disaster: {
-    id: 'disaster', icon: '🚒', name: 'นักป้องกันและบรรเทาสาธารณภัยปฏิบัติการ', desc: 'พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 · การกู้ภัยและระงับอัคคีภัย',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'dslaw', name: 'กฎหมายภัยพิบัติ' }, { k: 'dsops', name: 'ปฏิบัติการดับเพลิง' }],
+    id: 'disaster', icon: '🚒', name: 'นักป้องกันและบรรเทาสาธารณภัยปฏิบัติการ', category: 'partB', theme: 'theme-amber',
+    desc: 'พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 · การกู้ภัยและระงับอัคคีภัย',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'dslaw', q:'ผู้ใดดำรงตำแหน่งผู้บัญชาการป้องกันและบรรเทาสาธารณภัยแห่งชาติ', c:['นายกรัฐมนตรี','รัฐมนตรีว่าการกระทรวงมหาดไทย','ปลัดกระทรวงมหาดไทย','อธิบดีกรมป้องกันและบรรเทาสาธารณภัย'], a:1, e:'พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 มาตรา 13 กำหนดให้ รมว.มหาดไทย เป็นผู้บัญชาการ' },
-      { s:'dslaw', q:'ผู้ใดเป็นผู้อำนวยการกลางตาม พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550', c:['ปลัดกระทรวงมหาดไทย','ผู้ว่าราชการจังหวัด','รองปลัดกระทรวงมหาดไทย','อธิบดีกรมป้องกันและบรรเทาสาธารณภัย'], a:3, e:'มาตรา 13 วรรคสาม กำหนดให้อธิบดีกรมป้องกันและบรรเทาสาธารณภัยเป็นผู้อำนวยการกลาง' },
-      { s:'dslaw', q:'ในเขตองค์การบริหารส่วนตำบล ผู้ใดเป็นผู้อำนวยการท้องถิ่น', c:['นายก อบต.','ปลัด อบต.','นายอำเภอ','กำนัน'], a:0, e:'มาตรา 20 กำหนดให้ผู้บริหารท้องถิ่นเป็นผู้อำนวยการท้องถิ่น และปลัดเป็นผู้ช่วยผู้อำนวยการท้องถิ่น' },
-      { s:'dslaw', q:'ผู้ใดเป็นรองผู้อำนวยการจังหวัดตามกฎหมายป้องกันและบรรเทาสาธารณภัย', c:['รองผู้ว่าราชการจังหวัด','ปลัดจังหวัด','นายกองค์การบริหารส่วนจังหวัด','หัวหน้าสำนักงาน ปภ.จังหวัด'], a:2, e:'มาตรา 15 กำหนดให้ผู้ว่าราชการจังหวัดเป็น ผอ.จังหวัด และนายก อบจ. เป็นรอง ผอ.จังหวัด' },
-      { s:'dslaw', q:'แผนการป้องกันและบรรเทาสาธารณภัยแห่งชาติ แบ่งระดับการจัดการสาธารณภัยเป็นกี่ระดับ', c:['สามระดับ','สี่ระดับ','ห้าระดับ','หกระดับ'], a:1, e:'แบ่งเป็นสี่ระดับ ตั้งแต่ระดับ 1 (ขนาดเล็ก ท้องถิ่นคุมได้) ถึงระดับ 4 (ร้ายแรงยิ่ง นายกฯ คุม)' },
-      { s:'dslaw', q:'ข้อใดมิใช่ความหมายของสาธารณภัยตามกฎหมาย', c:['อัคคีภัย วาตภัย อุทกภัย','โรคระบาดในมนุษย์และสัตว์','ภัยทางอากาศและการก่อวินาศกรรม','ความขัดแย้งทางการเมือง'], a:3, e:'กฎหมายนิยามครอบคลุมภัยธรรมชาติ โรคระบาด และอุบัติภัยร้ายแรง แต่มิได้รวมถึงความขัดแย้งทางการเมือง' },
-      { s:'dsops', q:'องค์ประกอบของการเกิดเพลิงไหม้ตามทฤษฎีสามเหลี่ยมของไฟ ประกอบด้วยข้อใด', c:['เชื้อเพลิง ความชื้น แรงดัน','ออกซิเจน ไนโตรเจน ความร้อน','เชื้อเพลิง ความร้อน ออกซิเจน','ประกายไฟ ลม เชื้อเพลิง'], a:2, e:'การติดไฟต้องมีองค์ประกอบครบสามส่วน คือ เชื้อเพลิง ความร้อน และออกซิเจน' },
-      { s:'dsops', q:'เพลิงไหม้ที่เกิดจากน้ำมันเชื้อเพลิงหรือของเหลวไวไฟ จัดเป็นเพลิงประเภทใด', c:['ประเภท A','ประเภท B','ประเภท C','ประเภท D'], a:1, e:'เพลิงประเภท B เกิดจากของเหลวไวไฟ ต้องใช้โฟมหรือผงเคมีแห้งดับ ห้ามใช้น้ำฉีดโดยตรง' },
-      { s:'dsops', q:'การดับเพลิงในอุปกรณ์ไฟฟ้าที่มีกระแสไฟฟ้าไหลอยู่ ควรใช้สารดับเพลิงชนิดใด', c:['ก๊าซคาร์บอนไดออกไซด์หรือผงเคมีแห้ง','น้ำสะอาดฉีดเป็นลำตรง','โฟมผสมน้ำ','ทรายเปียก'], a:0, e:'เพลิงประเภท C เกิดกับอุปกรณ์ไฟฟ้าที่มีกระแส ต้องใช้สารที่ไม่นำไฟฟ้า เช่น CO2 หรือผงเคมีแห้ง' },
-      { s:'dsops', q:'การประเมินและจัดลำดับความเร่งด่วนในการรักษาผู้บาดเจ็บ เรียกว่าอะไร', c:['การปฐมพยาบาลเบื้องต้น','การฟื้นคืนชีพ','การคัดแยกผู้บาดเจ็บ (Triage)','การเคลื่อนย้ายฉุกเฉิน'], a:2, e:'Triage คือการคัดแยกผู้บาดเจ็บตามความเร่งด่วนโดยใช้รหัสสี เพื่อให้การรักษามีประสิทธิภาพสูงสุด' }
+      { s:'dslaw', q:'ในเขตองค์การบริหารส่วนตำบล ผู้ใดเป็นผู้อำนวยการท้องถิ่นในการป้องกันภัย', c:['นายก อบต.','ปลัด อบต.','นายอำเภอ','กำนัน'], a:0, e:'มาตรา 20 กำหนดให้ผู้บริหารท้องถิ่นเป็นผู้อำนวยการท้องถิ่น' },
+      { s:'dsops', q:'เพลิงไหม้ที่เกิดจากน้ำมันเชื้อเพลิงหรือของเหลวไวไฟ จัดเป็นเพลิงประเภทใด', c:['ประเภท A','ประเภท B','ประเภท C','ประเภท D'], a:1, e:'เพลิงประเภท B เกิดจากของเหลวไวไฟ ต้องใช้โฟมหรือผงเคมีแห้งดับ ห้ามใช้น้ำฉีดตรง' }
     ]
   },
   ee: {
-    id: 'ee', icon: '⚡', name: 'วิศวกรไฟฟ้าปฏิบัติการ', desc: 'ทฤษฎีวงจรไฟฟ้า · ระบบไฟฟ้ากำลัง · ความปลอดภัยและการต่อลงดิน',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'eetheo', name: 'ทฤษฎีวงจร' }, { k: 'eesys', name: 'ระบบไฟฟ้ากำลัง' }],
+    id: 'ee', icon: '⚡', name: 'วิศวกรไฟฟ้าปฏิบัติการ', category: 'partB', theme: 'theme-blue',
+    desc: 'ทฤษฎีวงจรไฟฟ้า · ระบบไฟฟ้ากำลัง 3 เฟส 4 สาย · ความปลอดภัยและการต่อลงดิน',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'eetheo', q:'ตามกฎของโอห์ม หากความต้านทาน 20 โอห์ม มีกระแสไหล 3 แอมแปร์ แรงดันตกคร่อมคือเท่าใด', c:['50 โวลต์','60 โวลต์','70 โวลต์','80 โวลต์'], a:1, e:'แรงดัน (V) = กระแส (I) × ความต้านทาน (R) = 3 × 20 = 60 โวลต์' },
-      { s:'eetheo', q:'เครื่องใช้ไฟฟ้าขนาด 2000 วัตต์ ใช้กับแรงดัน 220 โวลต์ มีกระแสไหลประมาณเท่าใด', c:['4.5 แอมแปร์','6.8 แอมแปร์','9.1 แอมแปร์','13.6 แอมแปร์'], a:2, e:'กระแส (I) = กำลังไฟฟ้า (P) ÷ แรงดัน (V) = 2000 ÷ 220 ≈ 9.09 แอมแปร์' },
-      { s:'eetheo', q:'ตัวต้านทานขนาด 10 โอห์ม จำนวน 3 ตัว ต่อขนานกัน จะได้ความต้านทานรวมเท่าใด', c:['3.33 โอห์ม','10 โอห์ม','20 โอห์ม','30 โอห์ม'], a:0, e:'ต่อขนานค่าเท่ากัน ความต้านทานรวม = R ÷ N = 10 ÷ 3 ≈ 3.33 โอห์ม' },
-      { s:'eetheo', q:'ตัวประกอบกำลัง (Power Factor) ในระบบไฟฟ้ากระแสสลับ หมายถึงข้อใด', c:['อัตราส่วนกระแสต่อแรงดัน','อัตราส่วนกำลังไฟฟ้าปรากฏต่อกำลังไฟฟ้าจริง','ผลคูณแรงดันกับกระแส','อัตราส่วนกำลังไฟฟ้าจริงต่อกำลังไฟฟ้าปรากฏ'], a:3, e:'Power Factor คือ อัตราส่วนระหว่างกำลังไฟฟ้าจริง (kW) ต่อกำลังไฟฟ้าปรากฏ (kVA)' },
-      { s:'eesys', q:'ระบบจำหน่ายไฟฟ้าแรงต่ำมาตรฐานในประเทศไทย มีลักษณะตรงกับข้อใด', c:['1 เฟส 2 สาย 230V 60Hz','3 เฟส 4 สาย 380/220V 50Hz','3 เฟส 3 สาย 415V 60Hz','2 เฟส 3 สาย 110V 50Hz'], a:1, e:'ระบบแรงต่ำไทยคือ 3 เฟส 4 สาย แรงดัน 380V (Line-to-Line) และ 220V (Line-to-Neutral) ที่ 50Hz' },
-      { s:'eesys', q:'เครื่องตัดไฟรั่ว (RCD) มีหลักการทำงานอย่างไร', c:['ตรวจจับผลต่างของกระแสเข้าและออก หากไม่เท่ากันจะตัดวงจร','ตรวจจับความร้อนของสายไฟ','ตรวจจับแรงดันเกิน','ตรวจจับความถี่เปลี่ยน'], a:0, e:'RCD ตรวจจับกระแสผลต่างระหว่างสายเฟสกับนิวทรัล หากมีไฟรั่วลงดินจะตัดวงจรทันที' },
-      { s:'eesys', q:'การต่อลงดิน (Earthing) ของระบบไฟฟ้า มีวัตถุประสงค์หลักเพื่ออะไร', c:['ลดค่าไฟฟ้า','เพิ่มแรงดันให้คงที่','ป้องกันอันตรายต่อบุคคลและเป็นทางระบายกระแสลัดวงจร','เพิ่มค่าตัวประกอบกำลัง'], a:2, e:'การต่อลงดินช่วยจำกัดแรงดันบนโครงโลหะและระบายกระแสรั่ว เพื่อให้อุปกรณ์ตัดตอนทำงานเร็วขึ้น' },
-      { s:'eesys', q:'หน่วยพลังงานไฟฟ้าที่ใช้คิดค่าไฟตามบ้านเรือน คือหน่วยใด', c:['วัตต์','โวลต์แอมแปร์','กิโลวัตต์','กิโลวัตต์-ชั่วโมง (Unit)'], a:3, e:'พลังงานไฟฟ้า = กำลังไฟฟ้า (kW) × เวลา (ชั่วโมง) คิดเป็น กิโลวัตต์-ชั่วโมง หรือหน่วย (Unit)' },
-      { s:'eesys', q:'หม้อแปลงไฟฟ้าทำหน้าที่หลักตรงกับข้อใด', c:['แปลงไฟ AC เป็น DC','เปลี่ยนระดับแรงดันไฟฟ้า AC โดยความถี่คงเดิม','เปลี่ยนความถี่ไฟฟ้า','เก็บสะสมพลังงาน'], a:1, e:'หม้อแปลงใช้เหนี่ยวนำแม่เหล็กไฟฟ้าเปลี่ยนระดับแรงดัน AC ให้สูงขึ้นหรือต่ำลงโดยความถี่คงที่' },
-      { s:'eesys', q:'ค่าความต้านทานของฉนวนสายไฟที่วัดได้ต่ำผิดปกติ บ่งชี้ถึงสภาพใด', c:['ตัวประกอบกำลังต่ำ','สายไฟใหญ่เกินไป','ฉนวนเสื่อมสภาพหรือชื้น เสี่ยงไฟฟ้ารั่ว','แรงดันไฟฟ้าสูงเกิน'], a:2, e:'ค่าความต้านทานฉนวนต่ำแสดงว่าฉนวนชำรุดหรือมีความชื้น อาจเกิดกระแสรั่วไหลหรือลัดวงจรได้' }
+      { s:'eetheo', q:'ตามกฎของโอห์ม หากความต้านทาน 20 โอห์ม มีกระแสไหล 3 แอมแปร์ แรงดันตกคร่อมคือเท่าใด', c:['50 โวลต์','60 โวลต์','70 โวลต์','80 โวลต์'], a:1, e:'V = I × R = 3 × 20 = 60 โวลต์' },
+      { s:'eesys', q:'เครื่องตัดไฟรั่ว (RCD) มีหลักการทำงานอย่างไร', c:['ตรวจจับผลต่างของกระแสเข้าและออก หากไม่เท่ากันจะตัดวงจร','ตรวจจับความร้อนของสายไฟ','ตรวจจับแรงดันเกิน','ตรวจจับความถี่เปลี่ยน'], a:0, e:'RCD ตรวจจับกระแสผลต่าง หากไฟรั่วลงดินจะตัดวงจรทันที' }
     ]
   },
   ce: {
-    id: 'ce', icon: '🏗️', name: 'วิศวกรโยธาปฏิบัติการ', desc: 'วัสดุและเทคโนโลยีคอนกรีต · ปฐพีกลศาสตร์ · การควบคุมงานก่อสร้าง',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'cemat', name: 'วัสดุก่อสร้าง' }, { k: 'ceeng', name: 'งานทางและปฐพี' }],
+    id: 'ce', icon: '🏗️', name: 'วิศวกรโยธาปฏิบัติการ', category: 'partB', theme: 'theme-emerald',
+    desc: 'วัสดุและเทคโนโลยีคอนกรีต · การทดสอบ Slump และ CBR · การควบคุมงานก่อสร้าง',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'cemat', q:'การทดสอบกำลังอัดของคอนกรีตตามมาตรฐานทั่วไป ใช้อายุคอนกรีตกี่วันเป็นเกณฑ์', c:['เจ็ดวัน','สิบสี่วัน','ยี่สิบแปดวัน','เก้าสิบวัน'], a:2, e:'มาตรฐานออกแบบและตรวจรับงานใช้กำลังอัดที่อายุยี่สิบแปดวันเป็นค่าอ้างอิงหลัก' },
-      { s:'cemat', q:'การทดสอบการยุบตัวของคอนกรีต (Slump Test) มีวัตถุประสงค์เพื่ออะไร', c:['วัดกำลังอัดสูงสุด','วัดความข้นเหลวและความสามารถในการเททำงานได้','วัดปริมาณปูนซีเมนต์','วัดความทนทานต่อสารเคมี'], a:1, e:'Slump Test ใช้วัดความข้นเหลวและความสามารถในการเท (Workability) ของคอนกรีตสดหน้างาน' },
-      { s:'cemat', q:'อัตราส่วนน้ำต่อซีเมนต์ (W/C Ratio) มีผลต่อคอนกรีตอย่างไร', c:['อัตราส่วนยิ่งต่ำ กำลังอัดยิ่งสูง แต่เทยากขึ้น','อัตราส่วนยิ่งสูง กำลังอัดยิ่งสูง','ไม่มีผลต่อกำลังอัด','อัตราส่วนยิ่งสูง ซึมน้ำได้ยากขึ้น'], a:0, e:'W/C ต่ำทำให้คอนกรีตแน่น แข็งแรง และซึมน้ำยาก แต่ความสามารถในการเททำงานจะลดลง' },
-      { s:'cemat', q:'เหล็กเส้นข้ออ้อย SD40 มีความหมายตรงกับข้อใด', c:['เหล็กกลมเรียบ กำลังคราก 2400 ksc','เหล็กกลมเรียบ กำลังคราก 4000 ksc','เหล็กข้ออ้อย กำลังคราก 3000 ksc','เหล็กข้ออ้อย กำลังครากไม่น้อยกว่า 4000 ksc'], a:3, e:'SD หมายถึงเหล็กข้ออ้อย (Deformed Bar) และ 40 คือกำลังครากต่ำสุด 4000 ksc (กก./ตร.ซม.)' },
-      { s:'cemat', q:'การบ่มคอนกรีตหลังเทเสร็จ มีวัตถุประสงค์สำคัญเพื่ออะไร', c:['เร่งให้คอนกรีตแห้งเร็ว','รักษาความชื้นให้ออสโมซิสและไฮเดรชันสมบูรณ์','ทำความสะอาดผิวหน้า','เพิ่มปริมาณปูนซีเมนต์'], a:1, e:'การบ่มช่วยรักษาความชื้นและอุณหภูมิให้ปฏิกิริยาไฮเดรชันเกิดต่อเนื่อง ป้องกันแตกร้าว' },
-      { s:'ceeng', q:'การทดสอบ CBR (California Bearing Ratio) ใช้ในงานวิศวกรรมด้านใด', c:['ทดสอบกำลังอัดคอนกรีต','ทดสอบแรงดึงเหล็ก','ทดสอบความสามารถรับแรงของดินและวัสดุชั้นทาง','ทดสอบคอนกรีตมวลเบา'], a:2, e:'CBR ใช้ประเมินความแข็งแรงของดินเดิมและวัสดุคันทาง เพื่อออกแบบความหนาชั้นโครงสร้างถนน' },
-      { s:'ceeng', q:'การทดสอบการบดอัดดิน (Compaction Test) มีวัตถุประสงค์เพื่อหาค่าใด', c:['ความชื้นที่เหมาะสมที่สุดและความหนาแน่นแห้งสูงสุด','การซึมผ่านของน้ำ','มุมเสียดทานภายใน','การทรุดตัวระยะยาว'], a:0, e:'หาค่า Optimum Moisture Content (OMC) และ Maximum Dry Density (MDD) เพื่อคุมงานบดอัดในสนาม' },
-      { s:'ceeng', q:'คอนกรีตมีคุณสมบัติทางกลในการรับแรงอย่างไร', c:['รับแรงดึงได้ดีกว่าแรงอัด','รับแรงอัดได้ดีมากแต่รับแรงดึงได้ต่ำ','รับแรงอัดและแรงดึงได้เท่ากัน','รับแรงเฉือนได้ดีที่สุด'], a:1, e:'คอนกรีตรับแรงอัดได้สูงมากแต่รับแรงดึงได้เพียงประมาณ 10% จึงต้องเสริมเหล็กรับแรงดึงแทน' },
-      { s:'ceeng', q:'ระยะหุ้มของคอนกรีต (Covering) มีความสำคัญอย่างไร', c:['เพื่อความสวยงาม','ลดปริมาณคอนกรีต','ช่วยถอดแบบง่าย','ป้องกันเหล็กเสริมจากสนิมและการกัดกร่อนจากความร้อน'], a:3, e:'ระยะหุ้มช่วยป้องกันน้ำ อากาศ และความร้อนมิให้ทำลายเหล็กเสริมโครงสร้างภายใน' },
-      { s:'ceeng', q:'เมื่อตรวจพบว่าผู้รับจ้างใช้วัสดุไม่ตรงตามแบบรูปรายการ ควรทำอย่างไรเป็นลำดับแรก', c:['สั่งรื้อถอนด้วยวาจาทันที','ปล่อยให้ทำไปก่อน','บันทึกข้อเท็จจริงเป็นหนังสือ แจ้งให้แก้ไข และรายงานกรรมการตรวจรับ','เจรจาส่วนตัว'], a:2, e:'ต้องทำหนังสือบันทึกข้อเท็จจริง สั่งแก้ไขเป็นลายลักษณ์อักษร และรายงานคณะกรรมการตรวจรับพัสดุ' }
+      { s:'cemat', q:'การทดสอบกำลังอัดของคอนกรีตตามมาตรฐานทั่วไป ใช้อายุคอนกรีตกี่วันเป็นเกณฑ์', c:['เจ็ดวัน','สิบสี่วัน','ยี่สิบแปดวัน','เก้าสิบวัน'], a:2, e:'มาตรฐานการออกแบบและตรวจรับงานใช้กำลังอัดที่อายุยี่สิบแปดวันเป็นเกณฑ์หลัก' },
+      { s:'cemat', q:'เหล็กเส้นข้ออ้อย SD40 มีความหมายตรงกับข้อใด', c:['เหล็กกลมเรียบ กำลัง 2400 ksc','เหล็กกลมเรียบ กำลัง 4000 ksc','เหล็กข้ออ้อย กำลัง 3000 ksc','เหล็กข้ออ้อย กำลังครากไม่น้อยกว่า 4000 ksc'], a:3, e:'SD หมายถึงเหล็กข้ออ้อย และ 40 คือกำลังครากต่ำสุด 4000 ksc' }
     ]
   },
   arch: {
-    id: 'arch', icon: '📐', name: 'สถาปนิกปฏิบัติการ', desc: 'กฎหมายควบคุมอาคาร · วิชาชีพสถาปัตยกรรม · การออกแบบ Universal Design',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'arlaw', name: 'กฎหมายอาคาร' }, { k: 'ardes', name: 'การออกแบบ' }],
+    id: 'arch', icon: '📐', name: 'สถาปนิกปฏิบัติการ', category: 'partB', theme: 'theme-purple',
+    desc: 'กฎหมายควบคุมอาคาร · ระยะดิ่งและที่ว่างอาคาร · Universal Design',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'arlaw', q:'ห้องนอนในอาคารพักอาศัย ต้องมีระยะดิ่งจากพื้นถึงเพดานไม่น้อยกว่าเท่าใด', c:['2.40 เมตร','2.60 เมตร','2.80 เมตร','3.00 เมตร'], a:1, e:'กฎกระทรวงกำหนดห้องนอน ห้องนั่งเล่น ต้องมีระยะดิ่งพื้นถึงเพดานไม่น้อยกว่า 2.60 เมตร' },
-      { s:'arlaw', q:'อาคารอยู่อาศัยต้องมีที่ว่างอันปราศจากสิ่งปกคลุมไม่น้อยกว่าเท่าใดของพื้นที่ดิน', c:['ร้อยละสิบ','ร้อยละยี่สิบ','ร้อยละสามสิบ','ร้อยละห้าสิบ'], a:2, e:'อาคารอยู่อาศัยเดี่ยวต้องมีที่ว่างไม่น้อยกว่าร้อยละสามสิบของพื้นที่ชั้นใดชั้นหนึ่งที่มากที่สุด' },
-      { s:'arlaw', q:'ใบอนุญาตก่อสร้างอาคารมีอายุใช้ได้คราวละไม่เกินกี่ปี', c:['ไม่เกินหนึ่งปี','ไม่เกินสองปี','ไม่เกินสามปี','ไม่มีกำหนดอายุ'], a:0, e:'พ.ร.บ.ควบคุมอาคาร มาตรา 35 กำหนดใบอนุญาตมีอายุใช้ได้ตามที่กำหนดไว้แต่ไม่เกินหนึ่งปี' },
-      { s:'arlaw', q:'บันไดของบ้านพักอาศัย ต้องมีขนาดลูกตั้งและลูกนอนตามข้อใด', c:['ลูกตั้งสูงไม่เกิน 25 ซม. ลูกนอนกว้างไม่น้อยกว่า 15 ซม.','ลูกตั้งสูงไม่เกิน 15 ซม. ลูกนอนกว้างไม่น้อยกว่า 30 ซม.','ลูกตั้งสูงไม่เกิน 18 ซม. ลูกนอนกว้างไม่น้อยกว่า 25 ซม.','ลูกตั้งสูงไม่เกิน 20 ซม. ลูกนอนกว้างไม่น้อยกว่า 22 ซม.'], a:3, e:'กฎกระทรวงกำหนดบันไดบ้านพักอาศัยลูกตั้งสูงไม่เกิน 20 ซม. และลูกนอนกว้างไม่น้อยกว่า 22 ซม.' },
-      { s:'arlaw', q:'ตาม พ.ร.บ.สถาปนิก พ.ศ. 2543 วิชาชีพสถาปัตยกรรมควบคุมมีกี่สาขา', c:['สองสาขา','สามสาขา','สี่สาขา','ห้าสาขา'], a:2, e:'มีสี่สาขา ได้แก่ สถาปัตยกรรมหลัก สถาปัตยกรรมผังเมือง ภูมิสถาปัตยกรรม และสถาปัตยกรรมภายใน' },
-      { s:'arlaw', q:'ระดับใบอนุญาตประกอบวิชาชีพสถาปัตยกรรม เรียงจากระดับต้นไปสูงสุดคือข้อใด', c:['สามัญ ภาคี วุฒิ','ภาคี สามัญ วุฒิ','วุฒิ สามัญ ภาคี','ภาคี วุฒิ สามัญ'], a:1, e:'เรียงลำดับจากระดับต้นไปสูงสุดคือ ภาคีสถาปนิก สามัญสถาปนิก และวุฒิสถาปนิก' },
-      { s:'ardes', q:'แนวคิด Universal Design (อารยสถาปัตย์) มีหลักการสำคัญตรงกับข้อใด', c:['ทุกคนใช้งานได้อย่างเท่าเทียม ปลอดภัย โดยไม่ต้องดัดแปลงพิเศษ','สร้างพื้นที่แยกเฉพาะสำหรับคนพิการ','เน้นความสวยงามก่อนค่อยเพิ่มทางลาด','เน้นประหยัดงบประมาณ'], a:0, e:'ออกแบบสภาพแวดล้อมให้คนทุกวัยและทุกสภาพร่างกายใช้งานร่วมกันได้อย่างสะดวกและเสมอภาค' },
-      { s:'ardes', q:'แบบก่อสร้างที่แสดงภาพตัดแนวดิ่งเพื่อแสดงระดับพื้น ฝ้า และโครงสร้างภายใน เรียกว่าอะไร', c:['แบบแปลนพื้น (Floor Plan)','แบบรูปด้าน (Elevation)','แบบรูปตัด (Section)','แบบผังบริเวณ (Site Plan)'], a:2, e:'Section คือภาพตัดแนวดิ่งเพื่อแสดงระดับความสูง โครงสร้าง และมิติภายในอาคาร' },
-      { s:'ardes', q:'ในภูมิอากาศร้อนชื้นของไทย การวางผังอาคารที่ดีควรหันด้านยาวไปทางทิศใด', c:['ทิศตะวันออกและทิศตะวันตก','ทิศเหนือและทิศใต้','ทิศตะวันตกเฉียงใต้','ทิศใดก็ได้'], a:1, e:'วางด้านยาวรับลมทิศเหนือ-ใต้ และลดพื้นที่ผิวผนังที่ต้องรับแสงแดดจัดจากทิศตะวันออกและตะวันตก' },
-      { s:'ardes', q:'มาตราส่วน 1:100 ในแบบสถาปัตยกรรม มีความหมายตรงกับข้อใด', c:['1 เมตรในแบบ เท่ากับ 100 เมตรจริง','1 หน่วยในแบบ เท่ากับ 1/100 หน่วยจริง','ใช้เฉพาะอาคารพื้นที่ไม่เกิน 100 ตร.ม.','1 เซนติเมตรในแบบ เท่ากับ 1 เมตรในพื้นที่จริง'], a:3, e:'1:100 หมายถึง 1 ซม. ในแบบ เท่ากับ 100 ซม. (หรือ 1 เมตร) ในพื้นที่ก่อสร้างจริง' }
+      { s:'arlaw', q:'ห้องนอนในอาคารพักอาศัย ต้องมีระยะดิ่งจากพื้นถึงเพดานไม่น้อยกว่าเท่าใด', c:['2.40 เมตร','2.60 เมตร','2.80 เมตร','3.00 เมตร'], a:1, e:'กฎกระทรวงกำหนดห้องนอน ห้องนั่งเล่น ต้องมีระยะดิ่งไม่น้อยกว่า 2.60 เมตร' },
+      { s:'ardes', q:'แนวคิด Universal Design (อารยสถาปัตย์) มีหลักการสำคัญตรงกับข้อใด', c:['ทุกคนใช้งานได้อย่างเท่าเทียม ปลอดภัย โดยไม่ต้องดัดแปลงพิเศษ','สร้างพื้นที่แยกเฉพาะสำหรับคนพิการ','เน้นความสวยงามก่อนค่อยเพิ่มทางลาด','เน้นประหยัดงบประมาณ'], a:0, e:'ออกแบบสภาพแวดล้อมให้คนทุกวัยใช้งานร่วมกันได้อย่างสะดวกและเสมอภาค' }
     ]
   },
   me: {
-    id: 'me', icon: '⚙️', name: 'วิศวกรเครื่องกลปฏิบัติการ', desc: 'เทอร์โมไดนามิกส์ · เครื่องปรับอากาศ · เครื่องสูบน้ำและเครื่องจักรกล',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'methe', name: 'เทอร์โมไดนามิกส์' }, { k: 'memac', name: 'เครื่องจักรกล' }],
+    id: 'me', icon: '⚙️', name: 'วิศวกรเครื่องกลปฏิบัติการ', category: 'partB', theme: 'theme-cyan',
+    desc: 'เทอร์โมไดนามิกส์ · วัฏจักรทำความเย็นแบบอัดไอ · เครื่องยนต์และปั๊มน้ำ',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'methe', q:'กฎข้อที่หนึ่งของเทอร์โมไดนามิกส์ กล่าวถึงเรื่องใด', c:['ความร้อนไหลจากเย็นไปร้อนได้เอง','พลังงานไม่สูญหาย เพียงแต่เปลี่ยนรูปได้เท่านั้น','เครื่องจักรมีประสิทธิภาพ 100%','เอนโทรปีของระบบปิดลดลงเสมอ'], a:1, e:'กฎการอนุรักษ์พลังงานระบุว่า พลังงานรวมของระบบคงที่ สามารถเปลี่ยนรูปได้แต่สร้างใหม่หรือทำลายไม่ได้' },
-      { s:'methe', q:'การถ่ายเทความร้อนจากดวงอาทิตย์มายังโลกโดยไม่ต้องอาศัยตัวกลาง เรียกว่าอะไร', c:['การนำความร้อน','การพาความร้อน','การแผ่รังสีความร้อน','การควบแน่น'], a:2, e:'การแผ่รังสีความร้อนเดินทางผ่านสุญญากาศในรูปคลื่นแม่เหล็กไฟฟ้าได้โดยไม่ต้องมีตัวกลาง' },
-      { s:'methe', q:'ขนาดทำความเย็น 1 ตันความเย็น (Ton of Refrigeration) มีค่าเท่ากับกี่ BTU/hr', c:['9000 BTU/hr','12000 BTU/hr','18000 BTU/hr','24000 BTU/hr'], a:1, e:'1 ตันความเย็น = 12000 BTU ต่อชั่วโมง มาจากพลังงานที่ใช้ทำให้น้ำแข็ง 1 ตันละลายใน 24 ชั่วโมง' },
-      { s:'methe', q:'วัฏจักรการทำความเย็นแบบอัดไอ ประกอบด้วยอุปกรณ์หลักตามลำดับการไหลอย่างไร', c:['เครื่องระเหย, ควบแน่น, อัดไอ, ลดความดัน','เครื่องควบแน่น, ระเหย, ลดความดัน, อัดไอ','เครื่องอัดไอ, ควบแน่น, ลดความดัน, ระเหย','ลดความดัน, อัดไอ, ระเหย, ควบแน่น'], a:2, e:'คอมเพรสเซอร์ (อัดไอ) -> คอนเดนเซอร์ (ควบแน่น) -> วาล์วขยายตัว (ลดความดัน) -> อีวาพอเรเตอร์ (ระเหย)' },
-      { s:'memac', q:'จังหวะการทำงานของเครื่องยนต์ 4 จังหวะ เรียงลำดับอย่างไร', c:['อัด ดูด ระเบิด คาย','ดูด อัด ระเบิด คาย','ดูด ระเบิด อัด คาย','คาย ดูด อัด ระเบิด'], a:1, e:'เริ่มจาก จังหวะดูดไอดี -> จังหวะอัดไอดี -> จังหวะระเบิด (กำลัง) -> จังหวะคายไอเสีย' },
-      { s:'memac', q:'เครื่องยนต์ดีเซลต่างจากเครื่องยนต์เบนซินในสาระสำคัญตามข้อใด', c:['ดีเซลใช้หัวเทียนจุดระเบิด','ดีเซลทำงาน 2 จังหวะเสมอ','ดีเซลจุดระเบิดด้วยความร้อนจากการอัดอากาศความดันสูง','ดีเซลมีอัตราส่วนการอัดต่ำกว่า'], a:2, e:'เครื่องยนต์ดีเซลอัดอากาศจนร้อนจัดแล้วฉีดน้ำมันให้ลุกไหม้เองโดยไม่ต้องพึ่งประกายไฟจากหัวเทียน' },
-      { s:'memac', q:'ค่า Head ของเครื่องสูบน้ำ (Pump) หมายถึงอะไร', c:['พลังงานต่อหน่วยน้ำหนักของของเหลว แสดงเป็นความสูง','ปริมาณน้ำที่สูบได้ต่อนาที','กำลังไฟฟ้าของมอเตอร์','ความเร็วรอบของใบพัด'], a:0, e:'Head คือพลังงานแรงดันที่ปั๊มส่งให้ของเหลว แสดงในหน่วยความสูงคอลัมน์น้ำ (เมตร)' },
-      { s:'memac', q:'ปรากฏการณ์ Cavitation (โพรงอากาศ) ในเครื่องสูบน้ำ เกิดจากสาเหตุใด', c:['มอเตอร์แรงเกินไป','น้ำเย็นเกินไป','ท่อส่งใหญ่เกินไป','ความดันด้านดูดลดต่ำกว่าความดันไออิ่มตัวจนเกิดฟองไอแล้วยุบตัว'], a:3, e:'เมื่อความดันด้านดูดต่ำจนน้ำกลายเป็นไอ ฟองไอจะถูกดันไปยุบตัวรุนแรงทำให้ใบพัดสึกกร่อนเสียหาย' },
-      { s:'memac', q:'การบำรุงรักษาเชิงป้องกัน (Preventive Maintenance) มีลักษณะอย่างไร', c:['ซ่อมเมื่อเครื่องจักรพังเสียหายแล้ว','ตรวจเช็ก หล่อลื่น และเปลี่ยนอะไหล่ตามรอบเวลาเพื่อป้องกันการขัดข้อง','ซื้อเครื่องใหม่ยกชุดทุกปี','หยุดใช้งานเครื่องจักรพร้อมกัน'], a:1, e:'PM เป็นการดูแลรักษาตามตารางเวลาที่กำหนดไว้ เพื่อป้องกันไม่ให้เครื่องจักรหยุดทำงานกะทันหัน' },
-      { s:'memac', q:'ระบบระบายอากาศในอาคารจอดรถใต้ดิน มีวัตถุประสงค์หลักเพื่ออะไร', c:['ลดเสียงเครื่องยนต์','รักษาอุณหภูมิให้เย็นสบาย','เจือจางและระบายก๊าซคาร์บอนมอนอกไซด์จากไอเสีย','ลดความชื้นป้องกันสนิม'], a:2, e:'ระบายก๊าซคาร์บอนมอนอกไซด์ (CO) ซึ่งเป็นพิษและไม่มีกลิ่น ให้อยู่ในระดับที่ปลอดภัยต่อมนุษย์' }
+      { s:'methe', q:'ขนาดทำความเย็น 1 ตันความเย็น (Ton of Refrigeration) มีค่าเท่ากับกี่ BTU/hr', c:['9000 BTU/hr','12000 BTU/hr','18000 BTU/hr','24000 BTU/hr'], a:1, e:'1 ตันความเย็น = 12000 BTU ต่อชั่วโมง' },
+      { s:'memac', q:'เครื่องยนต์ดีเซลต่างจากเครื่องยนต์เบนซินในสาระสำคัญตามข้อใด', c:['ดีเซลใช้หัวเทียนจุดระเบิด','ดีเซลทำงาน 2 จังหวะเสมอ','ดีเซลจุดระเบิดด้วยความร้อนจากการอัดอากาศความดันสูง','ดีเซลมีอัตราส่วนการอัดต่ำกว่า'], a:2, e:'เครื่องยนต์ดีเซลอัดอากาศจนร้อนจัดแล้วฉีดน้ำมันให้ลุกไหม้เองโดยไม่ต้องพึ่งหัวเทียน' }
     ]
   },
   cd: {
-    id: 'cd', icon: '🤝', name: 'นักพัฒนาชุมชนปฏิบัติการ', desc: 'หลักการพัฒนาชุมชน · ข้อมูล จปฐ. · สวัสดิการสังคมและเบี้ยยังชีพ',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'cdprin', name: 'หลักการพัฒนาชุมชน' }, { k: 'cdwel', name: 'สวัสดิการสังคม' }],
+    id: 'cd', icon: '🤝', name: 'นักพัฒนาชุมชนปฏิบัติการ', category: 'partB', theme: 'theme-emerald',
+    desc: 'หลักการมีส่วนร่วมของชุมชน · การจัดเก็บข้อมูล จปฐ. · สวัสดิการและเบี้ยยังชีพ',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'cdprin', q:'ปรัชญาของเศรษฐกิจพอเพียง ประกอบด้วยกี่ห่วงและกี่เงื่อนไข', c:['สองห่วง สองเงื่อนไข','สามห่วง สองเงื่อนไข','สามห่วง สามเงื่อนไข','สี่ห่วง สองเงื่อนไข'], a:1, e:'สามห่วง (พอประมาณ มีเหตุผล มีภูมิคุ้มกัน) และสองเงื่อนไข (ความรู้ คุณธรรม)' },
-      { s:'cdprin', q:'การจัดเก็บข้อมูลความจำเป็นพื้นฐาน (จปฐ.) มีรอบการจัดเก็บอย่างไร', c:['จัดเก็บเป็นประจำทุกปีในระดับครัวเรือน','จัดเก็บทุกสองปี','จัดเก็บทุกห้าปี','จัดเก็บเฉพาะเมื่อร้องขอ'], a:0, e:'จปฐ. จัดเก็บทุกปีในระดับครัวเรือนเพื่อชี้วัดคุณภาพชีวิต ส่วน กชช. 2ค เก็บทุกสองปีในชนบท' },
-      { s:'cdprin', q:'หัวใจสำคัญที่สุดของการพัฒนาชุมชน คือข้อใด', c:['เจ้าหน้าที่รัฐวางแผนและทำให้ทั้งหมด','ประชาชนมีส่วนร่วมคิด ร่วมทำ ร่วมรับประโยชน์ และพึ่งตนเองได้','การแจกงบประมาณและสิ่งของ','การแข่งขันสร้างผลงาน'], a:1, e:'เน้นกระบวนการมีส่วนร่วมและการเสริมพลัง (Empowerment) ให้ชุมชนสามารถพึ่งพาตนเองได้ยั่งยืน' },
-      { s:'cdprin', q:'แผนชุมชนที่ดีควรมีลักษณะตรงกับข้อใด', c:['เจ้าหน้าที่ อปท. จัดทำให้ทั้งหมด','ลอกแบบจากชุมชนอื่น','จัดทำขึ้นเพื่อขอเงินงบประมาณเท่านั้น','เกิดจากคนในชุมชนร่วมวิเคราะห์ปัญหาและมีกิจกรรมที่ชุมชนทำเองได้'], a:3, e:'ต้องเกิดจากกระบวนการเรียนรู้และวิเคราะห์ทุนชุมชน มีทั้งส่วนที่ทำเอง ร่วมมือ และขอรับการสนับสนุน' },
-      { s:'cdprin', q:'เวทีประชาคมในงานพัฒนาชุมชน มีบทบาทสำคัญเพื่ออะไร', c:['รับฟังคำสั่งจากราชการฝ่ายเดียว','เป็นพื้นที่แลกเปลี่ยนปัญหา แสดงความคิดเห็น และตัดสินใจร่วมกัน','เวทีหาเสียงเลือกตั้ง','เวทีรับเรื่องร้องทุกข์ทุจริต'], a:1, e:'เวทีประชาคมคือเครื่องมือสร้างการมีส่วนร่วม แลกเปลี่ยนข้อมูล และหาฉันทามติในการพัฒนาชุมชน' },
-      { s:'cdwel', q:'ตาม พ.ร.บ.ผู้สูงอายุ พ.ศ. 2546 ผู้สูงอายุหมายถึงบุคคลที่มีอายุเท่าใด', c:['ห้าสิบปีบริบูรณ์ขึ้นไป','ห้าสิบห้าปีบริบูรณ์ขึ้นไป','หกสิบปีบริบูรณ์ขึ้นไปและมีสัญชาติไทย','หกสิบห้าปีบริบูรณ์ขึ้นไป'], a:2, e:'มาตรา 3 นิยามผู้สูงอายุว่าคือบุคคลที่มีอายุเกินหกสิบปีบริบูรณ์ขึ้นไปและมีสัญชาติไทย' },
-      { s:'cdwel', q:'การจ่ายเบี้ยยังชีพผู้สูงอายุแบบขั้นบันได ผู้มีอายุ 90 ปีขึ้นไปได้รับเดือนละเท่าใด', c:['หกร้อยบาท','เจ็ดร้อยบาท','แปดร้อยบาท','หนึ่งพันบาท'], a:3, e:'ขั้นบันได: 60-69 ปี (600 บ.), 70-79 ปี (700 บ.), 80-89 ปี (800 บ.) และ 90 ปีขึ้นไป (1,000 บ.)' },
-      { s:'cdwel', q:'บทบาทของ อปท. เกี่ยวกับการจ่ายเบี้ยยังชีพผู้สูงอายุคือข้อใด', c:['กำหนดอัตราเงินเองตามฐานะ','รับลงทะเบียน ตรวจสอบสิทธิ และจ่ายเงินตามระเบียบ','ส่งรายชื่อให้ส่วนกลางจ่ายอย่างเดียว','ไม่มีหน้าที่เกี่ยวข้อง'], a:1, e:'อปท. มีหน้าที่รับลงทะเบียน ตรวจสอบคุณสมบัติ จัดทำฐานข้อมูล และจ่ายเงินเบี้ยยังชีพตามระเบียบ มท.' },
-      { s:'cdwel', q:'กองทุนหมู่บ้านและชุมชนเมืองแห่งชาติ มีวัตถุประสงค์หลักเพื่ออะไร', c:['แจกเงินช่วยเหลือผู้ยากไร้แบบให้เปล่า','สร้างถนนและประปาในหมู่บ้าน','เป็นแหล่งเงินทุนหมุนเวียนในการประกอบอาชีพที่ชุมชนบริหารเอง','จ่ายเบี้ยเลี้ยงกรรมการ'], a:2, e:'เป็นแหล่งทุนหมุนเวียนดอกเบี้ยต่ำเพื่อให้ประชาชนกู้ยืมไปลงทุนสร้างอาชีพและบริหารจัดการกันเอง' },
-      { s:'cdwel', q:'การส่งเสริมกลุ่มอาชีพในชุมชนให้ประสบความสำเร็จ ควรเริ่มจากข้อใด', c:['ซื้อเครื่องจักรราคาแพงให้กลุ่ม','กำหนดสินค้าตามที่ราชการต้องการ','ศึกษาทุนชุมชน ทักษะสมาชิก และความเป็นไปได้ทางการตลาด','เร่งตั้งกลุ่มให้ครบยอด'], a:2, e:'ต้องเริ่มจากการวิเคราะห์ความพร้อม ทักษะ ภูมิปัญญา และความต้องการของตลาดก่อนเริ่มผลิต' }
+      { s:'cdprin', q:'การจัดเก็บข้อมูลความจำเป็นพื้นฐาน (จปฐ.) มีรอบการจัดเก็บอย่างไร', c:['จัดเก็บเป็นประจำทุกปีในระดับครัวเรือน','จัดเก็บทุกสองปี','จัดเก็บทุกห้าปี','จัดเก็บเฉพาะเมื่อร้องขอ'], a:0, e:'จปฐ. จัดเก็บทุกปีในระดับครัวเรือนเพื่อชี้วัดคุณภาพชีวิต' },
+      { s:'cdwel', q:'การจ่ายเบี้ยยังชีพผู้สูงอายุแบบขั้นบันได ผู้มีอายุ 90 ปีขึ้นไปได้รับเดือนละเท่าใด', c:['หกร้อยบาท','เจ็ดร้อยบาท','แปดร้อยบาท','หนึ่งพันบาท'], a:3, e:'อายุ 90 ปีขึ้นไปได้รับ 1,000 บาทต่อเดือน' }
     ]
   },
   policy: {
-    id: 'policy', icon: '📊', name: 'นักวิเคราะห์นโยบายและแผนปฏิบัติการ', desc: 'แผนพัฒนาท้องถิ่น 5 ปี · ยุทธศาสตร์ชาติ 20 ปี · เครื่องมือวิเคราะห์ SWOT และ PDCA',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'plplan', name: 'แผนพัฒนาท้องถิ่น' }, { k: 'pltool', name: 'การวิเคราะห์และประเมินผล' }],
+    id: 'policy', icon: '📊', name: 'นักวิเคราะห์นโยบายและแผนปฏิบัติการ', category: 'partB', theme: 'theme-blue',
+    desc: 'แผนพัฒนาท้องถิ่น 5 ปี · ยุทธศาสตร์ชาติ 20 ปี · เครื่องมือวิเคราะห์ SWOT และ PDCA',
+    sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'plplan', q:'แผนพัฒนาท้องถิ่นขององค์กรปกครองส่วนท้องถิ่นในปัจจุบัน มีห้วงระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:2, e:'ระเบียบกระทรวงมหาดไทยว่าด้วยการจัดทำแผนพัฒนา อปท. (ฉบับที่ 3) กำหนดให้ใช้ แผนพัฒนาท้องถิ่น 5 ปี' },
-      { s:'plplan', q:'คณะกรรมการพัฒนาท้องถิ่น มีผู้ใดเป็นประธานกรรมการ', c:['ผู้บริหารท้องถิ่น (นายกฯ)','ปลัด อปท.','ประธานสภาท้องถิ่น','ผู้แทนประชาคม'], a:0, e:'ผู้บริหารท้องถิ่นเป็นประธานกรรมการพัฒนาท้องถิ่น ส่วนปลัดเป็นประธานคณะกรรมการสนับสนุนฯ' },
-      { s:'plplan', q:'คณะกรรมการสนับสนุนการจัดทำแผนพัฒนาท้องถิ่น มีหน้าที่หลักคือข้อใด', c:['อนุมัติและประกาศใช้แผน','จัดทำร่างแผนพัฒนาท้องถิ่นเสนอต่อคณะกรรมการพัฒนาท้องถิ่น','ติดตามประเมินผลโครงการ','ตรวจสอบบัญชีการเงิน'], a:1, e:'คณะกรรมการสนับสนุนฯ (มีปลัดเป็นประธาน) มีหน้าที่ยกร่างแผนพัฒนาเสนอคณะกรรมการพัฒนาท้องถิ่น' },
-      { s:'plplan', q:'ยุทธศาสตร์ชาติ 20 ปี แบ่งออกเป็นกี่ยุทธศาสตร์ด้าน', c:['สามด้าน','สี่ด้าน','ห้าด้าน','หกด้าน'], a:3, e:'แบ่งเป็น 6 ด้าน: มั่นคง, แข่งขัน, ทรัพยากรมนุษย์, เสมอภาค, สิ่งแวดล้อม, และภาครัฐ' },
-      { s:'plplan', q:'แผนการดำเนินงานของ อปท. มีวัตถุประสงค์เพื่ออะไร', c:['แสดงวิสัยทัศน์ 20 ปี','แสดงรายละเอียดโครงการ กิจกรรม งบประมาณ และระยะเวลาทำจริงในปีนั้น','ขออนุมัติผู้ว่าฯ','แผนจัดหาบุคลากร'], a:1, e:'แผนการดำเนินงานแสดงรายละเอียดโครงการและกิจกรรมที่จะดำเนินการจริงในปีงบประมาณนั้นเพื่อใช้คุมงาน' },
-      { s:'plplan', q:'ลำดับชั้นความสอดคล้องของแผนพัฒนา ข้อใดเรียงลำดับจากระดับบนลงล่างถูกต้อง', c:['แผนพัฒนาท้องถิ่น -> ยุทธศาสตร์ชาติ','ยุทธศาสตร์ชาติ -> แผนแม่บท/แผนสภาพัฒน์ -> แผนพัฒนาท้องถิ่น','แผนพัฒนาจังหวัด -> ยุทธศาสตร์ชาติ','แผนแยกเป็นอิสระต่อกัน'], a:1, e:'แผนระดับ 1 (ยุทธศาสตร์ชาติ) -> แผนระดับ 2 (แผนแม่บท/แผน 13) -> แผนระดับ 3 (แผนปฏิบัติการ/ท้องถิ่น)' },
-      { s:'pltool', q:'การวิเคราะห์ SWOT แบ่งปัจจัยสภาพแวดล้อมออกเป็นอย่างไร', c:['ภายใน (จุดแข็ง/จุดอ่อน), ภายนอก (โอกาส/อุปสรรค)','ภายใน (โอกาส/จุดอ่อน), ภายนอก (จุดแข็ง/อุปสรรค)','กิจกรรมหลัก และกิจกรรมสนับสนุน','ต้นทุนคงที่ และต้นทุนผันแปร'], a:0, e:'SWOT: Strengths & Weaknesses เป็นปัจจัยภายใน, Opportunities & Threats เป็นปัจจัยภายนอก' },
-      { s:'pltool', q:'วงจรบริหารงานคุณภาพ PDCA ประกอบด้วยขั้นตอนใดตามลำดับ', c:['วางแผน ปฏิบัติ ตรวจสอบ ปรับปรุงแก้ไข (Plan-Do-Check-Act)','ผลิต ตรวจสอบ จำหน่าย ปรับปรุง','จัดซื้อ ปฏิบัติ ควบคุม ประเมิน','วิเคราะห์ ออกแบบ พัฒนา ติดตั้ง'], a:0, e:'วงจรเดมมิ่ง (PDCA): Plan (วางแผน) -> Do (ปฏิบัติ) -> Check (ตรวจสอบ) -> Act (ปรับปรุงแก้ไข)' },
-      { s:'pltool', q:'เกณฑ์การตั้งตัวชี้วัดที่ดีตามหลัก SMART ตัวอักษร M ย่อมาจากคำว่าอะไร', c:['Management','Measurable (วัดผลได้ชัดเจน)','Modern','Mission'], a:1, e:'S=Specific, M=Measurable (วัดผลได้), A=Achievable, R=Relevant, T=Time-bound' },
-      { s:'pltool', q:'การติดตามและประเมินผลแผนพัฒนาท้องถิ่น มีวัตถุประสงค์สำคัญที่สุดเพื่ออะไร', c:['หาคนผิดมาลงโทษทางวินัย','ทำรายงานส่งตามระเบียบให้ครบเฉยๆ','ทราบผลการดำเนินงานเทียบกับเป้าหมายเพื่อนำไปปรับปรุงแผนรอบต่อไป','ใช้ของบเพิ่ม'], a:2, e:'เพื่อประเมินความก้าวหน้าและผลสัมฤทธิ์ แล้วนำปัญหาอุปสรรคไปปรับปรุงการวางแผนงานในอนาคต' }
+      { s:'plplan', q:'แผนพัฒนาท้องถิ่นขององค์กรปกครองส่วนท้องถิ่นในปัจจุบัน มีห้วงระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:2, e:'ระเบียบ มท. กำหนดให้ใช้ แผนพัฒนาท้องถิ่น 5 ปี' },
+      { s:'pltool', q:'วงจรบริหารงานคุณภาพ PDCA ประกอบด้วยขั้นตอนใดตามลำดับ', c:['วางแผน ปฏิบัติ ตรวจสอบ ปรับปรุงแก้ไข (Plan-Do-Check-Act)','ผลิต ตรวจสอบ จำหน่าย ปรับปรุง','จัดซื้อ ปฏิบัติ ควบคุม ประเมิน','วิเคราะห์ ออกแบบ พัฒนา ติดตั้ง'], a:0, e:'Plan (วางแผน) -> Do (ปฏิบัติ) -> Check (ตรวจสอบ) -> Act (ปรับปรุงแก้ไข)' }
     ]
   },
   gen: {
-    id: 'gen', icon: '📋', name: 'นักจัดการงานทั่วไปปฏิบัติการ', desc: 'ระเบียบงานสารบรรณ · การประชุมและการจัดทำรายงาน · การบริหารงานทั่วไป',
-    sec: 7200, mins: 120, full: 100, pass: 60,
-    subjects: [{ k: 'gnsar', name: 'ระเบียบงานสารบรรณ' }, { k: 'gnadm', name: 'การบริหารงานทั่วไป' }],
+    id: 'gen', icon: '📋', name: 'นักจัดการงานทั่วไปปฏิบัติการ', category: 'partB', theme: 'theme-amber',
+    desc: 'ระเบียบสำนักนายกฯ ว่าด้วยงานสารบรรณ · การประชุมราชการ · การบริหารงานสำนักงาน',
+    sec: 7200, mins: 120, pass: 60,
     q: [
       { s:'gnsar', q:'ตามระเบียบงานสารบรรณ หนังสือราชการมีกี่ชนิด', c:['สี่ชนิด','ห้าชนิด','หกชนิด','เจ็ดชนิด'], a:2, e:'มีหกชนิด: ภายนอก, ภายใน, ประทับตรา, สั่งการ, ประชาสัมพันธ์, และหนังสือที่เจ้าหน้าที่ทำขึ้น/รับไว้' },
-      { s:'gnsar', q:'หนังสือสั่งการตามระเบียบงานสารบรรณ มีกี่ชนิด และได้แก่อะไรบ้าง', c:['สามชนิด ได้แก่ คำสั่ง ระเบียบ ข้อบังคับ','สามชนิด ได้แก่ คำสั่ง ประกาศ แถลงการณ์','สองชนิด ได้แก่ คำสั่ง และระเบียบ','สี่ชนิด ได้แก่ คำสั่ง ระเบียบ ข้อบังคับ ประกาศ'], a:0, e:'หนังสือสั่งการมีสามชนิด คือ คำสั่ง ระเบียบ และข้อบังคับ (ส่วนประกาศเป็นหนังสือประชาสัมพันธ์)' },
-      { s:'gnsar', q:'หนังสือภายในตามระเบียบงานสารบรรณ ใช้กระดาษแบบใด', c:['กระดาษตราครุฑ','กระดาษบันทึกข้อความ','กระดาษหัวจดหมายหน่วยงาน','กระดาษเปล่า'], a:1, e:'หนังสือภายในเป็นหนังสือติดต่อภายในกระทรวงหรือจังหวัดเดียวกัน ใช้กระดาษบันทึกข้อความ' },
-      { s:'gnsar', q:'ชั้นความเร็วของหนังสือราชการ แบ่งออกเป็นกี่ระดับ', c:['สองระดับ (ด่วน, ด่วนที่สุด)','สามระดับ (ด่วน, ด่วนมาก, ด่วนที่สุด)','สี่ระดับ (ปกติ, ด่วน, ด่วนมาก, ด่วนที่สุด)','สามระดับ (ด่วนพิเศษ, ด่วนมาก, ด่วนที่สุด)'], a:1, e:'มีสามระดับ: ด่วน (เร็วกว่าปกติ), ด่วนมาก (ปฏิบัติโดยเร็ว), ด่วนที่สุด (ปฏิบัติทันทีที่ได้รับ)' },
-      { s:'gnsar', q:'หนังสือราชการที่ปฏิบัติเสร็จสิ้นแล้ว โดยปกติต้องเก็บรักษาไว้อย่างน้อยกี่ปี', c:['ห้าปี','สิบปี','สิบห้าปี','ยี่สิบปี'], a:1, e:'ระเบียบกำหนดให้เก็บรักษาหนังสือราชการไว้ไม่น้อยกว่าสิบปี เว้นแต่มีระเบียบกำหนดไว้เป็นอย่างอื่น' },
-      { s:'gnsar', q:'ขนาดของตราครุฑสำหรับใช้ในหนังสือราชการ มีกี่ขนาด', c:['หนึ่งขนาด (สูง 3 ซม.)','สองขนาด (สูง 3 ซม. และสูง 1.5 ซม.)','สามขนาด','สี่ขนาด'], a:1, e:'มีสองขนาด: ครุฑสูง 3 ซม. (หนังสือภายนอก/ประทับตรา) และครุฑสูง 1.5 ซม. (บันทึกข้อความ)' },
-      { s:'gnadm', q:'ชั้นความลับของทางราชการตามระเบียบฯ แบ่งออกเป็นกี่ชั้น', c:['สามชั้น (ลับ, ลับมาก, ลับที่สุด)','สามชั้น (ปกปิด, ลับ, ลับที่สุด)','สี่ชั้น (ปกปิด, ลับ, ลับมาก, ลับที่สุด)','สองชั้น (ลับ, ลับมาก)'], a:0, e:'มีสามชั้นความลับ เรียงจากระดับความเสียหาย: ลับ, ลับมาก, และลับที่สุด (ยกเลิกชั้นปกปิดแล้ว)' },
-      { s:'gnadm', q:'รายงานการประชุมตามระเบียบงานสารบรรณ จัดเป็นหนังสือประเภทใด', c:['หนังสือประชาสัมพันธ์','หนังสือที่เจ้าหน้าที่ทำขึ้นหรือรับไว้เป็นหลักฐานในราชการ','หนังสือสั่งการ','หนังสือภายใน'], a:1, e:'จัดเป็นหนังสือประเภทที่หก คือ หนังสือที่เจ้าหน้าที่ทำขึ้นหรือรับไว้เป็นหลักฐานในราชการ' },
-      { s:'gnadm', q:'การจัดเตรียมการประชุมที่ดี เจ้าหน้าที่ควรดำเนินการตามข้อใดเป็นสำคัญ', c:['แจ้งนัดด้วยวาจาในวันประชุม','ทำรายงานการประชุมไว้ล่วงหน้า','ส่งหนังสือเชิญพร้อมระเบียบวาระและเอกสารประกอบล่วงหน้าอย่างเพียงพอ','เชิญเฉพาะคนที่เห็นด้วย'], a:2, e:'ต้องจัดส่งหนังสือเชิญและเอกสารประกอบให้ผู้เข้าประชุมศึกษาล่วงหน้าเพื่อให้การประชุมมีประสิทธิภาพ' },
-      { s:'gnadm', q:'ขอบเขตภารกิจของตำแหน่งนักจัดการงานทั่วไป ครอบคลุมงานด้านใดบ้าง', c:['เฉพาะรับส่งหนังสือราชการ','เฉพาะงานเลขานุการและประชุม','เฉพาะงานอาคารสถานที่และยานพาหนะ','งานสารบรรณ งานประชุม งานพิธีการ อาคารสถานที่ ยานพาหนะ และประสานราชการทั่วไป'], a:3, e:'นักจัดการงานทั่วไปทำหน้าที่สนับสนุนการบริหารรอบด้าน ทั้งสารบรรณ ประชุม พิธีการ และอาคารสถานที่' }
+      { s:'gnsar', q:'หนังสือราชการที่ปฏิบัติเสร็จสิ้นแล้ว โดยปกติต้องเก็บรักษาไว้อย่างน้อยกี่ปี', c:['ห้าปี','สิบปี','สิบห้าปี','ยี่สิบปี'], a:1, e:'ระเบียบกำหนดให้เก็บรักษาหนังสือราชการไว้ไม่น้อยกว่าสิบปี' }
     ]
   }
 };
 
-/* ================= ระบบควบคุมแอปพลิเคชัน ================= */
+/* ================= จัดการหน่วยความจำระบบ ================= */
+function loadAppBank() {
+  const saved = localStorage.getItem('localgov_app_bank');
+  if (saved) {
+    try { return JSON.parse(saved); } catch (e) { console.warn('โหลดฐานข้อมูลไม่สำเร็จ ใช้ค่าเริ่มต้น'); }
+  }
+  return JSON.parse(JSON.stringify(DEFAULT_BANK));
+}
+
+function saveAppBank(bankObj) {
+  window.BANK = bankObj;
+  localStorage.setItem('localgov_app_bank', JSON.stringify(bankObj));
+}
+
+window.BANK = loadAppBank();
+
+/* ================= ควบคุมหน้าเว็บและการสอบ ================= */
 let currentMode = localStorage.getItem('localgov_mode') || 'practice';
+let activeFilter = 'all';
 let activePack = null;
 let currentQIdx = 0;
 let userAnswers = {};
@@ -412,24 +559,35 @@ function changeMode(val) {
   localStorage.setItem('localgov_mode', val);
 }
 
+function filterTab(cat, btnEl) {
+  activeFilter = cat;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  renderCards();
+}
+
 function renderCards() {
   const grid = document.getElementById('cardGrid');
   grid.innerHTML = '';
+
   Object.keys(window.BANK).forEach(key => {
     const p = window.BANK[key];
+    if (activeFilter !== 'all' && p.category !== activeFilter) return;
+
+    const themeClass = p.theme || 'theme-blue';
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = `card ${themeClass}`;
     card.onclick = () => openBriefing(key);
     card.innerHTML = `
       <div>
         <div class="card-top">
-          <div class="card-icon">${p.icon}</div>
+          <div class="card-icon">${p.icon || '📝'}</div>
           <div>
             <div class="card-title">${p.name}</div>
-            <span class="card-badge">ภาค ข ความรู้เฉพาะตำแหน่ง</span>
+            <span class="card-badge">${p.tag || 'ข้อสอบมาตรฐาน'}</span>
           </div>
         </div>
-        <div class="card-desc">${p.desc}</div>
+        <div class="card-desc">${p.desc || ''}</div>
       </div>
       <button class="card-btn">เข้าทำข้อสอบ (${p.q.length} ข้อ) ➔</button>
     `;
@@ -440,12 +598,13 @@ function renderCards() {
 function openBriefing(posId) {
   activePack = window.BANK[posId];
   if (!activePack) return;
-  document.getElementById('briefTitle').innerHTML = `<span>${activePack.icon}</span> ${activePack.name}`;
+  document.getElementById('briefTitle').innerHTML = `<span>${activePack.icon || '📝'}</span> ${activePack.name}`;
   document.getElementById('briefDetail').innerHTML = `
-    <p><b>• โหมดปัจจุบัน:</b> ${currentMode === 'practice' ? '⚡ ฝึกฝนด่วน (ตรวจเฉลยทันทีทีละข้อ)' : '🎯 สนามจริง (สอบจับเวลา ส่งแล้วสรุปผล)'}</p>
+    <p><b>• กลุ่มวิชา:</b> ${activePack.tag || 'ข้อสอบมาตรฐาน'}</p>
+    <p><b>• รูปแบบการทดสอบ:</b> ${currentMode === 'practice' ? '⚡ ฝึกฝนด่วน (เฉลยพร้อมอธิบายทันที)' : '🎯 สนามจริง (จับเวลา สรุปผลตอนจบ)'}</p>
     <p><b>• จำนวนข้อสอบ:</b> ${activePack.q.length} ข้อ</p>
-    <p><b>• เวลาในการสอบ:</b> ${activePack.mins} นาที (120 นาที)</p>
-    <p><b>• เกณฑ์ผ่านการทดสอบ:</b> ได้คะแนนไม่ต่ำกว่า 60%</p>
+    <p><b>• เวลาในการทำ:</b> ${activePack.mins || 60} นาที</p>
+    <p><b>• เกณฑ์ผ่านการทดสอบ:</b> ได้คะแนนไม่ต่ำกว่า ${activePack.pass || 60}%</p>
   `;
   document.getElementById('briefModal').classList.remove('hidden');
 }
@@ -460,7 +619,7 @@ function confirmStart() {
   document.getElementById('resultView').classList.add('hidden');
   document.getElementById('examView').classList.remove('hidden');
   
-  document.getElementById('examPosName').innerText = `${activePack.icon} ${activePack.name}`;
+  document.getElementById('examPosName').innerText = `${activePack.icon || '📝'} ${activePack.name}`;
   document.getElementById('examModeLabel').innerText = currentMode === 'practice' ? 'โหมดฝึกฝนด่วน (เฉลยทันที)' : 'โหมดสนามจริง (จับเวลา)';
   
   currentQIdx = 0;
@@ -469,7 +628,7 @@ function confirmStart() {
   
   clearInterval(timerInterval);
   if (currentMode === 'exam') {
-    timeLeft = activePack.sec || 7200;
+    timeLeft = activePack.sec || (activePack.mins ? activePack.mins * 60 : 3600);
     document.getElementById('timerDisplay').classList.remove('hidden');
     startTimer();
   } else {
@@ -487,7 +646,7 @@ function startTimer() {
     updateTimerUI();
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
-      alert('หมดเวลาการทำข้อสอบ! ระบบจะสรุปผลคะแนนให้คุณโดยอัตโนมัติ');
+      alert('หมดเวลาทำข้อสอบ! ระบบจะสรุปคะแนนอัตโนมัติ');
       submitExam();
     }
   }, 1000);
@@ -518,7 +677,6 @@ function renderQuestion() {
   
   const cBox = document.getElementById('choiceContainer');
   cBox.innerHTML = '';
-  
   const expBox = document.getElementById('expBox');
   expBox.classList.add('hidden');
   
@@ -539,7 +697,7 @@ function renderQuestion() {
   });
 
   if (((currentMode === 'practice' && userAnswers[currentQIdx] !== undefined) || isReviewing) && q.e) {
-    expBox.innerHTML = `<b>💡 เฉลยและคำอธิบาย:</b> ข้อที่ถูกต้องคือ <b>${['ก','ข','ค','ง'][q.a]}</b><br>${q.e}`;
+    expBox.innerHTML = `<b>💡 เฉลยและคำอธิบาย:</b> ข้อที่ถูกต้องคือ <b>ข้อ ${['ก','ข','ค','ง'][q.a]}</b><br>${q.e}`;
     expBox.classList.remove('hidden');
   }
 
@@ -571,15 +729,16 @@ function submitExam() {
   });
   
   const percent = Math.round((score / activePack.q.length) * 100);
-  const isPass = percent >= activePack.pass;
+  const isPass = percent >= (activePack.pass || 60);
   
   document.getElementById('examView').classList.add('hidden');
   document.getElementById('resultView').classList.remove('hidden');
   
   document.getElementById('scoreIcon').innerText = isPass ? '🎉' : '📚';
-  document.getElementById('scoreTitle').innerText = isPass ? 'ยินดีด้วย! คุณผ่านเกณฑ์การทดสอบ' : 'พยายามอีกนิด! คุณยังไม่ผ่านเกณฑ์';
-  document.getElementById('scoreSub').innerText = `${activePack.name} (เกณฑ์ผ่าน ${activePack.pass}%) คุณทำได้ ${percent}%`;
+  document.getElementById('scoreTitle').innerText = isPass ? 'ยินดีด้วย! คุณสอบผ่านเกณฑ์' : 'พยายามอีกนิด! คุณยังไม่ผ่านเกณฑ์';
+  document.getElementById('scoreSub').innerText = `${activePack.name} (เกณฑ์ผ่าน ${activePack.pass || 60}%) คุณทำได้ ${percent}%`;
   document.getElementById('totalScore').innerText = score;
+  document.getElementById('fullScoreText').innerText = ` / ${activePack.q.length} ข้อ`;
 }
 
 function reviewExam() {
@@ -597,6 +756,189 @@ function backToHome() {
   document.getElementById('resultView').classList.add('hidden');
   document.getElementById('examView').classList.add('hidden');
   document.getElementById('homeView').classList.remove('hidden');
+  renderCards();
+}
+
+/* ================= ฟังก์ชันระบบหลังบ้าน ADMIN STUDIO ================= */
+function openAdminModal() {
+  populateAdminPacks();
+  document.getElementById('adminModal').classList.remove('hidden');
+}
+
+function closeAdminModal() {
+  document.getElementById('adminModal').classList.add('hidden');
+  renderCards();
+}
+
+function populateAdminPacks() {
+  const sel = document.getElementById('admPosSelect');
+  sel.innerHTML = '';
+  Object.keys(window.BANK).forEach(k => {
+    const opt = document.createElement('option');
+    opt.value = k;
+    opt.innerText = `${window.BANK[k].icon || '📝'} ${window.BANK[k].name}`;
+    sel.appendChild(opt);
+  });
+  if (sel.options.length > 0) {
+    onAdminSelectPack(sel.value);
+  }
+}
+
+function onAdminSelectPack(key) {
+  const p = window.BANK[key];
+  if (!p) return;
+  document.getElementById('admCurrentTheme').value = p.theme || 'theme-blue';
+  document.getElementById('admCurrentCategory').value = p.category || 'partB';
+  document.getElementById('admQCount').innerText = p.q ? p.q.length : 0;
+}
+
+function updateCurrentTheme(val) {
+  const key = document.getElementById('admPosSelect').value;
+  if (window.BANK[key]) {
+    window.BANK[key].theme = val;
+    saveAppBank(window.BANK);
+  }
+}
+
+function updateCurrentCategory(val) {
+  const key = document.getElementById('admPosSelect').value;
+  if (window.BANK[key]) {
+    window.BANK[key].category = val;
+    saveAppBank(window.BANK);
+  }
+}
+
+function toggleAddPackForm() {
+  document.getElementById('addPackBox').classList.toggle('hidden');
+}
+
+function saveNewPack() {
+  const id = document.getElementById('npId').value.trim();
+  const name = document.getElementById('npName').value.trim();
+  const icon = document.getElementById('npIcon').value.trim() || '📝';
+  const cat = document.getElementById('npCategory').value;
+  const theme = document.getElementById('npTheme').value;
+  const desc = document.getElementById('npDesc').value.trim();
+
+  if (!id || !name) {
+    alert('กรุณาระบุ ID และชื่อตำแหน่ง');
+    return;
+  }
+  if (window.BANK[id]) {
+    alert('ID นี้มีอยู่ในระบบแล้ว กรุณาใช้ ID อื่น');
+    return;
+  }
+
+  window.BANK[id] = {
+    id: id, icon: icon, name: name, category: cat, theme: theme,
+    tag: cat === 'partB' ? 'ภาค ข ความรู้เฉพาะตำแหน่ง' : (cat === 'partA_all' ? 'ภาค ก รวมทุกหมวด' : 'ภาค ก รายหมวด'),
+    desc: desc, sec: 7200, mins: 120, pass: 60, q: []
+  };
+
+  saveAppBank(window.BANK);
+  populateAdminPacks();
+  document.getElementById('admPosSelect').value = id;
+  onAdminSelectPack(id);
+  toggleAddPackForm();
+  alert(`เพิ่มตำแหน่ง "${name}" สำเร็จเรียบร้อย`);
+}
+
+function deleteCurrentPack() {
+  const key = document.getElementById('admPosSelect').value;
+  if (!confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบตำแหน่ง "${window.BANK[key].name}"?`)) return;
+  delete window.BANK[key];
+  saveAppBank(window.BANK);
+  populateAdminPacks();
+  alert('ลบตำแหน่งเรียบร้อยแล้ว');
+}
+
+function addQuestionToCurrentPack() {
+  const key = document.getElementById('admPosSelect').value;
+  const qText = document.getElementById('admQText').value.trim();
+  const c0 = document.getElementById('admChoice0').value.trim();
+  const c1 = document.getElementById('admChoice1').value.trim();
+  const c2 = document.getElementById('admChoice2').value.trim();
+  const c3 = document.getElementById('admChoice3').value.trim();
+  const ans = parseInt(document.getElementById('admAns').value, 10);
+  const exp = document.getElementById('admExp').value.trim();
+
+  if (!qText || !c0 || !c1 || !c2 || !c3) {
+    alert('กรุณากรอกคำถามและตัวเลือกให้ครบทั้ง 4 ข้อ');
+    return;
+  }
+
+  window.BANK[key].q.push({
+    s: 'custom', q: qText, c: [c0, c1, c2, c3], a: ans, e: exp
+  });
+
+  saveAppBank(window.BANK);
+  document.getElementById('admQCount').innerText = window.BANK[key].q.length;
+  document.getElementById('admQText').value = '';
+  document.getElementById('admChoice0').value = '';
+  document.getElementById('admChoice1').value = '';
+  document.getElementById('admChoice2').value = '';
+  document.getElementById('admChoice3').value = '';
+  document.getElementById('admExp').value = '';
+  alert('เพิ่มข้อสอบสำเร็จเรียบร้อย');
+}
+
+/* ================= ระบบสำรองข้อมูล (BACKUP / RESTORE) ================= */
+function exportDataJSON() {
+  const dataStr = JSON.stringify(window.BANK, null, 2);
+  document.getElementById('jsonClipboardBox').value = dataStr;
+  
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `localgov_quest_backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function triggerImportJSON() {
+  document.getElementById('importFileInput').click();
+}
+
+function handleFileImport(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (typeof parsed === 'object') {
+        saveAppBank(parsed);
+        populateAdminPacks();
+        alert('นำเข้าข้อมูลสำเร็จเรียบร้อยแล้ว!');
+      }
+    } catch (err) {
+      alert('ไฟล์ JSON ไม่ถูกต้อง: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function importFromClipboard() {
+  const str = document.getElementById('jsonClipboardBox').value.trim();
+  if (!str) { alert('กรุณาวางโค้ด JSON ในกล่องก่อน'); return; }
+  try {
+    const parsed = JSON.parse(str);
+    saveAppBank(parsed);
+    populateAdminPacks();
+    alert('กู้คืนข้อมูลสำเร็จเรียบร้อยแล้ว!');
+  } catch (err) {
+    alert('รูปแบบ JSON ผิดพลาด: ' + err.message);
+  }
+}
+
+function resetToFactoryDefault() {
+  if (!confirm('คำเตือน: คุณต้องการล้างข้อมูลทั้งหมดแล้วกลับไปใช้ข้อสอบเริ่มต้นของระบบหรือไม่?')) return;
+  localStorage.removeItem('localgov_app_bank');
+  window.BANK = JSON.parse(JSON.stringify(DEFAULT_BANK));
+  saveAppBank(window.BANK);
+  populateAdminPacks();
+  alert('คืนค่าเริ่มต้นโรงงานสำเร็จ');
 }
 
 window.onload = () => {
