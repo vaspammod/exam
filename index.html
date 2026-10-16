@@ -884,6 +884,92 @@
       setTimeout(function(){ statusBox.remove(); }, 3000);
     });
 })();
+    /* ===== PATCH: FIX NEW POSITIONS COMPATIBILITY ===== */
+
+(function(){
+
+  // ค้นหาคลังข้อสอบทั้งหมดในหน้าเว็บ
+
+  var bName = ['BANK','EXAMS','QUIZ','DATA','QUESTIONS'].find(function(k){
+
+    return window[k] && typeof window[k] === 'object';
+
+  }) || 'BANK';
+
+
+  var B = window[bName];
+
+  if(!B) return;
+
+
+  // วนลูปตรวจสอบทุกตำแหน่ง ถ้าเป็นตำแหน่งใหม่ที่ค่าไม่ครบ ให้เติมค่ามาตรฐานให้ทันที
+
+  Object.keys(B).forEach(function(key){
+
+    var p = B[key];
+
+    if(!p) return;
+
+
+    // 1. ป้องกัน Array คำถามหาย
+
+    if(!p.q && p.questions) p.q = p.questions;
+
+    if(!p.questions && p.q) p.questions = p.q;
+
+    if(!p.q) { p.q = []; p.questions = []; }
+
+
+    // 2. ป้องกัน subjects พัง
+
+    if(!p.subjects || !Array.isArray(p.subjects) || p.subjects.length === 0){
+
+      p.subjects = [
+
+        { k: 'general', name: 'ความรู้ความสามารถเฉพาะตำแหน่ง', mark: 100, group: 1 }
+
+      ];
+
+    }
+
+
+    // 3. ป้องกันข้อสอบแต่ละข้อไม่มีหมวดหมู่ s
+
+    p.q.forEach(function(item){
+
+      if(!item.s) item.s = p.subjects[0].k;
+
+      if(!item.c) item.c = ['ก','ข','ค','ง'];
+
+      if(typeof item.a === 'undefined') item.a = 0;
+
+      if(!item.e) item.e = '';
+
+    });
+
+
+    // 4. เติมค่าการจับเวลาและเกณฑ์คะแนนที่จำเป็น
+
+    if(!p.sec) p.sec = (p.mins ? p.mins * 60 : 7200);
+
+    if(!p.mins) p.mins = Math.round(p.sec / 60);
+
+    if(!p.pass) p.pass = 60;
+
+    if(!p.full) p.full = 100;
+
+    if(!p.qty) p.qty = p.q.length;
+
+    if(!p.rule) p.rule = 'partB';
+
+    if(!p.timeLabel) p.timeLabel = p.mins + ' นาที';
+
+  });
+
+
+  console.log('✅ ปรับโครงสร้างตำแหน่งใหม่ให้เข้ากับระบบเดิมเรียบร้อย');
+
+})();
   </script>
 </body>
 </html>
