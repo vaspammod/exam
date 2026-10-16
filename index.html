@@ -42,70 +42,70 @@
     /* สไตล์การ์ดข้อสอบ */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
     .card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #cbd5e1; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
     .card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
     .card-icon { font-size: 32px; width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .card-title { font-size: 17px; font-weight: 700; color: #0f172a; line-height: 1.3; }
+    .card-title { font-size: 17px; font-weight: 700; line-height: 1.3; }
     .card-badge { display: inline-block; font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 6px; margin-top: 4px; }
-    .card-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; flex-grow: 1; }
-    .card-btn { width: 100%; padding: 10px; background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; font-weight: 600; font-size: 14px; color: var(--primary); transition: 0.15s; }
-    .card:hover .card-btn { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .card-desc { font-size: 13.5px; opacity: 0.85; line-height: 1.5; margin-bottom: 16px; flex-grow: 1; }
+    .card-btn { width: 100%; padding: 10px; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; font-weight: 600; font-size: 14px; transition: 0.15s; }
+    .card:hover .card-btn { background: rgba(255,255,255,0.95); }
 
     /* ป้ายสถานะอัปเดตใหม่ */
-    .badge-new { position: absolute; top: 12px; right: 12px; background: #ef4444; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4); animation: pulse 1.8s infinite; }
+    .badge-new { position: absolute; top: 12px; right: 12px; background: #ef4444; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4); animation: pulse 1.8s infinite; z-index: 2; }
     @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.05); } }
 
-    /* ================= 50 CARD COLOR THEMES ================= */
-    .theme-1 .card-icon { background: #eff6ff; } .theme-1 .card-badge { background: #dbeafe; color: #1e40af; }
-    .theme-2 .card-icon { background: #ecfdf5; } .theme-2 .card-badge { background: #d1fae5; color: #065f46; }
-    .theme-3 .card-icon { background: #faf5ff; } .theme-3 .card-badge { background: #f3e8ff; color: #6b21a8; }
-    .theme-4 .card-icon { background: #fffbeb; } .theme-4 .card-badge { background: #fef3c7; color: #92400e; }
-    .theme-5 .card-icon { background: #fff1f2; } .theme-5 .card-badge { background: #ffe4e6; color: #9f1239; }
-    .theme-6 .card-icon { background: #ecfeff; } .theme-6 .card-badge { background: #cffafe; color: #155e75; }
-    .theme-7 .card-icon { background: #f0fdfa; } .theme-7 .card-badge { background: #ccfbf1; color: #115e59; }
-    .theme-8 .card-icon { background: #fdf4ff; } .theme-8 .card-badge { background: #fae8ff; color: #86198f; }
-    .theme-9 .card-icon { background: #fefce8; } .theme-9 .card-badge { background: #fef9c3; color: #854d0e; }
-    .theme-10 .card-icon { background: #f1f5f9; } .theme-10 .card-badge { background: #e2e8f0; color: #334155; }
-    .theme-11 .card-icon { background: #e0e7ff; } .theme-11 .card-badge { background: #c7d2fe; color: #3730a3; }
-    .theme-12 .card-icon { background: #dcfce7; } .theme-12 .card-badge { background: #bbf7d0; color: #166534; }
-    .theme-13 .card-icon { background: #ffedd5; } .theme-13 .card-badge { background: #fed7aa; color: #9a3412; }
-    .theme-14 .card-icon { background: #fce7f3; } .theme-14 .card-badge { background: #fbcfe8; color: #9d174d; }
-    .theme-15 .card-icon { background: #ede9fe; } .theme-15 .card-badge { background: #ddd6fe; color: #5b21b6; }
-    .theme-16 .card-icon { background: #e0f2fe; } .theme-16 .card-badge { background: #bae6fd; color: #075985; }
-    .theme-17 .card-icon { background: #f5f5f4; } .theme-17 .card-badge { background: #e7e5e4; color: #44403c; }
-    .theme-18 .card-icon { background: #ccfbf1; } .theme-18 .card-badge { background: #99f6e4; color: #134e4a; }
-    .theme-19 .card-icon { background: #fae8ff; } .theme-19 .card-badge { background: #f5d0fe; color: #701a75; }
-    .theme-20 .card-icon { background: #fee2e2; } .theme-20 .card-badge { background: #fecaca; color: #991b1b; }
-    .theme-21 .card-icon { background: #dbeafe; } .theme-21 .card-badge { background: #bfdbfe; color: #1e3a8a; }
-    .theme-22 .card-icon { background: #bbf7d0; } .theme-22 .card-badge { background: #86efac; color: #14532d; }
-    .theme-23 .card-icon { background: #fef08a; } .theme-23 .card-badge { background: #fde047; color: #713f12; }
-    .theme-24 .card-icon { background: #ddd6fe; } .theme-24 .card-badge { background: #c4b5fd; color: #4c1d95; }
-    .theme-25 .card-icon { background: #fed7aa; } .theme-25 .card-badge { background: #fdba74; color: #7c2d12; }
-    .theme-26 .card-icon { background: #fbcfe8; } .theme-26 .card-badge { background: #f472b6; color: #831843; }
-    .theme-27 .card-icon { background: #a7f3d0; } .theme-27 .card-badge { background: #6ee7b7; color: #064e3b; }
-    .theme-28 .card-icon { background: #bae6fd; } .theme-28 .card-badge { background: #7dd3fc; color: #0c4a6e; }
-    .theme-29 .card-icon { background: #e9d5ff; } .theme-29 .card-badge { background: #d8b4fe; color: #581c87; }
-    .theme-30 .card-icon { background: #fecdd3; } .theme-30 .card-badge { background: #fda4af; color: #881337; }
-    .theme-31 .card-icon { background: #cbd5e1; } .theme-31 .card-badge { background: #94a3b8; color: #1e293b; }
-    .theme-32 .card-icon { background: #99f6e4; } .theme-32 .card-badge { background: #5eead4; color: #134e4a; }
-    .theme-33 .card-icon { background: #f5d0fe; } .theme-33 .card-badge { background: #f0abfc; color: #701a75; }
-    .theme-34 .card-icon { background: #fed7aa; } .theme-34 .card-badge { background: #fb923c; color: #7c2d12; }
-    .theme-35 .card-icon { background: #bfdbfe; } .theme-35 .card-badge { background: #93c5fd; color: #1e3a8a; }
-    .theme-36 .card-icon { background: #c7d2fe; } .theme-36 .card-badge { background: #a5b4fc; color: #312e81; }
-    .theme-37 .card-icon { background: #e2e8f0; } .theme-37 .card-badge { background: #cbd5e1; color: #334155; }
-    .theme-38 .card-icon { background: #dcfce7; } .theme-38 .card-badge { background: #4ade80; color: #14532d; }
-    .theme-39 .card-icon { background: #ffedd5; } .theme-39 .card-badge { background: #f97316; color: #fff; }
-    .theme-40 .card-icon { background: #fee2e2; } .theme-40 .card-badge { background: #ef4444; color: #fff; }
-    .theme-41 .card-icon { background: #ecfeff; } .theme-41 .card-badge { background: #06b6d4; color: #fff; }
-    .theme-42 .card-icon { background: #f0fdf4; } .theme-42 .card-badge { background: #22c55e; color: #fff; }
-    .theme-43 .card-icon { background: #faf5ff; } .theme-43 .card-badge { background: #a855f7; color: #fff; }
-    .theme-44 .card-icon { background: #fffbeb; } .theme-44 .card-badge { background: #eab308; color: #fff; }
-    .theme-45 .card-icon { background: #fff1f2; } .theme-45 .card-badge { background: #f43f5e; color: #fff; }
-    .theme-46 .card-icon { background: #f8fafc; } .theme-46 .card-badge { background: #64748b; color: #fff; }
-    .theme-47 .card-icon { background: #fdf2f8; } .theme-47 .card-badge { background: #ec4899; color: #fff; }
-    .theme-48 .card-icon { background: #eff6ff; } .theme-48 .card-badge { background: #3b82f6; color: #fff; }
-    .theme-49 .card-icon { background: #f5f3ff; } .theme-49 .card-badge { background: #8b5cf6; color: #fff; }
-    .theme-50 .card-icon { background: #ecfdf5; } .theme-50 .card-badge { background: #10b981; color: #fff; }
+    /* ================= MAPPING 50 ธีมสีการ์ดจริง ================= */
+    .theme-classic { background: #ffffff; border-color: #e2e8f0; color: #0f172a; } .theme-classic .card-icon { background: #f1f5f9; } .theme-classic .card-badge { background: #e2e8f0; color: #334155; } .theme-classic .card-btn { color: #2563eb; }
+    .theme-slate { background: #1e293b; border-color: #334155; color: #f8fafc; } .theme-slate .card-icon { background: #334155; } .theme-slate .card-badge { background: #475569; color: #f1f5f9; } .theme-slate .card-desc { color: #cbd5e1; } .theme-slate .card-title { color: #fff; } .theme-slate .card-btn { background: #334155; color: #fff; border-color: #475569; }
+    .theme-zinc { background: #18181b; border-color: #27272a; color: #f4f4f5; } .theme-zinc .card-icon { background: #27272a; } .theme-zinc .card-badge { background: #3f3f46; color: #f4f4f5; } .theme-zinc .card-desc { color: #a1a1aa; } .theme-zinc .card-title { color: #fff; } .theme-zinc .card-btn { background: #27272a; color: #fff; }
+    .theme-stone { background: #fafaf9; border-color: #e7e5e4; color: #1c1917; } .theme-stone .card-icon { background: #f5f5f4; } .theme-stone .card-badge { background: #e7e5e4; color: #44403c; } .theme-stone .card-btn { color: #78716c; }
+    .theme-neutral { background: #f5f5f5; border-color: #e5e5e5; color: #171717; } .theme-neutral .card-icon { background: #e5e5e5; } .theme-neutral .card-badge { background: #d4d4d4; color: #262626; }
+    .theme-ocean { background: #f0fdf4; border-color: #bbf7d0; color: #14532d; } .theme-ocean .card-icon { background: #dcfce7; } .theme-ocean .card-badge { background: #bbf7d0; color: #166534; } .theme-ocean .card-btn { color: #15803d; }
+    .theme-sky { background: #f0f9ff; border-color: #bae6fd; color: #0369a1; } .theme-sky .card-icon { background: #e0f2fe; } .theme-sky .card-badge { background: #bae6fd; color: #0284c7; } .theme-sky .card-btn { color: #0284c7; }
+    .theme-indigo { background: #eef2ff; border-color: #c7d2fe; color: #3730a3; } .theme-indigo .card-icon { background: #e0e7ff; } .theme-indigo .card-badge { background: #c7d2fe; color: #4f46e5; } .theme-indigo .card-btn { color: #4f46e5; }
+    .theme-blue { background: #eff6ff; border-color: #bfdbfe; color: #1e40af; } .theme-blue .card-icon { background: #dbeafe; } .theme-blue .card-badge { background: #bfdbfe; color: #2563eb; } .theme-blue .card-btn { color: #2563eb; }
+    .theme-cyan { background: #ecfeff; border-color: #cffafe; color: #155e75; } .theme-cyan .card-icon { background: #cffafe; } .theme-cyan .card-badge { background: #a5f3fc; color: #0891b2; }
+    .theme-royal { background: #1e3a8a; border-color: #2563eb; color: #eff6ff; } .theme-royal .card-icon { background: #2563eb; } .theme-royal .card-badge { background: #3b82f6; color: #fff; } .theme-royal .card-desc { color: #bfdbfe; } .theme-royal .card-title { color: #fff; } .theme-royal .card-btn { background: #2563eb; color: #fff; }
+    .theme-navy { background: #0f172a; border-color: #1e293b; color: #f8fafc; } .theme-navy .card-icon { background: #1e293b; } .theme-navy .card-badge { background: #334155; color: #38bdf8; } .theme-navy .card-desc { color: #94a3b8; } .theme-navy .card-title { color: #fff; } .theme-navy .card-btn { background: #1e293b; color: #fff; }
+    .theme-lightblue { background: #f0f9ff; border-color: #bae6fd; color: #0c4a6e; } .theme-lightblue .card-icon { background: #e0f2fe; } .theme-lightblue .card-badge { background: #bae6fd; color: #0369a1; }
+    .theme-midnight { background: #090d16; border-color: #1e293b; color: #e2e8f0; } .theme-midnight .card-icon { background: #111827; } .theme-midnight .card-badge { background: #1f2937; color: #60a5fa; } .theme-midnight .card-title { color: #fff; } .theme-midnight .card-btn { background: #1f2937; color: #fff; }
+    .theme-ice { background: #f8fafc; border-color: #e2e8f0; color: #0f172a; } .theme-ice .card-icon { background: #e0f2fe; } .theme-ice .card-badge { background: #bae6fd; color: #0369a1; }
+    .theme-emerald { background: #ecfdf5; border-color: #a7f3d0; color: #065f46; } .theme-emerald .card-icon { background: #d1fae5; } .theme-emerald .card-badge { background: #a7f3d0; color: #047857; }
+    .theme-mint { background: #f0fdf4; border-color: #bbf7d0; color: #166534; } .theme-mint .card-icon { background: #dcfce7; } .theme-mint .card-badge { background: #bbf7d0; color: #15803d; }
+    .theme-green { background: #f0fdf4; border-color: #86efac; color: #14532d; } .theme-green .card-icon { background: #dcfce7; } .theme-green .card-badge { background: #86efac; color: #16a34a; }
+    .theme-teal { background: #f0fdfa; border-color: #99f6e4; color: #134e4a; } .theme-teal .card-icon { background: #ccfbf1; } .theme-teal .card-badge { background: #99f6e4; color: #0d9488; }
+    .theme-forest { background: #064e3b; border-color: #047857; color: #ecfdf5; } .theme-forest .card-icon { background: #047857; } .theme-forest .card-badge { background: #065f46; color: #34d399; } .theme-forest .card-desc { color: #a7f3d0; } .theme-forest .card-title { color: #fff; } .theme-forest .card-btn { background: #047857; color: #fff; }
+    .theme-lime { background: #f7fee7; border-color: #d9f99d; color: #365314; } .theme-lime .card-icon { background: #ecfccb; } .theme-lime .card-badge { background: #d9f99d; color: #65a30d; }
+    .theme-sage { background: #f4f6f4; border-color: #d4ddd4; color: #2c3e2c; } .theme-sage .card-icon { background: #e2e8e2; } .theme-sage .card-badge { background: #cbd5cb; color: #3f4f3f; }
+    .theme-olive { background: #fefce8; border-color: #fef08a; color: #713f12; } .theme-olive .card-icon { background: #fef9c3; } .theme-olive .card-badge { background: #fef08a; color: #854d0e; }
+    .theme-pistachio { background: #f4fbf4; border-color: #d2ebd2; color: #274e27; } .theme-pistachio .card-icon { background: #e1f3e1; } .theme-pistachio .card-badge { background: #c2e5c2; color: #1b361b; }
+    .theme-seafoam { background: #f0fdfa; border-color: #99f6e4; color: #115e59; } .theme-seafoam .card-icon { background: #ccfbf1; } .theme-seafoam .card-badge { background: #99f6e4; color: #0f766e; }
+    .theme-amber { background: #fffbeb; border-color: #fde68a; color: #92400e; } .theme-amber .card-icon { background: #fef3c7; } .theme-amber .card-badge { background: #fde68a; color: #d97706; }
+    .theme-orange { background: #fff7ed; border-color: #fed7aa; color: #9a3412; } .theme-orange .card-icon { background: #ffedd5; } .theme-orange .card-badge { background: #fed7aa; color: #ea580c; }
+    .theme-yellow { background: #fefce8; border-color: #fef08a; color: #854d0e; } .theme-yellow .card-icon { background: #fef9c3; } .theme-yellow .card-badge { background: #fef08a; color: #ca8a04; }
+    .theme-gold { background: #fffbeb; border-color: #fcd34d; color: #78350f; } .theme-gold .card-icon { background: #fef3c7; } .theme-gold .card-badge { background: #fcd34d; color: #b45309; }
+    .theme-sunset { background: #fff1f2; border-color: #fecdd3; color: #9f1239; } .theme-sunset .card-icon { background: #ffe4e6; } .theme-sunset .card-badge { background: #fecdd3; color: #e11d48; }
+    .theme-warmorange { background: #fff7ed; border-color: #fdba74; color: #7c2d12; } .theme-warmorange .card-icon { background: #ffedd5; } .theme-warmorange .card-badge { background: #fdba74; color: #c2410c; }
+    .theme-lemon { background: #fefde8; border-color: #fef08a; color: #713f12; } .theme-lemon .card-icon { background: #fef9c3; } .theme-lemon .card-badge { background: #fef08a; color: #a16207; }
+    .theme-tangerine { background: #fff8f1; border-color: #fed7aa; color: #9a3412; } .theme-tangerine .card-icon { background: #ffedd5; } .theme-tangerine .card-badge { background: #fed7aa; color: #c2410c; }
+    .theme-honey { background: #fefce8; border-color: #fde047; color: #713f12; } .theme-honey .card-icon { background: #fef9c3; } .theme-honey .card-badge { background: #fde047; color: #a16207; }
+    .theme-autumn { background: #fdf8f6; border-color: #f5d0b1; color: #7c2d12; } .theme-autumn .card-icon { background: #fae3d9; } .theme-autumn .card-badge { background: #f5d0b1; color: #9a3412; }
+    .theme-rose { background: #fff1f2; border-color: #fecdd3; color: #9f1239; } .theme-rose .card-icon { background: #ffe4e6; } .theme-rose .card-badge { background: #fecdd3; color: #e11d48; }
+    .theme-pink { background: #fdf2f8; border-color: #fbcfe8; color: #9d174d; } .theme-pink .card-icon { background: #fce7f3; } .theme-pink .card-badge { background: #fbcfe8; color: #db2777; }
+    .theme-red { background: #fef2f2; border-color: #fecaca; color: #991b1b; } .theme-red .card-icon { background: #fee2e2; } .theme-red .card-badge { background: #fecaca; color: #dc2626; }
+    .theme-magenta { background: #fdf4ff; border-color: #f5d0fe; color: #701a75; } .theme-magenta .card-icon { background: #fae8ff; } .theme-magenta .card-badge { background: #f5d0fe; color: #c026d3; }
+    .theme-blush { background: #fff5f5; border-color: #fed7d7; color: #9b2c2c; } .theme-blush .card-icon { background: #fed7d7; } .theme-blush .card-badge { background: #feb2b2; color: #c53030; }
+    .theme-crimson { background: #fff1f2; border-color: #fda4af; color: #881337; } .theme-crimson .card-icon { background: #ffe4e6; } .theme-crimson .card-badge { background: #fda4af; color: #9f1239; }
+    .theme-coral { background: #fffbeb; border-color: #fed7aa; color: #9a3412; } .theme-coral .card-icon { background: #ffedd5; } .theme-coral .card-badge { background: #fed7aa; color: #ea580c; }
+    .theme-ruby { background: #fff1f2; border-color: #fb7185; color: #881337; } .theme-ruby .card-icon { background: #fecdd3; } .theme-ruby .card-badge { background: #fb7185; color: #fff; } .theme-ruby .card-title { color: #881337; }
+    .theme-purple { background: #faf5ff; border-color: #e9d5ff; color: #6b21a8; } .theme-purple .card-icon { background: #f3e8ff; } .theme-purple .card-badge { background: #e9d5ff; color: #9333ea; }
+    .theme-violet { background: #f5f3ff; border-color: #ddd6fe; color: #5b21b6; } .theme-violet .card-icon { background: #ede9fe; } .theme-violet .card-badge { background: #ddd6fe; color: #7c3aed; }
+    .theme-lavender { background: #faf8fc; border-color: #e8e1f0; color: #4a3b5c; } .theme-lavender .card-icon { background: #f0ebf5; } .theme-lavender .card-badge { background: #e2d9ec; color: #6b4c8a; }
+    .theme-plum { background: #fdf4ff; border-color: #f0abfc; color: #581c87; } .theme-plum .card-icon { background: #fae8ff; } .theme-plum .card-badge { background: #f0abfc; color: #7e22ce; }
+    .theme-orchid { background: #fdf4ff; border-color: #e879f9; color: #701a75; } .theme-orchid .card-icon { background: #f5d0fe; } .theme-orchid .card-badge { background: #e879f9; color: #fff; } .theme-orchid .card-title { color: #701a75; }
+    .theme-fuchsia { background: #fdf4ff; border-color: #f0abfc; color: #701a75; } .theme-fuchsia .card-icon { background: #fae8ff; } .theme-fuchsia .card-badge { background: #f0abfc; color: #a21caf; }
+    .theme-amethyst { background: #f5f3ff; border-color: #c4b5fd; color: #4c1d95; } .theme-amethyst .card-icon { background: #ede9fe; } .theme-amethyst .card-badge { background: #c4b5fd; color: #6d28d9; }
 
     /* Modals & Buttons */
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 16px; }
@@ -262,7 +262,7 @@
       <p>คุณกำลังจะเข้าสู่ <b>Admin Studio (ระบบจัดการข้อสอบ)</b></p><br>
       <p>• การแก้ไข ลบ หรือนำเข้าข้อมูลจะมีผลกับระบบคลังข้อสอบทันที</p>
       <p>• ระบบจะล็อกการปิดหน้าจอชั่วคราว เพื่อป้องกันข้อมูลสูญหาย</p>
-      <p>• <b>โปรดกดปุ่ม "ปิดและบันทึกข้อมูล" เมื่อทำรายการเสร็จสิ้นเท่านั้น</b></p>
+      <p>• <b>โปรดกดปุ่ม "กดออกเมื่อทำเสร็จ" ที่มุมขวาบนของหน้าหลังบ้าน เมื่อทำรายการเสร็จสิ้นเท่านั้น</b></p>
     </div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeAdminWarning()">ยกเลิก</button>
@@ -294,7 +294,7 @@
       <button class="adm-tab-btn" onclick="switchAdmTab('tabBackup', this)">💾 สำรองและกู้คืน</button>
     </div>
 
-    <!-- แท็บที่ 1: จัดการตำแหน่งและธีม -->
+    <!-- แท็บที่ 1: จัดการตำแหน่งและ 50 ธีมสี -->
     <div id="tabPositions" class="adm-tab-content">
       <div class="admin-form-group">
         <label>เลือกตำแหน่งที่ต้องการแก้ไข:</label>
@@ -303,8 +303,59 @@
 
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 12px;">
         <div class="admin-form-group">
-          <label>เปลี่ยนธีมสีการ์ด (50 ธีม):</label>
-          <select id="admCurrentTheme" class="admin-select" onchange="updateCurrentTheme(this.value)"></select>
+          <label>🎨 ธีมสีการ์ด (รองรับ 50 เฉดสี):</label>
+          <select id="admCurrentTheme" class="admin-select" onchange="updateCurrentTheme(this.value)">
+            <option value="classic">⚪ 1. ธีมคลาสสิก</option>
+            <option value="slate">🪨 2. สเลทเทาเข้ม</option>
+            <option value="zinc">⚙️ 3. ซิงค์เงิน</option>
+            <option value="stone">🏛️ 4. สโตนอบอุ่น</option>
+            <option value="neutral">📄 5. นิวทรัลกระดาษ</option>
+            <option value="ocean">🌊 6. มหาสมุทร</option>
+            <option value="sky">🌤️ 7. ฟ้าพาสเทล</option>
+            <option value="indigo">🌌 8. เนบิวลา</option>
+            <option value="blue">📘 9. น้ำเงินแท้</option>
+            <option value="cyan">🧊 10. ไซแอนใส</option>
+            <option value="royal">👑 11. รอยัลบลู</option>
+            <option value="navy">⚓ 12. เนวี่กรมท่า</option>
+            <option value="lightblue">🔹 13. ฟ้าสว่าง</option>
+            <option value="midnight">🌙 14. มิดไนท์</option>
+            <option value="ice">❄️ 15. ไอซ์บลู</option>
+            <option value="emerald">🌿 16. มรกต</option>
+            <option value="mint">🍃 17. มินต์</option>
+            <option value="green">🌳 18. เขียวใบไม้</option>
+            <option value="teal">🦚 19. เทล</option>
+            <option value="forest">🌲 20. ฟอเรสต์</option>
+            <option value="lime">🍏 21. ไลม์</option>
+            <option value="sage">🌿 22. เซจ</option>
+            <option value="olive">🫒 23. โอลีฟ</option>
+            <option value="pistachio">🥜 24. พิสตาชิโอ</option>
+            <option value="seafoam">🌊 25. ซีโฟม</option>
+            <option value="amber">🔥 26. แอมอำพัน</option>
+            <option value="orange">🍊 27. ส้มแท้</option>
+            <option value="yellow">⭐ 28. เหลืองทอง</option>
+            <option value="gold">🪙 29. ทองประกาย</option>
+            <option value="sunset">🌅 30. ซันเซ็ต</option>
+            <option value="warmorange">🎃 31. ส้มฟักทอง</option>
+            <option value="lemon">🍋 32. เลมอน</option>
+            <option value="tangerine">🍊 33. แทงเจอรีน</option>
+            <option value="honey">🍯 34. น้ำผึ้ง</option>
+            <option value="autumn">🍁 35. ออทัมน์</option>
+            <option value="rose">🌹 36. กุหลาบ</option>
+            <option value="pink">🌸 37. ซากุระ</option>
+            <option value="red">❤️ 38. แดงเพลิง</option>
+            <option value="magenta">🌺 39. มาเจนต้า</option>
+            <option value="blush">🩰 40. บลัชพิงค์</option>
+            <option value="crimson">🍷 41. คริมสัน</option>
+            <option value="coral">🪸 42. ปะการัง</option>
+            <option value="ruby">💎 43. ทับทิม</option>
+            <option value="purple">🟣 44. ม่วงอิมพีเรียล</option>
+            <option value="violet">🔮 45. ไวโอเล็ต</option>
+            <option value="lavender">🪻 46. ลาเวนเดอร์</option>
+            <option value="plum">🍇 47. พลัม</option>
+            <option value="orchid">🪷 48. กล้วยไม้</option>
+            <option value="fuchsia">💜 49. ฟุกเซีย</option>
+            <option value="amethyst">💎 50. อเมทิสต์</option>
+          </select>
         </div>
         <div class="admin-form-group">
           <label>หมวดหมู่:</label>
@@ -319,7 +370,7 @@
       <div class="admin-form-group">
         <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
           <input type="checkbox" id="admIsNewCheckbox" onchange="updateCurrentNewStatus(this.checked)">
-          <span>🔥 ติดป้าย "อัปเดตใหม่" บนการ์ดตำแหน่งนี้</span>
+          <span>🔥 ติดป้ายสถานะ "อัปเดตใหม่" บนการ์ดตำแหน่งนี้</span>
         </label>
       </div>
 
@@ -340,7 +391,14 @@
             <option value="partA_sub">ภาค ก รายหมวด</option>
             <option value="partA_all">ภาค ก รวมทุกหมวด</option>
           </select>
-          <select id="npTheme" class="admin-select"></select>
+          <select id="npTheme" class="admin-select">
+            <option value="classic">⚪ 1. ธีมคลาสสิก</option>
+            <option value="slate">🪨 2. สเลทเทาเข้ม</option>
+            <option value="emerald">🌿 16. มรกต</option>
+            <option value="amber">🔥 26. แอมอำพัน</option>
+            <option value="rose">🌹 36. กุหลาบ</option>
+            <option value="purple">🟣 44. ม่วงอิมพีเรียล</option>
+          </select>
           <input id="npDesc" class="admin-input" placeholder="คำอธิบายสั้นๆ">
         </div>
         <button class="btn btn-primary" style="min-height:36px; font-size:13px; margin-top:8px; width:100%;" onclick="saveNewPack()">บันทึกตำแหน่งใหม่ ➔</button>
@@ -414,51 +472,39 @@
 <script>
 /* ================= ฐานข้อมูลเริ่มต้นมาตรฐาน 19 ชุด ================= */
 const DEFAULT_BANK = {
-  /* ------------------- ภาค ก รวมทุกหมวด ------------------- */
   partA_full: {
     id: 'partA_full', icon: '🏆', name: 'ภาค ก ท้องถิ่น (รวมทุกหมวด)',
-    tag: 'ภาค ก ความรู้ความสามารถทั่วไป', category: 'partA_all', theme: 'theme-1', isNew: true,
+    tag: 'ภาค ก ความรู้ความสามารถทั่วไป', category: 'partA_all', theme: 'indigo', isNew: true,
     desc: 'ชุดจำลองสนามจริง: คิดวิเคราะห์เชิงคณิต · ภาษาไทย · กฎหมายท้องถิ่น 11 ฉบับ · ภาษาอังกฤษ',
     sec: 7200, mins: 120, pass: 60,
     q: [
       { s:'math', q:'อนุกรมตัวเลข: 3, 7, 15, 31, 63, ... ตัวเลขถัดไปคือจำนวนใด', c:['95','115','127','135'], a:2, e:'ระยะห่างเพิ่มขึ้นเป็นสองเท่า: +4, +8, +16, +32, ดังนั้นตัวถัดไปคือ +64 ได้ 63 + 64 = 127' },
-      { s:'math', q:'สินค้าชิ้นหนึ่งติดราคาขายไว้ 1,200 บาท หากลดราคาให้ผู้ซื้อ 20% ร้านค้ายังคงได้กำไร 20% จงหาราคาทุนของสินค้านี้', c:['750 บาท','800 บาท','850 บาท','900 บาท'], a:1, e:'ราคาขายจริงหลังลด 20% คือ 1,200 × 0.80 = 960 บาท โดยราคา 960 บาทคิดเป็น 120% ของราคาทุน ดังนั้นทุน = (960 × 100) ÷ 120 = 800 บาท' },
       { s:'thai', q:'ข้อใดใช้คำราชาศัพท์ได้ถูกต้องตามหลักไวยากรณ์ไทย', c:['ทรงเสด็จพระราชดำเนินไปทรงเปิดงาน','เสด็จพระราชดำเนินไปเปิดงาน','เสด็จไปทรงพระดำเนิน','ทรงเสด็จไปเยือน'], a:1, e:'คำว่า "เสด็จพระราชดำเนิน" เป็นกริยาราชาศัพท์ในตัวเองอยู่แล้ว ไม่ต้องเติม "ทรง" ซ้อนข้างหน้า' },
-      { s:'thai', q:'สำนวนในข้อใดมีความหมายตรงกับคำว่า "ยอมจำนนเพราะจำนนด้วยพยานหลักฐาน"', c:['จนแต้ม','จับไม่ได้ไล่ไม่ทัน','มัดมือชก','จำนนต่อหลักฐาน'], a:0, e:'"จนแต้ม" มาจากการเล่นหมากรุก หมายถึงหมดทางเดิน หมดปัญญาโต้แย้ง หรือยอมจำนนต่อสถานการณ์' },
       { s:'law', q:'ตามพระราชบัญญัติระเบียบบริหารราชการแผ่นดิน พ.ศ. 2534 การจัดระเบียบบริหารราชการของไทยแบ่งเป็นกี่ส่วน', c:['2 ส่วน (ส่วนกลาง, ส่วนภูมิภาค)','3 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น)','4 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น, องค์การมหาชน)','3 ส่วน (ส่วนกลาง, ส่วนท้องถิ่น, ส่วนเอกชน)'], a:1, e:'มาตรา 4 แบ่งเป็น 1. ราชการส่วนกลาง 2. ราชการส่วนภูมิภาค 3. ราชการส่วนท้องถิ่น' },
-      { s:'law', q:'องค์กรปกครองส่วนท้องถิ่นรูปแบบพิเศษในประเทศไทยปัจจุบัน ได้แก่ข้อใด', c:['พัทยา และ เทศบาลนครนครราชสีมา','กรุงเทพมหานคร และ เมืองพัทยา','กรุงเทพมหานคร และ องค์การบริหารส่วนจังหวัดนนทบุรี','เทศบาลนครเชียงใหม่ และ เมืองพัทยา'], a:1, e:'องค์กรปกครองส่วนท้องถิ่นรูปแบบพิเศษมี 2 แห่งคือ กรุงเทพมหานคร และ เมืองพัทยา' },
-      { s:'eng', q:'Select the most suitable word: "The municipality _____ a new park project next Monday."', c:['launches','launched','will launch','has launched'], a:2, e:'มีตัวบอกเวลาในอนาคต "next Monday" จึงต้องใช้ Future Simple Tense (will + V.1)' },
-      { s:'eng', q:'Choose the synonym of the word "EFFICIENT":', c:['Effective and productive','Slow and complicated','Careless and weak','Expensive and luxury'], a:0, e:'Efficient หมายถึง มีประสิทธิภาพ ประหยัดเวลาและพลังงาน ตรงกับ Effective and productive' },
-      { s:'math', q:'หากรถยนต์คันหนึ่งแล่นด้วยความเร็วคงที่ 90 กิโลเมตรต่อชั่วโมง ในเวลา 40 นาที จะแล่นได้ระยะทางเท่าใด', c:['50 กิโลเมตร','60 กิโลเมตร','65 กิโลเมตร','70 กิโลเมตร'], a:1, e:'40 นาทีคิดเป็น 40/60 = 2/3 ชั่วโมง นำความเร็ว 90 × (2/3) = 60 กิโลเมตร' },
-      { s:'law', q:'พระราชกฤษฎีกาว่าด้วยหลักเกณฑ์และวิธีการบริหารกิจการบ้านเมืองที่ดี พ.ศ. 2546 มีเป้าหมายสูงสุดเพื่อสิ่งใด', c:['เพื่อลดงบประมาณรายจ่ายประจำปี','เพื่อเกิดประโยชน์สุขของประชาชน','เพื่อเพิ่มข้าราชการส่วนภูมิภาค','เพื่อยกเลิกกฎหมายที่ล้าสมัย'], a:1, e:'มาตรา 6 กำหนดเป้าหมายอันดับแรกและสำคัญที่สุดคือ "เกิดประโยชน์สุขของประชาชน"' }
+      { s:'eng', q:'Select the most suitable word: "The municipality _____ a new park project next Monday."', c:['launches','launched','will launch','has launched'], a:2, e:'มีตัวบอกเวลาในอนาคต "next Monday" จึงต้องใช้ Future Simple Tense (will + V.1)' }
     ]
   },
-
-  /* ------------------- ภาค ก รายหมวด 4 วิชา ------------------- */
   partA_math: {
     id: 'partA_math', icon: '🧮', name: 'ภาค ก: คิดวิเคราะห์และคณิตศาสตร์',
-    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-2', isNew: true,
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'emerald', isNew: true,
     desc: 'เจาะลึกอนุกรม ตรรกศาสตร์ เงื่อนไขสัญลักษณ์ คณิตศาสตร์ทั่วไป ร้อยละ และโจทย์ปัญหา',
     sec: 3600, mins: 60, pass: 60,
     q: [
-      { s:'m', q:'อนุกรม: 2, 6, 12, 20, 30, ... พจน์ถัดไปคือเลขใด', c:['40','42','44','46'], a:1, e:'ระยะห่างคือ +4, +6, +8, +10 ดังนั้นตัวถัดไปคือ +12 ได้ 30 + 12 = 42' },
-      { s:'m', q:'เสาไฟปักเรียงกันเป็นแถวตรง แต่ละต้นห่างกัน 5 เมตร ถ้ามีเสาไฟทั้งหมด 21 ต้น เสาต้นแรกกับต้นสุดท้ายห่างกันกี่เมตร', c:['100 เมตร','105 เมตร','110 เมตร','115 เมตร'], a:0, e:'เสา 21 ต้น มีช่วงว่าง 20 ช่วง นำ 20 × 5 = 100 เมตร' },
-      { s:'m', q:'ผลบวกของเลขคู่ 5 จำนวนเรียงกันมีค่าเท่ากับ 120 จงหาเลขคู่ที่มีค่าน้อยที่สุด', c:['18','20','22','24'], a:1, e:'ค่าเฉลี่ยคือตัวกลาง = 120 ÷ 5 = 24 ดังนั้นเลขทั้ง 5 ตัวคือ 20, 22, 24, 26, 28 ตัวน้อยสุดคือ 20' }
+      { s:'m', q:'อนุกรม: 2, 6, 12, 20, 30, ... พจน์ถัดไปคือเลขใด', c:['40','42','44','46'], a:1, e:'ระยะห่างคือ +4, +6, +8, +10 ดังนั้นตัวถัดไปคือ +12 ได้ 30 + 12 = 42' }
     ]
   },
   partA_thai: {
     id: 'partA_thai', icon: '📖', name: 'ภาค ก: ภาษาไทยและการสื่อสาร',
-    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-4', isNew: false,
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'pink', isNew: false,
     desc: 'ความเข้าใจภาษา การเรียงรูปประโยค การจับใจความสำคัญ คำราชาศัพท์ และสำนวนไทย',
     sec: 3600, mins: 60, pass: 60,
     q: [
-      { s:'t', q:'คำในข้อใดสะกดถูกต้องตามพจนานุกรมฉบับราชบัณฑิตยสถานทุกคำ', c:['กะเพรา อนุญาต สัมมนา','กระเพรา อนุญาต สัมมนา','กะเพรา อนุณาต สัมนา','กระเพรา อนุญาติ สัมมนา'], a:0, e:'กะเพรา (ไม่มี ร), อนุญาต (ไม่มีสระอิ), สัมมนา (ม ม้าสองตัว)' },
-      { s:'t', q:'ประโยคใดเป็นประโยคที่ไม่มีการกำกวมในด้านความหมาย', c:['เขาเห็นตำรวจจับขโมยบนรถเมล์','แม่บอกลูกสาวว่าเพื่อนของเธอมาหา','แพทย์ตรวจรักษาคนไข้ด้วยความตั้งใจในห้องตรวจ','ครูตีนักเรียนที่มาสายด้วยไม้เรียว'], a:2, e:'ข้อ 3 สื่อสารประธาน กริยา กรรม และสถานที่ได้อย่างชัดเจน ไม่มีคำขยายกำกวม' }
+      { s:'t', q:'คำในข้อใดสะกดถูกต้องตามพจนานุกรมฉบับราชบัณฑิตยสถานทุกคำ', c:['กะเพรา อนุญาต สัมมนา','กระเพรา อนุญาต สัมมนา','กะเพรา อนุณาต สัมนา','กระเพรา อนุญาติ สัมมนา'], a:0, e:'กะเพรา (ไม่มี ร), อนุญาต (ไม่มีสระอิ), สัมมนา (ม ม้าสองตัว)' }
     ]
   },
   partA_law: {
     id: 'partA_law', icon: '⚖️', name: 'ภาค ก: กฎหมายการปฏิบัติราชการท้องถิ่น',
-    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-3', isNew: true,
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'purple', isNew: true,
     desc: 'พ.ร.บ.อบจ., เทศบาล, อบต., พัทยา, กำหนดแผนกระจายอำนาจ, และการบริหารกิจการบ้านเมืองที่ดี',
     sec: 3600, mins: 60, pass: 60,
     q: [
@@ -467,26 +513,23 @@ const DEFAULT_BANK = {
   },
   partA_eng: {
     id: 'partA_eng', icon: '🌐', name: 'ภาค ก: ภาษาอังกฤษสำหรับการปฏิบัติงาน',
-    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-6', isNew: false,
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'sky', isNew: false,
     desc: 'Structure & Grammar, Vocabulary, Conversation ในสำนักงาน และ Reading Comprehension',
     sec: 3600, mins: 60, pass: 60,
     q: [
       { s:'e', q:'"Could you please submit the financial report by Friday?" ประโยคนี้มีเจตนาตามข้อใด', c:['Giving an order','Making a polite request','Refusing an offer','Apologizing'], a:1, e:'ขึ้นต้นด้วย "Could you please..." เป็นสำนวนการขอร้องอย่างสุภาพ (Polite request)' }
     ]
   },
-
-  /* ------------------- ภาค ข เฉพาะตำแหน่ง 14 ตำแหน่ง ------------------- */
   edu: {
-    id: 'edu', icon: '🎓', name: 'นักวิชาการศึกษาปฏิบัติการ', category: 'partB', theme: 'theme-11', isNew: true,
+    id: 'edu', icon: '🎓', name: 'นักวิชาการศึกษาปฏิบัติการ', category: 'partB', theme: 'blue', isNew: true,
     desc: 'พ.ร.บ.การศึกษาแห่งชาติ · การศึกษาภาคบังคับ · หลักสูตรและการจัดการเรียนรู้',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การศึกษาภาคบังคับมีกำหนดระยะเวลากี่ปี', c:['หกปี','แปดปี','เก้าปี','สิบสองปี'], a:2, e:'มาตรา 17 กำหนดการศึกษาภาคบังคับเก้าปี' },
-      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การจัดการศึกษามีกี่รูปแบบ', c:['สองรูปแบบ','สามรูปแบบ','สี่รูปแบบ','ห้ารูปแบบ'], a:1, e:'มาตรา 15 กำหนดสามรูปแบบ คือ ในระบบ นอกระบบ และตามอัธยาศัย' }
+      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การศึกษาภาคบังคับมีกำหนดระยะเวลากี่ปี', c:['หกปี','แปดปี','เก้าปี','สิบสองปี'], a:2, e:'มาตรา 17 กำหนดการศึกษาภาคบังคับเก้าปี' }
     ]
   },
   hr: {
-    id: 'hr', icon: '👥', name: 'นักทรัพยากรบุคคลปฏิบัติการ', category: 'partB', theme: 'theme-12', isNew: false,
+    id: 'hr', icon: '👥', name: 'นักทรัพยากรบุคคลปฏิบัติการ', category: 'partB', theme: 'emerald', isNew: false,
     desc: 'การบริหารงานบุคคลส่วนท้องถิ่น · วินัยและการรักษาวินัย · แผนอัตรากำลัง 3 ปี',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -494,7 +537,7 @@ const DEFAULT_BANK = {
     ]
   },
   fin: {
-    id: 'fin', icon: '💰', name: 'นักวิชาการเงินและบัญชีปฏิบัติการ', category: 'partB', theme: 'theme-13', isNew: true,
+    id: 'fin', icon: '💰', name: 'นักวิชาการเงินและบัญชีปฏิบัติการ', category: 'partB', theme: 'amber', isNew: true,
     desc: 'ระเบียบการเงินการคลังท้องถิ่น · พ.ร.บ.จัดซื้อจัดจ้างฯ · หลักการบัญชีคู่',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -502,7 +545,7 @@ const DEFAULT_BANK = {
     ]
   },
   reg: {
-    id: 'reg', icon: '🪪', name: 'นักจัดการงานทะเบียนและบัตรปฏิบัติการ', category: 'partB', theme: 'theme-16', isNew: false,
+    id: 'reg', icon: '🪪', name: 'นักจัดการงานทะเบียนและบัตรปฏิบัติการ', category: 'partB', theme: 'cyan', isNew: false,
     desc: 'กฎหมายทะเบียนราษฎร · บัตรประจำตัวประชาชน · การแจ้งเกิด/ตาย/ย้ายที่อยู่',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -510,7 +553,7 @@ const DEFAULT_BANK = {
     ]
   },
   urban: {
-    id: 'urban', icon: '🗺️', name: 'นักผังเมืองปฏิบัติการ', category: 'partB', theme: 'theme-15', isNew: false,
+    id: 'urban', icon: '🗺️', name: 'นักผังเมืองปฏิบัติการ', category: 'partB', theme: 'stone', isNew: false,
     desc: 'กฎหมายผังเมือง พ.ศ. 2562 · การใช้ประโยชน์ที่ดิน · การควบคุมอาคารสูง',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -518,7 +561,7 @@ const DEFAULT_BANK = {
     ]
   },
   legal: {
-    id: 'legal', icon: '⚖️', name: 'นิติกรปฏิบัติการ', category: 'partB', theme: 'theme-14', isNew: true,
+    id: 'legal', icon: '⚖️', name: 'นิติกรปฏิบัติการ', category: 'partB', theme: 'crimson', isNew: true,
     desc: 'กฎหมายแพ่งและพาณิชย์ · กฎหมายอาญา · กฎหมายวิธีปฏิบัติราชการทางปกครอง',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -526,7 +569,7 @@ const DEFAULT_BANK = {
     ]
   },
   disaster: {
-    id: 'disaster', icon: '🚒', name: 'นักป้องกันและบรรเทาสาธารณภัยปฏิบัติการ', category: 'partB', theme: 'theme-20', isNew: true,
+    id: 'disaster', icon: '🚒', name: 'นักป้องกันและบรรเทาสาธารณภัยปฏิบัติการ', category: 'partB', theme: 'orange', isNew: true,
     desc: 'พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 · การกู้ภัยและระงับอัคคีภัย',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -534,7 +577,7 @@ const DEFAULT_BANK = {
     ]
   },
   ee: {
-    id: 'ee', icon: '⚡', name: 'วิศวกรไฟฟ้าปฏิบัติการ', category: 'partB', theme: 'theme-21', isNew: false,
+    id: 'ee', icon: '⚡', name: 'วิศวกรไฟฟ้าปฏิบัติการ', category: 'partB', theme: 'royal', isNew: false,
     desc: 'ทฤษฎีวงจรไฟฟ้า · ระบบไฟฟ้ากำลัง 3 เฟส 4 สาย · ความปลอดภัยและการต่อลงดิน',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -542,7 +585,7 @@ const DEFAULT_BANK = {
     ]
   },
   ce: {
-    id: 'ce', icon: '🏗️', name: 'วิศวกรโยธาปฏิบัติการ', category: 'partB', theme: 'theme-22', isNew: false,
+    id: 'ce', icon: '🏗️', name: 'วิศวกรโยธาปฏิบัติการ', category: 'partB', theme: 'forest', isNew: false,
     desc: 'วัสดุและเทคโนโลยีคอนกรีต · การทดสอบ Slump และ CBR · การควบคุมงานก่อสร้าง',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -550,7 +593,7 @@ const DEFAULT_BANK = {
     ]
   },
   arch: {
-    id: 'arch', icon: '📐', name: 'สถาปนิกปฏิบัติการ', category: 'partB', theme: 'theme-24', isNew: false,
+    id: 'arch', icon: '📐', name: 'สถาปนิกปฏิบัติการ', category: 'partB', theme: 'violet', isNew: false,
     desc: 'กฎหมายควบคุมอาคาร · ระยะดิ่งและที่ว่างอาคาร · Universal Design',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -558,7 +601,7 @@ const DEFAULT_BANK = {
     ]
   },
   me: {
-    id: 'me', icon: '⚙️', name: 'วิศวกรเครื่องกลปฏิบัติการ', category: 'partB', theme: 'theme-28', isNew: false,
+    id: 'me', icon: '⚙️', name: 'วิศวกรเครื่องกลปฏิบัติการ', category: 'partB', theme: 'slate', isNew: false,
     desc: 'เทอร์โมไดนามิกส์ · วัฏจักรทำความเย็นแบบอัดไอ · เครื่องยนต์และปั๊มน้ำ',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -566,7 +609,7 @@ const DEFAULT_BANK = {
     ]
   },
   cd: {
-    id: 'cd', icon: '🤝', name: 'นักพัฒนาชุมชนปฏิบัติการ', category: 'partB', theme: 'theme-27', isNew: true,
+    id: 'cd', icon: '🤝', name: 'นักพัฒนาชุมชนปฏิบัติการ', category: 'partB', theme: 'mint', isNew: true,
     desc: 'หลักการมีส่วนร่วมของชุมชน · การจัดเก็บข้อมูล จปฐ. · สวัสดิการและเบี้ยยังชีพ',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -574,7 +617,7 @@ const DEFAULT_BANK = {
     ]
   },
   policy: {
-    id: 'policy', icon: '📊', name: 'นักวิเคราะห์นโยบายและแผนปฏิบัติการ', category: 'partB', theme: 'theme-35', isNew: false,
+    id: 'policy', icon: '📊', name: 'นักวิเคราะห์นโยบายและแผนปฏิบัติการ', category: 'partB', theme: 'ocean', isNew: false,
     desc: 'แผนพัฒนาท้องถิ่น 5 ปี · ยุทธศาสตร์ชาติ 20 ปี · เครื่องมือวิเคราะห์ SWOT และ PDCA',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -582,7 +625,7 @@ const DEFAULT_BANK = {
     ]
   },
   gen: {
-    id: 'gen', icon: '📋', name: 'นักจัดการงานทั่วไปปฏิบัติการ', category: 'partB', theme: 'theme-34', isNew: true,
+    id: 'gen', icon: '📋', name: 'นักจัดการงานทั่วไปปฏิบัติการ', category: 'partB', theme: 'gold', isNew: true,
     desc: 'ระเบียบสำนักนายกฯ ว่าด้วยงานสารบรรณ · การประชุมราชการ · การบริหารงานสำนักงาน',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -640,9 +683,9 @@ function renderCards() {
     const p = window.BANK[key];
     if (activeFilter !== 'all' && p.category !== activeFilter) return;
 
-    const themeClass = p.theme || 'theme-1';
+    const themeClass = p.theme || 'classic';
     const card = document.createElement('div');
-    card.className = `card ${themeClass}`;
+    card.className = `card theme-${themeClass}`;
     card.onclick = () => openBriefing(key);
 
     const newBadge = p.isNew ? `<span class="badge-new">🔥 อัปเดตใหม่</span>` : '';
@@ -830,7 +873,6 @@ function backToHome() {
 }
 
 /* ================= ฟังก์ชันระบบหลังบ้าน ADMIN STUDIO ================= */
-// ระบบความปลอดภัยป้องกันการเผลอปิด
 window.addEventListener('beforeunload', function (e) {
   if (inAdminMode) {
     e.preventDefault();
@@ -849,7 +891,6 @@ function closeAdminWarning() {
 function enterAdminStudio() {
   closeAdminWarning();
   inAdminMode = true;
-  initThemeOptions();
   populateAdminPacks();
   loadSavedSheetUrl();
   document.getElementById('adminModal').classList.remove('hidden');
@@ -870,20 +911,6 @@ function switchAdmTab(tabId, btnEl) {
   document.getElementById(tabId).classList.remove('hidden');
 }
 
-function initThemeOptions() {
-  const selects = [document.getElementById('admCurrentTheme'), document.getElementById('npTheme')];
-  selects.forEach(sel => {
-    if (sel.options.length === 0) {
-      for (let i = 1; i <= 50; i++) {
-        const opt = document.createElement('option');
-        opt.value = `theme-${i}`;
-        opt.innerText = `ธีมสีที่ ${i} (Theme ${i})`;
-        sel.appendChild(opt);
-      }
-    }
-  });
-}
-
 function populateAdminPacks() {
   const sel = document.getElementById('admPosSelect');
   sel.innerHTML = '';
@@ -901,7 +928,7 @@ function populateAdminPacks() {
 function onAdminSelectPack(key) {
   const p = window.BANK[key];
   if (!p) return;
-  document.getElementById('admCurrentTheme').value = p.theme || 'theme-1';
+  document.getElementById('admCurrentTheme').value = p.theme || 'classic';
   document.getElementById('admCurrentCategory').value = p.category || 'partB';
   document.getElementById('admIsNewCheckbox').checked = !!p.isNew;
   document.getElementById('admQCount').innerText = p.q ? p.q.length : 0;
@@ -1048,7 +1075,6 @@ function syncSheetData() {
     });
 }
 
-// ตรวจสอบและดึงข้อมูลจาก Sheets อัตโนมัติเมื่อเริ่มเปิดเว็บ
 function autoSyncSheetOnLoad() {
   const url = localStorage.getItem('localgov_sheet_url');
   if (url && url.startsWith('http')) {
