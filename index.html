@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>LocalGov Quest - คลังข้อสอบท้องถิ่น กสถ.</title>
+  <!-- Google Fonts: Kanit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #2563eb;
@@ -16,7 +17,7 @@
       --warning: #f59e0b;
       --bg: #f8fafc;
       --card-bg: #ffffff;
-      --text: #1e293b;
+      --text: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
       --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
@@ -26,50 +27,92 @@
     
     header { background: #fff; border-bottom: 1px solid var(--border); padding: 14px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
     .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700; color: var(--primary-dark); }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 700; color: var(--primary-dark); }
     .header-controls { display: flex; align-items: center; gap: 10px; }
-    .mode-pill { display: flex; align-items: center; background: #eff6ff; padding: 4px 10px; border-radius: 999px; border: 1px solid #bfdbfe; font-size: 13px; font-weight: 500; gap: 6px; }
-    .mode-select { border: none; background: transparent; font-size: 13px; font-weight: 600; color: var(--primary); cursor: pointer; outline: none; }
+    .mode-pill { display: flex; align-items: center; background: #eff6ff; padding: 5px 12px; border-radius: 999px; border: 1px solid #bfdbfe; font-size: 14px; font-weight: 500; gap: 6px; }
+    .mode-select { border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--primary); cursor: pointer; outline: none; }
     
     .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
     
     /* แท็บสลับหมวด */
     .tab-bar { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; }
-    .tab-btn { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border); background: #fff; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: 0.15s; }
-    .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .tab-btn { padding: 8px 18px; border-radius: 999px; border: 1px solid var(--border); background: #fff; font-size: 14px; font-weight: 500; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: 0.15s; }
+    .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); font-weight: 600; }
     
-    /* สไตล์การ์ดข้อสอบและธีม */
+    /* สไตล์การ์ดข้อสอบ */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
     .card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 20px; box-shadow: var(--shadow); transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
     .card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #cbd5e1; }
     .card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
     .card-icon { font-size: 32px; width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .card-title { font-size: 16px; font-weight: 700; color: #0f172a; line-height: 1.3; }
-    .card-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px; margin-top: 4px; }
-    .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; flex-grow: 1; }
+    .card-title { font-size: 17px; font-weight: 700; color: #0f172a; line-height: 1.3; }
+    .card-badge { display: inline-block; font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 6px; margin-top: 4px; }
+    .card-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; flex-grow: 1; }
     .card-btn { width: 100%; padding: 10px; background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; font-weight: 600; font-size: 14px; color: var(--primary); transition: 0.15s; }
     .card:hover .card-btn { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* ธีมสีการ์ด */
-    .theme-blue .card-icon { background: #eff6ff; }
-    .theme-blue .card-badge { background: #dbeafe; color: #1e40af; }
-    .theme-emerald .card-icon { background: #ecfdf5; }
-    .theme-emerald .card-badge { background: #d1fae5; color: #065f46; }
-    .theme-purple .card-icon { background: #faf5ff; }
-    .theme-purple .card-badge { background: #f3e8ff; color: #6b21a8; }
-    .theme-amber .card-icon { background: #fffbeb; }
-    .theme-amber .card-badge { background: #fef3c7; color: #92400e; }
-    .theme-rose .card-icon { background: #fff1f2; }
-    .theme-rose .card-badge { background: #ffe4e6; color: #9f1239; }
-    .theme-cyan .card-icon { background: #ecfeff; }
-    .theme-cyan .card-badge { background: #cffafe; color: #155e75; }
+    /* ป้ายสถานะอัปเดตใหม่ */
+    .badge-new { position: absolute; top: 12px; right: 12px; background: #ef4444; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4); animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.05); } }
 
-    /* หน้าต่างป๊อปอัป Modal */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 16px; }
+    /* ================= 50 CARD COLOR THEMES ================= */
+    .theme-1 .card-icon { background: #eff6ff; } .theme-1 .card-badge { background: #dbeafe; color: #1e40af; }
+    .theme-2 .card-icon { background: #ecfdf5; } .theme-2 .card-badge { background: #d1fae5; color: #065f46; }
+    .theme-3 .card-icon { background: #faf5ff; } .theme-3 .card-badge { background: #f3e8ff; color: #6b21a8; }
+    .theme-4 .card-icon { background: #fffbeb; } .theme-4 .card-badge { background: #fef3c7; color: #92400e; }
+    .theme-5 .card-icon { background: #fff1f2; } .theme-5 .card-badge { background: #ffe4e6; color: #9f1239; }
+    .theme-6 .card-icon { background: #ecfeff; } .theme-6 .card-badge { background: #cffafe; color: #155e75; }
+    .theme-7 .card-icon { background: #f0fdfa; } .theme-7 .card-badge { background: #ccfbf1; color: #115e59; }
+    .theme-8 .card-icon { background: #fdf4ff; } .theme-8 .card-badge { background: #fae8ff; color: #86198f; }
+    .theme-9 .card-icon { background: #fefce8; } .theme-9 .card-badge { background: #fef9c3; color: #854d0e; }
+    .theme-10 .card-icon { background: #f1f5f9; } .theme-10 .card-badge { background: #e2e8f0; color: #334155; }
+    .theme-11 .card-icon { background: #e0e7ff; } .theme-11 .card-badge { background: #c7d2fe; color: #3730a3; }
+    .theme-12 .card-icon { background: #dcfce7; } .theme-12 .card-badge { background: #bbf7d0; color: #166534; }
+    .theme-13 .card-icon { background: #ffedd5; } .theme-13 .card-badge { background: #fed7aa; color: #9a3412; }
+    .theme-14 .card-icon { background: #fce7f3; } .theme-14 .card-badge { background: #fbcfe8; color: #9d174d; }
+    .theme-15 .card-icon { background: #ede9fe; } .theme-15 .card-badge { background: #ddd6fe; color: #5b21b6; }
+    .theme-16 .card-icon { background: #e0f2fe; } .theme-16 .card-badge { background: #bae6fd; color: #075985; }
+    .theme-17 .card-icon { background: #f5f5f4; } .theme-17 .card-badge { background: #e7e5e4; color: #44403c; }
+    .theme-18 .card-icon { background: #ccfbf1; } .theme-18 .card-badge { background: #99f6e4; color: #134e4a; }
+    .theme-19 .card-icon { background: #fae8ff; } .theme-19 .card-badge { background: #f5d0fe; color: #701a75; }
+    .theme-20 .card-icon { background: #fee2e2; } .theme-20 .card-badge { background: #fecaca; color: #991b1b; }
+    .theme-21 .card-icon { background: #dbeafe; } .theme-21 .card-badge { background: #bfdbfe; color: #1e3a8a; }
+    .theme-22 .card-icon { background: #bbf7d0; } .theme-22 .card-badge { background: #86efac; color: #14532d; }
+    .theme-23 .card-icon { background: #fef08a; } .theme-23 .card-badge { background: #fde047; color: #713f12; }
+    .theme-24 .card-icon { background: #ddd6fe; } .theme-24 .card-badge { background: #c4b5fd; color: #4c1d95; }
+    .theme-25 .card-icon { background: #fed7aa; } .theme-25 .card-badge { background: #fdba74; color: #7c2d12; }
+    .theme-26 .card-icon { background: #fbcfe8; } .theme-26 .card-badge { background: #f472b6; color: #831843; }
+    .theme-27 .card-icon { background: #a7f3d0; } .theme-27 .card-badge { background: #6ee7b7; color: #064e3b; }
+    .theme-28 .card-icon { background: #bae6fd; } .theme-28 .card-badge { background: #7dd3fc; color: #0c4a6e; }
+    .theme-29 .card-icon { background: #e9d5ff; } .theme-29 .card-badge { background: #d8b4fe; color: #581c87; }
+    .theme-30 .card-icon { background: #fecdd3; } .theme-30 .card-badge { background: #fda4af; color: #881337; }
+    .theme-31 .card-icon { background: #cbd5e1; } .theme-31 .card-badge { background: #94a3b8; color: #1e293b; }
+    .theme-32 .card-icon { background: #99f6e4; } .theme-32 .card-badge { background: #5eead4; color: #134e4a; }
+    .theme-33 .card-icon { background: #f5d0fe; } .theme-33 .card-badge { background: #f0abfc; color: #701a75; }
+    .theme-34 .card-icon { background: #fed7aa; } .theme-34 .card-badge { background: #fb923c; color: #7c2d12; }
+    .theme-35 .card-icon { background: #bfdbfe; } .theme-35 .card-badge { background: #93c5fd; color: #1e3a8a; }
+    .theme-36 .card-icon { background: #c7d2fe; } .theme-36 .card-badge { background: #a5b4fc; color: #312e81; }
+    .theme-37 .card-icon { background: #e2e8f0; } .theme-37 .card-badge { background: #cbd5e1; color: #334155; }
+    .theme-38 .card-icon { background: #dcfce7; } .theme-38 .card-badge { background: #4ade80; color: #14532d; }
+    .theme-39 .card-icon { background: #ffedd5; } .theme-39 .card-badge { background: #f97316; color: #fff; }
+    .theme-40 .card-icon { background: #fee2e2; } .theme-40 .card-badge { background: #ef4444; color: #fff; }
+    .theme-41 .card-icon { background: #ecfeff; } .theme-41 .card-badge { background: #06b6d4; color: #fff; }
+    .theme-42 .card-icon { background: #f0fdf4; } .theme-42 .card-badge { background: #22c55e; color: #fff; }
+    .theme-43 .card-icon { background: #faf5ff; } .theme-43 .card-badge { background: #a855f7; color: #fff; }
+    .theme-44 .card-icon { background: #fffbeb; } .theme-44 .card-badge { background: #eab308; color: #fff; }
+    .theme-45 .card-icon { background: #fff1f2; } .theme-45 .card-badge { background: #f43f5e; color: #fff; }
+    .theme-46 .card-icon { background: #f8fafc; } .theme-46 .card-badge { background: #64748b; color: #fff; }
+    .theme-47 .card-icon { background: #fdf2f8; } .theme-47 .card-badge { background: #ec4899; color: #fff; }
+    .theme-48 .card-icon { background: #eff6ff; } .theme-48 .card-badge { background: #3b82f6; color: #fff; }
+    .theme-49 .card-icon { background: #f5f3ff; } .theme-49 .card-badge { background: #8b5cf6; color: #fff; }
+    .theme-50 .card-icon { background: #ecfdf5; } .theme-50 .card-badge { background: #10b981; color: #fff; }
+
+    /* Modals & Buttons */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 16px; }
     .modal-box { background: #fff; width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; border-radius: 20px; padding: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); animation: pop 0.2s ease-out; }
     @keyframes pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-    .modal-title { font-size: 19px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-    .modal-detail { background: #f8fafc; border-radius: 12px; padding: 14px; margin-bottom: 20px; font-size: 14px; line-height: 1.6; }
+    .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .modal-detail { background: #f8fafc; border-radius: 12px; padding: 14px; margin-bottom: 20px; font-size: 14.5px; line-height: 1.6; }
     .modal-actions { display: flex; gap: 10px; }
     
     .btn { flex: 1; min-height: 48px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.15s; }
@@ -77,33 +120,39 @@
     .btn-primary:hover { background: var(--primary-dark); }
     .btn-secondary { background: #e2e8f0; color: #475569; }
     .btn-danger { background: #fee2e2; color: var(--danger); }
+    .btn-warning { background: #fef3c7; color: #92400e; }
 
-    /* หน้าข้อสอบ */
+    /* Exam Page */
     .exam-wrapper { max-width: 780px; margin: 16px auto; }
     .exam-header { background: #fff; padding: 14px 18px; border-radius: 14px; border: 1px solid var(--border); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
     .timer { font-size: 17px; font-weight: 700; color: var(--danger); display: flex; align-items: center; gap: 6px; }
     .question-card { background: #fff; border-radius: 16px; border: 1px solid var(--border); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow); }
-    .q-number { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
-    .q-text { font-size: 16px; font-weight: 600; line-height: 1.6; margin-bottom: 18px; }
+    .q-number { font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .q-text { font-size: 16.5px; font-weight: 600; line-height: 1.6; margin-bottom: 18px; }
     .choice-list { display: flex; flex-direction: column; gap: 10px; }
     .choice-item { border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 16px; cursor: pointer; transition: 0.15s; font-size: 15px; display: flex; align-items: center; gap: 12px; line-height: 1.4; }
     .choice-item:hover { border-color: #94a3b8; background: #f8fafc; }
     .choice-item.selected { border-color: var(--primary); background: #eff6ff; font-weight: 600; }
     .choice-item.correct { border-color: var(--success); background: #f0fdf4; color: #166534; font-weight: 600; }
     .choice-item.incorrect { border-color: var(--danger); background: #fef2f2; color: #991b1b; }
-    .explain-card { margin-top: 16px; padding: 14px 16px; border-radius: 10px; background: #f0fdf4; border-left: 4px solid var(--success); font-size: 14px; line-height: 1.6; color: #14532d; }
+    .explain-card { margin-top: 16px; padding: 14px 16px; border-radius: 10px; background: #f0fdf4; border-left: 4px solid var(--success); font-size: 14.5px; line-height: 1.6; color: #14532d; }
     .nav-bar { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; }
     .palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 6px; background: #fff; padding: 14px; border-radius: 14px; border: 1px solid var(--border); margin-top: 16px; }
     .pal-btn { height: 36px; border-radius: 8px; border: 1px solid var(--border); background: #f8fafc; font-weight: 600; font-size: 13px; cursor: pointer; }
     .pal-btn.answered { background: var(--primary); color: #fff; border-color: var(--primary); }
     .pal-btn.current { outline: 2px solid #0f172a; outline-offset: 1px; }
 
-    /* ปุ่มเปิดหลังบ้านลอยตัว */
-    .admin-float-btn { position: fixed; right: 16px; bottom: 16px; width: 48px; height: 48px; border-radius: 50%; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; z-index: 900; border: none; }
+    /* Admin Studio Styles */
+    .admin-float-btn { position: fixed; right: 16px; bottom: 16px; width: 50px; height: 50px; border-radius: 50%; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 4px 14px rgba(0,0,0,0.3); cursor: pointer; z-index: 900; border: none; transition: 0.2s; }
+    .admin-float-btn:hover { transform: scale(1.08); }
+    .admin-tabs { display: flex; gap: 6px; border-bottom: 2px solid var(--border); margin-bottom: 16px; overflow-x: auto; }
+    .adm-tab-btn { padding: 8px 14px; border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+    .adm-tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
     .admin-form-group { margin-bottom: 12px; }
     .admin-form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
     .admin-input, .admin-select, .admin-textarea { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; }
     .admin-textarea { resize: vertical; min-height: 60px; }
+    .warning-box { background: #fffbeb; border: 1px solid #fef3c7; border-left: 4px solid var(--warning); padding: 12px 14px; border-radius: 8px; font-size: 13px; color: #92400e; margin-bottom: 14px; line-height: 1.5; }
 
     .hidden { display: none !important; }
     @media (max-width: 640px) {
@@ -136,8 +185,8 @@
 <!-- หน้ารายการชุดข้อสอบ -->
 <div id="homeView" class="container">
   <div style="margin-bottom: 16px;">
-    <h2 style="font-size: 22px; font-weight: 700; color:#0f172a;">ระบบจำลองการสอบภาค ก และ ภาค ข ท้องถิ่น</h2>
-    <p style="font-size: 14px; color: var(--text-muted);">เลือกหมวดหมู่ที่ต้องการฝึกฝน อ้างอิงระเบียบและกฎหมายฉบับมาตรฐาน กสถ.</p>
+    <h2 style="font-size: 24px; font-weight: 700; color:#0f172a;">ระบบจำลองข้อสอบท้องถิ่น กสถ. (ภาค ก และ ภาค ข)</h2>
+    <p style="font-size: 14.5px; color: var(--text-muted);">คลังข้อสอบมาตรฐาน อ้างอิงระเบียบกฎหมายท้องถิ่นและการประเมินผลสมรรถนะจริง</p>
   </div>
 
   <div class="tab-bar">
@@ -166,8 +215,8 @@
 <div id="examView" class="container exam-wrapper hidden">
   <div class="exam-header">
     <div>
-      <span id="examPosName" style="font-weight:700; font-size:15px;"></span>
-      <div id="examModeLabel" style="font-size:12px; color:var(--text-muted);"></div>
+      <span id="examPosName" style="font-weight:700; font-size:16px;"></span>
+      <div id="examModeLabel" style="font-size:12.5px; color:var(--text-muted);"></div>
     </div>
     <div id="timerDisplay" class="timer">⏳ <span id="timeText">--:--</span></div>
   </div>
@@ -195,7 +244,7 @@
     <h2 id="scoreTitle" style="font-size: 24px; font-weight: 700; margin-bottom: 6px;"></h2>
     <p id="scoreSub" style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;"></p>
     <div style="display:inline-block; background:#f8fafc; border:1px solid var(--border); border-radius:14px; padding:16px 28px; margin-bottom: 24px;">
-      <span style="font-size: 40px; font-weight: 800; color: var(--primary);" id="totalScore">0</span>
+      <span style="font-size: 42px; font-weight: 800; color: var(--primary);" id="totalScore">0</span>
       <span style="font-size: 16px; color: var(--text-muted);" id="fullScoreText"> / 10 ข้อ</span>
     </div>
     <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
@@ -205,70 +254,60 @@
   </div>
 </div>
 
-<!-- ปุ่มเปิดระบบหลังบ้าน Admin Studio -->
-<button class="admin-float-btn" onclick="openAdminModal()" title="เปิดระบบหลังบ้าน">⚙️</button>
+<!-- Modal คำเตือนก่อนเข้าหลังบ้าน -->
+<div id="adminWarningModal" class="modal-overlay hidden">
+  <div class="modal-box" style="max-width: 460px;">
+    <div class="modal-title" style="color: #b45309;">⚠️ คำเตือนความปลอดภัยระบบหลังบ้าน</div>
+    <div class="modal-detail">
+      <p>คุณกำลังจะเข้าสู่ <b>Admin Studio (ระบบจัดการข้อสอบ)</b></p><br>
+      <p>• การแก้ไข ลบ หรือนำเข้าข้อมูลจะมีผลกับระบบคลังข้อสอบทันที</p>
+      <p>• ระบบจะล็อกการปิดหน้าจอชั่วคราว เพื่อป้องกันข้อมูลสูญหาย</p>
+      <p>• <b>โปรดกดปุ่ม "ปิดและบันทึกข้อมูล" เมื่อทำรายการเสร็จสิ้นเท่านั้น</b></p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeAdminWarning()">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="enterAdminStudio()">รับทราบและเข้าสู่ระบบ ➔</button>
+    </div>
+  </div>
+</div>
 
-<!-- Modal หลังบ้าน Admin Studio -->
+<!-- ปุ่มเปิดระบบหลังบ้าน Admin Studio -->
+<button class="admin-float-btn" onclick="requestAdminAccess()" title="เปิดระบบหลังบ้าน">⚙️</button>
+
+<!-- Modal หลังบ้าน Admin Studio (แบบแยกแท็บ) -->
 <div id="adminModal" class="modal-overlay hidden">
-  <div class="modal-box" style="max-width: 680px;">
+  <div class="modal-box" style="max-width: 720px;">
     <div class="modal-title" style="justify-content: space-between;">
-      <span>🛠️ ระบบหลังบ้านจัดการข้อสอบ</span>
-      <button onclick="closeAdminModal()" style="border:none; background:transparent; font-size:20px; cursor:pointer;">✖</button>
+      <span>🛠️ ระบบหลังบ้านจัดการข้อสอบ (Admin Studio)</span>
+      <button class="btn btn-danger" style="flex:none; padding:4px 12px; min-height:34px; font-size:13px;" onclick="closeAdminModal()">กดออกเมื่อทำเสร็จ ✖</button>
     </div>
 
-    <!-- ส่วนที่ 1: เลือกจัดการชุดข้อสอบ -->
-    <div style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
+    <div class="warning-box">
+      🔒 <b>โหมดความปลอดภัย:</b> ตรวจสอบข้อมูลให้เรียบร้อยก่อนปิดหน้าต่าง หากต้องการบันทึกถาวรไปยังเครื่องอื่น ให้ใช้แท็บ "สำรองข้อมูล"
+    </div>
+
+    <!-- เมนูแท็บหลังบ้าน -->
+    <div class="admin-tabs">
+      <button class="adm-tab-btn active" onclick="switchAdmTab('tabPositions', this)">🏷️ จัดการตำแหน่ง</button>
+      <button class="adm-tab-btn" onclick="switchAdmTab('tabQuestions', this)">📝 จัดการข้อสอบ</button>
+      <button class="adm-tab-btn" onclick="switchAdmTab('tabSheets', this)">🌐 เชื่อม Google Sheets</button>
+      <button class="adm-tab-btn" onclick="switchAdmTab('tabBackup', this)">💾 สำรองและกู้คืน</button>
+    </div>
+
+    <!-- แท็บที่ 1: จัดการตำแหน่งและธีม -->
+    <div id="tabPositions" class="adm-tab-content">
       <div class="admin-form-group">
-        <label>เลือกตำแหน่ง / หมวดวิชาที่จะแก้ไข:</label>
+        <label>เลือกตำแหน่งที่ต้องการแก้ไข:</label>
         <select id="admPosSelect" class="admin-select" onchange="onAdminSelectPack(this.value)"></select>
       </div>
-      <div style="display: flex; gap: 8px;">
-        <button class="btn btn-secondary" style="min-height:36px; font-size:13px;" onclick="toggleAddPackForm()">➕ เพิ่มตำแหน่งใหม่</button>
-        <button class="btn btn-danger" style="min-height:36px; font-size:13px;" onclick="deleteCurrentPack()">🗑️ ลบตำแหน่งนี้</button>
-      </div>
-    </div>
 
-    <!-- ฟอร์มสร้างตำแหน่งใหม่ (ซ่อนไว้เปิดเมื่อกดปุ่ม) -->
-    <div id="addPackBox" class="hidden" style="background:#f1f5f9; padding:14px; border-radius:12px; margin-bottom:16px;">
-      <h4 style="font-size:14px; margin-bottom:8px;">เพิ่มตำแหน่ง / ชุดข้อสอบใหม่:</h4>
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-        <input id="npId" class="admin-input" placeholder="ID (อังกฤษ เช่น it, driver)">
-        <input id="npName" class="admin-input" placeholder="ชื่อตำแหน่ง">
-        <input id="npIcon" class="admin-input" placeholder="อีโมจิ (เช่น 💻)">
-        <select id="npCategory" class="admin-select">
-          <option value="partB">ภาค ข เฉพาะตำแหน่ง</option>
-          <option value="partA_sub">ภาค ก รายหมวด</option>
-          <option value="partA_all">ภาค ก รวมทุกหมวด</option>
-        </select>
-        <select id="npTheme" class="admin-select">
-          <option value="theme-blue">ธีม: น้ำเงิน (Blue)</option>
-          <option value="theme-emerald">ธีม: มรกต (Emerald)</option>
-          <option value="theme-purple">ธีม: ม่วง (Purple)</option>
-          <option value="theme-amber">ธีม: อำพัน (Amber)</option>
-          <option value="theme-rose">ธีม: กุหลาบ (Rose)</option>
-          <option value="theme-cyan">ธีม: ฟ้า (Cyan)</option>
-        </select>
-        <input id="npDesc" class="admin-input" placeholder="คำอธิบายสั้นๆ">
-      </div>
-      <button class="btn btn-primary" style="min-height:36px; font-size:13px; margin-top:8px; width:100%;" onclick="saveNewPack()">บันทึกชุดใหม่</button>
-    </div>
-
-    <!-- ส่วนที่ 2: เปลี่ยนธีมและคำอธิบายชุดปัจจุบัน -->
-    <div style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 12px;">
         <div class="admin-form-group">
-          <label>เปลี่ยนธีมสีการ์ด:</label>
-          <select id="admCurrentTheme" class="admin-select" onchange="updateCurrentTheme(this.value)">
-            <option value="theme-blue">น้ำเงิน (Blue)</option>
-            <option value="theme-emerald">มรกต (Emerald)</option>
-            <option value="theme-purple">ม่วง (Purple)</option>
-            <option value="theme-amber">อำพัน (Amber)</option>
-            <option value="theme-rose">กุหลาบ (Rose)</option>
-            <option value="theme-cyan">ฟ้า (Cyan)</option>
-          </select>
+          <label>เปลี่ยนธีมสีการ์ด (50 ธีม):</label>
+          <select id="admCurrentTheme" class="admin-select" onchange="updateCurrentTheme(this.value)"></select>
         </div>
         <div class="admin-form-group">
-          <label>แท็กสังกัดหมวดหมู่:</label>
+          <label>หมวดหมู่:</label>
           <select id="admCurrentCategory" class="admin-select" onchange="updateCurrentCategory(this.value)">
             <option value="partA_all">ภาค ก รวมทุกหมวด</option>
             <option value="partA_sub">ภาค ก รายหมวด</option>
@@ -276,11 +315,44 @@
           </select>
         </div>
       </div>
+
+      <div class="admin-form-group">
+        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+          <input type="checkbox" id="admIsNewCheckbox" onchange="updateCurrentNewStatus(this.checked)">
+          <span>🔥 ติดป้าย "อัปเดตใหม่" บนการ์ดตำแหน่งนี้</span>
+        </label>
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-top: 14px;">
+        <button class="btn btn-secondary" style="min-height:36px; font-size:13px;" onclick="toggleAddPackForm()">➕ เพิ่มตำแหน่งใหม่</button>
+        <button class="btn btn-danger" style="min-height:36px; font-size:13px;" onclick="deleteCurrentPack()">🗑️ ลบตำแหน่งนี้</button>
+      </div>
+
+      <!-- ฟอร์มสร้างตำแหน่งใหม่ -->
+      <div id="addPackBox" class="hidden" style="background:#f1f5f9; padding:14px; border-radius:12px; margin-top:14px;">
+        <h4 style="font-size:14px; margin-bottom:8px;">เพิ่มตำแหน่งใหม่:</h4>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+          <input id="npId" class="admin-input" placeholder="ID อังกฤษ (เช่น it, driver)">
+          <input id="npName" class="admin-input" placeholder="ชื่อตำแหน่ง">
+          <input id="npIcon" class="admin-input" placeholder="อีโมจิ (เช่น 💻)">
+          <select id="npCategory" class="admin-select">
+            <option value="partB">ภาค ข เฉพาะตำแหน่ง</option>
+            <option value="partA_sub">ภาค ก รายหมวด</option>
+            <option value="partA_all">ภาค ก รวมทุกหมวด</option>
+          </select>
+          <select id="npTheme" class="admin-select"></select>
+          <input id="npDesc" class="admin-input" placeholder="คำอธิบายสั้นๆ">
+        </div>
+        <button class="btn btn-primary" style="min-height:36px; font-size:13px; margin-top:8px; width:100%;" onclick="saveNewPack()">บันทึกตำแหน่งใหม่ ➔</button>
+      </div>
     </div>
 
-    <!-- ส่วนที่ 3: เพิ่มข้อสอบใหม่ลงในชุดนี้ -->
-    <div style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
-      <h4 style="font-size:15px; margin-bottom:8px;">➕ เพิ่มข้อสอบในตำแหน่งนี้ (<span id="admQCount">0</span> ข้อปัจจุบัน)</h4>
+    <!-- แท็บที่ 2: จัดการข้อสอบ -->
+    <div id="tabQuestions" class="adm-tab-content hidden">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h4 style="font-size:15px;">➕ เพิ่มข้อสอบ (<span id="admQCount">0</span> ข้อปัจจุบัน)</h4>
+        <span id="admQPackLabel" style="font-size:13px; color:var(--text-muted);"></span>
+      </div>
       <div class="admin-form-group">
         <label>โจทย์คำถาม:</label>
         <textarea id="admQText" class="admin-textarea" placeholder="พิมพ์คำถามที่นี่..."></textarea>
@@ -306,20 +378,35 @@
           <input id="admExp" class="admin-input" placeholder="ระบุเหตุผลหรือมาตราอ้างอิง">
         </div>
       </div>
-      <button class="btn btn-primary" style="margin-top:10px; width:100%; min-height:40px;" onclick="addQuestionToCurrentPack()">เพิ่มข้อสอบข้อนี้ ➔</button>
+      <button class="btn btn-primary" style="margin-top:12px; width:100%; min-height:42px;" onclick="addQuestionToCurrentPack()">เพิ่มข้อสอบข้อนี้ ➔</button>
     </div>
 
-    <!-- ส่วนที่ 4: การสำรองข้อมูล นำเข้า / ส่งออก (Backup & Restore) -->
-    <div>
-      <h4 style="font-size:15px; margin-bottom:8px;">💾 ระบบสำรองข้อมูล (Backup / Import)</h4>
-      <div style="display:flex; gap:8px; margin-bottom:10px;">
+    <!-- แท็บที่ 3: เชื่อมต่อ Google Sheets -->
+    <div id="tabSheets" class="adm-tab-content hidden">
+      <div class="admin-form-group">
+        <label>Google Apps Script Web App URL:</label>
+        <input id="sheetUrlInput" class="admin-input" placeholder="https://script.google.com/macros/s/.../exec">
+      </div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px; line-height:1.5;">
+        วาง URL ของ Apps Script ที่ได้จากการ Deploy เพื่อดึงข้อสอบสดจาก Google Sheets โดยตรง เมื่อบันทึกแล้วระบบจะจดจำ URL นี้ไว้
+      </p>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-primary" style="min-height:38px; font-size:13px;" onclick="saveAndSyncSheet()">💾 บันทึก URL & ดึงข้อมูลทันที</button>
+        <button class="btn btn-secondary" style="min-height:38px; font-size:13px;" onclick="syncSheetData()">🔄 ซิงค์ข้อมูลล่าสุด</button>
+      </div>
+      <div id="sheetSyncStatus" style="font-size:13px; margin-top:10px; font-weight:500;"></div>
+    </div>
+
+    <!-- แท็บที่ 4: สำรองและกู้คืน (Backup / Restore) -->
+    <div id="tabBackup" class="adm-tab-content hidden">
+      <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
         <button class="btn btn-secondary" style="min-height:36px; font-size:13px;" onclick="exportDataJSON()">📤 ส่งออกไฟล์สำรอง (.JSON)</button>
         <button class="btn btn-secondary" style="min-height:36px; font-size:13px;" onclick="triggerImportJSON()">📥 นำเข้าไฟล์สำรอง (.JSON)</button>
         <button class="btn btn-danger" style="min-height:36px; font-size:13px;" onclick="resetToFactoryDefault()">🔄 คืนค่าเริ่มต้นโรงงาน</button>
         <input type="file" id="importFileInput" accept=".json" class="hidden" onchange="handleFileImport(event)">
       </div>
-      <textarea id="jsonClipboardBox" class="admin-textarea" style="font-size:11px;" placeholder="กล่องแสดงผล JSON / วางโค้ด JSON เพื่อกดนำเข้า..."></textarea>
-      <button class="btn btn-secondary" style="width:100%; min-height:34px; font-size:12px; margin-top:4px;" onclick="importFromClipboard()">📥 กู้คืนข้อมูลจากกล่องข้อความด้านบน</button>
+      <textarea id="jsonClipboardBox" class="admin-textarea" style="font-size:11.5px; height:90px;" placeholder="กล่องแสดงผล JSON / วางโค้ด JSON เพื่อกดนำเข้า..."></textarea>
+      <button class="btn btn-secondary" style="width:100%; min-height:36px; font-size:13px; margin-top:6px;" onclick="importFromClipboard()">📥 กู้คืนข้อมูลจากกล่องข้อความด้านบน</button>
     </div>
   </div>
 </div>
@@ -330,7 +417,7 @@ const DEFAULT_BANK = {
   /* ------------------- ภาค ก รวมทุกหมวด ------------------- */
   partA_full: {
     id: 'partA_full', icon: '🏆', name: 'ภาค ก ท้องถิ่น (รวมทุกหมวด)',
-    tag: 'ภาค ก ความรู้ความสามารถทั่วไป', category: 'partA_all', theme: 'theme-blue',
+    tag: 'ภาค ก ความรู้ความสามารถทั่วไป', category: 'partA_all', theme: 'theme-1', isNew: true,
     desc: 'ชุดจำลองสนามจริง: คิดวิเคราะห์เชิงคณิต · ภาษาไทย · กฎหมายท้องถิ่น 11 ฉบับ · ภาษาอังกฤษ',
     sec: 7200, mins: 120, pass: 60,
     q: [
@@ -350,178 +437,156 @@ const DEFAULT_BANK = {
   /* ------------------- ภาค ก รายหมวด 4 วิชา ------------------- */
   partA_math: {
     id: 'partA_math', icon: '🧮', name: 'ภาค ก: คิดวิเคราะห์และคณิตศาสตร์',
-    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-emerald',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-2', isNew: true,
     desc: 'เจาะลึกอนุกรม ตรรกศาสตร์ เงื่อนไขสัญลักษณ์ คณิตศาสตร์ทั่วไป ร้อยละ และโจทย์ปัญหา',
     sec: 3600, mins: 60, pass: 60,
     q: [
       { s:'m', q:'อนุกรม: 2, 6, 12, 20, 30, ... พจน์ถัดไปคือเลขใด', c:['40','42','44','46'], a:1, e:'ระยะห่างคือ +4, +6, +8, +10 ดังนั้นตัวถัดไปคือ +12 ได้ 30 + 12 = 42' },
       { s:'m', q:'เสาไฟปักเรียงกันเป็นแถวตรง แต่ละต้นห่างกัน 5 เมตร ถ้ามีเสาไฟทั้งหมด 21 ต้น เสาต้นแรกกับต้นสุดท้ายห่างกันกี่เมตร', c:['100 เมตร','105 เมตร','110 เมตร','115 เมตร'], a:0, e:'เสา 21 ต้น มีช่วงว่าง 20 ช่วง นำ 20 × 5 = 100 เมตร' },
-      { s:'m', q:'ผลบวกของเลขคู่ 5 จำนวนเรียงกันมีค่าเท่ากับ 120 จงหาเลขคู่ที่มีค่าน้อยที่สุด', c:['18','20','22','24'], a:1, e:'ค่าเฉลี่ยคือตัวกลาง = 120 ÷ 5 = 24 ดังนั้นเลขทั้ง 5 ตัวคือ 20, 22, 24, 26, 28 ตัวน้อยสุดคือ 20' },
-      { s:'m', q:'ถ้า A ทำงานเสร็จใน 6 วัน และ B ทำงานชนิดเดียวกันเสร็จใน 3 วัน หากทั้งสองช่วยกันทำงานจะเสร็จในกี่วัน', c:['1.5 วัน','2 วัน','2.5 วัน','4.5 วัน'], a:1, e:'ใน 1 วัน ทั้งสองทำได้ (1/6) + (1/3) = 3/6 = 1/2 ของงาน ดังนั้นใช้เวลารวม 2 วัน' },
-      { s:'m', q:'ซื้อส้มมาราคากิโลกรัมละ 40 บาท ขายไป 50 บาท คิดเป็นกำไรกี่เปอร์เซ็นต์', c:['20%','25%','30%','35%'], a:1, e:'กำไร 10 บาท เทียบทุน 40 บาท คิดเป็น (10 ÷ 40) × 100 = 25%' }
+      { s:'m', q:'ผลบวกของเลขคู่ 5 จำนวนเรียงกันมีค่าเท่ากับ 120 จงหาเลขคู่ที่มีค่าน้อยที่สุด', c:['18','20','22','24'], a:1, e:'ค่าเฉลี่ยคือตัวกลาง = 120 ÷ 5 = 24 ดังนั้นเลขทั้ง 5 ตัวคือ 20, 22, 24, 26, 28 ตัวน้อยสุดคือ 20' }
     ]
   },
   partA_thai: {
     id: 'partA_thai', icon: '📖', name: 'ภาค ก: ภาษาไทยและการสื่อสาร',
-    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-amber',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-4', isNew: false,
     desc: 'ความเข้าใจภาษา การเรียงรูปประโยค การจับใจความสำคัญ คำราชาศัพท์ และสำนวนไทย',
     sec: 3600, mins: 60, pass: 60,
     q: [
       { s:'t', q:'คำในข้อใดสะกดถูกต้องตามพจนานุกรมฉบับราชบัณฑิตยสถานทุกคำ', c:['กะเพรา อนุญาต สัมมนา','กระเพรา อนุญาต สัมมนา','กะเพรา อนุณาต สัมนา','กระเพรา อนุญาติ สัมมนา'], a:0, e:'กะเพรา (ไม่มี ร), อนุญาต (ไม่มีสระอิ), สัมมนา (ม ม้าสองตัว)' },
-      { s:'t', q:'ประโยคใดเป็นประโยคที่ไม่มีการกำกวมในด้านความหมาย', c:['เขาเห็นตำรวจจับขโมยบนรถเมล์','แม่บอกลูกสาวว่าเพื่อนของเธอมาหา','แพทย์ตรวจรักษาคนไข้ด้วยความตั้งใจในห้องตรวจ','ครูตีนักเรียนที่มาสายด้วยไม้เรียว'], a:2, e:'ข้อ 3 สื่อสารประธาน กริยา กรรม และสถานที่ได้อย่างชัดเจน ไม่มีคำขยายกำกวม' },
-      { s:'t', q:'"คมในฝัก" มีความหมายตรงกับบุคคลที่มีลักษณะตามข้อใด', c:['คนที่มีอาวุธติดตัวอยู่เสมอ','คนที่มีความรู้ความสามารถแต่ไม่แสดงโอ้อวด','คนที่มีวาจาเชือดเฉือนผู้อื่น','คนที่มีปฏิภาณไหวพริบสู้คน'], a:1, e:'คมในฝัก หมายถึง ผู้มีความรู้ความสามารถซ่อนอยู่แต่สงบเสงี่ยม ไม่โอ้อวด' }
+      { s:'t', q:'ประโยคใดเป็นประโยคที่ไม่มีการกำกวมในด้านความหมาย', c:['เขาเห็นตำรวจจับขโมยบนรถเมล์','แม่บอกลูกสาวว่าเพื่อนของเธอมาหา','แพทย์ตรวจรักษาคนไข้ด้วยความตั้งใจในห้องตรวจ','ครูตีนักเรียนที่มาสายด้วยไม้เรียว'], a:2, e:'ข้อ 3 สื่อสารประธาน กริยา กรรม และสถานที่ได้อย่างชัดเจน ไม่มีคำขยายกำกวม' }
     ]
   },
   partA_law: {
     id: 'partA_law', icon: '⚖️', name: 'ภาค ก: กฎหมายการปฏิบัติราชการท้องถิ่น',
-    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-purple',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-3', isNew: true,
     desc: 'พ.ร.บ.อบจ., เทศบาล, อบต., พัทยา, กำหนดแผนกระจายอำนาจ, และการบริหารกิจการบ้านเมืองที่ดี',
     sec: 3600, mins: 60, pass: 60,
     q: [
-      { s:'l', q:'ผู้ว่าราชการจังหวัดใช้อำนาจกำกับดูแลองค์การบริหารส่วนจังหวัดในลักษณะใด', c:['บังคับบัญชาโดยตรง','กำกับดูแลตามที่กฎหมายกำหนด','ตรวจสอบภายในทุกสัปดาห์','ไม่มีอำนาจกำกับดูแล'], a:1, e:'ราชการส่วนภูมิภาคมีอำนาจ "กำกับดูแล" (Supervision) องค์กรปกครองส่วนท้องถิ่นตามขอบเขตที่กฎหมายบัญญัติ มิใช่การบังคับบัญชา' },
-      { s:'l', q:'ข้อบัญญัติท้องถิ่นจะมีผลบังคับใช้ได้เมื่อใด', c:['เมื่อสภาท้องถิ่นมีมติเห็นชอบในวาระสาม','เมื่อผู้ว่าราชการจังหวัดลงนาม','เมื่อได้ประกาศไว้โดยเปิดเผย ณ สำนักงานท้องถิ่นตามกำหนด','เมื่อประชาชนลงประชามติ'], a:2, e:'ข้อบัญญัติท้องถิ่นต้องผ่านกระบวนการประกาศไว้โดยเปิดเผย ณ ที่ทำการ อปท. ตามเวลาที่กฎหมายระบุจึงจะมีผลใช้บังคับ' }
+      { s:'l', q:'ผู้ว่าราชการจังหวัดใช้อำนาจกำกับดูแลองค์การบริหารส่วนจังหวัดในลักษณะใด', c:['บังคับบัญชาโดยตรง','กำกับดูแลตามที่กฎหมายกำหนด','ตรวจสอบภายในทุกสัปดาห์','ไม่มีอำนาจกำกับดูแล'], a:1, e:'ราชการส่วนภูมิภาคมีอำนาจ "กำกับดูแล" (Supervision) องค์กรปกครองส่วนท้องถิ่นตามขอบเขตที่กฎหมายบัญญัติ' }
     ]
   },
   partA_eng: {
     id: 'partA_eng', icon: '🌐', name: 'ภาค ก: ภาษาอังกฤษสำหรับการปฏิบัติงาน',
-    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-cyan',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'theme-6', isNew: false,
     desc: 'Structure & Grammar, Vocabulary, Conversation ในสำนักงาน และ Reading Comprehension',
     sec: 3600, mins: 60, pass: 60,
     q: [
-      { s:'e', q:'"Could you please submit the financial report by Friday?" ประโยคนี้มีเจตนาตามข้อใด', c:['Giving an order','Making a polite request','Refusing an offer','Apologizing'], a:1, e:'ขึ้นต้นด้วย "Could you please..." เป็นสำนวนการขอร้องอย่างสุภาพ (Polite request)' },
-      { s:'e', q:'Neither the officer nor the staff _____ available right now.', c:['is','are','be','were'], a:0, e:'โครงสร้าง Neither... nor... กริยาจะผันตามประธานตัวหลังสุด ซึ่ง "the staff" เป็นนามเอกพจน์/กลุ่มก้อน จึงใช้ is' }
+      { s:'e', q:'"Could you please submit the financial report by Friday?" ประโยคนี้มีเจตนาตามข้อใด', c:['Giving an order','Making a polite request','Refusing an offer','Apologizing'], a:1, e:'ขึ้นต้นด้วย "Could you please..." เป็นสำนวนการขอร้องอย่างสุภาพ (Polite request)' }
     ]
   },
 
   /* ------------------- ภาค ข เฉพาะตำแหน่ง 14 ตำแหน่ง ------------------- */
   edu: {
-    id: 'edu', icon: '🎓', name: 'นักวิชาการศึกษาปฏิบัติการ', category: 'partB', theme: 'theme-blue',
+    id: 'edu', icon: '🎓', name: 'นักวิชาการศึกษาปฏิบัติการ', category: 'partB', theme: 'theme-11', isNew: true,
     desc: 'พ.ร.บ.การศึกษาแห่งชาติ · การศึกษาภาคบังคับ · หลักสูตรและการจัดการเรียนรู้',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การศึกษาภาคบังคับมีกำหนดระยะเวลากี่ปี', c:['หกปี','แปดปี','เก้าปี','สิบสองปี'], a:2, e:'มาตรา 17 กำหนดการศึกษาภาคบังคับเก้าปี (อายุย่างเข้าปีที่ 7 ถึง 16)' },
-      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การจัดการศึกษามีกี่รูปแบบ', c:['สองรูปแบบ','สามรูปแบบ','สี่รูปแบบ','ห้ารูปแบบ'], a:1, e:'มาตรา 15 กำหนดสามรูปแบบ คือ ในระบบ นอกระบบ และตามอัธยาศัย' },
-      { s:'edulaw', q:'ผู้ปกครองที่ไม่ส่งเด็กซึ่งอยู่ในเกณฑ์การศึกษาภาคบังคับเข้าเรียน ต้องระวางโทษตามข้อใด', c:['ปรับไม่เกินหนึ่งพันบาท','ปรับไม่เกินหนึ่งหมื่นบาท','จำคุกไม่เกินหนึ่งเดือน','จำคุกไม่เกินสามเดือน'], a:0, e:'พ.ร.บ.การศึกษาภาคบังคับ พ.ศ. 2545 มาตรา 13 กำหนดโทษปรับไม่เกินหนึ่งพันบาท' },
-      { s:'edulaw', q:'ตามพระราชบัญญัติการพัฒนาเด็กปฐมวัย พ.ศ. 2562 เด็กปฐมวัยหมายถึงเด็กช่วงอายุใด', c:['สามปีถึงห้าปีบริบูรณ์','สองปีถึงหกปีบริบูรณ์','ต่ำกว่าหกปีบริบูรณ์','ต่ำกว่าเจ็ดปีบริบูรณ์'], a:2, e:'มาตรา 3 นิยามเด็กปฐมวัยว่าหมายถึงเด็กซึ่งมีอายุต่ำกว่าหกปีบริบูรณ์' },
-      { s:'eduacad', q:'หลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พ.ศ. 2551 กำหนดกลุ่มสาระการเรียนรู้ไว้กี่กลุ่ม', c:['ห้ากลุ่ม','หกกลุ่ม','เจ็ดกลุ่ม','แปดกลุ่ม'], a:3, e:'กำหนดไว้แปดกลุ่มสาระการเรียนรู้' }
+      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การศึกษาภาคบังคับมีกำหนดระยะเวลากี่ปี', c:['หกปี','แปดปี','เก้าปี','สิบสองปี'], a:2, e:'มาตรา 17 กำหนดการศึกษาภาคบังคับเก้าปี' },
+      { s:'edulaw', q:'ตามพระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 การจัดการศึกษามีกี่รูปแบบ', c:['สองรูปแบบ','สามรูปแบบ','สี่รูปแบบ','ห้ารูปแบบ'], a:1, e:'มาตรา 15 กำหนดสามรูปแบบ คือ ในระบบ นอกระบบ และตามอัธยาศัย' }
     ]
   },
   hr: {
-    id: 'hr', icon: '👥', name: 'นักทรัพยากรบุคคลปฏิบัติการ', category: 'partB', theme: 'theme-emerald',
+    id: 'hr', icon: '👥', name: 'นักทรัพยากรบุคคลปฏิบัติการ', category: 'partB', theme: 'theme-12', isNew: false,
     desc: 'การบริหารงานบุคคลส่วนท้องถิ่น · วินัยและการรักษาวินัย · แผนอัตรากำลัง 3 ปี',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'hrlaw', q:'โทษทางวินัยสำหรับพนักงานส่วนท้องถิ่น มีกี่สถาน', c:['สามสถาน','สี่สถาน','ห้าสถาน','หกสถาน'], a:2, e:'มีห้าสถาน ได้แก่ ภาคทัณฑ์ ตัดเงินเดือน ลดเงินเดือน ปลดออก และไล่ออก' },
-      { s:'hrlaw', q:'พนักงานส่วนท้องถิ่นที่ถูกลงโทษปลดออก มีสิทธิได้รับบำเหน็จบำนาญหรือไม่', c:['ไม่มีสิทธิใดๆ','มีสิทธิเสมือนว่าผู้นั้นลาออกจากราชการ','มีสิทธิได้รับกึ่งหนึ่ง','ขึ้นอยู่กับดุลพินิจ'], a:1, e:'ผู้ถูกลงโทษปลดออกยังมีสิทธิได้รับบำเหน็จบำนาญเสมือนลาออกจากราชการ' },
-      { s:'hrlaw', q:'คณะกรรมการมาตรฐานการบริหารงานบุคคลส่วนท้องถิ่น มีชื่อย่อตรงกับข้อใด', c:['ก.จ.','ก.ท.','ก.อบต.','ก.ถ.'], a:3, e:'ก.ถ. ทำหน้าที่กำหนดมาตรฐานกลางด้านการบริหารงานบุคคลส่วนท้องถิ่น' }
+      { s:'hrlaw', q:'โทษทางวินัยสำหรับพนักงานส่วนท้องถิ่น มีกี่สถาน', c:['สามสถาน','สี่สถาน','ห้าสถาน','หกสถาน'], a:2, e:'มีห้าสถาน ได้แก่ ภาคทัณฑ์ ตัดเงินเดือน ลดเงินเดือน ปลดออก และไล่ออก' }
     ]
   },
   fin: {
-    id: 'fin', icon: '💰', name: 'นักวิชาการเงินและบัญชีปฏิบัติการ', category: 'partB', theme: 'theme-amber',
+    id: 'fin', icon: '💰', name: 'นักวิชาการเงินและบัญชีปฏิบัติการ', category: 'partB', theme: 'theme-13', isNew: true,
     desc: 'ระเบียบการเงินการคลังท้องถิ่น · พ.ร.บ.จัดซื้อจัดจ้างฯ · หลักการบัญชีคู่',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'finlaw', q:'ปีงบประมาณของส่วนราชการและองค์กรปกครองส่วนท้องถิ่น เริ่มต้นและสิ้นสุดเมื่อใด', c:['1 ม.ค. ถึง 31 ธ.ค.','1 ต.ค. ถึง 30 ก.ย. ของปีถัดไป','1 เม.ย. ถึง 31 มี.ค. ของปีถัดไป','1 ก.ค. ถึง 30 มิ.ย. ของปีถัดไป'], a:1, e:'เริ่มตั้งแต่วันที่ 1 ตุลาคมของปีหนึ่ง ถึง 30 กันยายนของปีถัดไป' },
-      { s:'finlaw', q:'การจัดซื้อจัดจ้างโดยวิธีเฉพาะเจาะจงเนื่องจากวงเงินเล็กน้อย กำหนดไว้ไม่เกินเท่าใด', c:['ไม่เกินหนึ่งแสนบาท','ไม่เกินห้าแสนบาท','ไม่เกินหนึ่งล้านบาท','ไม่เกินสองล้านบาท'], a:1, e:'กฎกระทรวงกำหนดวงเงินวิธีเฉพาะเจาะจงไว้ไม่เกินห้าแสนบาท' }
+      { s:'finlaw', q:'ปีงบประมาณของส่วนราชการและองค์กรปกครองส่วนท้องถิ่น เริ่มต้นและสิ้นสุดเมื่อใด', c:['1 ม.ค. ถึง 31 ธ.ค.','1 ต.ค. ถึง 30 ก.ย. ของปีถัดไป','1 เม.ย. ถึง 31 มี.ค. ของปีถัดไป','1 ก.ค. ถึง 30 มิ.ย. ของปีถัดไป'], a:1, e:'เริ่มตั้งแต่วันที่ 1 ตุลาคมของปีหนึ่ง ถึง 30 กันยายนของปีถัดไป' }
     ]
   },
   reg: {
-    id: 'reg', icon: '🪪', name: 'นักจัดการงานทะเบียนและบัตรปฏิบัติการ', category: 'partB', theme: 'theme-cyan',
+    id: 'reg', icon: '🪪', name: 'นักจัดการงานทะเบียนและบัตรปฏิบัติการ', category: 'partB', theme: 'theme-16', isNew: false,
     desc: 'กฎหมายทะเบียนราษฎร · บัตรประจำตัวประชาชน · การแจ้งเกิด/ตาย/ย้ายที่อยู่',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'regciv', q:'เมื่อมีคนเกิดในบ้าน เจ้าบ้านต้องแจ้งการเกิดต่อนายทะเบียนภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน'], a:2, e:'พ.ร.บ.การทะเบียนราษฎร มาตรา 18 กำหนดให้แจ้งภายในสิบห้าวันนับแต่วันเกิด' },
-      { s:'regciv', q:'เมื่อมีคนตายในบ้าน เจ้าบ้านต้องแจ้งการตายต่อนายทะเบียนภายในระยะเวลาเท่าใด', c:['ภายในยี่สิบสี่ชั่วโมง','ภายในสามวัน','ภายในเจ็ดวัน','ภายในสิบห้าวัน'], a:0, e:'มาตรา 21 กำหนดให้แจ้งการตายภายในยี่สิบสี่ชั่วโมงนับแต่เวลาตาย' }
+      { s:'regciv', q:'เมื่อมีคนเกิดในบ้าน เจ้าบ้านต้องแจ้งการเกิดต่อนายทะเบียนภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน'], a:2, e:'พ.ร.บ.การทะเบียนราษฎร มาตรา 18 กำหนดให้แจ้งภายในสิบห้าวัน' }
     ]
   },
   urban: {
-    id: 'urban', icon: '🗺️', name: 'นักผังเมืองปฏิบัติการ', category: 'partB', theme: 'theme-purple',
+    id: 'urban', icon: '🗺️', name: 'นักผังเมืองปฏิบัติการ', category: 'partB', theme: 'theme-15', isNew: false,
     desc: 'กฎหมายผังเมือง พ.ศ. 2562 · การใช้ประโยชน์ที่ดิน · การควบคุมอาคารสูง',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'uplaw', q:'ในแผนผังกำหนดการใช้ประโยชน์ที่ดินตามผังเมืองรวม พื้นที่สีเหลืองหมายถึงที่ดินประเภทใด', c:['ที่อยู่อาศัยหนาแน่นน้อย','ที่อยู่อาศัยหนาแน่นปานกลาง','พาณิชยกรรม','ชนบทและเกษตรกรรม'], a:0, e:'สีเหลืองคือที่อยู่อาศัยหนาแน่นน้อย สีส้มคือหนาแน่นปานกลาง' },
-      { s:'uplaw', q:'ตามกฎกระทรวงควบคุมอาคาร อาคารสูงหมายถึงอาคารที่มีความสูงตั้งแต่เท่าใด', c:['ตั้งแต่สิบห้าเมตรขึ้นไป','ตั้งแต่สิบแปดเมตรขึ้นไป','ตั้งแต่ยี่สิบเมตรขึ้นไป','ตั้งแต่ยี่สิบสามเมตรขึ้นไป'], a:3, e:'อาคารสูงคืออาคารที่มีความสูงตั้งแต่ 23 เมตรขึ้นไป วัดถึงพื้นดาดฟ้า' }
+      { s:'uplaw', q:'ในแผนผังกำหนดการใช้ประโยชน์ที่ดินตามผังเมืองรวม พื้นที่สีเหลืองหมายถึงที่ดินประเภทใด', c:['ที่อยู่อาศัยหนาแน่นน้อย','ที่อยู่อาศัยหนาแน่นปานกลาง','พาณิชยกรรม','ชนบทและเกษตรกรรม'], a:0, e:'สีเหลืองคือที่อยู่อาศัยหนาแน่นน้อย' }
     ]
   },
   legal: {
-    id: 'legal', icon: '⚖️', name: 'นิติกรปฏิบัติการ', category: 'partB', theme: 'theme-rose',
+    id: 'legal', icon: '⚖️', name: 'นิติกรปฏิบัติการ', category: 'partB', theme: 'theme-14', isNew: true,
     desc: 'กฎหมายแพ่งและพาณิชย์ · กฎหมายอาญา · กฎหมายวิธีปฏิบัติราชการทางปกครอง',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'lgciv', q:'ตามประมวลกฎหมายแพ่งและพาณิชย์ บุคคลย่อมบรรลุนิติภาวะเมื่อใด', c:['อายุสิบแปดปีบริบูรณ์','อายุยี่สิบปีบริบูรณ์ หรือเมื่อสมรสโดยชอบด้วยกฎหมาย','อายุยี่สิบปีบริบูรณ์เท่านั้น','อายุยี่สิบเอ็ดปีบริบูรณ์'], a:1, e:'บรรลุนิติภาวะเมื่ออายุ 20 ปีบริบูรณ์ หรือเมื่อทำการสมรสชอบด้วยกฎหมาย' },
-      { s:'lgadm', q:'การฟ้องคดีต่อศาลปกครองกรณีเดือดร้อนเสียหายจากคำสั่งทางปกครอง ต้องยื่นฟ้องภายในกี่วัน', c:['ภายในสามสิบวัน','ภายในหกสิบวัน','ภายในเก้าสิบวัน','ภายในหนึ่งปี'], a:2, e:'มาตรา 49 กำหนดให้ยื่นฟ้องภายในเก้าสิบวันนับแต่วันที่รู้เหตุแห่งการฟ้องคดี' }
+      { s:'lgciv', q:'ตามประมวลกฎหมายแพ่งและพาณิชย์ บุคคลย่อมบรรลุนิติภาวะเมื่อใด', c:['อายุสิบแปดปีบริบูรณ์','อายุยี่สิบปีบริบูรณ์ หรือเมื่อสมรสโดยชอบด้วยกฎหมาย','อายุยี่สิบปีบริบูรณ์เท่านั้น','อายุยี่สิบเอ็ดปีบริบูรณ์'], a:1, e:'บรรลุนิติภาวะเมื่ออายุ 20 ปีบริบูรณ์ หรือเมื่อทำการสมรสชอบด้วยกฎหมาย' }
     ]
   },
   disaster: {
-    id: 'disaster', icon: '🚒', name: 'นักป้องกันและบรรเทาสาธารณภัยปฏิบัติการ', category: 'partB', theme: 'theme-amber',
+    id: 'disaster', icon: '🚒', name: 'นักป้องกันและบรรเทาสาธารณภัยปฏิบัติการ', category: 'partB', theme: 'theme-20', isNew: true,
     desc: 'พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 · การกู้ภัยและระงับอัคคีภัย',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'dslaw', q:'ในเขตองค์การบริหารส่วนตำบล ผู้ใดเป็นผู้อำนวยการท้องถิ่นในการป้องกันภัย', c:['นายก อบต.','ปลัด อบต.','นายอำเภอ','กำนัน'], a:0, e:'มาตรา 20 กำหนดให้ผู้บริหารท้องถิ่นเป็นผู้อำนวยการท้องถิ่น' },
-      { s:'dsops', q:'เพลิงไหม้ที่เกิดจากน้ำมันเชื้อเพลิงหรือของเหลวไวไฟ จัดเป็นเพลิงประเภทใด', c:['ประเภท A','ประเภท B','ประเภท C','ประเภท D'], a:1, e:'เพลิงประเภท B เกิดจากของเหลวไวไฟ ต้องใช้โฟมหรือผงเคมีแห้งดับ ห้ามใช้น้ำฉีดตรง' }
+      { s:'dslaw', q:'ในเขตองค์การบริหารส่วนตำบล ผู้ใดเป็นผู้อำนวยการท้องถิ่นในการป้องกันภัย', c:['นายก อบต.','ปลัด อบต.','นายอำเภอ','กำนัน'], a:0, e:'มาตรา 20 กำหนดให้ผู้บริหารท้องถิ่นเป็นผู้อำนวยการท้องถิ่น' }
     ]
   },
   ee: {
-    id: 'ee', icon: '⚡', name: 'วิศวกรไฟฟ้าปฏิบัติการ', category: 'partB', theme: 'theme-blue',
+    id: 'ee', icon: '⚡', name: 'วิศวกรไฟฟ้าปฏิบัติการ', category: 'partB', theme: 'theme-21', isNew: false,
     desc: 'ทฤษฎีวงจรไฟฟ้า · ระบบไฟฟ้ากำลัง 3 เฟส 4 สาย · ความปลอดภัยและการต่อลงดิน',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'eetheo', q:'ตามกฎของโอห์ม หากความต้านทาน 20 โอห์ม มีกระแสไหล 3 แอมแปร์ แรงดันตกคร่อมคือเท่าใด', c:['50 โวลต์','60 โวลต์','70 โวลต์','80 โวลต์'], a:1, e:'V = I × R = 3 × 20 = 60 โวลต์' },
-      { s:'eesys', q:'เครื่องตัดไฟรั่ว (RCD) มีหลักการทำงานอย่างไร', c:['ตรวจจับผลต่างของกระแสเข้าและออก หากไม่เท่ากันจะตัดวงจร','ตรวจจับความร้อนของสายไฟ','ตรวจจับแรงดันเกิน','ตรวจจับความถี่เปลี่ยน'], a:0, e:'RCD ตรวจจับกระแสผลต่าง หากไฟรั่วลงดินจะตัดวงจรทันที' }
+      { s:'eetheo', q:'ตามกฎของโอห์ม หากความต้านทาน 20 โอห์ม มีกระแสไหล 3 แอมแปร์ แรงดันตกคร่อมคือเท่าใด', c:['50 โวลต์','60 โวลต์','70 โวลต์','80 โวลต์'], a:1, e:'V = I × R = 3 × 20 = 60 โวลต์' }
     ]
   },
   ce: {
-    id: 'ce', icon: '🏗️', name: 'วิศวกรโยธาปฏิบัติการ', category: 'partB', theme: 'theme-emerald',
+    id: 'ce', icon: '🏗️', name: 'วิศวกรโยธาปฏิบัติการ', category: 'partB', theme: 'theme-22', isNew: false,
     desc: 'วัสดุและเทคโนโลยีคอนกรีต · การทดสอบ Slump และ CBR · การควบคุมงานก่อสร้าง',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'cemat', q:'การทดสอบกำลังอัดของคอนกรีตตามมาตรฐานทั่วไป ใช้อายุคอนกรีตกี่วันเป็นเกณฑ์', c:['เจ็ดวัน','สิบสี่วัน','ยี่สิบแปดวัน','เก้าสิบวัน'], a:2, e:'มาตรฐานการออกแบบและตรวจรับงานใช้กำลังอัดที่อายุยี่สิบแปดวันเป็นเกณฑ์หลัก' },
-      { s:'cemat', q:'เหล็กเส้นข้ออ้อย SD40 มีความหมายตรงกับข้อใด', c:['เหล็กกลมเรียบ กำลัง 2400 ksc','เหล็กกลมเรียบ กำลัง 4000 ksc','เหล็กข้ออ้อย กำลัง 3000 ksc','เหล็กข้ออ้อย กำลังครากไม่น้อยกว่า 4000 ksc'], a:3, e:'SD หมายถึงเหล็กข้ออ้อย และ 40 คือกำลังครากต่ำสุด 4000 ksc' }
+      { s:'cemat', q:'การทดสอบกำลังอัดของคอนกรีตตามมาตรฐานทั่วไป ใช้อายุคอนกรีตกี่วันเป็นเกณฑ์', c:['เจ็ดวัน','สิบสี่วัน','ยี่สิบแปดวัน','เก้าสิบวัน'], a:2, e:'มาตรฐานการออกแบบและตรวจรับงานใช้กำลังอัดที่อายุยี่สิบแปดวัน' }
     ]
   },
   arch: {
-    id: 'arch', icon: '📐', name: 'สถาปนิกปฏิบัติการ', category: 'partB', theme: 'theme-purple',
+    id: 'arch', icon: '📐', name: 'สถาปนิกปฏิบัติการ', category: 'partB', theme: 'theme-24', isNew: false,
     desc: 'กฎหมายควบคุมอาคาร · ระยะดิ่งและที่ว่างอาคาร · Universal Design',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'arlaw', q:'ห้องนอนในอาคารพักอาศัย ต้องมีระยะดิ่งจากพื้นถึงเพดานไม่น้อยกว่าเท่าใด', c:['2.40 เมตร','2.60 เมตร','2.80 เมตร','3.00 เมตร'], a:1, e:'กฎกระทรวงกำหนดห้องนอน ห้องนั่งเล่น ต้องมีระยะดิ่งไม่น้อยกว่า 2.60 เมตร' },
-      { s:'ardes', q:'แนวคิด Universal Design (อารยสถาปัตย์) มีหลักการสำคัญตรงกับข้อใด', c:['ทุกคนใช้งานได้อย่างเท่าเทียม ปลอดภัย โดยไม่ต้องดัดแปลงพิเศษ','สร้างพื้นที่แยกเฉพาะสำหรับคนพิการ','เน้นความสวยงามก่อนค่อยเพิ่มทางลาด','เน้นประหยัดงบประมาณ'], a:0, e:'ออกแบบสภาพแวดล้อมให้คนทุกวัยใช้งานร่วมกันได้อย่างสะดวกและเสมอภาค' }
+      { s:'arlaw', q:'ห้องนอนในอาคารพักอาศัย ต้องมีระยะดิ่งจากพื้นถึงเพดานไม่น้อยกว่าเท่าใด', c:['2.40 เมตร','2.60 เมตร','2.80 เมตร','3.00 เมตร'], a:1, e:'กฎกระทรวงกำหนดห้องนอน ห้องนั่งเล่น ต้องมีระยะดิ่งไม่น้อยกว่า 2.60 เมตร' }
     ]
   },
   me: {
-    id: 'me', icon: '⚙️', name: 'วิศวกรเครื่องกลปฏิบัติการ', category: 'partB', theme: 'theme-cyan',
+    id: 'me', icon: '⚙️', name: 'วิศวกรเครื่องกลปฏิบัติการ', category: 'partB', theme: 'theme-28', isNew: false,
     desc: 'เทอร์โมไดนามิกส์ · วัฏจักรทำความเย็นแบบอัดไอ · เครื่องยนต์และปั๊มน้ำ',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'methe', q:'ขนาดทำความเย็น 1 ตันความเย็น (Ton of Refrigeration) มีค่าเท่ากับกี่ BTU/hr', c:['9000 BTU/hr','12000 BTU/hr','18000 BTU/hr','24000 BTU/hr'], a:1, e:'1 ตันความเย็น = 12000 BTU ต่อชั่วโมง' },
-      { s:'memac', q:'เครื่องยนต์ดีเซลต่างจากเครื่องยนต์เบนซินในสาระสำคัญตามข้อใด', c:['ดีเซลใช้หัวเทียนจุดระเบิด','ดีเซลทำงาน 2 จังหวะเสมอ','ดีเซลจุดระเบิดด้วยความร้อนจากการอัดอากาศความดันสูง','ดีเซลมีอัตราส่วนการอัดต่ำกว่า'], a:2, e:'เครื่องยนต์ดีเซลอัดอากาศจนร้อนจัดแล้วฉีดน้ำมันให้ลุกไหม้เองโดยไม่ต้องพึ่งหัวเทียน' }
+      { s:'methe', q:'ขนาดทำความเย็น 1 ตันความเย็น (Ton of Refrigeration) มีค่าเท่ากับกี่ BTU/hr', c:['9000 BTU/hr','12000 BTU/hr','18000 BTU/hr','24000 BTU/hr'], a:1, e:'1 ตันความเย็น = 12000 BTU ต่อชั่วโมง' }
     ]
   },
   cd: {
-    id: 'cd', icon: '🤝', name: 'นักพัฒนาชุมชนปฏิบัติการ', category: 'partB', theme: 'theme-emerald',
+    id: 'cd', icon: '🤝', name: 'นักพัฒนาชุมชนปฏิบัติการ', category: 'partB', theme: 'theme-27', isNew: true,
     desc: 'หลักการมีส่วนร่วมของชุมชน · การจัดเก็บข้อมูล จปฐ. · สวัสดิการและเบี้ยยังชีพ',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'cdprin', q:'การจัดเก็บข้อมูลความจำเป็นพื้นฐาน (จปฐ.) มีรอบการจัดเก็บอย่างไร', c:['จัดเก็บเป็นประจำทุกปีในระดับครัวเรือน','จัดเก็บทุกสองปี','จัดเก็บทุกห้าปี','จัดเก็บเฉพาะเมื่อร้องขอ'], a:0, e:'จปฐ. จัดเก็บทุกปีในระดับครัวเรือนเพื่อชี้วัดคุณภาพชีวิต' },
-      { s:'cdwel', q:'การจ่ายเบี้ยยังชีพผู้สูงอายุแบบขั้นบันได ผู้มีอายุ 90 ปีขึ้นไปได้รับเดือนละเท่าใด', c:['หกร้อยบาท','เจ็ดร้อยบาท','แปดร้อยบาท','หนึ่งพันบาท'], a:3, e:'อายุ 90 ปีขึ้นไปได้รับ 1,000 บาทต่อเดือน' }
+      { s:'cdprin', q:'การจัดเก็บข้อมูลความจำเป็นพื้นฐาน (จปฐ.) มีรอบการจัดเก็บอย่างไร', c:['จัดเก็บเป็นประจำทุกปีในระดับครัวเรือน','จัดเก็บทุกสองปี','จัดเก็บทุกห้าปี','จัดเก็บเฉพาะเมื่อร้องขอ'], a:0, e:'จปฐ. จัดเก็บทุกปีในระดับครัวเรือนเพื่อชี้วัดคุณภาพชีวิต' }
     ]
   },
   policy: {
-    id: 'policy', icon: '📊', name: 'นักวิเคราะห์นโยบายและแผนปฏิบัติการ', category: 'partB', theme: 'theme-blue',
+    id: 'policy', icon: '📊', name: 'นักวิเคราะห์นโยบายและแผนปฏิบัติการ', category: 'partB', theme: 'theme-35', isNew: false,
     desc: 'แผนพัฒนาท้องถิ่น 5 ปี · ยุทธศาสตร์ชาติ 20 ปี · เครื่องมือวิเคราะห์ SWOT และ PDCA',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'plplan', q:'แผนพัฒนาท้องถิ่นขององค์กรปกครองส่วนท้องถิ่นในปัจจุบัน มีห้วงระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:2, e:'ระเบียบ มท. กำหนดให้ใช้ แผนพัฒนาท้องถิ่น 5 ปี' },
-      { s:'pltool', q:'วงจรบริหารงานคุณภาพ PDCA ประกอบด้วยขั้นตอนใดตามลำดับ', c:['วางแผน ปฏิบัติ ตรวจสอบ ปรับปรุงแก้ไข (Plan-Do-Check-Act)','ผลิต ตรวจสอบ จำหน่าย ปรับปรุง','จัดซื้อ ปฏิบัติ ควบคุม ประเมิน','วิเคราะห์ ออกแบบ พัฒนา ติดตั้ง'], a:0, e:'Plan (วางแผน) -> Do (ปฏิบัติ) -> Check (ตรวจสอบ) -> Act (ปรับปรุงแก้ไข)' }
+      { s:'plplan', q:'แผนพัฒนาท้องถิ่นขององค์กรปกครองส่วนท้องถิ่นในปัจจุบัน มีห้วงระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:2, e:'ระเบียบ มท. กำหนดให้ใช้ แผนพัฒนาท้องถิ่น 5 ปี' }
     ]
   },
   gen: {
-    id: 'gen', icon: '📋', name: 'นักจัดการงานทั่วไปปฏิบัติการ', category: 'partB', theme: 'theme-amber',
+    id: 'gen', icon: '📋', name: 'นักจัดการงานทั่วไปปฏิบัติการ', category: 'partB', theme: 'theme-34', isNew: true,
     desc: 'ระเบียบสำนักนายกฯ ว่าด้วยงานสารบรรณ · การประชุมราชการ · การบริหารงานสำนักงาน',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'gnsar', q:'ตามระเบียบงานสารบรรณ หนังสือราชการมีกี่ชนิด', c:['สี่ชนิด','ห้าชนิด','หกชนิด','เจ็ดชนิด'], a:2, e:'มีหกชนิด: ภายนอก, ภายใน, ประทับตรา, สั่งการ, ประชาสัมพันธ์, และหนังสือที่เจ้าหน้าที่ทำขึ้น/รับไว้' },
-      { s:'gnsar', q:'หนังสือราชการที่ปฏิบัติเสร็จสิ้นแล้ว โดยปกติต้องเก็บรักษาไว้อย่างน้อยกี่ปี', c:['ห้าปี','สิบปี','สิบห้าปี','ยี่สิบปี'], a:1, e:'ระเบียบกำหนดให้เก็บรักษาหนังสือราชการไว้ไม่น้อยกว่าสิบปี' }
+      { s:'gnsar', q:'ตามระเบียบงานสารบรรณ หนังสือราชการมีกี่ชนิด', c:['สี่ชนิด','ห้าชนิด','หกชนิด','เจ็ดชนิด'], a:2, e:'มีหกชนิด: ภายนอก, ภายใน, ประทับตรา, สั่งการ, ประชาสัมพันธ์, และหนังสือที่เจ้าหน้าที่ทำขึ้น/รับไว้' }
     ]
   }
 };
@@ -530,7 +595,7 @@ const DEFAULT_BANK = {
 function loadAppBank() {
   const saved = localStorage.getItem('localgov_app_bank');
   if (saved) {
-    try { return JSON.parse(saved); } catch (e) { console.warn('โหลดฐานข้อมูลไม่สำเร็จ ใช้ค่าเริ่มต้น'); }
+    try { return JSON.parse(saved); } catch (e) { console.warn('ใช้ฐานข้อมูลเริ่มต้น'); }
   }
   return JSON.parse(JSON.stringify(DEFAULT_BANK));
 }
@@ -551,6 +616,7 @@ let userAnswers = {};
 let timerInterval = null;
 let timeLeft = 0;
 let isReviewing = false;
+let inAdminMode = false;
 
 document.getElementById('modeSelect').value = currentMode;
 
@@ -574,11 +640,15 @@ function renderCards() {
     const p = window.BANK[key];
     if (activeFilter !== 'all' && p.category !== activeFilter) return;
 
-    const themeClass = p.theme || 'theme-blue';
+    const themeClass = p.theme || 'theme-1';
     const card = document.createElement('div');
     card.className = `card ${themeClass}`;
     card.onclick = () => openBriefing(key);
+
+    const newBadge = p.isNew ? `<span class="badge-new">🔥 อัปเดตใหม่</span>` : '';
+
     card.innerHTML = `
+      ${newBadge}
       <div>
         <div class="card-top">
           <div class="card-icon">${p.icon || '📝'}</div>
@@ -760,14 +830,58 @@ function backToHome() {
 }
 
 /* ================= ฟังก์ชันระบบหลังบ้าน ADMIN STUDIO ================= */
-function openAdminModal() {
+// ระบบความปลอดภัยป้องกันการเผลอปิด
+window.addEventListener('beforeunload', function (e) {
+  if (inAdminMode) {
+    e.preventDefault();
+    e.returnValue = 'คุณกำลังอยู่ในระบบหลังบ้าน ข้อมูลอาจยังไม่ถูกบันทึกเสร็จสิ้น ต้องการออกหรือไม่?';
+  }
+});
+
+function requestAdminAccess() {
+  document.getElementById('adminWarningModal').classList.remove('hidden');
+}
+
+function closeAdminWarning() {
+  document.getElementById('adminWarningModal').classList.add('hidden');
+}
+
+function enterAdminStudio() {
+  closeAdminWarning();
+  inAdminMode = true;
+  initThemeOptions();
   populateAdminPacks();
+  loadSavedSheetUrl();
   document.getElementById('adminModal').classList.remove('hidden');
 }
 
 function closeAdminModal() {
-  document.getElementById('adminModal').classList.add('hidden');
-  renderCards();
+  if (confirm('คุณตรวจสอบและบันทึกการแก้ไขครบถ้วนแล้วใช่หรือไม่?')) {
+    inAdminMode = false;
+    document.getElementById('adminModal').classList.add('hidden');
+    renderCards();
+  }
+}
+
+function switchAdmTab(tabId, btnEl) {
+  document.querySelectorAll('.adm-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.adm-tab-content').forEach(c => c.classList.add('hidden'));
+  btnEl.classList.add('active');
+  document.getElementById(tabId).classList.remove('hidden');
+}
+
+function initThemeOptions() {
+  const selects = [document.getElementById('admCurrentTheme'), document.getElementById('npTheme')];
+  selects.forEach(sel => {
+    if (sel.options.length === 0) {
+      for (let i = 1; i <= 50; i++) {
+        const opt = document.createElement('option');
+        opt.value = `theme-${i}`;
+        opt.innerText = `ธีมสีที่ ${i} (Theme ${i})`;
+        sel.appendChild(opt);
+      }
+    }
+  });
 }
 
 function populateAdminPacks() {
@@ -787,9 +901,11 @@ function populateAdminPacks() {
 function onAdminSelectPack(key) {
   const p = window.BANK[key];
   if (!p) return;
-  document.getElementById('admCurrentTheme').value = p.theme || 'theme-blue';
+  document.getElementById('admCurrentTheme').value = p.theme || 'theme-1';
   document.getElementById('admCurrentCategory').value = p.category || 'partB';
+  document.getElementById('admIsNewCheckbox').checked = !!p.isNew;
   document.getElementById('admQCount').innerText = p.q ? p.q.length : 0;
+  document.getElementById('admQPackLabel').innerText = `ชุด: ${p.name}`;
 }
 
 function updateCurrentTheme(val) {
@@ -804,6 +920,14 @@ function updateCurrentCategory(val) {
   const key = document.getElementById('admPosSelect').value;
   if (window.BANK[key]) {
     window.BANK[key].category = val;
+    saveAppBank(window.BANK);
+  }
+}
+
+function updateCurrentNewStatus(val) {
+  const key = document.getElementById('admPosSelect').value;
+  if (window.BANK[key]) {
+    window.BANK[key].isNew = val;
     saveAppBank(window.BANK);
   }
 }
@@ -830,7 +954,7 @@ function saveNewPack() {
   }
 
   window.BANK[id] = {
-    id: id, icon: icon, name: name, category: cat, theme: theme,
+    id: id, icon: icon, name: name, category: cat, theme: theme, isNew: true,
     tag: cat === 'partB' ? 'ภาค ข ความรู้เฉพาะตำแหน่ง' : (cat === 'partA_all' ? 'ภาค ก รวมทุกหมวด' : 'ภาค ก รายหมวด'),
     desc: desc, sec: 7200, mins: 120, pass: 60, q: []
   };
@@ -880,6 +1004,65 @@ function addQuestionToCurrentPack() {
   document.getElementById('admChoice3').value = '';
   document.getElementById('admExp').value = '';
   alert('เพิ่มข้อสอบสำเร็จเรียบร้อย');
+}
+
+/* ================= เชื่อมต่อ GOOGLE SHEETS ================= */
+function loadSavedSheetUrl() {
+  const url = localStorage.getItem('localgov_sheet_url') || '';
+  document.getElementById('sheetUrlInput').value = url;
+}
+
+function saveAndSyncSheet() {
+  const url = document.getElementById('sheetUrlInput').value.trim();
+  if (!url) { alert('กรุณากรอก URL'); return; }
+  localStorage.setItem('localgov_sheet_url', url);
+  syncSheetData();
+}
+
+function syncSheetData() {
+  const url = localStorage.getItem('localgov_sheet_url') || document.getElementById('sheetUrlInput').value.trim();
+  const statusEl = document.getElementById('sheetSyncStatus');
+  if (!url) {
+    statusEl.innerHTML = '<span style="color:var(--danger)">⚠️ ยังไม่ได้ระบุ Web App URL</span>';
+    return;
+  }
+
+  statusEl.innerHTML = '<span>🔄 กำลังดาวน์โหลดข้อมูลจาก Google Sheets...</span>';
+
+  fetch(url)
+    .then(res => res.json())
+    .then(remoteBank => {
+      if (!remoteBank || Object.keys(remoteBank).length === 0) {
+        statusEl.innerHTML = '<span style="color:var(--warning)">⚠️ ข้อมูลในชีตว่างเปล่า</span>';
+        return;
+      }
+      Object.keys(remoteBank).forEach(k => {
+        window.BANK[k] = remoteBank[k];
+      });
+      saveAppBank(window.BANK);
+      populateAdminPacks();
+      statusEl.innerHTML = `<span style="color:var(--success)">✅ ซิงค์สำเร็จ! (${Object.keys(remoteBank).length} ตำแหน่ง)</span>`;
+    })
+    .catch(err => {
+      statusEl.innerHTML = `<span style="color:var(--danger)">❌ ซิงค์ไม่สำเร็จ: ${err.message}</span>`;
+    });
+}
+
+// ตรวจสอบและดึงข้อมูลจาก Sheets อัตโนมัติเมื่อเริ่มเปิดเว็บ
+function autoSyncSheetOnLoad() {
+  const url = localStorage.getItem('localgov_sheet_url');
+  if (url && url.startsWith('http')) {
+    fetch(url)
+      .then(res => res.json())
+      .then(remoteBank => {
+        if (remoteBank && Object.keys(remoteBank).length > 0) {
+          Object.keys(remoteBank).forEach(k => { window.BANK[k] = remoteBank[k]; });
+          saveAppBank(window.BANK);
+          renderCards();
+        }
+      })
+      .catch(e => console.warn('Auto sync skipped'));
+  }
 }
 
 /* ================= ระบบสำรองข้อมูล (BACKUP / RESTORE) ================= */
@@ -943,6 +1126,7 @@ function resetToFactoryDefault() {
 
 window.onload = () => {
   renderCards();
+  autoSyncSheetOnLoad();
 };
 </script>
 </body>
