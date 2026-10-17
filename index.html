@@ -45,10 +45,10 @@
   </div>
 
   <div class="flex gap-2 mb-6 overflow-x-auto pb-1">
-    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 active-tab transition whitespace-nowrap shadow-sm" onclick="filterTab('all', this)">📌 ทั้งหมด</button>
-    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm" onclick="filterTab('partA_all', this)">🏆 ภาค ก รวมทุกหมวด</button>
-    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm" onclick="filterTab('partA_sub', this)">📖 ภาค ก ฝึกซ้อมรายหมวด</button>
-    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm" onclick="filterTab('partB', this)">💼 ภาค ข ความรู้เฉพาะตำแหน่ง</button>
+    <button class="px-4 py-2 rounded-full border border-slate-200 bg-blue-600 text-white text-sm font-semibold transition whitespace-nowrap shadow-sm tab-btn active" onclick="filterTab('all', this)">📌 ทั้งหมด</button>
+    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partA_all', this)">🏆 ภาค ก รวมทุกหมวด</button>
+    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partA_sub', this)">📖 ภาค ก ฝึกซ้อมรายหมวด</button>
+    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partB', this)">💼 ภาค ข ความรู้เฉพาะตำแหน่ง</button>
   </div>
 
   <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
@@ -60,8 +60,8 @@
     <div id="briefTitle" class="text-lg font-bold mb-3 flex items-center gap-2"></div>
     <div id="briefDetail" class="bg-slate-50 rounded-xl p-4 mb-5 text-sm leading-relaxed text-slate-700"></div>
     <div class="flex gap-3">
-      <button class="flex-1 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition" onclick="closeModal()">ยกเลิก</button>
-      <button class="flex-1 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition" onclick="confirmStart()">เริ่มทำข้อสอบ ➔</button>
+      <button class="flex-1 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition cursor-pointer" onclick="closeModal()">ยกเลิก</button>
+      <button class="flex-1 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition cursor-pointer" onclick="confirmStart()">เริ่มทำข้อสอบ ➔</button>
     </div>
   </div>
 </div>
@@ -84,9 +84,9 @@
   </div>
 
   <div class="flex justify-between gap-3 mb-4">
-    <button class="px-5 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition text-sm" onclick="prevQ()">⬅️ ข้อก่อนหน้า</button>
-    <button id="nextBtn" class="px-5 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition text-sm" onclick="nextQ()">ข้อถัดไป ➡️</button>
-    <button id="submitBtn" class="px-5 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition text-sm hidden" onclick="submitExam()">📝 ส่งข้อสอบ</button>
+    <button class="px-5 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition text-sm cursor-pointer" onclick="prevQ()">⬅️ ข้อก่อนหน้า</button>
+    <button id="nextBtn" class="px-5 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition text-sm cursor-pointer" onclick="nextQ()">ข้อถัดไป ➡️</button>
+    <button id="submitBtn" class="px-5 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition text-sm hidden cursor-pointer" onclick="submitExam()">📝 ส่งข้อสอบ</button>
   </div>
 
   <div id="palette" class="grid grid-cols-10 gap-1.5 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm"></div>
@@ -103,8 +103,8 @@
       <span class="text-sm text-slate-500" id="fullScoreText"> / 10 ข้อ</span>
     </div>
     <div class="flex gap-3 justify-center">
-      <button class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition text-sm" onclick="backToHome()">กลับหน้าหลัก</button>
-      <button class="px-6 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition text-sm" onclick="reviewExam()">🔍 ดูเฉลยละเอียด</button>
+      <button class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition text-sm cursor-pointer" onclick="backToHome()">กลับหน้าหลัก</button>
+      <button class="px-6 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition text-sm cursor-pointer" onclick="reviewExam()">🔍 ดูเฉลยละเอียด</button>
     </div>
   </div>
 </div>
@@ -114,14 +114,14 @@
   <div class="bg-white w-full max-w-md rounded-2xl p-6 shadow-2xl">
     <div class="text-amber-600 font-bold text-lg mb-3">⚠️ คำเตือนความปลอดภัยระบบหลังบ้าน</div>
     <div class="bg-slate-50 rounded-xl p-4 mb-5 text-sm text-slate-700 leading-relaxed">
-      <p>คุณกำลังจะเข้าสู่ <b>Admin Studio (ระบบจัดการข้อสอบ)</b></p><br>
+      <p>คุณกำลังจะเข้าสู่ <b>Admin Studio (ระบบจัดการข้อสอบชั้นสูง)</b></p><br>
       <p>• การแก้ไข ลบ หรือนำเข้าข้อมูลจะมีผลกับระบบคลังข้อสอบทันที</p>
       <p>• ระบบจะล็อกการปิดหน้าจอชั่วคราว เพื่อป้องกันข้อมูลสูญหาย</p>
       <p class="mt-2">• <b>โปรดกดปุ่ม "กดออกเมื่อทำเสร็จ ✖" ที่มุมขวาบน เมื่อทำรายการเสร็จสิ้นเท่านั้น</b></p>
     </div>
     <div class="flex gap-3">
-      <button class="flex-1 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition" onclick="closeAdminWarning()">ยกเลิก</button>
-      <button class="flex-1 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition" onclick="enterAdminStudio()">รับทราบและเข้าสู่ระบบ ➔</button>
+      <button class="flex-1 py-3 bg-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-300 transition cursor-pointer" onclick="closeAdminWarning()">ยกเลิก</button>
+      <button class="flex-1 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition cursor-pointer" onclick="enterAdminStudio()">รับทราบและเข้าสู่ระบบ ➔</button>
     </div>
   </div>
 </div>
@@ -143,23 +143,23 @@
 
     <!-- เมนูแท็บหลังบ้าน -->
     <div class="flex gap-2 border-b-2 border-slate-200 mb-4 overflow-x-auto pb-2">
-      <button class="px-4 py-2 border-none bg-transparent text-sm font-semibold text-blue-600 border-b-2 border-blue-600 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabPositions', this)">🏷️ จัดการตำแหน่ง</button>
-      <button class="px-4 py-2 border-none bg-transparent text-sm font-semibold text-slate-500 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabQuestions', this)">📝 จัดการข้อสอบ</button>
-      <button class="px-4 py-2 border-none bg-transparent text-sm font-semibold text-slate-500 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabSheets', this)">🌐 เชื่อม Google Sheets</button>
-      <button class="px-4 py-2 border-none bg-transparent text-sm font-semibold text-slate-500 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabBackup', this)">💾 สำรองและกู้คืน</button>
+      <button class="adm-tab-btn px-4 py-2 border-none bg-transparent text-sm font-semibold text-blue-600 border-b-2 border-blue-600 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabPositions', this)">🏷️ จัดการตำแหน่ง</button>
+      <button class="adm-tab-btn px-4 py-2 border-none bg-transparent text-sm font-semibold text-slate-500 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabQuestions', this)">📝 จัดการข้อสอบ</button>
+      <button class="adm-tab-btn px-4 py-2 border-none bg-transparent text-sm font-semibold text-slate-500 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabSheets', this)">🌐 เชื่อม Google Sheets</button>
+      <button class="adm-tab-btn px-4 py-2 border-none bg-transparent text-sm font-semibold text-slate-500 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabBackup', this)">💾 สำรองและกู้คืน</button>
     </div>
 
     <!-- แท็บที่ 1: จัดการตำแหน่งและ 50 ธีมสีเดิม -->
     <div id="tabPositions" class="space-y-3">
       <div>
         <label class="text-xs font-medium text-slate-600 block mb-1">เลือกตำแหน่งที่ต้องการแก้ไข:</label>
-        <select id="admPosSelect" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-white" onchange="onAdminSelectPack(this.value)"></select>
+        <select id="admPosSelect" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-white cursor-pointer" onchange="onAdminSelectPack(this.value)"></select>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label class="text-xs font-medium text-slate-600 block mb-1">🎨 ธีมสีการ์ด (รองรับ 50 เฉดสี)</label>
-          <select id="editPosTheme" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-white font-medium shadow-xs" onchange="updateCurrentTheme(this.value)">
+          <select id="editPosTheme" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-white font-medium shadow-xs cursor-pointer" onchange="updateCurrentTheme(this.value)">
             <option value="classic">⚪ 1. ธีมคลาสสิก</option>
             <option value="slate">🪨 2. สเลทเทาเข้ม</option>
             <option value="zinc">⚙️ 3. ซิงค์เงิน</option>
@@ -214,7 +214,7 @@
         </div>
         <div>
           <label class="text-xs font-medium text-slate-600 block mb-1">หมวดหมู่ระบบ:</label>
-          <select id="admCurrentCategory" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-white" onchange="updateCurrentCategory(this.value)">
+          <select id="admCurrentCategory" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-white cursor-pointer" onchange="updateCurrentCategory(this.value)">
             <option value="partA_all">ภาค ก รวมทุกหมวด</option>
             <option value="partA_sub">ภาค ก รายหมวด</option>
             <option value="partB">ภาค ข เฉพาะตำแหน่ง</option>
@@ -224,7 +224,7 @@
 
       <div>
         <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-slate-700">
-          <input type="checkbox" id="admIsNewCheckbox" class="w-4 h-4 rounded text-blue-600" onchange="updateCurrentNewStatus(this.checked)">
+          <input type="checkbox" id="admIsNewCheckbox" class="w-4 h-4 rounded text-blue-600 cursor-pointer" onchange="updateCurrentNewStatus(this.checked)">
           <span>🔥 ติดป้ายสถานะ "อัปเดตใหม่" บนการ์ดตำแหน่งนี้</span>
         </label>
       </div>
@@ -241,7 +241,7 @@
           <input id="npId" class="p-2 border border-slate-200 rounded-lg text-sm bg-white" placeholder="ID อังกฤษ (เช่น it)">
           <input id="npName" class="p-2 border border-slate-200 rounded-lg text-sm bg-white" placeholder="ชื่อตำแหน่ง">
           <input id="npIcon" class="p-2 border border-slate-200 rounded-lg text-sm bg-white" placeholder="อีโมจิ (เช่น 💻)">
-          <select id="npCategory" class="p-2 border border-slate-200 rounded-lg text-sm bg-white">
+          <select id="npCategory" class="p-2 border border-slate-200 rounded-lg text-sm bg-white cursor-pointer">
             <option value="partB">ภาค ข เฉพาะตำแหน่ง</option>
             <option value="partA_sub">ภาค ก รายหมวด</option>
             <option value="partA_all">ภาค ก รวมทุกหมวด</option>
@@ -270,7 +270,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
         <div>
           <label class="text-xs font-medium text-slate-600 block mb-1">เฉลยข้อที่ถูก:</label>
-          <select id="admAns" class="w-full p-2 border border-slate-200 rounded-lg text-sm bg-white">
+          <select id="admAns" class="w-full p-2 border border-slate-200 rounded-lg text-sm bg-white cursor-pointer">
             <option value="0">ข้อ ก.</option>
             <option value="1">ข้อ ข.</option>
             <option value="2">ข้อ ค.</option>
@@ -388,7 +388,10 @@ const DEFAULT_BANK = {
     desc: 'ชุดจำลองสนามจริง: คิดวิเคราะห์เชิงคณิต · ภาษาไทย · กฎหมายท้องถิ่น 11 ฉบับ · ภาษาอังกฤษ',
     sec: 7200, mins: 120, pass: 60,
     q: [
-      { s:'math', q:'อนุกรมตัวเลข: 3, 7, 15, 31, 63, ... ตัวเลขถัดไปคือจำนวนใด', c:['95','115','127','135'], a:2, e:'ระยะห่างเพิ่มขึ้นเป็นสองเท่า: +4, +8, +16, +32, ดังนั้นตัวถัดไปคือ +64 ได้ 63 + 64 = 127' }
+      { s:'math', q:'อนุกรมตัวเลข: 3, 7, 15, 31, 63, ... ตัวเลขถัดไปคือจำนวนใด', c:['95','115','127','135'], a:2, e:'ระยะห่างเพิ่มขึ้นเป็นสองเท่า: +4, +8, +16, +32, ดังนั้นตัวถัดไปคือ +64 ได้ 63 + 64 = 127' },
+      { s:'thai', q:'ข้อใดใช้คำราชาศัพท์ได้ถูกต้องตามหลักไวยากรณ์ไทย', c:['ทรงเสด็จพระราชดำเนินไปทรงเปิดงาน','เสด็จพระราชดำเนินไปเปิดงาน','เสด็จไปทรงพระดำเนิน','ทรงเสด็จไปเยือน'], a:1, e:'คำว่า "เสด็จพระราชดำเนิน" เป็นกริยาราชาศัพท์ในตัวเองอยู่แล้ว ไม่ต้องเติม "ทรง" ซ้อนข้างหน้า' },
+      { s:'law', q:'ตามพระราชบัญญัติระเบียบบริหารราชการแผ่นดิน พ.ศ. 2534 การจัดระเบียบบริหารราชการของไทยแบ่งเป็นกี่ส่วน', c:['2 ส่วน (ส่วนกลาง, ส่วนภูมิภาค)','3 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น)','4 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น, องค์การมหาชน)','3 ส่วน (ส่วนกลาง, ส่วนท้องถิ่น, ส่วนเอกชน)'], a:1, e:'มาตรา 4 แบ่งเป็น 1. ราชการส่วนกลาง 2. ราชการส่วนภูมิภาค 3. ราชการส่วนท้องถิ่น' },
+      { s:'eng', q:'Select the most suitable word: "The municipality _____ a new park project next Monday."', c:['launches','launched','will launch','has launched'], a:2, e:'มีตัวบอกเวลาในอนาคต "next Monday" จึงต้องใช้ Future Simple Tense (will + V.1)' }
     ]
   },
   partA_math: {
@@ -410,14 +413,14 @@ const DEFAULT_BANK = {
     tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'purple', isNew: true,
     desc: 'พ.ร.บ.อบจ., เทศบาล, อบต., พัทยา, กำหนดแผนกระจายอำนาจ, และการบริหารกิจการบ้านเมืองที่ดี',
     sec: 3600, mins: 60, pass: 60,
-    q: [{ s:'l', q:'ผู้ว่าราชการจังหวัดใช้อำนาจกำกับดูแลองค์การบริหารส่วนจังหวัดในลักษณะใด', c:['บังคับบัญชาโดยตรง','กำกับดูแลตามที่กฎหมายกำหนด','ตรวจสอบภายในทุกสัปดาห์','ไม่มีอำนาจกำกับดูแล'], a:1, e:'ราชการส่วนภูมิภาคมีอำนาจ "กำกับดูแล" (Supervision)' }]
+    q: [{ s:'l', q:'ผู้ว่าราชการจังหวัดใช้อำนาจกำกับดูแลองค์การบริหารส่วนจังหวัดในลักษณะใด', c:['บังคับบัญชาโดยตรง','กำกับดูแลตามที่กฎหมายกำหนด','ตรวจสอบภายในทุกสัปดาห์','ไม่มีอำนาจกำกับดูแล'], a:1, e:'ราชการส่วนภูมิภาคมีอำนาจ "กำกับดูแล" (Supervision) องค์กรปกครองส่วนท้องถิ่นตามขอบเขตที่กฎหมายบัญญัติ' }]
   },
   partA_eng: {
     id: 'partA_eng', icon: '🌐', name: 'ภาค ก: ภาษาอังกฤษสำหรับการปฏิบัติงาน',
     tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'sky', isNew: false,
     desc: 'Structure & Grammar, Vocabulary, Conversation ในสำนักงาน และ Reading Comprehension',
     sec: 3600, mins: 60, pass: 60,
-    q: [{ s:'e', q:'"Could you please submit the financial report by Friday?" ประโยคนี้มีเจตนาตามข้อใด', c:['Giving an order','Making a polite request','Refusing an offer','Apologizing'], a:1, e:'ขึ้นต้นด้วย "Could you please..." เป็นสำนวนการขอร้องอย่างสุภาพ' }]
+    q: [{ s:'e', q:'"Could you please submit the financial report by Friday?" ประโยคนี้มีเจตนาตามข้อใด', c:['Giving an order','Making a polite request','Refusing an offer','Apologizing'], a:1, e:'ขึ้นต้นด้วย "Could you please..." เป็นสำนวนการขอร้องอย่างสุภาพ (Polite request)' }]
   },
   edu: {
     id: 'edu', icon: '🎓', name: 'นักวิชาการศึกษาปฏิบัติการ', category: 'partB', theme: 'blue', isNew: true,
@@ -435,13 +438,13 @@ const DEFAULT_BANK = {
     id: 'fin', icon: '💰', name: 'นักวิชาการเงินและบัญชีปฏิบัติการ', category: 'partB', theme: 'amber', isNew: true,
     desc: 'ระเบียบการเงินการคลังท้องถิ่น · พ.ร.บ.จัดซื้อจัดจ้างฯ · หลักการบัญชีคู่',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'finlaw', q:'ปีงบประมาณของส่วนราชการและองค์กรปกครองส่วนท้องถิ่น เริ่มต้นและสิ้นสุดเมื่อใด', c:['1 ม.ค. ถึง 31 ธ.ค.','1 ต.ค. ถึง 30 ก.ย. ของปีถัดไป','1 เม.ย. ถึง 31 มี.ค. ของปีถัดไป','1 ก.ค. ถึง 30 มิ.ย. ของปีถัดไป'], a:1, e:'เริ่ม 1 ต.ค. ถึง 30 ก.ย.' }]
+    q: [{ s:'finlaw', q:'ปีงบประมาณของส่วนราชการและองค์กรปกครองส่วนท้องถิ่น เริ่มต้นและสิ้นสุดเมื่อใด', c:['1 ม.ค. ถึง 31 ธ.ค.','1 ต.ค. ถึง 30 ก.ย. ของปีถัดไป','1 เม.ย. ถึง 31 มี.ค. ของปีถัดไป','1 ก.ค. ถึง 30 มิ.ย. ของปีถัดไป'], a:1, e:'เริ่มตั้งแต่วันที่ 1 ตุลาคมของปีหนึ่ง ถึง 30 กันยายนของปีถัดไป' }]
   },
   reg: {
     id: 'reg', icon: '🪪', name: 'นักจัดการงานทะเบียนและบัตรปฏิบัติการ', category: 'partB', theme: 'cyan', isNew: false,
     desc: 'กฎหมายทะเบียนราษฎร · บัตรประจำตัวประชาชน · การแจ้งเกิด/ตาย/ย้ายที่อยู่',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'regciv', q:'เมื่อมีคนเกิดในบ้าน เจ้าบ้านต้องแจ้งการเกิดต่อนายทะเบียนภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน'], a:2, e:'กำหนดให้แจ้งภายใน 15 วัน' }]
+    q: [{ s:'regciv', q:'เมื่อมีคนเกิดในบ้าน เจ้าบ้านต้องแจ้งการเกิดต่อนายทะเบียนภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน'], a:2, e:'พ.ร.บ.การทะเบียนราษฎร มาตรา 18 กำหนดให้แจ้งภายในสิบห้าวัน' }]
   },
   urban: {
     id: 'urban', icon: '🗺️', name: 'นักผังเมืองปฏิบัติการ', category: 'partB', theme: 'stone', isNew: false,
@@ -453,68 +456,109 @@ const DEFAULT_BANK = {
     id: 'legal', icon: '⚖️', name: 'นิติกรปฏิบัติการ', category: 'partB', theme: 'crimson', isNew: true,
     desc: 'กฎหมายแพ่งและพาณิชย์ · กฎหมายอาญา · กฎหมายวิธีปฏิบัติราชการทางปกครอง',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'lgciv', q:'ตามประมวลกฎหมายแพ่งและพาณิชย์ บุคคลย่อมบรรลุนิติภาวะเมื่อใด', c:['อายุสิบแปดปีบริบูรณ์','อายุยี่สิบปีบริบูรณ์ หรือเมื่อสมรสโดยชอบด้วยกฎหมาย','อายุยี่สิบปีบริบูรณ์เท่านั้น','อายุยี่สิบเอ็ดปีบริบูรณ์'], a:1, e:'บรรลุนิติภาวะเมื่ออายุ 20 ปีบริบูรณ์' }]
+    q: [{ s:'lgciv', q:'ตามประมวลกฎหมายแพ่งและพาณิชย์ บุคคลย่อมบรรลุนิติภาวะเมื่อใด', c:['อายุสิบแปดปีบริบูรณ์','อายุยี่สิบปีบริบูรณ์ หรือเมื่อสมรสโดยชอบด้วยกฎหมาย','อายุยี่สิบปีบริบูรณ์เท่านั้น','อายุยี่สิบเอ็ดปีบริบูรณ์'], a:1, e:'บรรลุนิติภาวะเมื่ออายุ 20 ปีบริบูรณ์ หรือเมื่อทำการสมรสชอบด้วยกฎหมาย' }]
   },
   disaster: {
     id: 'disaster', icon: '🚒', name: 'นักป้องกันและบรรเทาสาธารณภัยปฏิบัติการ', category: 'partB', theme: 'orange', isNew: true,
     desc: 'พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 · การกู้ภัยและระงับอัคคีภัย',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'dslaw', q:'ในเขตองค์การบริหารส่วนตำบล ผู้ใดเป็นผู้อำนวยการท้องถิ่นในการป้องกันภัย', c:['นายก อบต.','ปลัด อบต.','นายอำเภอ','กำนัน'], a:0, e:'ผู้บริหารท้องถิ่นเป็น ผอ.ท้องถิ่น' }]
+    q: [{ s:'dslaw', q:'ในเขตองค์การบริหารส่วนตำบล ผู้ใดเป็นผู้อำนวยการท้องถิ่นในการป้องกันภัย', c:['นายก อบต.','ปลัด อบต.','นายอำเภอ','กำนัน'], a:0, e:'มาตรา 20 กำหนดให้ผู้บริหารท้องถิ่นเป็นผู้อำนวยการท้องถิ่น' }]
   },
   ee: {
     id: 'ee', icon: '⚡', name: 'วิศวกรไฟฟ้าปฏิบัติการ', category: 'partB', theme: 'royal', isNew: false,
     desc: 'ทฤษฎีวงจรไฟฟ้า · ระบบไฟฟ้ากำลัง 3 เฟส 4 สาย · ความปลอดภัยและการต่อลงดิน',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'eetheo', q:'ตามกฎของโอห์ม หากความต้านทาน 20 โอห์ม มีกระแสไหล 3 แอมแปร์ แรงดันตกคร่อมคือเท่าใด', c:['50 โวลต์','60 โวลต์','70 โวลต์','80 โวลต์'], a:1, e:'V = I × R = 60V' }]
+    q: [{ s:'eetheo', q:'ตามกฎของโอห์ม หากความต้านทาน 20 โอห์ม มีกระแสไหล 3 แอมแปร์ แรงดันตกคร่อมคือเท่าใด', c:['50 โวลต์','60 โวลต์','70 โวลต์','80 โวลต์'], a:1, e:'V = I × R = 3 × 20 = 60 โวลต์' }]
   },
   ce: {
     id: 'ce', icon: '🏗️', name: 'วิศวกรโยธาปฏิบัติการ', category: 'partB', theme: 'forest', isNew: false,
     desc: 'วัสดุและเทคโนโลยีคอนกรีต · การทดสอบ Slump และ CBR · การควบคุมงานก่อสร้าง',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'cemat', q:'การทดสอบกำลังอัดของคอนกรีตตามมาตรฐานทั่วไป ใช้อายุคอนกรีตกี่วันเป็นเกณฑ์', c:['เจ็ดวัน','สิบสี่วัน','ยี่สิบแปดวัน','เก้าสิบวัน'], a:2, e:'ใช้อายุ 28 วันเป็นเกณฑ์หลัก' }]
+    q: [{ s:'cemat', q:'การทดสอบกำลังอัดของคอนกรีตตามมาตรฐานทั่วไป ใช้อายุคอนกรีตกี่วันเป็นเกณฑ์', c:['เจ็ดวัน','สิบสี่วัน','ยี่สิบแปดวัน','เก้าสิบวัน'], a:2, e:'มาตรฐานการออกแบบและตรวจรับงานใช้กำลังอัดที่อายุยี่สิบแปดวัน' }]
   },
   arch: {
     id: 'arch', icon: '📐', name: 'สถาปนิกปฏิบัติการ', category: 'partB', theme: 'violet', isNew: false,
     desc: 'กฎหมายควบคุมอาคาร · ระยะดิ่งและที่ว่างอาคาร · Universal Design',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'arlaw', q:'ห้องนอนในอาคารพักอาศัย ต้องมีระยะดิ่งจากพื้นถึงเพดานไม่น้อยกว่าเท่าใด', c:['2.40 เมตร','2.60 เมตร','2.80 เมตร','3.00 เมตร'], a:1, e:'ไม่น้อยกว่า 2.60 เมตร' }]
+    q: [{ s:'arlaw', q:'ห้องนอนในอาคารพักอาศัย ต้องมีระยะดิ่งจากพื้นถึงเพดานไม่น้อยกว่าเท่าใด', c:['2.40 เมตร','2.60 เมตร','2.80 เมตร','3.00 เมตร'], a:1, e:'กฎกระทรวงกำหนดห้องนอน ห้องนั่งเล่น ต้องมีระยะดิ่งไม่น้อยกว่า 2.60 เมตร' }]
   },
   me: {
     id: 'me', icon: '⚙️', name: 'วิศวกรเครื่องกลปฏิบัติการ', category: 'partB', theme: 'slate', isNew: false,
     desc: 'เทอร์โมไดนามิกส์ · วัฏจักรทำความเย็นแบบอัดไอ · เครื่องยนต์และปั๊มน้ำ',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'methe', q:'ขนาดทำความเย็น 1 ตันความเย็น (Ton of Refrigeration) มีค่าเท่ากับกี่ BTU/hr', c:['9000 BTU/hr','12000 BTU/hr','18000 BTU/hr','24000 BTU/hr'], a:1, e:'12000 BTU/hr' }]
+    q: [{ s:'methe', q:'ขนาดทำความเย็น 1 ตันความเย็น (Ton of Refrigeration) มีค่าเท่ากับกี่ BTU/hr', c:['9000 BTU/hr','12000 BTU/hr','18000 BTU/hr','24000 BTU/hr'], a:1, e:'1 ตันความเย็น = 12000 BTU ต่อชั่วโมง' }]
   },
   cd: {
     id: 'cd', icon: '🤝', name: 'นักพัฒนาชุมชนปฏิบัติการ', category: 'partB', theme: 'mint', isNew: true,
     desc: 'หลักการมีส่วนร่วมของชุมชน · การจัดเก็บข้อมูล จปฐ. · สวัสดิการและเบี้ยยังชีพ',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'cdprin', q:'การจัดเก็บข้อมูลความจำเป็นพื้นฐาน (จปฐ.) มีรอบการจัดเก็บอย่างไร', c:['จัดเก็บเป็นประจำทุกปีในระดับครัวเรือน','จัดเก็บทุกสองปี','จัดเก็บทุกห้าปี','จัดเก็บเฉพาะเมื่อร้องขอ'], a:0, e:'จัดเก็บทุกปีในระดับครัวเรือน' }]
+    q: [{ s:'cdprin', q:'การจัดเก็บข้อมูลความจำเป็นพื้นฐาน (จปฐ.) มีรอบการจัดเก็บอย่างไร', c:['จัดเก็บเป็นประจำทุกปีในระดับครัวเรือน','จัดเก็บทุกสองปี','จัดเก็บทุกห้าปี','จัดเก็บเฉพาะเมื่อร้องขอ'], a:0, e:'จปฐ. จัดเก็บทุกปีในระดับครัวเรือนเพื่อชี้วัดคุณภาพชีวิต' }]
   },
   policy: {
     id: 'policy', icon: '📊', name: 'นักวิเคราะห์นโยบายและแผนปฏิบัติการ', category: 'partB', theme: 'ocean', isNew: false,
     desc: 'แผนพัฒนาท้องถิ่น 5 ปี · ยุทธศาสตร์ชาติ 20 ปี · เครื่องมือวิเคราะห์ SWOT และ PDCA',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'plplan', q:'แผนพัฒนาท้องถิ่นขององค์กรปกครองส่วนท้องถิ่นในปัจจุบัน มีห้วงระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:2, e:'แผนพัฒนาท้องถิ่น 5 ปี' }]
+    q: [{ s:'plplan', q:'แผนพัฒนาท้องถิ่นขององค์กรปกครองส่วนท้องถิ่นในปัจจุบัน มีห้วงระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:2, e:'ระเบียบ มท. กำหนดให้ใช้ แผนพัฒนาท้องถิ่น 5 ปี' }]
   },
   gen: {
     id: 'gen', icon: '📋', name: 'นักจัดการงานทั่วไปปฏิบัติการ', category: 'partB', theme: 'gold', isNew: true,
     desc: 'ระเบียบสำนักนายกฯ ว่าด้วยงานสารบรรณ · การประชุมราชการ · การบริหารงานสำนักงาน',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'gnsar', q:'ตามระเบียบงานสารบรรณ หนังสือราชการมีกี่ชนิด', c:['สี่ชนิด','ห้าชนิด','หกชนิด','เจ็ดชนิด'], a:2, e:'มีหกชนิด' }]
+    q: [{ s:'gnsar', q:'ตามระเบียบงานสารบรรณ หนังสือราชการมีกี่ชนิด', c:['สี่ชนิด','ห้าชนิด','หกชนิด','เจ็ดชนิด'], a:2, e:'มีหกชนิด: ภายนอก, ภายใน, ประทับตรา, สั่งการ, ประชาสัมพันธ์, และหนังสือที่เจ้าหน้าที่ทำขึ้น/รับไว้' }]
   }
 };
 
-/* ================= จัดการหน่วยความจำระบบ ================= */
+/* ================= ปรับแต่งและตรวจสอบความสมบูรณ์ของข้อสอบ ================= */
+function normalizeQuestion(rawQ) {
+  let qText = rawQ.q || rawQ.question || rawQ.text || 'ไม่มีโจทย์คำถาม';
+  let choices = rawQ.c || rawQ.choices || rawQ.options || [];
+  
+  if (typeof choices === 'string') {
+    choices = choices.split('|').map(s => s.trim());
+  }
+  if (!Array.isArray(choices) || choices.length === 0) {
+    choices = ['ตัวเลือก ก', 'ตัวเลือก ข', 'ตัวเลือก ค', 'ตัวเลือก ง'];
+  }
+
+  let ans = 0;
+  if (rawQ.a !== undefined) ans = parseInt(rawQ.a, 10);
+  else if (rawQ.answer !== undefined) {
+    if (typeof rawQ.answer === 'number') ans = rawQ.answer;
+    else if (['ก', 'a', '0'].includes(String(rawQ.answer).toLowerCase())) ans = 0;
+    else if (['ข', 'b', '1'].includes(String(rawQ.answer).toLowerCase())) ans = 1;
+    else if (['ค', 'c', '2'].includes(String(rawQ.answer).toLowerCase())) ans = 2;
+    else if (['ง', 'd', '3'].includes(String(rawQ.answer).toLowerCase())) ans = 3;
+  }
+
+  let exp = rawQ.e || rawQ.explain || rawQ.explanation || 'ไม่มีคำอธิบายเพิ่มเติม';
+  let sub = rawQ.s || rawQ.subject || 'general';
+
+  return { s: sub, q: qText, c: choices, a: isNaN(ans) ? 0 : ans, e: exp };
+}
+
 function loadAppBank() {
   const saved = localStorage.getItem('localgov_app_bank');
+  let bankObj = null;
   if (saved) {
-    try { return JSON.parse(saved); } catch (e) { console.warn('ใช้ฐานข้อมูลเริ่มต้น'); }
+    try { bankObj = JSON.parse(saved); } catch (e) { bankObj = null; }
   }
-  return JSON.parse(JSON.stringify(DEFAULT_BANK));
+  if (!bankObj) bankObj = JSON.parse(JSON.stringify(DEFAULT_BANK));
+
+  Object.keys(bankObj).forEach(k => {
+    let pack = bankObj[k];
+    let rawList = pack.q || pack.questions || [];
+    pack.q = rawList.map(item => normalizeQuestion(item));
+  });
+
+  return bankObj;
 }
 
 function saveAppBank(bankObj) {
+  Object.keys(bankObj).forEach(k => {
+    let pack = bankObj[k];
+    let rawList = pack.q || pack.questions || [];
+    pack.q = rawList.map(item => normalizeQuestion(item));
+  });
   window.BANK = bankObj;
   localStorage.setItem('localgov_app_bank', JSON.stringify(bankObj));
 }
@@ -560,24 +604,25 @@ function renderCards() {
 
     const t = getThemeClasses(p.theme || 'classic');
     const card = document.createElement('div');
-    card.className = `card rounded-2xl p-5 shadow-sm transition-all duration-200 cursor-pointer flex flex-col justify-between relative overflow-hidden ${t.card}`;
+    card.className = `rounded-2xl p-5 shadow-sm transition-all duration-200 cursor-pointer flex flex-col justify-between relative overflow-hidden ${t.card}`;
     card.onclick = () => openBriefing(key);
 
     const newBadge = p.isNew ? `<span class="badge-new">🔥 อัปเดตใหม่</span>` : '';
+    const qCount = p.q ? p.q.length : 0;
 
     card.innerHTML = `
       ${newBadge}
       <div>
-        <div class="card-top">
-          <div class="card-icon text-3xl w-14 h-14 rounded-xl flex items-center justify-center shrink-0 bg-white/20">${p.icon || '📝'}</div>
+        <div class="flex items-start gap-3.5 mb-3">
+          <div class="text-3xl w-14 h-14 rounded-xl flex items-center justify-center shrink-0 bg-white/20">${p.icon || '📝'}</div>
           <div>
-            <div class="card-title text-lg font-bold leading-snug">${p.name}</div>
-            <span class="card-badge inline-block text-[11px] font-medium px-2 py-0.5 rounded-md mt-1 bg-white/20 ${t.subText}">${p.tag || 'ข้อสอบมาตรฐาน'}</span>
+            <div class="text-lg font-bold leading-snug">${p.name}</div>
+            <span class="inline-block text-[11px] font-medium px-2 py-0.5 rounded-md mt-1 bg-white/20 ${t.subText}">${p.tag || 'ข้อสอบมาตรฐาน'}</span>
           </div>
         </div>
-        <div class="card-desc text-xs opacity-90 leading-relaxed mb-4 line-clamp-2 ${t.descText}">${p.desc || ''}</div>
+        <div class="text-xs opacity-90 leading-relaxed mb-4 line-clamp-2 ${t.descText}">${p.desc || ''}</div>
       </div>
-      <button class="card-btn w-full py-2.5 rounded-xl text-sm transition font-semibold ${t.btn}">เข้าทำข้อสอบ (${p.q.length} ข้อ) ➔</button>
+      <button class="w-full py-2.5 rounded-xl text-sm transition font-semibold ${t.btn}">เข้าทำข้อสอบ (${qCount} ข้อ) ➔</button>
     `;
     grid.appendChild(card);
   });
@@ -651,53 +696,92 @@ function renderPalette() {
   pal.innerHTML = '';
   activePack.q.forEach((_, idx) => {
     const btn = document.createElement('button');
-    btn.className = `pal-btn ${userAnswers[idx] !== undefined ? 'answered' : ''} ${idx === currentQIdx ? 'current' : ''}`;
+    const isAns = (userAnswers[idx] !== undefined);
+    const isCur = (idx === currentQIdx);
+    
+    let btnClass = 'h-9 rounded-lg border font-semibold text-xs transition cursor-pointer ';
+    if (isAns) {
+      btnClass += 'bg-blue-600 text-white border-blue-600 ';
+    } else {
+      btnClass += 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 ';
+    }
+    if (isCur) {
+      btnClass += 'ring-2 ring-slate-900 ring-offset-1 ';
+    }
+    
+    btn.className = btnClass;
     btn.innerText = idx + 1;
     btn.onclick = () => { currentQIdx = idx; renderQuestion(); };
     pal.appendChild(btn);
   });
 }
 
+/* ===== ปรับปรุงการเรนเดอร์ข้อสอบและตรวจเช็กคำตอบแบบปลอดภัย 100% ===== */
 function renderQuestion() {
   const q = activePack.q[currentQIdx];
+  if (!q) return;
+
   document.getElementById('qNum').innerText = `คำถามข้อที่ ${currentQIdx + 1} จากทั้งหมด ${activePack.q.length} ข้อ`;
   document.getElementById('qText').innerText = q.q;
-  
+
   const cBox = document.getElementById('choiceContainer');
   cBox.innerHTML = '';
   const expBox = document.getElementById('expBox');
   expBox.classList.add('hidden');
-  
+
+  const selectedAnswer = userAnswers[currentQIdx];
+
   q.c.forEach((choiceText, cIdx) => {
     const div = document.createElement('div');
-    div.className = 'choice-item';
     
-    if (userAnswers[currentQIdx] === cIdx) div.classList.add('selected');
-    
-    if ((currentMode === 'practice' && userAnswers[currentQIdx] !== undefined) || isReviewing) {
-      if (cIdx === q.a) div.classList.add('correct');
-      else if (userAnswers[currentQIdx] === cIdx) div.classList.add('incorrect');
+    const isSelected = (selectedAnswer !== undefined && Number(selectedAnswer) === Number(cIdx));
+    const isCorrect = (Number(cIdx) === Number(q.a));
+
+    let baseClass = 'w-full p-4 rounded-xl border-2 transition-all duration-150 flex items-center gap-3 cursor-pointer select-none text-sm ';
+
+    if (isSelected) {
+      baseClass += 'border-blue-600 bg-blue-50 text-blue-900 font-semibold shadow-xs ';
+    } else {
+      baseClass += 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-800 ';
     }
-    
-    div.innerHTML = `<span style="font-weight:700; width:24px;">${['ก','ข','ค','ง'][cIdx]}.</span> <span>${choiceText}</span>`;
-    div.onclick = () => selectChoice(cIdx);
+
+    if ((currentMode === 'practice' && selectedAnswer !== undefined) || isReviewing) {
+      if (isCorrect) {
+        baseClass = 'w-full p-4 rounded-xl border-2 transition-all duration-150 flex items-center gap-3 text-sm border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold shadow-xs ';
+      } else if (isSelected && !isCorrect) {
+        baseClass = 'w-full p-4 rounded-xl border-2 transition-all duration-150 flex items-center gap-3 text-sm border-red-500 bg-red-50 text-red-900 shadow-xs ';
+      }
+    }
+
+    div.className = baseClass;
+    div.innerHTML = `
+      <span class="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center font-bold text-xs shrink-0">${['ก','ข','ค','ง'][cIdx] || (cIdx+1)}</span>
+      <span class="leading-relaxed flex-1">${choiceText}</span>
+    `;
+
+    div.onclick = function() {
+      selectChoice(cIdx);
+    };
+
     cBox.appendChild(div);
   });
 
-  if (((currentMode === 'practice' && userAnswers[currentQIdx] !== undefined) || isReviewing) && q.e) {
-    expBox.innerHTML = `<b>💡 เฉลยและคำอธิบาย:</b> ข้อที่ถูกต้องคือ <b>ข้อ ${['ก','ข','ค','ง'][q.a]}</b><br>${q.e}`;
+  if (((currentMode === 'practice' && selectedAnswer !== undefined) || isReviewing) && q.e) {
+    const correctLabel = ['ก','ข','ค','ง'][q.a] || (Number(q.a) + 1);
+    expBox.innerHTML = `<b>💡 เฉลยและคำอธิบาย:</b> คำตอบที่ถูกต้องคือ <b>ข้อ ${correctLabel}</b><br><span class="mt-1 block text-slate-700">${q.e}</span>`;
     expBox.classList.remove('hidden');
   }
 
-  document.getElementById('nextBtn').classList.toggle('hidden', currentQIdx === activePack.q.length - 1);
-  document.getElementById('submitBtn').classList.toggle('hidden', currentQIdx !== activePack.q.length - 1 && currentMode !== 'exam');
+  const isLast = (currentQIdx === activePack.q.length - 1);
+  document.getElementById('nextBtn').classList.toggle('hidden', isLast);
+  document.getElementById('submitBtn').classList.toggle('hidden', !isLast && currentMode !== 'exam');
 
   renderPalette();
 }
 
 function selectChoice(idx) {
   if (isReviewing) return;
-  userAnswers[currentQIdx] = idx;
+  userAnswers[currentQIdx] = Number(idx);
   renderQuestion();
 }
 
@@ -713,7 +797,9 @@ function submitExam() {
   clearInterval(timerInterval);
   let score = 0;
   activePack.q.forEach((q, idx) => {
-    if (userAnswers[idx] === q.a) score++;
+    if (userAnswers[idx] !== undefined && Number(userAnswers[idx]) === Number(q.a)) {
+      score++;
+    }
   });
   
   const percent = Math.round((score / activePack.q.length) * 100);
@@ -781,12 +867,12 @@ function closeAdminModal() {
 
 function switchAdmTab(tabId, btnEl) {
   document.querySelectorAll('.adm-tab-btn').forEach(b => {
-    b.style.color = '#64748b';
-    b.style.borderBottom = '2px solid transparent';
+    b.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+    b.classList.add('text-slate-500');
   });
   document.querySelectorAll('.adm-tab-content').forEach(c => c.classList.add('hidden'));
-  btnEl.style.color = '#2563eb';
-  btnEl.style.borderBottom = '2px solid #2563eb';
+  btnEl.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+  btnEl.classList.remove('text-slate-500');
   document.getElementById(tabId).classList.remove('hidden');
 }
 
@@ -927,28 +1013,26 @@ function syncSheetData() {
   const url = localStorage.getItem('localgov_sheet_url') || document.getElementById('sheetUrlInput').value.trim();
   const statusEl = document.getElementById('sheetSyncStatus');
   if (!url) {
-    statusEl.innerHTML = '<span style="color:#dc2626">⚠️ ยังไม่ได้ระบุ Web App URL</span>';
+    statusEl.innerHTML = '<span class="text-red-600">⚠️ ยังไม่ได้ระบุ Web App URL</span>';
     return;
   }
 
-  statusEl.innerHTML = '<span>🔄 กำลังดาวน์โหลดข้อมูลจาก Google Sheets...</span>';
+  statusEl.innerHTML = '<span class="text-blue-600">🔄 กำลังดาวน์โหลดข้อมูลจาก Google Sheets...</span>';
 
   fetch(url)
     .then(res => res.json())
     .then(remoteBank => {
       if (!remoteBank || Object.keys(remoteBank).length === 0) {
-        statusEl.innerHTML = '<span style="color:#f59e0b">⚠️ ข้อมูลในชีตว่างเปล่า</span>';
+        statusEl.innerHTML = '<span class="text-amber-600">⚠️ ข้อมูลในชีตว่างเปล่า</span>';
         return;
       }
-      Object.keys(remoteBank).forEach(k => {
-        window.BANK[k] = remoteBank[k];
-      });
-      saveAppBank(window.BANK);
+      saveAppBank(remoteBank);
       populateAdminPacks();
-      statusEl.innerHTML = `<span style="color:#16a34a">✅ ซิงค์สำเร็จ! (${Object.keys(remoteBank).length} ตำแหน่ง)</span>`;
+      statusEl.innerHTML = `<span class="text-emerald-600 font-bold">✅ ซิงค์สำเร็จ! (${Object.keys(remoteBank).length} ตำแหน่ง)</span>`;
+      renderCards();
     })
     .catch(err => {
-      statusEl.innerHTML = `<span style="color:#dc2626">❌ ซิงค์ไม่สำเร็จ: ${err.message}</span>`;
+      statusEl.innerHTML = `<span class="text-red-600">❌ ซิงค์ไม่สำเร็จ: ${err.message}</span>`;
     });
 }
 
@@ -959,8 +1043,7 @@ function autoSyncSheetOnLoad() {
       .then(res => res.json())
       .then(remoteBank => {
         if (remoteBank && Object.keys(remoteBank).length > 0) {
-          Object.keys(remoteBank).forEach(k => { window.BANK[k] = remoteBank[k]; });
-          saveAppBank(window.BANK);
+          saveAppBank(remoteBank);
           renderCards();
         }
       })
@@ -996,6 +1079,7 @@ function handleFileImport(evt) {
       if (typeof parsed === 'object') {
         saveAppBank(parsed);
         populateAdminPacks();
+        renderCards();
         alert('นำเข้าข้อมูลสำเร็จเรียบร้อยแล้ว!');
       }
     } catch (err) {
@@ -1012,6 +1096,7 @@ function importFromClipboard() {
     const parsed = JSON.parse(str);
     saveAppBank(parsed);
     populateAdminPacks();
+    renderCards();
     alert('กู้คืนข้อมูลสำเร็จเรียบร้อยแล้ว!');
   } catch (err) {
     alert('รูปแบบ JSON ผิดพลาด: ' + err.message);
@@ -1024,6 +1109,7 @@ function resetToFactoryDefault() {
   window.BANK = JSON.parse(JSON.stringify(DEFAULT_BANK));
   saveAppBank(window.BANK);
   populateAdminPacks();
+  renderCards();
   alert('คืนค่าเริ่มต้นโรงงานสำเร็จ');
 }
 
