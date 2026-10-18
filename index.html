@@ -41,14 +41,14 @@
 <div id="homeView" class="max-w-6xl mx-auto mt-6 px-4">
   <div class="mb-5">
     <h2 class="text-2xl font-bold text-slate-900">ระบบจำลองข้อสอบท้องถิ่น กสถ. (ภาค ก และ ภาค ข)</h2>
-    <p class="text-sm text-slate-500 mt-1">คลังข้อสอบมาตรฐาน อ้างอิงระเบียบกฎหมายท้องถิ่นและการประเมินผลสมรรถนะจริง</p>
+    <p class="text-sm text-slate-500 mt-1">คลังข้อสอบมาตรฐาน ครบทุกหมวดวิชา อ้างอิงระเบียบกฎหมายท้องถิ่นปัจจุบัน</p>
   </div>
 
   <div class="flex gap-2 mb-6 overflow-x-auto pb-1">
     <button class="px-4 py-2 rounded-full border border-slate-200 bg-blue-600 text-white text-sm font-semibold transition whitespace-nowrap shadow-sm tab-btn active" onclick="filterTab('all', this)">📌 ทั้งหมด</button>
-    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partA_all', this)">🏆 ภาค ก รวมทุกหมวด</button>
-    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partA_sub', this)">📖 ภาค ก ฝึกซ้อมรายหมวด</button>
-    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partB', this)">💼 ภาค ข ความรู้เฉพาะตำแหน่ง</button>
+    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partA_all', this)">🏆 ภาค ก (100 ข้อ)</button>
+    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partA_sub', this)">📖 ภาค ก (แยกรายหมวด)</button>
+    <button class="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-600 transition whitespace-nowrap shadow-sm tab-btn" onclick="filterTab('partB', this)">💼 ภาค ข (เฉพาะตำแหน่ง)</button>
   </div>
 
   <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
@@ -89,7 +89,7 @@
     <button id="submitBtn" class="px-5 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition text-sm hidden cursor-pointer" onclick="submitExam()">📝 ส่งข้อสอบ</button>
   </div>
 
-  <div id="palette" class="grid grid-cols-10 gap-1.5 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm"></div>
+  <div id="palette" class="grid grid-cols-10 gap-1.5 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm max-h-48 overflow-y-auto"></div>
 </div>
 
 <!-- หน้าสรุปผลการสอบ -->
@@ -129,7 +129,7 @@
 <!-- ปุ่มเปิดระบบหลังบ้าน Admin Studio -->
 <button class="fixed right-4 bottom-4 w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center text-xl shadow-lg cursor-pointer z-40 hover:scale-110 transition border-none" onclick="requestAdminAccess()" title="เปิดระบบหลังบ้าน">⚙️</button>
 
-<!-- Modal หลังบ้าน Admin Studio (แบบแยกแท็บ) -->
+<!-- Modal หลังบ้าน Admin Studio -->
 <div id="adminModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
   <div class="bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 shadow-2xl">
     <div class="flex justify-between items-center mb-4 border-b border-slate-200 pb-3">
@@ -149,7 +149,7 @@
       <button class="adm-tab-btn px-4 py-2 border-none bg-transparent text-sm font-semibold text-slate-500 cursor-pointer whitespace-nowrap -mb-2.5" onclick="switchAdmTab('tabBackup', this)">💾 สำรองและกู้คืน</button>
     </div>
 
-    <!-- แท็บที่ 1: จัดการตำแหน่งและ 50 ธีมสีเดิม -->
+    <!-- แท็บที่ 1: จัดการตำแหน่ง -->
     <div id="tabPositions" class="space-y-3">
       <div>
         <label class="text-xs font-medium text-slate-600 block mb-1">เลือกตำแหน่งที่ต้องการแก้ไข:</label>
@@ -160,56 +160,7 @@
         <div>
           <label class="text-xs font-medium text-slate-600 block mb-1">🎨 ธีมสีการ์ด (รองรับ 50 เฉดสี)</label>
           <select id="editPosTheme" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-white font-medium shadow-xs cursor-pointer" onchange="updateCurrentTheme(this.value)">
-            <option value="classic">⚪ 1. ธีมคลาสสิก</option>
-            <option value="slate">🪨 2. สเลทเทาเข้ม</option>
-            <option value="zinc">⚙️ 3. ซิงค์เงิน</option>
-            <option value="stone">🏛️ 4. สโตนอบอุ่น</option>
-            <option value="neutral">📄 5. นิวทรัลกระดาษ</option>
-            <option value="ocean">🌊 6. มหาสมุทร</option>
-            <option value="sky">🌤️ 7. ฟ้าพาสเทล</option>
-            <option value="indigo">🌌 8. เนบิวลา</option>
-            <option value="blue">📘 9. น้ำเงินแท้</option>
-            <option value="cyan">🧊 10. ไซแอนใส</option>
-            <option value="royal">👑 11. รอยัลบลู</option>
-            <option value="navy">⚓ 12. เนวี่กรมท่า</option>
-            <option value="lightblue">🔹 13. ฟ้าสว่าง</option>
-            <option value="midnight">🌙 14. มิดไนท์</option>
-            <option value="ice">❄️ 15. ไอซ์บลู</option>
-            <option value="emerald">🌿 16. มรกต</option>
-            <option value="mint">🍃 17. มินต์</option>
-            <option value="green">🌳 18. เขียวใบไม้</option>
-            <option value="teal">🦚 19. เทล</option>
-            <option value="forest">🌲 20. ฟอเรสต์</option>
-            <option value="lime">🍏 21. ไลม์</option>
-            <option value="sage">🌿 22. เซจ</option>
-            <option value="olive">🫒 23. โอลีฟ</option>
-            <option value="pistachio">🥜 24. พิสตาชิโอ</option>
-            <option value="seafoam">🌊 25. ซีโฟม</option>
-            <option value="amber">🔥 26. แอมอำพัน</option>
-            <option value="orange">🍊 27. ส้มแท้</option>
-            <option value="yellow">⭐ 28. เหลืองทอง</option>
-            <option value="gold">🪙 29. ทองประกาย</option>
-            <option value="sunset">🌅 30. ซันเซ็ต</option>
-            <option value="warmorange">🎃 31. ส้มฟักทอง</option>
-            <option value="lemon">🍋 32. เลมอน</option>
-            <option value="tangerine">🍊 33. แทงเจอรีน</option>
-            <option value="honey">🍯 34. น้ำผึ้ง</option>
-            <option value="autumn">🍁 35. ออทัมน์</option>
-            <option value="rose">🌹 36. กุหลาบ</option>
-            <option value="pink">🌸 37. ซากุระ</option>
-            <option value="red">❤️ 38. แดงเพลิง</option>
-            <option value="magenta">🌺 39. มาเจนต้า</option>
-            <option value="blush">🩰 40. บลัชพิงค์</option>
-            <option value="crimson">🍷 41. คริมสัน</option>
-            <option value="coral">🪸 42. ปะการัง</option>
-            <option value="ruby">💎 43. ทับทิม</option>
-            <option value="purple">🟣 44. ม่วงอิมพีเรียล</option>
-            <option value="violet">🔮 45. ไวโอเล็ต</option>
-            <option value="lavender">🪻 46. ลาเวนเดอร์</option>
-            <option value="plum">🍇 47. พลัม</option>
-            <option value="orchid">🪷 48. กล้วยไม้</option>
-            <option value="fuchsia">💜 49. ฟุกเซีย</option>
-            <option value="amethyst">💎 50. อเมทิสต์</option>
+            <option value="classic">⚪ 1. ธีมคลาสสิก</option><option value="slate">🪨 2. สเลทเทาเข้ม</option><option value="zinc">⚙️ 3. ซิงค์เงิน</option><option value="stone">🏛️ 4. สโตนอบอุ่น</option><option value="neutral">📄 5. นิวทรัลกระดาษ</option><option value="ocean">🌊 6. มหาสมุทร</option><option value="sky">🌤️ 7. ฟ้าพาสเทล</option><option value="indigo">🌌 8. เนบิวลา</option><option value="blue">📘 9. น้ำเงินแท้</option><option value="cyan">🧊 10. ไซแอนใส</option><option value="royal">👑 11. รอยัลบลู</option><option value="navy">⚓ 12. เนวี่กรมท่า</option><option value="lightblue">🔹 13. ฟ้าสว่าง</option><option value="midnight">🌙 14. มิดไนท์</option><option value="ice">❄️ 15. ไอซ์บลู</option><option value="emerald">🌿 16. มรกต</option><option value="mint">🍃 17. มินต์</option><option value="green">🌳 18. เขียวใบไม้</option><option value="teal">🦚 19. เทล</option><option value="forest">🌲 20. ฟอเรสต์</option><option value="lime">🍏 21. ไลม์</option><option value="sage">🌿 22. เซจ</option><option value="olive">🫒 23. โอลีฟ</option><option value="pistachio">🥜 24. พิสตาชิโอ</option><option value="seafoam">🌊 25. ซีโฟม</option><option value="amber">🔥 26. แอมอำพัน</option><option value="orange">🍊 27. ส้มแท้</option><option value="yellow">⭐ 28. เหลืองทอง</option><option value="gold">🪙 29. ทองประกาย</option><option value="sunset">🌅 30. ซันเซ็ต</option><option value="warmorange">🎃 31. ส้มฟักทอง</option><option value="lemon">🍋 32. เลมอน</option><option value="tangerine">🍊 33. แทงเจอรีน</option><option value="honey">🍯 34. น้ำผึ้ง</option><option value="autumn">🍁 35. ออทัมน์</option><option value="rose">🌹 36. กุหลาบ</option><option value="pink">🌸 37. ซากุระ</option><option value="red">❤️ 38. แดงเพลิง</option><option value="magenta">🌺 39. มาเจนต้า</option><option value="blush">🩰 40. บลัชพิงค์</option><option value="crimson">🍷 41. คริมสัน</option><option value="coral">🪸 42. ปะการัง</option><option value="ruby">💎 43. ทับทิม</option><option value="purple">🟣 44. ม่วงอิมพีเรียล</option><option value="violet">🔮 45. ไวโอเล็ต</option><option value="lavender">🪻 46. ลาเวนเดอร์</option><option value="plum">🍇 47. พลัม</option><option value="orchid">🪷 48. กล้วยไม้</option><option value="fuchsia">💜 49. ฟุกเซีย</option><option value="amethyst">💎 50. อเมทิสต์</option>
           </select>
         </div>
         <div>
@@ -380,48 +331,80 @@ function getThemeClasses(theme) {
   }
 }
 
-/* ================= ฐานข้อมูลเริ่มต้นมาตรฐาน 19 ชุด ================= */
+/* ================= ฐานข้อมูลคลังข้อสอบทั้งหมด ================= */
 const DEFAULT_BANK = {
+  /* ------------------- ภาค ก (100 ข้อ) ------------------- */
   partA_full: {
-    id: 'partA_full', icon: '🏆', name: 'ภาค ก ท้องถิ่น (รวมทุกหมวด)',
+    id: 'partA_full', icon: '🏆', name: 'ภาค ก ท้องถิ่น (รวม 100 ข้อ)',
     tag: 'ภาค ก ความรู้ความสามารถทั่วไป', category: 'partA_all', theme: 'indigo', isNew: true,
-    desc: 'ชุดจำลองสนามจริง: คิดวิเคราะห์เชิงคณิต · ภาษาไทย · กฎหมายท้องถิ่น 11 ฉบับ · ภาษาอังกฤษ',
+    desc: 'ข้อสอบจำลองสนามจริงครบชุด: คิดวิเคราะห์เชิงคณิต · ภาษาไทย · กฎหมายและ พ.ร.บ. · ภาษาอังกฤษ · ข่าวสารทั่วไป',
     sec: 7200, mins: 120, pass: 60,
     q: [
       { s:'math', q:'อนุกรมตัวเลข: 3, 7, 15, 31, 63, ... ตัวเลขถัดไปคือจำนวนใด', c:['95','115','127','135'], a:2, e:'ระยะห่างเพิ่มขึ้นเป็นสองเท่า: +4, +8, +16, +32, ดังนั้นตัวถัดไปคือ +64 ได้ 63 + 64 = 127' },
+      { s:'math', q:'สินค้าชิ้นหนึ่งติดราคาขายไว้ 1,200 บาท หากลดราคาให้ผู้ซื้อ 20% ร้านค้ายังคงได้กำไร 20% จงหาราคาทุนของสินค้านี้', c:['750 บาท','800 บาท','850 บาท','900 บาท'], a:1, e:'ราคาขายหลังลด 20% คือ 960 บาท คิดเป็น 120% ของทุน ดังนั้นทุน = (960×100)/120 = 800 บาท' },
       { s:'thai', q:'ข้อใดใช้คำราชาศัพท์ได้ถูกต้องตามหลักไวยากรณ์ไทย', c:['ทรงเสด็จพระราชดำเนินไปทรงเปิดงาน','เสด็จพระราชดำเนินไปเปิดงาน','เสด็จไปทรงพระดำเนิน','ทรงเสด็จไปเยือน'], a:1, e:'คำว่า "เสด็จพระราชดำเนิน" เป็นกริยาราชาศัพท์ในตัวเองอยู่แล้ว ไม่ต้องเติม "ทรง" ซ้อนข้างหน้า' },
-      { s:'law', q:'ตามพระราชบัญญัติระเบียบบริหารราชการแผ่นดิน พ.ศ. 2534 การจัดระเบียบบริหารราชการของไทยแบ่งเป็นกี่ส่วน', c:['2 ส่วน (ส่วนกลาง, ส่วนภูมิภาค)','3 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น)','4 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น, องค์การมหาชน)','3 ส่วน (ส่วนกลาง, ส่วนท้องถิ่น, ส่วนเอกชน)'], a:1, e:'มาตรา 4 แบ่งเป็น 1. ราชการส่วนกลาง 2. ราชการส่วนภูมิภาค 3. ราชการส่วนท้องถิ่น' },
-      { s:'eng', q:'Select the most suitable word: "The municipality _____ a new park project next Monday."', c:['launches','launched','will launch','has launched'], a:2, e:'มีตัวบอกเวลาในอนาคต "next Monday" จึงต้องใช้ Future Simple Tense (will + V.1)' }
+      { s:'thai', q:'สำนวนในข้อใดมีความหมายตรงกับคำว่า "ยอมจำนนเพราะจำนนด้วยพยานหลักฐาน"', c:['จนแต้ม','จับไม่ได้ไล่ไม่ทัน','มัดมือชก','จำนนต่อหลักฐาน'], a:0, e:'"จนแต้ม" หมายถึงหมดทางเดิน หรือยอมจำนนต่อสถานการณ์และหลักฐาน' },
+      { s:'law', q:'ตามพระราชบัญญัติระเบียบบริหารราชการแผ่นดิน พ.ศ. 2534 การจัดระเบียบบริหารราชการของไทยแบ่งเป็นกี่ส่วน', c:['2 ส่วน (ส่วนกลาง, ส่วนภูมิภาค)','3 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น)','4 ส่วน (ส่วนกลาง, ส่วนภูมิภาค, ส่วนท้องถิ่น, องค์การมหาชน)','3 ส่วน (ส่วนกลาง, ส่วนท้องถิ่น, ส่วนเอกชน)'], a:1, e:'มาตรา 4 แบ่งเป็น 3 ส่วน คือ ส่วนกลาง ส่วนภูมิภาค และส่วนท้องถิ่น' },
+      { s:'law', q:'องค์กรปกครองส่วนท้องถิ่นรูปแบบพิเศษในประเทศไทยปัจจุบัน ได้แก่ข้อใด', c:['พัทยา และ เทศบาลนครนครราชสีมา','กรุงเทพมหานคร และ เมืองพัทยา','กรุงเทพมหานคร และ อบจ.นนทบุรี','เทศบาลนครเชียงใหม่ และ เมืองพัทยา'], a:1, e:'รูปแบบพิเศษมี 2 แห่ง คือ กรุงเทพมหานคร และ เมืองพัทยา' },
+      { s:'eng', q:'Select the most suitable word: "The municipality _____ a new park project next Monday."', c:['launches','launched','will launch','has launched'], a:2, e:'มีตัวบอกเวลาในอนาคต "next Monday" ใช้ Future Simple Tense (will + V.1)' },
+      { s:'eng', q:'Choose the synonym of the word "EFFICIENT":', c:['Effective and productive','Slow and complicated','Careless and weak','Expensive and luxury'], a:0, e:'Efficient หมายถึง มีประสิทธิภาพ ตรงกับ Effective and productive' },
+      { s:'news', q:'นโยบายสำคัญในการขับเคลื่อนเศรษฐกิจดิจิทัลภาครัฐในปัจจุบัน เน้นการพัฒนาเรื่องใดเป็นหลัก', c:['การยกเลิกกระดาษทั้งหมดทันที','รัฐบาลดิจิทัล (Digital Government) และการเชื่อมโยงข้อมูลภาครัฐ','การสร้างสกุลเงินดิจิทัลของท้องถิ่น','การปิดบริการเคาน์เตอร์ราชการทั้งหมด'], a:1, e:'เน้นการบูรณาการบริการภาครัฐผ่านระบบดิจิทัลเพื่อให้ประชาชนเข้าถึงง่ายและโปร่งใส' }
     ]
   },
+
+  /* ------------------- หมวด ภาค ก แยกรายหมวด ------------------- */
   partA_math: {
-    id: 'partA_math', icon: '🧮', name: 'ภาค ก: คิดวิเคราะห์และคณิตศาสตร์',
+    id: 'partA_math', icon: '🧮', name: 'ภาค ก: หมวดคณิตศาสตร์และคิดวิเคราะห์',
     tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'emerald', isNew: true,
     desc: 'เจาะลึกอนุกรม ตรรกศาสตร์ เงื่อนไขสัญลักษณ์ คณิตศาสตร์ทั่วไป ร้อยละ และโจทย์ปัญหา',
     sec: 3600, mins: 60, pass: 60,
-    q: [{ s:'m', q:'อนุกรม: 2, 6, 12, 20, 30, ... พจน์ถัดไปคือเลขใด', c:['40','42','44','46'], a:1, e:'ระยะห่างคือ +4, +6, +8, +10 ดังนั้นตัวถัดไปคือ +12 ได้ 30 + 12 = 42' }]
+    q: [
+      { s:'m', q:'อนุกรม: 2, 6, 12, 20, 30, ... พจน์ถัดไปคือเลขใด', c:['40','42','44','46'], a:1, e:'ระยะห่างคือ +4, +6, +8, +10 ดังนั้นตัวถัดไปคือ +12 ได้ 30 + 12 = 42' },
+      { s:'m', q:'เสาไฟปักเรียงกันเป็นแถวตรง แต่ละต้นห่างกัน 5 เมตร ถ้ามีเสาไฟทั้งหมด 21 ต้น เสาต้นแรกกับต้นสุดท้ายห่างกันกี่เมตร', c:['100 เมตร','105 เมตร','110 เมตร','115 เมตร'], a:0, e:'เสา 21 ต้น มีช่วงว่าง 20 ช่วง นำ 20 × 5 = 100 เมตร' }
+    ]
   },
   partA_thai: {
-    id: 'partA_thai', icon: '📖', name: 'ภาค ก: ภาษาไทยและการสื่อสาร',
+    id: 'partA_thai', icon: '📖', name: 'ภาค ก: หมวดภาษาไทยและการสื่อสาร',
     tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'pink', isNew: false,
     desc: 'ความเข้าใจภาษา การเรียงรูปประโยค การจับใจความสำคัญ คำราชาศัพท์ และสำนวนไทย',
     sec: 3600, mins: 60, pass: 60,
-    q: [{ s:'t', q:'คำในข้อใดสะกดถูกต้องตามพจนานุกรมฉบับราชบัณฑิตยสถานทุกคำ', c:['กะเพรา อนุญาต สัมมนา','กระเพรา อนุญาต สัมมนา','กะเพรา อนุณาต สัมนา','กระเพรา อนุญาติ สัมมนา'], a:0, e:'กะเพรา (ไม่มี ร), อนุญาต (ไม่มีสระอิ), สัมมนา (ม ม้าสองตัว)' }]
+    q: [
+      { s:'t', q:'คำในข้อใดสะกดถูกต้องตามพจนานุกรมฉบับราชบัณฑิตยสถานทุกคำ', c:['กะเพรา อนุญาต สัมมนา','กระเพรา อนุญาต สัมมนา','กะเพรา อนุณาต สัมนา','กระเพรา อนุญาติ สัมมนา'], a:0, e:'กะเพรา (ไม่มี ร), อนุญาต (ไม่มีสระอิ), สัมมนา (ม ม้าสองตัว)' },
+      { s:'t', q:'ประโยคใดเป็นประโยคที่ไม่มีการกำกวมในด้านความหมาย', c:['เขาเห็นตำรวจจับขโมยบนรถเมล์','แม่บอกลูกสาวว่าเพื่อนของเธอมาหา','แพทย์ตรวจรักษาคนไข้ด้วยความตั้งใจในห้องตรวจ','ครูตีนักเรียนที่มาสายด้วยไม้เรียว'], a:2, e:'ข้อ 3 สื่อสารประธาน กริยา กรรม และสถานที่ได้อย่างชัดเจน ไม่มีคำขยายกำกวม' }
+    ]
   },
   partA_law: {
-    id: 'partA_law', icon: '⚖️', name: 'ภาค ก: กฎหมายการปฏิบัติราชการท้องถิ่น',
+    id: 'partA_law', icon: '⚖️', name: 'ภาค ก: หมวดพระราชบัญญัติ 14 ฉบับ',
     tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'purple', isNew: true,
-    desc: 'พ.ร.บ.อบจ., เทศบาล, อบต., พัทยา, กำหนดแผนกระจายอำนาจ, และการบริหารกิจการบ้านเมืองที่ดี',
+    desc: 'รวมข้อสอบเจาะลึก พ.ร.บ. เทศบาล, อบจ., อบต., แผนกระจายอำนาจ, วิธีปฏิบัติราชการทางปกครอง และอื่น ๆ',
     sec: 3600, mins: 60, pass: 60,
-    q: [{ s:'l', q:'ผู้ว่าราชการจังหวัดใช้อำนาจกำกับดูแลองค์การบริหารส่วนจังหวัดในลักษณะใด', c:['บังคับบัญชาโดยตรง','กำกับดูแลตามที่กฎหมายกำหนด','ตรวจสอบภายในทุกสัปดาห์','ไม่มีอำนาจกำกับดูแล'], a:1, e:'ราชการส่วนภูมิภาคมีอำนาจ "กำกับดูแล" (Supervision) องค์กรปกครองส่วนท้องถิ่นตามขอบเขตที่กฎหมายบัญญัติ' }]
+    q: [
+      { s:'l', q:'ผู้ว่าราชการจังหวัดใช้อำนาจกำกับดูแลองค์การบริหารส่วนจังหวัดในลักษณะใด', c:['บังคับบัญชาโดยตรง','กำกับดูแลตามที่กฎหมายกำหนด','ตรวจสอบภายในทุกสัปดาห์','ไม่มีอำนาจกำกับดูแล'], a:1, e:'ราชการส่วนภูมิภาคมีอำนาจ "กำกับดูแล" (Supervision) องค์กรปกครองส่วนท้องถิ่นตามขอบเขตที่กฎหมายบัญญัติ' },
+      { s:'l', q:'ข้อบัญญัติท้องถิ่นจะมีผลบังคับใช้ได้เมื่อใด', c:['เมื่อสภาท้องถิ่นมีมติเห็นชอบในวาระสาม','เมื่อผู้ว่าราชการจังหวัดลงนาม','เมื่อได้ประกาศไว้โดยเปิดเผย ณ สำนักงานท้องถิ่นตามกำหนด','เมื่อประชาชนลงประชามติ'], a:2, e:'ข้อบัญญัติท้องถิ่นต้องผ่านกระบวนการประกาศไว้โดยเปิดเผย ณ ที่ทำการ อปท. จึงจะมีผลใช้บังคับ' }
+    ]
   },
   partA_eng: {
-    id: 'partA_eng', icon: '🌐', name: 'ภาค ก: ภาษาอังกฤษสำหรับการปฏิบัติงาน',
+    id: 'partA_eng', icon: '🌐', name: 'ภาค ก: หมวดภาษาอังกฤษ (English Communication)',
     tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'sky', isNew: false,
     desc: 'Structure & Grammar, Vocabulary, Conversation ในสำนักงาน และ Reading Comprehension',
     sec: 3600, mins: 60, pass: 60,
-    q: [{ s:'e', q:'"Could you please submit the financial report by Friday?" ประโยคนี้มีเจตนาตามข้อใด', c:['Giving an order','Making a polite request','Refusing an offer','Apologizing'], a:1, e:'ขึ้นต้นด้วย "Could you please..." เป็นสำนวนการขอร้องอย่างสุภาพ (Polite request)' }]
+    q: [
+      { s:'e', q:'"Could you please submit the financial report by Friday?" ประโยคนี้มีเจตนาตามข้อใด', c:['Giving an order','Making a polite request','Refusing an offer','Apologizing'], a:1, e:'ขึ้นต้นด้วย "Could you please..." เป็นสำนวนการขอร้องอย่างสุภาพ (Polite request)' },
+      { s:'e', q:'Neither the officer nor the staff _____ available right now.', c:['is','are','be','were'], a:0, e:'โครงสร้าง Neither... nor... กริยาจะผันตามประธานตัวหลังสุด ซึ่ง "the staff" เป็นนามเอกพจน์ จึงใช้ is' }
+    ]
   },
+  partA_news: {
+    id: 'partA_news', icon: '📰', name: 'ภาค ก: หมวดข่าวสารทั่วไปและเหตุการณ์ปัจจุบัน',
+    tag: 'ภาค ก ฝึกซ้อมรายหมวด', category: 'partA_sub', theme: 'amber', isNew: true,
+    desc: 'ความรู้รอบตัว สังคม เศรษฐกิจ การเมือง นโยบายรัฐ และเหตุการณ์สำคัญล่าสุด',
+    sec: 3600, mins: 60, pass: 60,
+    q: [
+      { s:'n', q:'เป้าหมายการพัฒนาที่ยั่งยืน (SDGs) ขององค์การสหประชาชาติ กำหนดกรอบปีบรรลุเป้าหมายคือปีใด', c:['พ.ศ. 2570 (2027)','พ.ศ. 2573 (2030)','พ.ศ. 2580 (2037)','พ.ศ. 2593 (2050)'], a:1, e:'กรอบเป้าหมายการพัฒนาที่ยั่งยืน (SDGs) กำหนดไว้ให้สำเร็จภายในปี ค.ศ. 2030 (พ.ศ. 2573)' },
+      { s:'n', q:'การพัฒนาเศรษฐกิจ BCG Economy Model ประกอบด้วยเศรษฐกิจ 3 ด้าน ยกเว้นข้อใด', c:['Bio Economy (เศรษฐกิจชีวภาพ)','Circular Economy (เศรษฐกิจหมุนเวียน)','Green Economy (เศรษฐกิจสีเขียว)','Global Economy (เศรษฐกิจโลก)'], a:3, e:'BCG ย่อมาจาก Bio-Circular-Green Economy ไม่มี Global Economy' }
+    ]
+  },
+
+  /* ------------------- ภาค ข เฉพาะตำแหน่ง (รวมคอมพิวเตอร์และประชาสัมพันธ์) ------------------- */
   edu: {
     id: 'edu', icon: '🎓', name: 'นักวิชาการศึกษาปฏิบัติการ', category: 'partB', theme: 'blue', isNew: true,
     desc: 'พ.ร.บ.การศึกษาแห่งชาติ · การศึกษาภาคบังคับ · หลักสูตรและการจัดการเรียนรู้',
@@ -444,7 +427,7 @@ const DEFAULT_BANK = {
     id: 'reg', icon: '🪪', name: 'นักจัดการงานทะเบียนและบัตรปฏิบัติการ', category: 'partB', theme: 'cyan', isNew: false,
     desc: 'กฎหมายทะเบียนราษฎร · บัตรประจำตัวประชาชน · การแจ้งเกิด/ตาย/ย้ายที่อยู่',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'regciv', q:'เมื่อมีคนเกิดในบ้าน เจ้าบ้านต้องแจ้งการเกิดต่อนายทะเบียนภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน'], a:2, e:'พ.ร.บ.การทะเบียนราษฎร มาตรา 18 กำหนดให้แจ้งภายในสิบห้าวัน' }]
+    q: [{ s:'regciv', q:'เมื่อมีคนเกิดในบ้าน เจ้าบ้านต้องแจ้งการเกิดต่อนายทะเบียนภายในกี่วัน', c:['ภายในเจ็ดวัน','ภายในสิบวัน','ภายในสิบห้าวัน','ภายในสามสิบวัน'], a:2, e:'พ.ร.บ.การทะเบียนราษฎร มาตรา 18 กำหนดให้แจ้งภายในสิบห้าวันนับแต่วันเกิด' }]
   },
   urban: {
     id: 'urban', icon: '🗺️', name: 'นักผังเมืองปฏิบัติการ', category: 'partB', theme: 'stone', isNew: false,
@@ -456,41 +439,41 @@ const DEFAULT_BANK = {
     id: 'legal', icon: '⚖️', name: 'นิติกรปฏิบัติการ', category: 'partB', theme: 'crimson', isNew: true,
     desc: 'กฎหมายแพ่งและพาณิชย์ · กฎหมายอาญา · กฎหมายวิธีปฏิบัติราชการทางปกครอง',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'lgciv', q:'ตามประมวลกฎหมายแพ่งและพาณิชย์ บุคคลย่อมบรรลุนิติภาวะเมื่อใด', c:['อายุสิบแปดปีบริบูรณ์','อายุยี่สิบปีบริบูรณ์ หรือเมื่อสมรสโดยชอบด้วยกฎหมาย','อายุยี่สิบปีบริบูรณ์เท่านั้น','อายุยี่สิบเอ็ดปีบริบูรณ์'], a:1, e:'บรรลุนิติภาวะเมื่ออายุ 20 ปีบริบูรณ์ หรือเมื่อทำการสมรสชอบด้วยกฎหมาย' }]
+    q: [{ s:'lgciv', q:'ตามประมวลกฎหมายแพ่งและพาณิชย์ บุคคลย่อมบรรลุนิติภาวะเมื่อใด', c:['อายุสิบแปดปีบริบูรณ์','อายุยี่สิบปีบริบูรณ์ หรือเมื่อสมรสโดยชอบด้วยกฎหมาย','อายุยี่สิบปีบริบูรณ์เท่านั้น','อายุยี่สิบเอ็ดปีบริบูรณ์'], a:1, e:'บรรลุนิติภาวะเมื่ออายุครบยี่สิบปีบริบูรณ์ หรือเมื่อทำการสมรสตามเงื่อนไขกฎหมาย' }]
   },
   disaster: {
     id: 'disaster', icon: '🚒', name: 'นักป้องกันและบรรเทาสาธารณภัยปฏิบัติการ', category: 'partB', theme: 'orange', isNew: true,
     desc: 'พ.ร.บ.ป้องกันและบรรเทาสาธารณภัย พ.ศ. 2550 · การกู้ภัยและระงับอัคคีภัย',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'dslaw', q:'ในเขตองค์การบริหารส่วนตำบล ผู้ใดเป็นผู้อำนวยการท้องถิ่นในการป้องกันภัย', c:['นายก อบต.','ปลัด อบต.','นายอำเภอ','กำนัน'], a:0, e:'มาตรา 20 กำหนดให้ผู้บริหารท้องถิ่นเป็นผู้อำนวยการท้องถิ่น' }]
+    q: [{ s:'dslaw', q:'ในเขตองค์การบริหารส่วนตำบล ผู้ใดเป็นผู้อำนวยการท้องถิ่น', c:['นายก อบต.','ปลัด อบต.','นายอำเภอ','กำนัน'], a:0, e:'มาตรา 20 กำหนดให้ผู้บริหารท้องถิ่นเป็นผู้อำนวยการท้องถิ่น' }]
   },
   ee: {
     id: 'ee', icon: '⚡', name: 'วิศวกรไฟฟ้าปฏิบัติการ', category: 'partB', theme: 'royal', isNew: false,
-    desc: 'ทฤษฎีวงจรไฟฟ้า · ระบบไฟฟ้ากำลัง 3 เฟส 4 สาย · ความปลอดภัยและการต่อลงดิน',
+    desc: 'ทฤษฎีวงจรไฟฟ้า · ระบบไฟฟ้ากำลัง · ความปลอดภัยและการต่อลงดิน',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'eetheo', q:'ตามกฎของโอห์ม หากความต้านทาน 20 โอห์ม มีกระแสไหล 3 แอมแปร์ แรงดันตกคร่อมคือเท่าใด', c:['50 โวลต์','60 โวลต์','70 โวลต์','80 โวลต์'], a:1, e:'V = I × R = 3 × 20 = 60 โวลต์' }]
+    q: [{ s:'eetheo', q:'ตามกฎของโอห์ม หากความต้านทาน 20 โอห์ม มีกระแสไหล 3 แอมแปร์ แรงดันตกคร่อมคือเท่าใด', c:['50 โวลต์','60 โวลต์','70 โวลต์','80 โวลต์'], a:1, e:'แรงดัน (V) = กระแส (I) × ความต้านทาน (R) = 3 × 20 = 60 โวลต์' }]
   },
   ce: {
     id: 'ce', icon: '🏗️', name: 'วิศวกรโยธาปฏิบัติการ', category: 'partB', theme: 'forest', isNew: false,
-    desc: 'วัสดุและเทคโนโลยีคอนกรีต · การทดสอบ Slump และ CBR · การควบคุมงานก่อสร้าง',
+    desc: 'วัสดุและเทคโนโลยีคอนกรีต · ปฐพีกลศาสตร์ · การควบคุมงานก่อสร้าง',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'cemat', q:'การทดสอบกำลังอัดของคอนกรีตตามมาตรฐานทั่วไป ใช้อายุคอนกรีตกี่วันเป็นเกณฑ์', c:['เจ็ดวัน','สิบสี่วัน','ยี่สิบแปดวัน','เก้าสิบวัน'], a:2, e:'มาตรฐานการออกแบบและตรวจรับงานใช้กำลังอัดที่อายุยี่สิบแปดวัน' }]
+    q: [{ s:'cemat', q:'การทดสอบกำลังอัดของคอนกรีตตามมาตรฐานทั่วไป ใช้อายุคอนกรีตกี่วันเป็นเกณฑ์', c:['เจ็ดวัน','สิบสี่วัน','ยี่สิบแปดวัน','เก้าสิบวัน'], a:2, e:'มาตรฐานการออกแบบและตรวจรับงานใช้กำลังอัดที่อายุยี่สิบแปดวันเป็นค่าอ้างอิงหลัก' }]
   },
   arch: {
     id: 'arch', icon: '📐', name: 'สถาปนิกปฏิบัติการ', category: 'partB', theme: 'violet', isNew: false,
-    desc: 'กฎหมายควบคุมอาคาร · ระยะดิ่งและที่ว่างอาคาร · Universal Design',
+    desc: 'กฎหมายควบคุมอาคาร · วิชาชีพสถาปัตยกรรม · การออกแบบ Universal Design',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'arlaw', q:'ห้องนอนในอาคารพักอาศัย ต้องมีระยะดิ่งจากพื้นถึงเพดานไม่น้อยกว่าเท่าใด', c:['2.40 เมตร','2.60 เมตร','2.80 เมตร','3.00 เมตร'], a:1, e:'กฎกระทรวงกำหนดห้องนอน ห้องนั่งเล่น ต้องมีระยะดิ่งไม่น้อยกว่า 2.60 เมตร' }]
+    q: [{ s:'arlaw', q:'ห้องนอนในอาคารพักอาศัย ต้องมีระยะดิ่งจากพื้นถึงเพดานไม่น้อยกว่าเท่าใด', c:['2.40 เมตร','2.60 เมตร','2.80 เมตร','3.00 เมตร'], a:1, e:'กฎกระทรวงกำหนดห้องนอน ห้องนั่งเล่น ต้องมีระยะดิ่งพื้นถึงเพดานไม่น้อยกว่า 2.60 เมตร' }]
   },
   me: {
     id: 'me', icon: '⚙️', name: 'วิศวกรเครื่องกลปฏิบัติการ', category: 'partB', theme: 'slate', isNew: false,
-    desc: 'เทอร์โมไดนามิกส์ · วัฏจักรทำความเย็นแบบอัดไอ · เครื่องยนต์และปั๊มน้ำ',
+    desc: 'เทอร์โมไดนามิกส์ · เครื่องปรับอากาศ · เครื่องสูบน้ำและเครื่องจักรกล',
     sec: 7200, mins: 120, pass: 60,
     q: [{ s:'methe', q:'ขนาดทำความเย็น 1 ตันความเย็น (Ton of Refrigeration) มีค่าเท่ากับกี่ BTU/hr', c:['9000 BTU/hr','12000 BTU/hr','18000 BTU/hr','24000 BTU/hr'], a:1, e:'1 ตันความเย็น = 12000 BTU ต่อชั่วโมง' }]
   },
   cd: {
     id: 'cd', icon: '🤝', name: 'นักพัฒนาชุมชนปฏิบัติการ', category: 'partB', theme: 'mint', isNew: true,
-    desc: 'หลักการมีส่วนร่วมของชุมชน · การจัดเก็บข้อมูล จปฐ. · สวัสดิการและเบี้ยยังชีพ',
+    desc: 'หลักการพัฒนาชุมชน · ข้อมูล จปฐ. · สวัสดิการสังคมและเบี้ยยังชีพ',
     sec: 7200, mins: 120, pass: 60,
     q: [{ s:'cdprin', q:'การจัดเก็บข้อมูลความจำเป็นพื้นฐาน (จปฐ.) มีรอบการจัดเก็บอย่างไร', c:['จัดเก็บเป็นประจำทุกปีในระดับครัวเรือน','จัดเก็บทุกสองปี','จัดเก็บทุกห้าปี','จัดเก็บเฉพาะเมื่อร้องขอ'], a:0, e:'จปฐ. จัดเก็บทุกปีในระดับครัวเรือนเพื่อชี้วัดคุณภาพชีวิต' }]
   },
@@ -498,13 +481,51 @@ const DEFAULT_BANK = {
     id: 'policy', icon: '📊', name: 'นักวิเคราะห์นโยบายและแผนปฏิบัติการ', category: 'partB', theme: 'ocean', isNew: false,
     desc: 'แผนพัฒนาท้องถิ่น 5 ปี · ยุทธศาสตร์ชาติ 20 ปี · เครื่องมือวิเคราะห์ SWOT และ PDCA',
     sec: 7200, mins: 120, pass: 60,
-    q: [{ s:'plplan', q:'แผนพัฒนาท้องถิ่นขององค์กรปกครองส่วนท้องถิ่นในปัจจุบัน มีห้วงระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:2, e:'ระเบียบ มท. กำหนดให้ใช้ แผนพัฒนาท้องถิ่น 5 ปี' }]
+    q: [{ s:'plplan', q:'แผนพัฒนาท้องถิ่นขององค์กรปกครองส่วนท้องถิ่นในปัจจุบัน มีห้วงระยะเวลากี่ปี', c:['สามปี','สี่ปี','ห้าปี','สิบปี'], a:2, e:'ระเบียบกระทรวงมหาดไทยกำหนดให้ใช้ แผนพัฒนาท้องถิ่น 5 ปี' }]
   },
   gen: {
     id: 'gen', icon: '📋', name: 'นักจัดการงานทั่วไปปฏิบัติการ', category: 'partB', theme: 'gold', isNew: true,
-    desc: 'ระเบียบสำนักนายกฯ ว่าด้วยงานสารบรรณ · การประชุมราชการ · การบริหารงานสำนักงาน',
+    desc: 'ระเบียบงานสารบรรณ · การประชุมและการจัดทำรายงาน · การบริหารงานทั่วไป',
     sec: 7200, mins: 120, pass: 60,
     q: [{ s:'gnsar', q:'ตามระเบียบงานสารบรรณ หนังสือราชการมีกี่ชนิด', c:['สี่ชนิด','ห้าชนิด','หกชนิด','เจ็ดชนิด'], a:2, e:'มีหกชนิด: ภายนอก, ภายใน, ประทับตรา, สั่งการ, ประชาสัมพันธ์, และหนังสือที่เจ้าหน้าที่ทำขึ้น/รับไว้' }]
+  },
+
+  /* ================= เพิ่มเติมใหม่: นักวิชาการคอมพิวเตอร์ปฏิบัติการ (10 ข้อ) ================= */
+  computer: {
+    id: 'computer', icon: '💻', name: 'นักวิชาการคอมพิวเตอร์ปฏิบัติการ', category: 'partB', theme: 'cyan', isNew: true,
+    desc: 'ระบบเครือข่ายคอมพิวเตอร์ · ฐานข้อมูลและ SQL · ความปลอดภัยทางไซเบอร์ (PDPA/Cybersecurity)',
+    sec: 7200, mins: 120, pass: 60,
+    q: [
+      { s:'com', q:'โมเดล OSI Layer ใดทำหน้าที่กำหนดเส้นทาง (Routing) ของข้อมูลในเครือข่าย', c:['Physical Layer','Data Link Layer','Network Layer','Transport Layer'], a:2, e:'Network Layer (Layer 3) ทำหน้าที่ Routing และ Forwarding แพ็กเก็ตข้อมูลข้ามเครือข่าย' },
+      { s:'com', q:'โปรโตคอลใดใช้สำหรับการรับส่งอีเมลอย่างปลอดภัยผ่านพอร์ต 465 หรือ 587', c:['HTTP','FTP','SMTP','SNMP'], a:2, e:'SMTP (Simple Mail Transfer Protocol) ใช้สำหรับส่งอีเมล' },
+      { s:'com', q:'ในระบบฐานข้อมูลเชิงสัมพันธ์ คำสั่ง SQL ในข้อใดใช้สำหรับดึงข้อมูลจากตาราง', c:['INSERT','UPDATE','SELECT','DELETE'], a:2, e:'คำสั่ง SELECT ใช้สำหรับการสืบค้นและดึงข้อมูลจากตารางฐานข้อมูล' },
+      { s:'com', q:'ภัยคุกคามประเภทใดที่หลอกลวงผู้ใช้ผ่านอีเมลปลอมเพื่อให้เปิดเผยข้อมูลส่วนตัวหรือรหัสผ่าน', c:['Ransomware','Phishing','DDoS','Spyware'], a:1, e:'Phishing คือการปลอมแปลงอีเมลหรือเว็บไซต์เพื่อหลอกเอาข้อมูลสำคัญ' },
+      { s:'com', q:'ที่อยู่ IP Address ในเวอร์ชัน IPv4 ประกอบด้วยตัวเลขกี่บิต', c:['32 บิต','64 บิต','128 บิต','256 บิต'], a:0, e:'IPv4 มีขนาด 32 บิต แบ่งเป็น 4 ชุดชุดละ 8 บิต (Octet)' },
+      { s:'com', q:'สถาปัตยกรรมแบบใดที่แบ่งการทำงานออกเป็น Presentation, Business Logic และ Database', c:['Client-Server','Peer-to-Peer','3-Tier Architecture','Monolithic Architecture'], a:2, e:'3-Tier Architecture แยกการทำงานเป็น 3 ชั้น เพื่อความปลอดภัยและการดูแลรักษาง่าย' },
+      { s:'com', q:'พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 มีชื่อย่อเป็นสากลว่าอะไร', c:['GDPR','PDPA','HIPAA','SOX'], a:1, e:'PDPA (Personal Data Protection Act) คือกฎหมายคุ้มครองข้อมูลส่วนบุคคลของไทย' },
+      { s:'com', q:'คีย์ใดในฐานข้อมูลเชิงสัมพันธ์ที่ใช้ระบุแถวข้อมูลในตารางไม่ให้ซ้ำกัน', c:['Foreign Key','Primary Key','Composite Key','Index Key'], a:1, e:'Primary Key (คีย์หลัก) ทำหน้าที่ระบุความเป็นเอกลักษณ์ของแต่ละแถวในตาราง' },
+      { s:'com', q:'การโจมตีระบบโดยส่งคำขอเข้าสู่เซิร์ฟเวอร์พร้อมกันจำนวนมากจนล่ม เรียกว่าอะไร', c:['SQL Injection','Man-in-the-Middle','DDoS Attack','Cross-Site Scripting'], a:2, e:'Distributed Denial of Service (DDoS) เป็นการระดมส่งทราฟฟิกถล่มเซิร์ฟเวอร์จนใช้งานไม่ได้' },
+      { s:'com', q:'ระบบคลาวด์คอมพิวติ้งรูปแบบใดที่ผู้ใช้บริการไม่ต้องจัดการเซิร์ฟเวอร์หรือ OS เลย เน้นใช้งานแอปพลิเคชันสำเร็จรูป', c:['IaaS','PaaS','SaaS','DaaS'], a:2, e:'SaaS (Software as a Service) เช่น Google Workspace หรือ Microsoft 365 ผู้ใช้ใช้งานได้ทันที' }
+    ]
+  },
+
+  /* ================= เพิ่มเติมใหม่: นักวิชาการประชาสัมพันธ์ปฏิบัติการ (10 ข้อ) ================= */
+  pr: {
+    id: 'pr', icon: '📢', name: 'นักวิชาการประชาสัมพันธ์ปฏิบัติการ', category: 'partB', theme: 'rose', isNew: true,
+    desc: 'หลักการประชาสัมพันธ์และสื่อสารมวลชน · การบริหารสื่อสังคมออนไลน์ (Social Media) · การแถลงข่าวและผลิตสื่อ',
+    sec: 7200, mins: 120, pass: 60,
+    q: [
+      { s:'pr', q:'กระบวนการประชาสัมพันธ์ที่ดีตามหลักสากล เริ่มต้นจากขั้นตอนใดเป็นอันดับแรก', c:['การจัดทำสื่อและเผยแพร่','การประเมินผลโครงการ','การสำรวจและวิจัยปัญหา (Research/Fact-finding)','การแถลงข่าวต่อสื่อมวลชน'], a:2, e:'ขั้นตอนแรกคือการศึกษาวิเคราะห์และสำรวจปัญหา (R - Research ในหลัก 4C / RACE)' },
+      { s:'pr', q:'เครื่องมือสื่อสารประชาสัมพันธ์ใดจัดเป็นสื่อขององค์กรเอง (Owned Media)', c:['ข่าวทางโทรทัศน์ช่องหลัก','เว็บไซต์ทางการและเพจ Facebook ของหน่วยงาน','การซื้อโฆษณาบนหนังสือพิมพ์','การที่ประชาชนบอกต่อกันปากต่อปาก'], a:1, e:'Owned Media คือสื่อที่หน่วยงานเป็นเจ้าของและควบคุมช่องทางเอง เช่น เว็บไซต์และเพจทางการ' },
+      { s:'pr', q:'ในการจัดแถลงข่าวของหน่วยงานราชการ เอกสารสำคัญที่สุดที่ต้องแจกให้สื่อมวลชนคือข้อใด', c:['ของที่ระลึกแจกสื่อ','ข่าวแจก (Press Release)','กำหนดการอย่างเดียว','งบประมาณโครงการ'], a:1, e:'Press Release (ข่าวแจก) เป็นสรุปสาระสำคัญเพื่อให้สื่อมวลชนนำไปเขียนข่าวได้อย่างถูกต้องตรงกัน' },
+      { s:'pr', q:'ข้อใดคือเป้าหมายหลักของการประชาสัมพันธ์ภาครัฐ', c:['เพื่อแสวงหากำไรสูงสุดจากยอดขายสินค้า','เพื่อสร้างความเข้าใจอันดี ความร่วมมือ และภาพลักษณ์ที่ดีขององค์กร','เพื่อโฆษณาชวนเชื่อทางการเมืองฝ่ายเดียว','เพื่อลดงบประมาณการจัดซื้อพัสดุ'], a:1, e:'เป้าหมายหลักคือการสร้างความเข้าใจอันดีและความโปร่งใสระหว่างหน่วยงานกับประชาชน' },
+      { s:'pr', q:'กลยุทธ์การสื่อสารในภาวะวิกฤต (Crisis Communication) ข้อใดสำคัญที่สุด', c:['ปฏิเสธข้อกล่าวหาไว้ก่อน','ปิดข่าวเงียบไม่ให้สื่อรู้','รวดเร็ว โปร่งใส และมีศูนย์กลางการแถลงข่าวชัดเจน','รอให้เรื่องเงียบไปเอง'], a:2, e:'ต้องรวดเร็ว โปร่งใส และสื่อสารข้อมูลที่ถูกต้องออกจากศูนย์กลางเพื่อป้องกันข่าวลือ' },
+      { s:'pr', q:'หลักการเขียนข่าวเพื่อการประชาสัมพันธ์ (News Writing) นิยมใช้โครงสร้างรูปแบบใดมากที่สุด', c:['แบบปิรามิดหัวกลับ (Inverted Pyramid)','แบบลำดับเหตุการณ์ตามเวลา','แบบบทความวิชาการ','แบบบทละครสั้น'], a:0, e:'Inverted Pyramid เรียงลำดับจากใจความสำคัญมากที่สุด (5W1H) ไปหาเกร็ดเล็กน้อย' },
+      { s:'pr', q:'สื่อสังคมออนไลน์ (Social Media) รูปแบบใดที่มีจุดเด่นด้านการสร้างการมีส่วนร่วมแบบเรียลไทม์ผ่านภาพและวิดีโอสั้น', c:['จดหมายอิเล็กทรอนิกส์ (Email)','TikTok และ Reels','กระดานสนทนาเว็บอร์ด','รายงานประจำปี'], a:1, e:'TikTok และ Reels เป็นแพลตฟอร์มวิดีโอสั้นที่ได้รับความนิยมสูงในการเข้าถึงกลุ่มเป้าหมาย' },
+      { s:'pr', q:'หลักการ 5W1H ในการประชาสัมพันธ์ ตัวอักษร H ย่อมาจากคำว่าอะไร', c:['History','How','Honest','Header'], a:1, e:'5W1H ประกอบด้วย Who, What, Where, When, Why และ How (อย่างไร)' },
+      { s:'pr', q:'การประเมินผลสัมฤทธิ์งานประชาสัมพันธ์ ควรวัดจากสิ่งใดเป็นสำคัญ', c:['จำนวนแผ่นพับที่พิมพ์ออกมา','ความเข้าใจ ทัศนคติ หรือพฤติกรรมที่เปลี่ยนไปของกลุ่มเป้าหมาย','น้ำหนักของข่าวที่ลงหนังสือพิมพ์','จำนวนชั่วโมงการทำงานของเจ้าหน้าที่'], a:1, e:'การประเมินผลแท้จริงต้องวัดที่ความเปลี่ยนแปลงของทัศนคติ พฤติกรรม หรือความพึงพอใจ' },
+      { s:'pr', q:'ข้อใดมิใช่คุณลักษณะที่ดีของนักประชาสัมพันธ์ยุคดิจิทัล', c:['มีความคิดริเริ่มสร้างสรรค์','ติดตามเทรนด์สื่อใหม่ตลอดเวลา','รอคำสั่งและทำงานตามกรอบเดิมโดยไม่ปรับตัว','มีมนุษยสัมพันธ์และทักษะการเจรจาที่ดี'], a:2, e:'นักประชาสัมพันธ์ยุคใหม่ต้องมีความยืดหยุ่น ปรับตัวไว และคิดนอกกรอบ ไม่ควรยึดติดรูปแบบเดิม' }
+    ]
   }
 };
 
@@ -613,14 +634,14 @@ function renderCards() {
     card.innerHTML = `
       ${newBadge}
       <div>
-        <div class="flex items-start gap-3.5 mb-3">
-          <div class="text-3xl w-14 h-14 rounded-xl flex items-center justify-center shrink-0 bg-white/20">${p.icon || '📝'}</div>
+        <div class="card-top">
+          <div class="card-icon text-3xl w-14 h-14 rounded-xl flex items-center justify-center shrink-0 bg-white/20">${p.icon || '📝'}</div>
           <div>
-            <div class="text-lg font-bold leading-snug">${p.name}</div>
-            <span class="inline-block text-[11px] font-medium px-2 py-0.5 rounded-md mt-1 bg-white/20 ${t.subText}">${p.tag || 'ข้อสอบมาตรฐาน'}</span>
+            <div class="card-title text-lg font-bold leading-snug">${p.name}</div>
+            <span class="card-badge inline-block text-[11px] font-medium px-2 py-0.5 rounded-md mt-1 bg-white/20 ${t.subText}">${p.tag || 'ข้อสอบมาตรฐาน'}</span>
           </div>
         </div>
-        <div class="text-xs opacity-90 leading-relaxed mb-4 line-clamp-2 ${t.descText}">${p.desc || ''}</div>
+        <div class="card-desc text-xs opacity-90 leading-relaxed mb-4 line-clamp-2 ${t.descText}">${p.desc || ''}</div>
       </div>
       <button class="w-full py-2.5 rounded-xl text-sm transition font-semibold ${t.btn}">เข้าทำข้อสอบ (${qCount} ข้อ) ➔</button>
     `;
@@ -716,7 +737,6 @@ function renderPalette() {
   });
 }
 
-/* ===== ปรับปรุงการเรนเดอร์ข้อสอบและตรวจเช็กคำตอบแบบปลอดภัย 100% ===== */
 function renderQuestion() {
   const q = activePack.q[currentQIdx];
   if (!q) return;
@@ -867,12 +887,12 @@ function closeAdminModal() {
 
 function switchAdmTab(tabId, btnEl) {
   document.querySelectorAll('.adm-tab-btn').forEach(b => {
-    b.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
-    b.classList.add('text-slate-500');
+    b.style.color = '#64748b';
+    b.style.borderBottom = '2px solid transparent';
   });
   document.querySelectorAll('.adm-tab-content').forEach(c => c.classList.add('hidden'));
-  btnEl.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
-  btnEl.classList.remove('text-slate-500');
+  btnEl.style.color = '#2563eb';
+  btnEl.style.borderBottom = '2px solid #2563eb';
   document.getElementById(tabId).classList.remove('hidden');
 }
 
@@ -1013,26 +1033,26 @@ function syncSheetData() {
   const url = localStorage.getItem('localgov_sheet_url') || document.getElementById('sheetUrlInput').value.trim();
   const statusEl = document.getElementById('sheetSyncStatus');
   if (!url) {
-    statusEl.innerHTML = '<span class="text-red-600">⚠️ ยังไม่ได้ระบุ Web App URL</span>';
+    statusEl.innerHTML = '<span style="color:#dc2626">⚠️ ยังไม่ได้ระบุ Web App URL</span>';
     return;
   }
 
-  statusEl.innerHTML = '<span class="text-blue-600">🔄 กำลังดาวน์โหลดข้อมูลจาก Google Sheets...</span>';
+  statusEl.innerHTML = '<span>🔄 กำลังดาวน์โหลดข้อมูลจาก Google Sheets...</span>';
 
   fetch(url)
     .then(res => res.json())
     .then(remoteBank => {
       if (!remoteBank || Object.keys(remoteBank).length === 0) {
-        statusEl.innerHTML = '<span class="text-amber-600">⚠️ ข้อมูลในชีตว่างเปล่า</span>';
+        statusEl.innerHTML = '<span style="color:#f59e0b">⚠️ ข้อมูลในชีตว่างเปล่า</span>';
         return;
       }
       saveAppBank(remoteBank);
       populateAdminPacks();
-      statusEl.innerHTML = `<span class="text-emerald-600 font-bold">✅ ซิงค์สำเร็จ! (${Object.keys(remoteBank).length} ตำแหน่ง)</span>`;
+      statusEl.innerHTML = `<span style="color:#16a34a">✅ ซิงค์สำเร็จ! (${Object.keys(remoteBank).length} ตำแหน่ง)</span>`;
       renderCards();
     })
     .catch(err => {
-      statusEl.innerHTML = `<span class="text-red-600">❌ ซิงค์ไม่สำเร็จ: ${err.message}</span>`;
+      statusEl.innerHTML = `<span style="color:#dc2626">❌ ซิงค์ไม่สำเร็จ: ${err.message}</span>`;
     });
 }
 
